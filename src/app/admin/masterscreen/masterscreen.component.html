@@ -1,0 +1,172 @@
+<div class="masterscreen-container" @slideUp>
+  <div class="masterscreen-form">
+    <form [formGroup]="masterScreenForm" (submit)="AddMasterCharges(masterScreenForm.value,masterScreenForm.valid)">
+      <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">{{'masterScreen' | translate}}</h3>
+      <div class="clearfix"></div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">{{'documentationFee' | translate}}</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="{{'documentationFee' | translate}}" pTooltip="{{'documentationFee' | translate}}"
+              tooltipPosition="top" formControlName="DocumentationAdminFee" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(masterScreenForm.get('DocumentationAdminFee'))" [errMsg]="'documentationFeeRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(masterScreenForm.get('DocumentationAdminFee'))" [errMsg]="'validdocumentationFee' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">{{'prePaidLoan' | translate}}</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="{{'prePaidLoan' | translate}}" pTooltip="{{'prePaidLoan' | translate}}"
+              tooltipPosition="top" formControlName="PrepaidLoanCharges" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(masterScreenForm.get('PrepaidLoanCharges'))" [errMsg]="'prePaidLoanRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(masterScreenForm.get('PrepaidLoanCharges'))" [errMsg]="'validPrePaidLoan' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">{{'franchisecommission' | translate}}</h3>
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">{{'area' | translate}}</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="{{'area' | translate}}" pTooltip="{{'area' | translate}}" tooltipPosition="top"
+              formControlName="AreaFee" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(masterScreenForm.get('AreaFee'))" [errMsg]="'areaRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(masterScreenForm.get('AreaFee'))" [errMsg]="'validArea' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">{{'district' | translate}}</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="{{'district' | translate}}" pTooltip="{{'district' | translate}}" tooltipPosition="top"
+              formControlName="DistrictFee" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(masterScreenForm.get('DistrictFee'))" [errMsg]="'districtChargesRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(masterScreenForm.get('DistrictFee'))" [errMsg]="'validDistrictCharges' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">{{'districtCluster' | translate}}</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="{{'districtCluster' | translate}}" pTooltip="{{'districtCluster' | translate}}" tooltipPosition="top"
+              formControlName="DistrictClusterFee" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(masterScreenForm.get('DistrictClusterFee'))" [errMsg]="'districtClusterChangesRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(masterScreenForm.get('DistrictClusterFee'))" [errMsg]="'validDistrictClusterChanges' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">{{'state' | translate}}</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="{{'state' | translate}}" pTooltip="{{'state' | translate}}" tooltipPosition="top"
+              formControlName="StateFee" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(masterScreenForm.get('StateFee'))" [errMsg]="'stateChargesRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(masterScreenForm.get('StateFee'))" [errMsg]="'validStateCharges' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">{{'stateCluster' | translate}}</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="{{'stateCluster' | translate}}" pTooltip="{{'stateCluster' | translate}}" tooltipPosition="top"
+              formControlName="StateClusterFee" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(masterScreenForm.get('StateClusterFee'))" [errMsg]="'stateClusterChangesRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(masterScreenForm.get('StateClusterFee'))" [errMsg]="'validStateClusterChangesse' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">{{'mother' | translate}}</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="{{'mother' | translate}}" pTooltip="{{'mother' | translate}}" tooltipPosition="top"
+              formControlName="MotherFee" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(masterScreenForm.get('MotherFee'))" [errMsg]="'motherChargesRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(masterScreenForm.get('MotherFee'))" [errMsg]="'validMotherCharges' | translate"></validation>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+              <div class="label" style="color: #fff;">State GST</div>
+              <div class="clearfix"></div>
+              <input type="text" class="form-control" placeholder="State GST" pTooltip="State GST" tooltipPosition="top"
+                formControlName="SGST" required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(masterScreenForm.get('SGST'))" [errMsg]="'SGSTRqrd' | translate"></validation>
+                <validation *ngIf="isValidField(masterScreenForm.get('SGST'))" [errMsg]="'validSGSTCharges' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                <div class="label" style="color: #fff;">Central GST</div>
+                <div class="clearfix"></div>
+                <input type="text" class="form-control" placeholder="Central GST" pTooltip="Central GST" tooltipPosition="top"
+                  formControlName="CGST" required/>
+                <div class="input-validation-msg">
+                  <validation *ngIf="isRequiredField(masterScreenForm.get('CGST'))" [errMsg]="'CGSTRqrd' | translate"></validation>
+                  <validation *ngIf="isValidField(masterScreenForm.get('CGST'))" [errMsg]="'validCGST' | translate"></validation>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                  <div class="label" style="color: #fff;">IGST</div>
+                  <div class="clearfix"></div>
+                  <input type="text" class="form-control" placeholder="IGST" pTooltip="IGST" tooltipPosition="top"
+                    formControlName="IGST" required/>
+                  <div class="input-validation-msg">
+                    <validation *ngIf="isRequiredField(masterScreenForm.get('IGST'))" [errMsg]="'IGSTRqrd' | translate"></validation>
+                    <validation *ngIf="isValidField(masterScreenForm.get('IGST'))" [errMsg]="'validIGST' | translate"></validation>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-6">
+                    <div class="label" style="color: #fff;">TDS</div>
+                    <div class="clearfix"></div>
+                    <input type="text" class="form-control" placeholder="TDS" pTooltip="TDS" tooltipPosition="top"
+                      formControlName="TDS" required/>
+                    <div class="input-validation-msg">
+                      <validation *ngIf="isRequiredField(masterScreenForm.get('TDS'))" [errMsg]="'TDSRqrd' | translate"></validation>
+                      <validation *ngIf="isValidField(masterScreenForm.get('TDS'))" [errMsg]="'validTDS' | translate"></validation>
+                    </div>
+                  </div>
+                </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-md-12 col-sm-12 col-xs-12 margin-top-15">
+        <button type="submit" class="btn btn-primary" [disabled]="!masterScreenForm.valid" pTooltip="{{'submit' | translate}}" tooltipPosition="top">{{'submit' | translate}}</button>
+      </div>
+      <div class="clearfix"></div>
+    </form>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+<div class="sucess-msg">
+  <p-messages [(value)]="msgs"></p-messages>
+</div>
+
+<admin-footer></admin-footer>
+
+<div class="confirm-modal-overay" *ngIf="isShowModal == 2" (click)="closeForm()"></div>

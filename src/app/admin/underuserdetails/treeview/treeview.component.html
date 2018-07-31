@@ -1,0 +1,29 @@
+<div>
+    <div class="row">
+        <ul>
+            <li *ngFor="let parentNode of lstTreeData" class="container">
+                <a id="parentNode.UserID" (click)="getUnderUserDetails(parentNode.UserID)">
+                    <span>{{parentNode.Level}} --- {{ parentNode.UserName }}</span>
+                    <i *ngIf="parentNode.TreeItems.length > 0"></i>
+                </a>
+                <ul>
+                    <li *ngFor="let childNode of parentNode.TreeItems" class="">
+                        <a id="childNode.UserID" (click)="getUnderUserDetails(childNode.UserID)">
+                            <span>{{childNode.Level}} --- {{ childNode.UserName }}</span>
+                            <i *ngIf="childNode.TreeItems.length > 0"></i>
+                        </a>
+                        <div *ngIf="childNode.TreeItems.length > 0">
+                            <app-treeview [lstTreeData]="childNode.TreeItems"></app-treeview>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="PTB70" *ngIf="lstTreeData==0">
+            <div class="col-md-12 text-center">
+                <p>{{'noRecords' | translate}}</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

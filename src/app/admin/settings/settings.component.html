@@ -1,0 +1,546 @@
+<div class="settings-container">
+  <div class="col-md-12 col-xs-12 user-data" @slideUp>
+    <h3>{{'userInfo' | translate}}</h3>
+    <div class="col-md-4 col-xs-12 padding-left-10 margin-top-10">
+      <label>{{'firstName' | translate}}</label>
+      <div>{{UserDetails.FirstName}}</div>
+    </div>
+    <div class="col-md-4 col-xs-12 margin-top-10">
+      <label>{{'lastName' | translate}}</label>
+      <div>{{UserDetails.LastName}}</div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="col-md-4 col-xs-12 padding-left-10 margin-top-10">
+      <label>{{'phnNumber' | translate}}</label>
+      <div>{{UserDetails.PhoneNumber}}</div>
+    </div>
+    <div class="col-md-4 col-xs-12 margin-top-10">
+      <label>{{'email' | translate}}</label>
+      <div>{{UserDetails.Email}}</div>
+    </div>
+  </div>
+
+  <div class="col-md-12 col-xs-12 settings-list" @slideUp>
+    <h3 class="main-header">{{'settings' | translate}}</h3>
+    <ul>
+      <li class="padding-top-15" (click)="onShowUserProfileModal()">
+        <div>Edit Profile</div>
+      </li>
+      <li (click)="onAddOrModifyAddress()">
+        <div>Add/Modify Address</div>
+      </li>
+      <li (click)="onChangePassword()">
+        <div>{{'changePassword' | translate}}</div>
+      </li>
+      <div class="row">
+        <div *ngIf="isBankGrid">
+          <div style="text-align: center;font-weight: bold;color: white;">User Bank Account Details</div>
+          <div *ngIf="UserBankDetails!=0" style="overflow: auto;margin-left: 20px;">
+            <p-dataTable [value]="UserBankDetails" [loading]="false" selectionMode="single">
+              <p-column [style]="{'width':'100px'}" field="AccountHolderName" header="Account Holder Name"></p-column>
+              <p-column [style]="{'width':'130px'}" field="AccountNumber" header="Account Number"></p-column>
+              <p-column [style]="{'width':'130px'}" field="IFSCCode" header="IFSC Code"></p-column>
+              <p-column [style]="{'width':'125px'}" field="BranchName" header="Branch Name"></p-column>
+              <p-column [style]="{'width':'130px'}" field="BranchAddress" header="Branch Address"></p-column>
+            </p-dataTable>
+          </div>
+        </div>
+        <li *ngIf="isBankAccountLink" style="padding: 10px 0 0 25px;" (click)="onChangeBankAccount()">
+          <div>Add Bank Account Details</div>
+        </li>
+      </div>
+      <li (click)="onChangeAddNomineeDetails()">
+        <div>Add Nominee Details</div>
+      </li>
+    </ul>
+  </div>
+</div>
+<admin-footer></admin-footer>
+
+<!-- User Profile modal popup -->
+<div class="downloa-popup-modal" *ngIf="isShowModal == 2" @dialog>
+  <form [formGroup]="userProfileForm" (submit)="UpdateUserProfile(userProfileForm.value,userProfileForm.valid)">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h5 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa !important;background-color: #72767e;">User Profile</h5>
+        <i class="material-icons" pTooltip="Close" tooltipPosition="top" (click)="isShowModal = 1">close</i>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-body">
+        <div class="margin-top-10 col-md-12">
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">UserName</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" formControlName="UserName" readonly="readonly" />
+          </div>
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">DcID</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" formControlName="DcID" readonly="readonly" />
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <br/>
+        <div class="margin-top-10 col-md-12">
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">FirstName</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="{{'firstName' | translate}}" pTooltip="{{'firstName' | translate}}" tooltipPosition="top"
+              class="form-control" Autofocus formControlName="FirstName" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(userProfileForm.get('FirstName'))" [errMsg]="'frstNameRqrd' | translate"></validation>
+              <validation *ngIf="isValidLength(userProfileForm.get('FirstName'))" [errMsg]="'frstNameLnth' | translate"></validation>
+            </div>
+          </div>
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">LastName</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="{{'lastName' | translate}}" pTooltip="{{'lastName' | translate}}" tooltipPosition="top" class="form-control"
+              formControlName="LastName" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(userProfileForm.get('LastName'))" [errMsg]="'lastNameRqrd' | translate"></validation>
+              <validation *ngIf="isValidLength(userProfileForm.get('LastName'))" [errMsg]="'lastNameLnth' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <br/>
+        <div class="margin-top-10 col-md-12">
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">FatherName</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="{{'fatherName' | translate}}" pTooltip="{{'fatherName' | translate}}" tooltipPosition="top"
+              class="form-control" formControlName="FatherName" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(userProfileForm.get('FatherName'))" [errMsg]="'fatherNameRqrd' | translate"></validation>
+              <validation *ngIf="isValidLength(userProfileForm.get('FatherName'))" [errMsg]="'fatherNameLnth' | translate"></validation>
+            </div>
+          </div>
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">PhoneNumber</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="{{'mobileNumber' | translate}}" pTooltip="{{'mobileNumber' | translate}}" tooltipPosition="top"
+              class="form-control" formControlName="PhoneNumber" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(userProfileForm.get('PhoneNumber'))" [errMsg]="'phoneNumberRqrd' | translate"></validation>
+              <validation *ngIf="isValidLength(userProfileForm.get('PhoneNumber'))" [errMsg]="'validLength' | translate"></validation>
+              <validation *ngIf="isValidField(userProfileForm.get('PhoneNumber'))" [errMsg]="'validPhoneNumber' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <br/>
+        <div class="margin-top-10 col-md-12">
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">Email</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="{{'email' | translate}}" (focus)="trackEvent()" pTooltip="{{'email' | translate}}" tooltipPosition="top"
+              class="form-control" formControlName="Email" />
+            <div class="input-validation-msg">
+              <!-- <validation *ngIf="isRequiredField(userProfileForm.get('Email'))" [errMsg]="'emailRqrd' | translate"></validation> -->
+              <validation *ngIf="isValidField(userProfileForm.get('Email'))" [errMsg]="'validEmail' | translate"></validation>
+            </div>
+          </div>
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">AadharNumber</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="{{'aadharNumber' | translate}}" pTooltip="{{'aadharNumber' | translate}}" tooltipPosition="top"
+              class="form-control" formControlName="AadharNumber" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(userProfileForm.get('AadharNumber'))" [errMsg]="'aadharNumberRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(userProfileForm.get('AadharNumber'))" [errMsg]="'validAadharNumber' | translate"></validation>
+              <validation *ngIf="isValidLength(userProfileForm.get('AadharNumber'))" [errMsg]="'aadharNumberLenth' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <br/>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-12" style="text-align: center;">
+          <button type="submit" class="btn btn-primary" style="width: 100px;" [disabled]="!userProfileForm.valid" pTooltip="{{'update' | translate}}"
+            tooltipPosition="top">{{'update' | translate}}</button>&nbsp;&nbsp;
+          <!-- <button type="button" class="btn" style="width: 100px;" (click)="closeForm()">Cancel</button> -->
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+<!-- End User Profile modal popup -->
+
+<!-- Change password modal -->
+<div class="phone-number-modal" *ngIf="isShowModal == 3" @dialog>
+  <form [formGroup]="changePasswordForm" (submit)="changePassword(changePasswordForm.value,true)">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h5>{{'changePassword' | translate}}</h5>
+        <i class="material-icons" pTooltip="Close" tooltipPosition="top" (click)="isShowModal = 1">close</i>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-body">
+        <div class="margin-top-10 col-md-12">
+          <div>
+            <div class="label" style="color: #fff;">OldPassword</div>
+            <div class="clearfix"></div>
+            <input type="password" placeholder="{{'oldPassword' | translate}}" Autofocus pTooltip="{{'oldPassword' | translate}}" tooltipPosition="top"
+              class="form-control" formControlName="OldPassword" required/>
+          </div>
+          <div class="clearfix"></div>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(changePasswordForm.get('OldPassword'))" [errMsg]="'pwdRqrd' | translate"></validation>
+            <validation *ngIf="isValidField(changePasswordForm.get('OldPassword'))" [errMsg]="'validPwd' | translate"></validation>
+            <validation *ngIf="isValidLength(changePasswordForm.get('OldPassword'))" [errMsg]="'pwdLenth' | translate"></validation>
+          </div>
+        </div>
+
+        <div class="margin-top-15 col-md-12">
+          <div>
+            <div class="label" style="color: #fff;">NewPassword</div>
+            <div class="clearfix"></div>
+            <input type="password" placeholder="{{'newPassword' | translate}}" pTooltip="{{'newPassword' | translate}}" tooltipPosition="top"
+              class="form-control" formControlName="Password" required/>
+          </div>
+          <div class="clearfix"></div>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(changePasswordForm.get('Password'))" [errMsg]="'pwdRqrd' | translate"></validation>
+            <validation *ngIf="isValidField(changePasswordForm.get('Password'))" [errMsg]="'validPwd' | translate"></validation>
+            <validation *ngIf="isValidLength(changePasswordForm.get('Password'))" [errMsg]="'pwdLenth' | translate"></validation>
+          </div>
+        </div>
+
+        <div class="margin-top-15 col-md-12">
+          <div>
+            <div class="label" style="color: #fff;">ConfirmPassword</div>
+            <div class="clearfix"></div>
+            <input type="password" placeholder="{{'confirmPassword' | translate}}" pTooltip="{{'confirmPassword' | translate}}" tooltipPosition="top"
+              class="form-control" formControlName="ConfirmPassword" required/>
+          </div>
+          <div class="clearfix"></div>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(changePasswordForm.get('ConfirmPassword'))" [errMsg]="'cnfrmPwdRqrd' | translate"></validation>
+            <validation *ngIf="hasError('repeatPassword',changePasswordForm,changePasswordForm.get('ConfirmPassword'))" [errMsg]="'cnfrmPwdNtMatched' | translate"></validation>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-12" style="text-align: center;">
+          <button type="submit" class="btn btn-primary" [disabled]="!changePasswordForm.valid" pTooltip="{{'changePassword' | translate}}"
+            tooltipPosition="top">{{'changePassword' | translate}}</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+<!-- End Change password modal -->
+
+<!-- User address modal popup -->
+<div class="downloa-popup-modal" *ngIf="isShowModal == 4" @dialog>
+  <form [formGroup]="addressForm" (submit)="AddOrModifyAddress(addressForm.value,addressForm.valid)">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h5 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa !important;background-color: #72767e;">Add/Modify Address</h5>
+        <i class="material-icons" pTooltip="Close" tooltipPosition="top" (click)="isShowModal = 1">close</i>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-body">
+        <div class="margin-top-10 col-md-12">
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">Address</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="Address" pTooltip="Address" tooltipPosition="top" class="form-control" Autofocus formControlName="Address1"
+              required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(addressForm.get('Address1'))" [errMsg]="'address1Rqrd' | translate"></validation>
+              <validation *ngIf="isValidLength(addressForm.get('Address1'))" [errMsg]="'address1Lnth' | translate"></validation>
+            </div>
+          </div>
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">Address2</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="Address2" pTooltip="Address2" tooltipPosition="top" class="form-control" formControlName="Address2"
+            />
+            <div class="input-validation-msg">
+              <!-- <validation *ngIf="isRequiredField(addressForm.get('Address2'))" [errMsg]="'address2Rqrd' | translate"></validation> -->
+              <validation *ngIf="isValidLength(addressForm.get('Address2'))" [errMsg]="'address2Lnth' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <br/>
+        <div class="margin-top-10 col-md-12">
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">City</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="City" pTooltip="City" tooltipPosition="top" class="form-control" formControlName="City" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(addressForm.get('City'))" [errMsg]="'cityRqrd' | translate"></validation>
+              <validation *ngIf="isValidLength(addressForm.get('City'))" [errMsg]="'cityLnth' | translate"></validation>
+              <validation *ngIf="isValidField(addressForm.get('City'))" [errMsg]="'validCity' | translate"></validation>
+            </div>
+          </div>
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">State</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="State" pTooltip="State" tooltipPosition="top" class="form-control" formControlName="State"
+            />
+            <div class="input-validation-msg">
+              <!-- <validation *ngIf="isRequiredField(addressForm.get('State'))" [errMsg]="'stateRqrd' | translate"></validation> -->
+              <validation *ngIf="isValidLength(addressForm.get('State'))" [errMsg]="'validStateLength' | translate"></validation>
+              <validation *ngIf="isValidField(addressForm.get('State'))" [errMsg]="'validState' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <br/>
+        <div class="margin-top-10 col-md-12">
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">Zipcode</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="Zipcode" pTooltip="Zipcode" tooltipPosition="top" class="form-control" formControlName="Zipcode"
+            />
+            <div class="input-validation-msg">
+              <!-- <validation *ngIf="isRequiredField(addressForm.get('Zipcode'))" [errMsg]="'zipcodeRqrd' | translate"></validation> -->
+              <validation *ngIf="isValidLength(addressForm.get('Zipcode'))" [errMsg]="'zipcodeLenth' | translate"></validation>
+              <validation *ngIf="isValidField(addressForm.get('Zipcode'))" [errMsg]="'validZipcode' | translate"></validation>
+            </div>
+          </div>
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">Country</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="Country" pTooltip="Country" tooltipPosition="top" class="form-control" formControlName="Country"
+              required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(addressForm.get('Country'))" [errMsg]="'countryRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(addressForm.get('Country'))" [errMsg]="'validcountry' | translate"></validation>
+              <validation *ngIf="isValidLength(addressForm.get('Country'))" [errMsg]="'countryLenth' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <br/>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-12" style="text-align: center;">
+          <button type="submit" class="btn btn-primary" style="width: 100px;" [disabled]="!addressForm.valid" pTooltip="{{'update' | translate}}"
+            tooltipPosition="top">{{'update' | translate}}</button>&nbsp;&nbsp;
+          <!-- <button type="button" class="btn" style="width: 100px;" (click)="closeForm()">Cancel</button> -->
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+<!-- End User address modal popup -->
+
+<!-- Bank account modal popup -->
+<div class="downloa-popup-modal" *ngIf="isShowModal == 5" @dialog>
+  <form [formGroup]="frmBankAccount" (submit)="AddBankAccountDetails(frmBankAccount.value,frmBankAccount.valid)">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h5 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa !important;background-color: #72767e;">Add Banck Account Details</h5>
+        <i class="material-icons" pTooltip="Close" tooltipPosition="top" (click)="isShowModal = 1">close</i>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-body">
+        <div class="margin-top-10 col-md-12">
+          <div class="col-md-8 padding-right-0">
+            <div class="label" style="color: #fff;">Bank Name</div>
+            <select class="form-control" formControlName="BankID" Autofocus required>
+              <option value="" disabled selected>-- Select Bank --</option>
+              <option *ngFor="let banks of BankNames" value={{banks.BankID}}>
+                {{banks.BankName}}
+              </option>
+            </select>
+            <!-- <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmNomineeDetails.get('BankID'))" [errMsg]="'bankIDRqrd' | translate"></validation>
+            </div> -->
+          </div>
+        </div>
+        <div class="margin-top-10 col-md-12">
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">Account Holder Name</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="AccountHolderName" pTooltip="AccountHolderName" tooltipPosition="top" class="form-control"
+              formControlName="AccountHolderName" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmBankAccount.get('AccountHolderName'))" [errMsg]="'accountHolderNameRqrd' | translate"></validation>
+              <validation *ngIf="isValidLength(frmBankAccount.get('AccountHolderName'))" [errMsg]="'accountHolderNameLnth' | translate"></validation>
+            </div>
+          </div>
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">Account Number</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="AccountNumber" pTooltip="AccountNumber" tooltipPosition="top" class="form-control" formControlName="AccountNumber"
+            />
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmBankAccount.get('AccountNumber'))" [errMsg]="'accountNumberRqrd' | translate"></validation>
+              <validation *ngIf="isValidLength(frmBankAccount.get('AccountNumber'))" [errMsg]="'accountNumberLnth' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="margin-top-10 col-md-12">
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">Confirm Account Number</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="ConfirmAccountNumber" pTooltip="ConfirmAccountNumber" tooltipPosition="top" class="form-control"
+              formControlName="ConfirmAccountNumber" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmBankAccount.get('ConfirmAccountNumber'))" [errMsg]="'confirmAccountNumberRqrd' | translate"></validation>
+              <validation *ngIf="hasError('repeatAccountNumber',frmBankAccount,frmBankAccount.get('ConfirmAccountNumber'))" [errMsg]="'confirmAccountNumberNtMatched' | translate"></validation>
+            </div>
+          </div>
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">IFSC Code</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="IFSCCode" pTooltip="IFSCCode" tooltipPosition="top" class="form-control" formControlName="IFSCCode"
+            />
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmBankAccount.get('IFSCCode'))" [errMsg]="'iFSCCodeRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(frmBankAccount.get('IFSCCode'))" [errMsg]="'iFSCCodeLenth' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="margin-top-10 col-md-12">
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">Branch Name</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="BranchName" pTooltip="BranchName" tooltipPosition="top" class="form-control" formControlName="BranchName"
+            />
+            <div class="input-validation-msg">
+              <validation *ngIf="isValidLength(frmBankAccount.get('BranchName'))" [errMsg]="'BranchNameLenth' | translate"></validation>
+            </div>
+          </div>
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">Branch Address</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="BranchAddress" pTooltip="BranchAddress" tooltipPosition="top" class="form-control" formControlName="BranchAddress"
+            />
+            <div class="input-validation-msg">
+              <!-- <validation *ngIf="isRequiredField(frmBankAccount.get('BranchAddress'))" [errMsg]="'branchAddressRqrd' | translate"></validation> -->
+              <!-- <validation *ngIf="isValidField(frmBankAccount.get('BranchAddress'))" [errMsg]="'validBranchAddress' | translate"></validation> -->
+              <validation *ngIf="isValidLength(frmBankAccount.get('BranchAddress'))" [errMsg]="'branchAddressLenth' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <br/>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-12" style="text-align: center;">
+          <button type="submit" class="btn btn-primary" style="width: 100px;" [disabled]="!frmBankAccount.valid" pTooltip="{{'update' | translate}}"
+            tooltipPosition="top">Add</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+<!-- End Bank account modal popup -->
+
+<!-- Nominee details modal popup -->
+<div class="downloa-popup-modal" *ngIf="isShowModal == 6" @dialog>
+  <form [formGroup]="frmNomineeDetails" (submit)="AddOrModifyNomineeDetails(frmNomineeDetails.value,frmNomineeDetails.valid)">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h5 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa !important;background-color: #72767e;">Add/Modify Nominee</h5>
+        <i class="material-icons" pTooltip="Close" tooltipPosition="top" (click)="isShowModal = 1">close</i>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-body">
+        <div class="margin-top-10 col-md-12">
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">Nominee Name</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="NomineeName" pTooltip="NomineeName" tooltipPosition="top" class="form-control" Autofocus
+              formControlName="NomineeName" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmNomineeDetails.get('NomineeName'))" [errMsg]="'nomineeNameRqrd' | translate"></validation>
+              <validation *ngIf="isValidLength(frmNomineeDetails.get('NomineeName'))" [errMsg]="'nomineeNameLnth' | translate"></validation>
+            </div>
+          </div>
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">Nominee Relationship</div>
+            <select class="form-control" formControlName="NomineeRelationshipID">
+              <option *ngFor="let nominee of NomineeRelations" value={{nominee.NomineeRelationshipID}}>
+                {{nominee.NomineeRelations}}
+              </option>
+            </select>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmNomineeDetails.get('NomineeRelationshipID'))" [errMsg]="'nomineeRelationShipRqrd' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <br/>
+        <div class="margin-top-10 col-md-12">
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">Nominee Address</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="NomineeAddress" pTooltip="NomineeAddress" tooltipPosition="top" class="form-control" formControlName="NomineeAddress"
+            />
+            <div class="input-validation-msg">
+              <!-- <validation *ngIf="isRequiredField(frmNomineeDetails.get('NomineeAddress'))" [errMsg]="'nomineeAddressRqrd' | translate"></validation> -->
+              <validation *ngIf="isValidLength(frmNomineeDetails.get('NomineeAddress'))" [errMsg]="'nomineeAddressLnth' | translate"></validation>
+            </div>
+          </div>
+          <div class="col-md-6 padding-right-0">
+            <div class="label" style="color: #fff;">Phonenumber</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="PhoneNumber" pTooltip="PhoneNumber" tooltipPosition="top" class="form-control" formControlName="PhoneNumber"
+            />
+            <div class="input-validation-msg">
+              <validation *ngIf="isValidLength(frmNomineeDetails.get('PhoneNumber'))" [errMsg]="'PhoneNumberLength' | translate"></validation>
+              <validation *ngIf="isValidField(frmNomineeDetails.get('PhoneNumber'))" [errMsg]="'validNomineePhoneNumber' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-12" style="text-align: center;">
+          <button type="submit" class="btn btn-primary" style="width: 100px;" [disabled]="!frmNomineeDetails.valid">Add Nominee</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+<!-- End Nominee details modal popup -->
+
+<div class="confirm-modal-overay" *ngIf="isShowModal == 2 || isShowModal == 3 || isShowModal == 4|| isShowModal == 5|| isShowModal == 6"
+  (click)="closeForm()"></div>

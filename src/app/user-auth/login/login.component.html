@@ -1,0 +1,127 @@
+<!-- particles.js container -->
+<div id="login-particles-js"></div>
+
+<div class="ui container login-container">
+  <!-- Start Header -->
+  <div class="login-header">
+    <div class="col-md-3 xs-none"></div>
+    <div class="col-md-6"></div>
+    <div class="col-md-3 col-xs-5 xs-right">
+
+    </div>
+    <div class="clearfix"></div>
+  </div>
+
+  <!-- End Header -->
+
+  <div class="login-block">
+    <div class="login-main-block" @dialog>
+      <!-- Start Login Form -->
+      <div class="main-logo">
+        <img src="assets/img/logo_white.jpeg" style="height: 100px;width: 100px;" />
+      </div>
+      <div class="ui form login-form">
+        <!--Login Form Start-->
+        <div class="login-section" *ngIf="activeForm == 1">
+          <form [formGroup]="loginForm" (submit)="onLogin(loginForm.value,loginForm.valid)">
+            <div class="two fields">
+              <div class="field logo">
+                <h3>{{ 'login' | translate}}</h3>
+              </div>
+            </div>
+
+            <div class="two fields margin-top-10">
+              <div class="field">
+                <input type="text" placeholder="{{'userName' | translate}}" Autofocus pTooltip="{{'userName' | translate}}" tooltipPosition="top"
+                  class="form-control" formControlName="UserName" required/>
+                <div class="input-validation-msg">
+                  <validation *ngIf="isRequiredField(loginForm.get('UserName'))" [errMsg]="'userNameRqrd' | translate"></validation>
+                  <validation *ngIf="isValidField(loginForm.get('UserName'))" [errMsg]="'userNameLnth' | translate"></validation>
+                </div>
+              </div>
+            </div>
+
+            <div class="two fields margin-top-10">
+              <div class="field">
+                <input type="password" placeholder="{{'password' | translate}}" pTooltip="{{'password' | translate}}" tooltipPosition="top"
+                  class="form-control" formControlName="Password" required/>
+                <div class="input-validation-msg">
+                  <validation *ngIf="isRequiredField(loginForm.get('Password'))" [errMsg]="'pwdRqrd' | translate"></validation>
+                </div>
+              </div>
+            </div>
+
+            <div class="input-validation-msg customMsg">
+              <div class="label" *ngIf="isValidLogin" style="width: 375px;">
+                <p style="color:red;font-size: 14px;text-align: center;">{{loginError}}</p>
+              </div>
+            </div>
+
+            <div class="two fields margin-top-10">
+              <div class="field">
+                <button type="submit" class="btn-primary btn btn-block" pTooltip="{{'login' | translate}}" tooltipPosition="top" [disabled]="!loginForm.valid">
+                  {{'login' | translate}}
+                </button>
+              </div>
+              <div class="text-center whiteClr margin-top-10">
+                <span>{{'dntHaveAccount' | translate}}
+                  <a (click)="viewRegisterForm()" pTooltip="{{'register' | translate}}" tooltipPosition="top">{{'register' | translate}}</a>
+                </span>
+              </div>
+
+              <div class="margin-top-10 whiteClr text-center">
+                <span>{{'forgotPwd' | translate}}
+                  <a (click)="viewForgetPAsswordForm()">{{'recover' | translate}}</a>
+                </span>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- End Login Form -->
+      </div>
+
+      <div class="clearfix"></div>
+    </div>
+    <!-- Start Footer -->
+    <app-footer></app-footer>
+    <!-- End Footer -->
+
+    <!-- Forgot password modal -->
+    <div class="phone-number-modal" *ngIf="isShowModal == 2" @dialog>
+      <form [formGroup]="frmForgetPassword" (submit)="forgetPassword(frmForgetPassword.value)">
+        <div class="modal-container">
+          <div class="modal-header">
+            <h5>Forgot Password</h5>
+            <i class="material-icons" pTooltip="Close" tooltipPosition="top" (click)="isShowModal = 1">close</i>
+          </div>
+          <div class="clearfix"></div>
+
+          <div class="modal-body">
+            <div class="margin-top-10 col-md-12 countryCode">
+              <div class="col-md-12 padding-right-0">
+                <input type="text" placeholder="User name" pTooltip="User Name" tooltipPosition="top" class="form-control" Autofocus formControlName="UserName"
+                  required/>
+                <div class="input-validation-msg">
+                  <validation *ngIf="isRequiredField(frmForgetPassword.get('UserName'))" [errMsg]="'userNameRqrd' | translate"></validation>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+
+          <div class="modal-footer">
+            <div class="col-md-12" style="text-align: center;">
+              <button type="submit" class="btn btn-primary" style="width: 100px;" [disabled]="!frmForgetPassword.valid">Submit</button>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+
+          <div class="margin-top-10"></div>
+          <div class="clearfix"></div>
+        </div>
+      </form>
+    </div>
+    <!-- End Forget password modal -->
+  </div>
+</div>
+<div class="confirm-modal-overay" *ngIf="isShowModal == 2" (click)="closeForm()"></div>

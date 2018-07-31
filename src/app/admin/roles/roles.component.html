@@ -1,0 +1,53 @@
+<div class="transaction-history-container" @slideUp>
+  <div class="transaction-history-table box-shadow">
+    <h3 class="first">Add/Modify Roles</h3>
+    <form [formGroup]="roleForm" (submit)="onSubmitrole(roleForm.value,roleForm.valid)">
+      <div>
+        <div class="row">
+          <div class="col-md-4 col-xs-12 col-sm-12 margin-top-15">
+            <div class="label" style="color: white;">{{'role' | translate}}</div>
+            <input type="text" id="txtName" formControlName="Name" class="form-control" placeholder="{{'role' | translate}}" tooltipPosition="top"
+              required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(roleForm.get('Name'))" [errMsg]="'rolerequired' | translate"></validation>
+            </div>
+          </div>
+          <div class="col-md-1 col-xs-12 col-sm-12 margin-top-15">
+            <div class="label" style="color: white;">{{'isactive' | translate}}</div>
+            <input type="checkbox" formControlName="IsActive" style="margin: 10px 0 0 0;" />
+          </div>
+          <div class="col-md-12 col-xs-12 col-sm-12" style="padding: 0 0 0 116px;">
+            <button type="submit" *ngIf="!saveRole" style="margin: 15px 0 0 0;width:8%;" [disabled]="!roleForm.valid" class="btn btn-primary"
+              pTooltip="{{'rolesave' | translate}}" tooltipPosition="top">{{'rolesave' | translate}}
+            </button>
+            <button type="button" *ngIf="updateRole" (click)="onUpdaterole(roleForm.value,roleForm.valid)" style="margin: 15px 0 0 0;width:8%;"
+              [disabled]="!roleForm.valid" class="btn btn-primary" pTooltip="{{'updaterole' | translate}}" tooltipPosition="top">{{'updaterole' | translate}}
+            </button>
+            <button type="button" style="margin: 15px 0 0 0;width:8%;" class="btn btn-default" (click)="rolereset()" pTooltip="{{'reset' | translate}}">{{'reset' | translate}}</button>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </form>
+    <br/>
+
+    <div class="col-md-4" style="padding: 0 0 0 0;">
+      <div *ngIf="rolesList!=0" style="overflow: auto;">
+        <p-dataTable [value]="rolesList" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+          <p-column field="Name" header="Role" [sortable]="true"></p-column>
+          <p-column field="IsActive" header="Is Active">
+            <ng-template let-row="rowData" let-index="rowIndex" let-col pTemplate="body">
+              <input type="checkbox" [(ngModel)]="row[col.field]" />
+            </ng-template>
+          </p-column>
+          <p-column styleClass="text-center" header="Action" field="Action">
+            <ng-template let-rolesList="rowData" pTemplate="body" let-ri="rowIndex">
+              <button type="button" style="height: 25px;width: 70px;" class="ui-button-reset-transparent" pButton (click)="editRole(rolesList)" label="Edit">Edit</button>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
+    </div>
+  </div>
+</div>
+<admin-footer></admin-footer>

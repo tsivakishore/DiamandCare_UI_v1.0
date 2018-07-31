@@ -1,0 +1,10 @@
+body .ui-paginator{
+    width: 1601px !important;
+}
+
+.abc-datatable .ui-paginator {
+    margin: 0px;
+    padding: 0px !important;
+    background-color: #F5B52C;
+    border-radius: 1px;
+ }

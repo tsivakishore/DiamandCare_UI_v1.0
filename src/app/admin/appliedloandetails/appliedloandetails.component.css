@@ -1,0 +1,23 @@
+.btndownload{
+    background-color: #428bca00 !important;
+    border: 0px solid #428bca00 !important;
+}
+.btndownload:hover{
+    background-color: #428bca00 !important;
+    border: 0px solid #428bca00 !important;
+}
+.btnyes{
+    width: 90px; 
+    margin-left: 10px;
+}
+.btnno{
+    width: 90px;
+    background: #e85454;
+    border: #e85454; 
+    margin-left: 20px;
+}
+.btncancel{
+    width: 90px;
+    background-color: #353c48 !important;
+    border-color: #353c48 !important;
+}

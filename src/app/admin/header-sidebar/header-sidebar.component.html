@@ -1,0 +1,223 @@
+<!-- App Sidebar -->
+<div class="sidebar-container box-shadow desktop-view" *ngIf="isOpenSidebar" @sideAmination>
+  <!-- Start Sidebar Toggle icon -->
+  <div class="toggleIcon desktop-view">
+    <i class="material-icons open" (click)="onToggleSidebar()" pTooltip="{{'hide' | translate}}" tooltipPosition="top" *ngIf="this.isOpenSidebar">keyboard_arrow_left</i>
+  </div>
+  <!-- End Sidebar Toggle icon -->
+
+  <div class="logo">
+    <img src="assets/img/logo_white.jpeg" style="height: 65px; width: 75px;" />
+  </div>
+
+  <ul class="navbar-menu">
+    <li pTooltip="{{userName}}" tooltipPosition="top">
+      <a routerLinkActive="active" [routerLink]="settingsUrl">
+        <i class="material-icons">tag_faces</i>
+        <span>{{userName}}</span>
+        <div class="clearfix"></div>
+      </a>
+      <div class="clearfix"></div>
+    </li>
+    <li tooltipPosition="top">
+      <a [routerLink]="earnLoansUrl" routerLinkActive="active">
+        <i class="material-icons">money</i>
+        <span>Loans</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
+      <a [routerLink]="secretKeyUrl" *ngIf="Is_Visible_SecretKey" routerLinkActive="active">
+        <i class="material-icons">vpn_key</i>
+        <span>Secret Key</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
+      <a [routerLink]="masterScreenUrl" *ngIf="Is_Visible_MasterScreen" routerLinkActive="active">
+        <i class="material-icons">add_to_queue</i>
+        <span>Master Screen</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
+      <a [routerLink]="appliedLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedLoanDetails" routerLinkActive="active">
+        <i class="material-icons">assignment_ind</i>
+        <span>Loan Details</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
+      <a [routerLink]="appliedUserLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedUserLoanDetails" routerLinkActive="active">
+        <i class="material-icons">dashboard</i>
+        <span>My Loan Details</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
+      <a [routerLink]="underUserDetailsUrl" *ngIf="Is_Visible_UnderUserDetails" routerLinkActive="active">
+        <i class="material-icons">supervisor_account</i>
+        <span>Under Users</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
+      <a [routerLink]="bankAccountUrl" *ngIf="Is_Visible_BankAccount" routerLinkActive="active">
+        <i class="material-icons">account_box</i>
+        <span>Add Bank Account</span>
+      </a>
+    </li>
+    <li tooltipPosition="top" *ngIf="Is_Visible_Add_Roles">
+      <a [routerLink]="rolesUrl" routerLinkActive="active">
+        <i class="material-icons">notifications_none</i>
+        <span>Roles</span>
+      </a>
+    </li>
+    <li tooltipPosition="top" routerLinkActive="active">
+      <a [routerLink]="addUserToRoleUrl" *ngIf="Is_Visible_Roles" routerLinkActive="active">
+        <i class="material-icons">group add</i>
+        <span>{{'Assign Role' | translate}}</span>
+      </a>
+    </li>
+    <li>
+      <a routerLinkActive="active" (click)="logout()" tooltipPosition="top">
+        <i class="material-icons">power_settings_new</i>
+        <span>{{'logout' | translate}}</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<!-- End Sidebar -->
+
+<!-- Start Sidebar Toggle icon -->
+<div class="toggleIcon desktop-view">
+  <i class="material-icons close" (click)="onToggleSidebar()" pTooltip="{{'show' | translate}}" tooltipPosition="right" *ngIf="!this.isOpenSidebar">menu</i>
+</div>
+<!-- End Sidebar Toggle icon -->
+
+
+<!-- App Mobile Sidebar -->
+<div class="sidebar-container box-shadow mobile-view" *ngIf="isOpenMobileSidebar" @sideAmination>
+  <div class="toggleIcon mobile-view">
+    <i class="material-icons open" (click)="onMobileToggleSidebar()" *ngIf="this.isOpenMobileSidebar">keyboard_arrow_left</i>
+  </div>
+  <!-- End Sidebar Toggle icon -->
+  <div class="logo">
+    <img src="assets/img/logo_white.jpeg" style="height: 65px; width: 75px;" />
+  </div>
+  <ul class="navbar-menu">
+    <li>
+      <a routerLinkActive="active" [routerLink]="settingsUrl" (click)="closeSidebar()">
+        <i class="material-icons">tag_faces</i>
+        <span>{{userName}}</span>
+        <div class="clearfix"></div>
+      </a>
+      <div class="clearfix"></div>
+    </li>
+    <li>
+      <a [routerLink]="earnLoansUrl" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">money</i>
+        <span>Loans</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="secretKeyUrl" *ngIf="Is_Visible_SecretKey" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">vpn_key</i>
+        <span>Secret Key</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="masterScreenUrl" *ngIf="Is_Visible_MasterScreen" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">add_to_queue</i>
+        <span>Master Screen</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="appliedLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedLoanDetails" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">assignment_ind</i>
+        <span>Loan Details</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="appliedUserLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedUserLoanDetails" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">dashboard</i>
+        <span>My Loan Details</span>
+      </a>
+    </li>
+    <li>
+        <a [routerLink]="underUserDetailsUrl" *ngIf="Is_Visible_UnderUserDetails" routerLinkActive="active" (click)="closeSidebar()">
+          <i class="material-icons">supervisor_account</i>
+          <span>Under Users</span>
+        </a>
+      </li>
+    <li>
+      <a [routerLink]="bankAccountUrl" *ngIf="Is_Visible_BankAccount" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">account_box</i>
+        <span>Add Bank Account</span>
+      </a>
+    </li>
+    <li tooltipPosition="top" *ngIf="Is_Visible_Add_Roles">
+      <a [routerLink]="rolesUrl" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">notifications_none</i>
+        <span>Roles</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="addUserToRoleUrl" *ngIf="Is_Visible_Roles" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">group add</i>
+        <span>Assign Role</span>
+      </a>
+    </li>
+    <li>
+      <a routerLinkActive="active" (click)="logout()">
+        <i class="material-icons">power_settings_new</i>
+        <span>{{'logout' | translate}}</span>
+      </a>
+    </li>
+  </ul>
+
+  <ul class="admin-profile navbar-menu">
+
+    <div class="language-dropdown">
+      <div class="language-select">
+
+      </div>
+    </div>
+  </ul>
+</div>
+<!-- End Mobile Sidebar -->
+
+<!-- Start Sidebar Toggle icon -->
+<div class="toggleIcon mobile-view">
+  <i class="material-icons close" (click)="onMobileToggleSidebar()" *ngIf="!this.isOpenMobileSidebar">menu</i>
+</div>
+<!-- End Sidebar Toggle icon -->
+
+<!-- Start Header -->
+<div [ngClass]="{'body-container':true,'sidePanelHide':!isOpenSidebar}" @slideDown>
+  <div class="header-container">
+    <ul class="progressbar">
+      <li (click)="currentRoute()" *ngIf="Is_Visible_AppliedLoanDetails" [ngClass]="{'twoTabActive':currentPath == 'wallet','AllTabActive':currentPath == 'buy-token'}">
+        <a [routerLink]="appliedLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedLoanDetails" routerLinkActive="active">
+          <span>{{'viewLoanDetails' | translate}}</span>
+        </a>
+      </li>
+      <li (click)="currentRoute()" *ngIf="Is_Visible_AppliedUserLoanDetails" [ngClass]="{'twoTabActive':currentPath == 'wallet','AllTabActive':currentPath == 'buy-token'}">
+        <a [routerLink]="appliedUserLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedUserLoanDetails" routerLinkActive="active">
+          <span>My Loan Details</span>
+        </a>
+      </li>
+
+      <li (click)="currentRoute();earnLoanEvent()" [ngClass]="{'twoTabActive':currentPath == 'wallet','AllTabActive':currentPath == 'buy-token'}">
+        <a [routerLink]="earnLoansUrl" routerLinkActive="active">
+          <span>Loans</span>
+        </a>
+      </li>
+
+      <li (click)="currentRoute();underUserDetailsEvent()" [ngClass]="{'AllTabActive':currentPath == 'buy-token'}">
+        <a [routerLink]="underUserDetailsUrl" routerLinkActive="active">
+          <span>Under Users</span>
+        </a>
+      </li>
+
+      <li>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+  </div>
+</div>
+<!-- End Header -->
