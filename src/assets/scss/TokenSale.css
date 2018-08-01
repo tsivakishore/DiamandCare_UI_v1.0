@@ -1182,6 +1182,10 @@ fieldset[disabled] a.btn {
   border-color: #00c8aa;
   color: #fff; }
 
+.settings-popup-modal .btn-primary:hover {
+    border-color: #00c8aa;
+    color: #fff; }
+
 .btn-primary:hover {
   color: #fff;
   transition: 0.2s all ease-in;
@@ -4028,19 +4032,32 @@ button[disabled] {
     .phone-number-modal .countryCode .col-md-3 {
       padding-right: 0px !important; }
 
-      .downloa-popup-modal {
-        width: 300px !important;
-        left: calc(50% - 150px) !important;
-        z-index: 999; }
-        .downloa-popup-modal .modal-header h5 {
-          font-size: 18px !important;
-          padding-top: 8px !important;
-          font-weight: 500 !important; }
-        .downloa-popup-modal .file-icons {
-          left: -16px !important; }
-        .downloa-popup-modal .countryCode .col-md-3 {
-          padding-right: 0px !important; }
-      
+.downloa-popup-modal {
+  width: 300px !important;
+  left: calc(50% - 150px) !important;
+  z-index: 999; }
+  .downloa-popup-modal .modal-header h5 {
+    font-size: 18px !important;
+    padding-top: 8px !important;
+    font-weight: 500 !important; }
+  .downloa-popup-modal .file-icons {
+    left: -16px !important; }
+  .downloa-popup-modal .countryCode .col-md-3 {
+    padding-right: 0px !important; }
+    
+.settings-popup-modal {
+  width: 300px !important;
+  left: calc(50% - 150px) !important;
+  z-index: 999; }
+  .settings-popup-modal .modal-header h5 {
+    font-size: 18px !important;
+    padding-top: 8px !important;
+    font-weight: 500 !important; }
+  .settings-popup-modal .file-icons {
+    left: -16px !important; }
+  .settings-popup-modal .countryCode .col-md-3 {
+    padding-right: 0px !important; }
+
   .etherium-container .ether-block .etherium-body button.btn {
     width: 130px !important; }
   .etherium-container .ether-block .etherium-body .cursor {
@@ -4115,12 +4132,19 @@ button[disabled] {
     left: inherit !important;
     top: 5% !important; }
 
-    .read-confirm-modal-container,
-    .downloa-popup-modal {
-      background-color: #353c48;
-      width: 92% !important;
-      left: inherit !important;
-      top: 5% !important; }
+.read-confirm-modal-container,
+.downloa-popup-modal {
+  background-color: #353c48;
+  width: 92% !important;
+  left: inherit !important;
+  top: 5% !important; }
+
+.read-confirm-modal-container,
+.settings-popup-modal {
+  background-color: #353c48;
+  width: 92% !important;
+  left: inherit !important;
+  top: 5% !important; }
 
   .xs-MT10 {
     margin-top: 10px !important; }
@@ -4507,6 +4531,54 @@ login, register {
   /* left: calc(50% - 270px); */
   z-index: 999; }
   .downloa-popup-modal .modal-body span {
+    float: left; }
+
+
+.read-confirm-modal-container,
+.settings-popup-modal {
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.62), 0px 0px 14px 9px rgba(0, 0, 0, 0.09);
+  background-color: #353c48;
+  width: 800px;
+  position: fixed;
+  top: 15%;
+  left: calc(50% - 400px);
+  z-index: 9; }
+  .read-confirm-modal-container .modal-header h5,
+  .settings-popup-modal .modal-header h5 {
+    font-size: 25px;
+    color: #fff !important;
+    text-align: center;
+    padding-top: 16px;
+    font-weight: 500; }
+  .read-confirm-modal-container .modal-header i,
+  .settings-popup-modal .modal-header i {
+    position: absolute;
+    right: 3px;
+    top: 2px;
+    color: #fff !important;
+    cursor: pointer; }
+  .read-confirm-modal-container .modal-body input,
+  .settings-popup-modal .modal-body input {
+    float: left; }
+  .read-confirm-modal-container .modal-body span,
+  .settings-popup-modal .modal-body span {
+    color: red !important;
+    cursor: pointer;
+    float: right;
+    width: 95%;
+    position: relative;
+    top: -3px; }
+  .read-confirm-modal-container .modal-footer,
+  .settings-popup-modal .modal-footer {
+    margin-top: 20px; }
+
+.settings-popup-modal {
+  color: #fff !important;
+  width: 850px;
+  margin-top: 0px !important;
+  /* left: calc(50% - 270px); */
+  z-index: 999; }
+  .settings-popup-modal .modal-body span {
     float: left; }
 
 .success-modal h3 {

@@ -1,0 +1,13 @@
+.rolestyle{
+    text-align: center;
+    color: white;
+    font-size: larger;
+    font-weight: bold;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: #4c5463;
+}

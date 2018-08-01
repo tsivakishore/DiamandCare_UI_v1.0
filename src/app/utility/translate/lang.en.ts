@@ -38,7 +38,7 @@ export const LANG_EN_TRANS = {
   'fatherNameRqrd': 'Please enter your father name',
   'aadharNumberRqrd': 'Please enter your aadhar number',
   'validAadharNumber': 'Accept only digits',
-  'aadharNumberLenth': 'Please enter 12 digit aadhar number.',
+  'aadharNumberLenth': 'Please enter 12 digit aadhar number',
   'frstNameLnth': 'Length must be in between 3 to 50',
   'fatherNameLnth': 'Length must be in between 3 to 50',
   'lastNameLnth': 'Length must be in between 2 to 50',

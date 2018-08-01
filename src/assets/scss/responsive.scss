@@ -185,6 +185,27 @@ $tablet : "only screen and (min-width: 768px) and (max-width:1108px)";
     }
   }
   
+.settings-popup-modal{
+  width: 300px!important;
+  left: calc(50% - 150px)!important;
+  z-index: 999;
+  .modal-header{
+    h5 {
+      font-size: 18px!important;
+      padding-top: 8px!important;
+      font-weight: 500!important;
+    }
+  }
+  .file-icons {
+    left: -16px!important;
+  }
+  .countryCode{
+    .col-md-3{
+      padding-right: 0px!important;
+    }
+  }
+}
+
   .etherium-container{
     .ether-block{
       .etherium-body{

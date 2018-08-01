@@ -56,7 +56,7 @@ export class API {
   public static GETTREEVIEWDATA = 'treedata/GetTreeData';
   public static INSERTORUPDATEBANKDETAILS = 'userbankdetails/InsertorUpdateUserBankDetails';
   public static GETUSERBANKDETAILS = 'userbankdetails/GetUserBankDetails';
-  public static NEWROLE='role/newrrole';
+  public static NEWROLE='role/newrole';
   public static UPDATEROLE='role/updaterole';
 
   // EXTERNAL API CALLERS

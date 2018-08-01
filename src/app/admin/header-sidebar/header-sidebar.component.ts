@@ -44,6 +44,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   userName: string;
   userID: string;
   roleID: string;
+  roleName: string;
 
   Is_Visible_EarnLoans: boolean = false;
   Is_Visible_AppliedLoanDetails: boolean = false;
@@ -65,7 +66,8 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
     this.roleID = this.sharedService.getRoleID();
     this.getMenusBasedOnRole(this.userID);
     this.UserDetails = this.sharedService.getUser();
-    this.userName = this.sharedService.getUserName();
+    this.userName = this.sharedService.getUserName().toUpperCase();
+    this.roleName = this.sharedService.getRoleName();
   }
 
   getMenusBasedOnRole(userID: string) {

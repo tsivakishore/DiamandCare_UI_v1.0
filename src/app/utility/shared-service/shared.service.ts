@@ -21,6 +21,7 @@ export class SharedService {
   private _userName: string;
   private _userID: string;
   private _roleID: string;
+  private _roleName: string;
   private _pass: string;
   private _refer: string;
   private isProfileUpdated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -89,6 +90,14 @@ export class SharedService {
 
   getRoleID(): string {
     return this._roleID;
+  }
+
+  setRoleName(value: string): void {
+    this._roleName = value;
+  }
+
+  getRoleName(): string {
+    return this._roleName;
   }
 
   /* Common Methods */

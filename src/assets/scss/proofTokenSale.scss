@@ -337,6 +337,61 @@ login,register{
   }
 }
 
+.read-confirm-modal-container,
+.settings-popup-modal{
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.62), 0px 0px 14px 9px rgba(0, 0, 0, 0.09);
+  background-color: $darkColor;
+  width: 800px;
+  position: fixed;
+  top: 15%;
+  left: calc(50% - 400px);
+  z-index: 9;
+  .modal-header{
+    h5{
+      font-size: 25px;
+      color: $white;
+      text-align: center;
+      padding-top: 16px;
+      font-weight: 500;
+    }
+    i{
+      position: absolute;
+      right: 3px;
+      top: 2px;
+      color: $white;
+      cursor: pointer;
+    }
+  }
+  .modal-body{
+    input{
+      float: left;
+    }
+    span{
+      color: $white;
+      cursor: pointer;
+      float: right;
+      width: 95%;
+      position: relative;
+      top: -3px;
+    }
+  }
+  .modal-footer{
+    margin-top: 20px;
+  }
+}
+
+.settings-popup-modal{
+  color: red;
+  width: 500px;
+  left: calc(50% - 270px);
+  z-index: 999;
+  .modal-body{
+    span{
+      float: left;
+    }
+  }
+}
+
 .success-modal{
   h3{
     font-size: 16px;

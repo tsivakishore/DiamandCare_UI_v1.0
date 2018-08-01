@@ -1,5 +1,5 @@
 <!-- App Sidebar -->
-<div class="sidebar-container box-shadow desktop-view" *ngIf="isOpenSidebar" @sideAmination>
+<div class="sidebar-container box-shadow desktop-view" style="overflow: auto" *ngIf="isOpenSidebar" @sideAmination>
   <!-- Start Sidebar Toggle icon -->
   <div class="toggleIcon desktop-view">
     <i class="material-icons open" (click)="onToggleSidebar()" pTooltip="{{'hide' | translate}}" tooltipPosition="top" *ngIf="this.isOpenSidebar">keyboard_arrow_left</i>
@@ -11,7 +11,10 @@
   </div>
 
   <ul class="navbar-menu">
-    <li pTooltip="{{userName}}" tooltipPosition="top">
+    <li>
+      <div class="rolestyle">
+        <span>{{roleName}}</span>
+      </div>
       <a routerLinkActive="active" [routerLink]="settingsUrl">
         <i class="material-icons">tag_faces</i>
         <span>{{userName}}</span>
@@ -63,7 +66,7 @@
     </li>
     <li tooltipPosition="top" *ngIf="Is_Visible_Add_Roles">
       <a [routerLink]="rolesUrl" routerLinkActive="active">
-        <i class="material-icons">notifications_none</i>
+        <i class="material-icons">group_add</i>
         <span>Roles</span>
       </a>
     </li>
@@ -91,7 +94,7 @@
 
 
 <!-- App Mobile Sidebar -->
-<div class="sidebar-container box-shadow mobile-view" *ngIf="isOpenMobileSidebar" @sideAmination>
+<div class="sidebar-container box-shadow mobile-view" style="overflow: auto" *ngIf="isOpenMobileSidebar" @sideAmination>
   <div class="toggleIcon mobile-view">
     <i class="material-icons open" (click)="onMobileToggleSidebar()" *ngIf="this.isOpenMobileSidebar">keyboard_arrow_left</i>
   </div>
@@ -101,6 +104,9 @@
   </div>
   <ul class="navbar-menu">
     <li>
+      <div class="rolestyle">
+        <span>{{roleName}}</span>
+      </div>
       <a routerLinkActive="active" [routerLink]="settingsUrl" (click)="closeSidebar()">
         <i class="material-icons">tag_faces</i>
         <span>{{userName}}</span>
@@ -139,11 +145,11 @@
       </a>
     </li>
     <li>
-        <a [routerLink]="underUserDetailsUrl" *ngIf="Is_Visible_UnderUserDetails" routerLinkActive="active" (click)="closeSidebar()">
-          <i class="material-icons">supervisor_account</i>
-          <span>Under Users</span>
-        </a>
-      </li>
+      <a [routerLink]="underUserDetailsUrl" *ngIf="Is_Visible_UnderUserDetails" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">supervisor_account</i>
+        <span>Under Users</span>
+      </a>
+    </li>
     <li>
       <a [routerLink]="bankAccountUrl" *ngIf="Is_Visible_BankAccount" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">account_box</i>
@@ -152,7 +158,7 @@
     </li>
     <li tooltipPosition="top" *ngIf="Is_Visible_Add_Roles">
       <a [routerLink]="rolesUrl" routerLinkActive="active" (click)="closeSidebar()">
-        <i class="material-icons">notifications_none</i>
+        <i class="material-icons">group_add</i>
         <span>Roles</span>
       </a>
     </li>

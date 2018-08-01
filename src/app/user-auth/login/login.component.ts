@@ -146,6 +146,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
     this.sharedService.setToken(body.access_token);
     this.sharedService.setUserID(body.userId);
     this.sharedService.setRoleID(body.roleId);
+    this.sharedService.setRoleName(body.roleName);
     this.getUserDetaildByLoginID();
     this.sharedService.setLoader(false);
     if (body.roleId === BaseUrl.AdminRoleID) {

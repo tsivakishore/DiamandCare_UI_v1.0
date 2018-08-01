@@ -107,7 +107,20 @@
     left: -16px !important; }
   .downloa-popup-modal .countryCode .col-md-3 {
     padding-right: 0px !important; }
-      
+  
+.settings-popup-modal {
+  width: 300px !important;
+  left: calc(50% - 150px) !important;
+  z-index: 999; }
+  .settings-popup-modal .modal-header h5 {
+    font-size: 18px !important;
+    padding-top: 8px !important;
+    font-weight: 500 !important; }
+  .settings-popup-modal .file-icons {
+    left: -16px !important; }
+  .settings-popup-modal .countryCode .col-md-3 {
+    padding-right: 0px !important; }
+    
   .etherium-container .ether-block .etherium-body button.btn {
     width: 130px !important; }
   .etherium-container .ether-block .etherium-body .cursor {

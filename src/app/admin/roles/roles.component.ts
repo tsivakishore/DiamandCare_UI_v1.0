@@ -41,6 +41,7 @@ export class RolesComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.createBuyTokenForm();
     this.getAllRoles();
+    this.roleForm.get('Name').enable();
   }
 
   createBuyTokenForm() {
@@ -60,48 +61,63 @@ export class RolesComponent extends BaseComponent implements OnInit {
     })
   }
 
-  onSubmitrole(formParam, isValid) {
-    this.apiManager.postAPI(API.NEWROLE, formParam).subscribe(response => {
-      if (response.m_Item1) {
-        this.toastr.success(response.m_Item2);
-        this.getAllRoles();
-        this.roleForm.reset();
-      }
-      else {
-        this.toastr.error(response.m_Item2);
-      }
-    }, err => {
-      console.log(err);
-      this.toastr.error("Oops! Role Registeration failed.Please try again.");
-    });
+  onSubmitrole(formParam, IsValidForm) {
+    if (IsValidForm) {
+      this.apiManager.postAPI(API.NEWROLE, formParam).subscribe(response => {
+        if (response.m_Item1) {
+          this.toastr.success(response.m_Item2);
+          this.getAllRoles();
+          this.roleForm.reset();
+        }
+        else {
+          this.rolereset();
+          this.toastr.error(response.m_Item2);
+        }
+      }, err => {
+        this.rolereset();
+        this.toastr.error("Oops! Role Registeration failed.Please try again.");
+      });
+    }
+    else {
+      this.toastr.error("Invalid form data.");
+    }
   }
 
   editRole(values) {
     this.roleForm.patchValue(values);
     this.updateRole = true;
     this.saveRole = true;
+    this.roleForm.get('Name').disable();
   }
 
   rolereset() {
     this.roleForm.reset({ RoleID: "", Name: "", IsActive: false });
     this.updateRole = false;
     this.saveRole = false;
+    this.roleForm.get('Name').enable();
   }
 
-  onUpdaterole(formParam, isValid) {
-    this.sharedService.setLoader(true);
-    this.apiManager.postAPI(API.UPDATEROLE, formParam).subscribe(response => {
-      if (response.Item1) {
-        this.toastr.success(response.Item2);
-        this.getAllRoles();
-      }
-      else {
-        this.toastr.error(response.Item2);
-      }
-    }, err => {
-      console.log(err);
-      this.toastr.error("Oops! Role details updatation failed.Please try again.");
-    });
-    this.sharedService.setLoader(false);
+  onUpdaterole(formParam, IsValidForm) {
+    if (IsValidForm) {
+      this.sharedService.setLoader(true);
+      this.apiManager.postAPI(API.UPDATEROLE, formParam).subscribe(response => {
+        if (response.m_Item1) {
+          this.rolereset();
+          this.toastr.success(response.m_Item2);
+          this.getAllRoles();
+        }
+        else {
+          this.rolereset();
+          this.toastr.error(response.m_Item2);
+        }
+      }, err => {
+        console.log(err);
+        this.toastr.error("Oops! Role details updatation failed.Please try again.");
+      });
+      this.sharedService.setLoader(false);
+    }
+    else {
+      this.toastr.error("Invalid form data.");
+    }
   }
 }

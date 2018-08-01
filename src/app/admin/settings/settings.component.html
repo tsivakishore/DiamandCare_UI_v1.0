@@ -59,7 +59,7 @@
 <admin-footer></admin-footer>
 
 <!-- User Profile modal popup -->
-<div class="downloa-popup-modal" *ngIf="isShowModal == 2" @dialog>
+<div class="settings-popup-modal" *ngIf="isShowModal == 2" @dialog>
   <form [formGroup]="userProfileForm" (submit)="UpdateUserProfile(userProfileForm.value,userProfileForm.valid)">
     <div class="modal-container">
       <div class="modal-header">
@@ -177,11 +177,11 @@
 <!-- End User Profile modal popup -->
 
 <!-- Change password modal -->
-<div class="phone-number-modal" *ngIf="isShowModal == 3" @dialog>
+<div class="settings-popup-modal changepassword-model" *ngIf="isShowModal == 3" @dialog>
   <form [formGroup]="changePasswordForm" (submit)="changePassword(changePasswordForm.value,true)">
     <div class="modal-container">
       <div class="modal-header">
-        <h5>{{'changePassword' | translate}}</h5>
+        <h5 style="color: #00c8aa !important;background-color: #72767e;">{{'changePassword' | translate}}</h5>
         <i class="material-icons" pTooltip="Close" tooltipPosition="top" (click)="isShowModal = 1">close</i>
       </div>
       <div class="clearfix"></div>
@@ -249,7 +249,7 @@
 <!-- End Change password modal -->
 
 <!-- User address modal popup -->
-<div class="downloa-popup-modal" *ngIf="isShowModal == 4" @dialog>
+<div class="settings-popup-modal" *ngIf="isShowModal == 4" @dialog>
   <form [formGroup]="addressForm" (submit)="AddOrModifyAddress(addressForm.value,addressForm.valid)">
     <div class="modal-container">
       <div class="modal-header">
@@ -354,7 +354,7 @@
 <!-- End User address modal popup -->
 
 <!-- Bank account modal popup -->
-<div class="downloa-popup-modal" *ngIf="isShowModal == 5" @dialog>
+<div class="settings-popup-modal" *ngIf="isShowModal == 5" @dialog>
   <form [formGroup]="frmBankAccount" (submit)="AddBankAccountDetails(frmBankAccount.value,frmBankAccount.valid)">
     <div class="modal-container">
       <div class="modal-header">
@@ -467,7 +467,7 @@
 <!-- End Bank account modal popup -->
 
 <!-- Nominee details modal popup -->
-<div class="downloa-popup-modal" *ngIf="isShowModal == 6" @dialog>
+<div class="settings-popup-modal" *ngIf="isShowModal == 6" @dialog>
   <form [formGroup]="frmNomineeDetails" (submit)="AddOrModifyNomineeDetails(frmNomineeDetails.value,frmNomineeDetails.valid)">
     <div class="modal-container">
       <div class="modal-header">
