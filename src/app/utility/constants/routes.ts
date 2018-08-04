@@ -14,4 +14,5 @@ export class RouteConstants {
   public static CHANGE_PASSWORD = 'change-password';
   public static NOTFOUND = 'not-found';
   public static ROLES = 'roles';
+  public static UPGRADETOFRANCHISE = 'upgradetofranchise';
 }
