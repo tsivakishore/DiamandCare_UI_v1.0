@@ -40,6 +40,18 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">{{'prePaidLoan' | translate}}</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="{{'registrationCharges' | translate}}" pTooltip="{{'registrationCharges' | translate}}"
+              tooltipPosition="top" formControlName="RegistrationCharges" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(masterScreenForm.get('RegistrationCharges'))" [errMsg]="'registrationChargesRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(masterScreenForm.get('RegistrationCharges'))" [errMsg]="'validRegistrationCharges' | translate"></validation>
+            </div>
+          </div>
+        </div>
 
 
         <div class="clearfix"></div>
