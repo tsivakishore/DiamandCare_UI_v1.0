@@ -18,6 +18,18 @@
         </div>
         <div class="row">
           <div class="col-md-6">
+            <div class="label" style="color: #fff;">{{'documentationFee1' | translate}}</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="{{'documentationFee1' | translate}}" pTooltip="{{'documentationFee1' | translate}}"
+              tooltipPosition="top" formControlName="DocumentationAdminFee1" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(masterScreenForm.get('DocumentationAdminFee1'))" [errMsg]="'documentationFeeRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(masterScreenForm.get('DocumentationAdminFee1'))" [errMsg]="'validdocumentationFee' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
             <div class="label" style="color: #fff;">{{'prePaidLoan' | translate}}</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" placeholder="{{'prePaidLoan' | translate}}" pTooltip="{{'prePaidLoan' | translate}}"
@@ -28,9 +40,10 @@
             </div>
           </div>
         </div>
-        <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">{{'franchisecommission' | translate}}</h3>
+
+
         <div class="clearfix"></div>
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-md-6">
             <div class="label" style="color: #fff;">{{'area' | translate}}</div>
             <div class="clearfix"></div>
@@ -58,8 +71,8 @@
           <div class="col-md-6">
             <div class="label" style="color: #fff;">{{'districtCluster' | translate}}</div>
             <div class="clearfix"></div>
-            <input type="text" class="form-control" placeholder="{{'districtCluster' | translate}}" pTooltip="{{'districtCluster' | translate}}" tooltipPosition="top"
-              formControlName="DistrictClusterFee" required/>
+            <input type="text" class="form-control" placeholder="{{'districtCluster' | translate}}" pTooltip="{{'districtCluster' | translate}}"
+              tooltipPosition="top" formControlName="DistrictClusterFee" required/>
             <div class="input-validation-msg">
               <validation *ngIf="isRequiredField(masterScreenForm.get('DistrictClusterFee'))" [errMsg]="'districtClusterChangesRqrd' | translate"></validation>
               <validation *ngIf="isValidField(masterScreenForm.get('DistrictClusterFee'))" [errMsg]="'validDistrictClusterChanges' | translate"></validation>
@@ -82,8 +95,8 @@
           <div class="col-md-6">
             <div class="label" style="color: #fff;">{{'stateCluster' | translate}}</div>
             <div class="clearfix"></div>
-            <input type="text" class="form-control" placeholder="{{'stateCluster' | translate}}" pTooltip="{{'stateCluster' | translate}}" tooltipPosition="top"
-              formControlName="StateClusterFee" required/>
+            <input type="text" class="form-control" placeholder="{{'stateCluster' | translate}}" pTooltip="{{'stateCluster' | translate}}"
+              tooltipPosition="top" formControlName="StateClusterFee" required/>
             <div class="input-validation-msg">
               <validation *ngIf="isRequiredField(masterScreenForm.get('StateClusterFee'))" [errMsg]="'stateClusterChangesRqrd' | translate"></validation>
               <validation *ngIf="isValidField(masterScreenForm.get('StateClusterFee'))" [errMsg]="'validStateClusterChangesse' | translate"></validation>
@@ -101,56 +114,54 @@
               <validation *ngIf="isValidField(masterScreenForm.get('MotherFee'))" [errMsg]="'validMotherCharges' | translate"></validation>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="row">
-            <div class="col-md-6">
-              <div class="label" style="color: #fff;">State GST</div>
-              <div class="clearfix"></div>
-              <input type="text" class="form-control" placeholder="State GST" pTooltip="State GST" tooltipPosition="top"
-                formControlName="SGST" required/>
-              <div class="input-validation-msg">
-                <validation *ngIf="isRequiredField(masterScreenForm.get('SGST'))" [errMsg]="'SGSTRqrd' | translate"></validation>
-                <validation *ngIf="isValidField(masterScreenForm.get('SGST'))" [errMsg]="'validSGSTCharges' | translate"></validation>
-              </div>
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">State GST</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="State GST" pTooltip="State GST" tooltipPosition="top" formControlName="SGST"
+              required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(masterScreenForm.get('SGST'))" [errMsg]="'SGSTRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(masterScreenForm.get('SGST'))" [errMsg]="'validSGSTCharges' | translate"></validation>
             </div>
           </div>
-          <div class="row">
-              <div class="col-md-6">
-                <div class="label" style="color: #fff;">Central GST</div>
-                <div class="clearfix"></div>
-                <input type="text" class="form-control" placeholder="Central GST" pTooltip="Central GST" tooltipPosition="top"
-                  formControlName="CGST" required/>
-                <div class="input-validation-msg">
-                  <validation *ngIf="isRequiredField(masterScreenForm.get('CGST'))" [errMsg]="'CGSTRqrd' | translate"></validation>
-                  <validation *ngIf="isValidField(masterScreenForm.get('CGST'))" [errMsg]="'validCGST' | translate"></validation>
-                </div>
-              </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">Central GST</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="Central GST" pTooltip="Central GST" tooltipPosition="top" formControlName="CGST"
+              required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(masterScreenForm.get('CGST'))" [errMsg]="'CGSTRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(masterScreenForm.get('CGST'))" [errMsg]="'validCGST' | translate"></validation>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                  <div class="label" style="color: #fff;">IGST</div>
-                  <div class="clearfix"></div>
-                  <input type="text" class="form-control" placeholder="IGST" pTooltip="IGST" tooltipPosition="top"
-                    formControlName="IGST" required/>
-                  <div class="input-validation-msg">
-                    <validation *ngIf="isRequiredField(masterScreenForm.get('IGST'))" [errMsg]="'IGSTRqrd' | translate"></validation>
-                    <validation *ngIf="isValidField(masterScreenForm.get('IGST'))" [errMsg]="'validIGST' | translate"></validation>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                  <div class="col-md-6">
-                    <div class="label" style="color: #fff;">TDS</div>
-                    <div class="clearfix"></div>
-                    <input type="text" class="form-control" placeholder="TDS" pTooltip="TDS" tooltipPosition="top"
-                      formControlName="TDS" required/>
-                    <div class="input-validation-msg">
-                      <validation *ngIf="isRequiredField(masterScreenForm.get('TDS'))" [errMsg]="'TDSRqrd' | translate"></validation>
-                      <validation *ngIf="isValidField(masterScreenForm.get('TDS'))" [errMsg]="'validTDS' | translate"></validation>
-                    </div>
-                  </div>
-                </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">IGST</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="IGST" pTooltip="IGST" tooltipPosition="top" formControlName="IGST" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(masterScreenForm.get('IGST'))" [errMsg]="'IGSTRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(masterScreenForm.get('IGST'))" [errMsg]="'validIGST' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">TDS</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="TDS" pTooltip="TDS" tooltipPosition="top" formControlName="TDS" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(masterScreenForm.get('TDS'))" [errMsg]="'TDSRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(masterScreenForm.get('TDS'))" [errMsg]="'validTDS' | translate"></validation>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="clearfix"></div>
       <div class="col-md-12 col-sm-12 col-xs-12 margin-top-15">
@@ -158,11 +169,35 @@
       </div>
       <div class="clearfix"></div>
     </form>
-    <div class="clearfix"></div>
   </div>
   <div class="clearfix"></div>
 </div>
-
+<h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">{{'franchisecommission' | translate}}</h3>
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="transaction-history-container">
+      <div class="transaction-history-table box-shadow">
+        <p-dataTable [value]="lstFranchise" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+          <p-column [style]="{'width':'80px'}" field="ID" header="ID" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'100px'}" field="FranchiseType" header="Franchise Type" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'120px'}" field="PaymentReceiptPercentage" header="Payment Receipt Percentage" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'200px'}" field="TargetJoineesPerMonth" header="Target Joinees per Month" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'150px'}" field="MinimumJoineesAvg" header="Minimum Joinees on Avg" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'80px'}" header="Edit" [sortable]="true">
+            <ng-template let-data="rowData" pTemplate="body" let-ri="rowIndex">
+              <div class="col-md-12" style="margin-left: -30px;">
+                <div class="col-md-6" style="width:100px">
+                  <button type="button" style="width: 50px;height: 20px;" class="ui-button-reset-transparent" pButton (click)="EditFranchise(ri)">Edit</button>
+                </div>
+              </div>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="sucess-msg">
   <p-messages [(value)]="msgs"></p-messages>
 </div>
@@ -170,3 +205,66 @@
 <admin-footer></admin-footer>
 
 <div class="confirm-modal-overay" *ngIf="isShowModal == 2" (click)="closeForm()"></div>
+
+<div class="phone-number-modal" style="margin-left: 15px;margin-top: 50px;" *ngIf="isShowModal == 3" @dialog>
+  <form [formGroup]="fgFranchise" (submit)="onEditFranchise(fgFranchise.value,fgFranchise.valid)">
+    <div class="modal-container" style="height: 300px !important;">
+      <div class="modal-header" style="background: #797b85;">
+        <h5>Edit Franchise</h5>
+        <i class="material-icons" (click)="closeForm()">close</i>
+      </div>
+      <div class="clearfix"></div>
+      <div class="clearfix"></div>
+
+      <div class="modal-body" style="height: 50px;">
+        <div class="col-md-12">
+          <div class="margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="ID" tooltipPosition="top" class="form-control" formControlName="ID" readonly/>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Franchise Type" tooltipPosition="top" class="form-control" formControlName="FranchiseType" readonly/>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Payment Receipt Percentage" tooltipPosition="top" class="form-control" formControlName="PaymentReceiptPercentage"
+              />
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Target Joinees per Month" tooltipPosition="top" class="form-control" formControlName="TargetJoineesPerMonth"
+              />
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Minimum Joinees Avg" tooltipPosition="top" class="form-control" formControlName="MinimumJoineesAvg"
+              />
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-7 col-md-offset-3">
+          <button type="submit" [disabled]="!fgFranchise.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
+          <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>

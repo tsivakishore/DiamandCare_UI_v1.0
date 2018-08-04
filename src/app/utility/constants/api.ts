@@ -58,6 +58,8 @@ export class API {
   public static GETUSERBANKDETAILS = 'userbankdetails/GetUserBankDetails';
   public static NEWROLE='role/newrole';
   public static UPDATEROLE='role/updaterole';
+  public static GETFRANCHISEMASTER='franchisedetails/GetFranchiseMasterDetails';
+  public static EDITFRANCHISE='franchisedetails/UpdateFranchise';
 
   // EXTERNAL API CALLERS
 
