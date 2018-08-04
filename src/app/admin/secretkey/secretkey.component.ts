@@ -38,6 +38,10 @@ export class SecretkeyComponent extends BaseComponent implements OnInit {
   listRegKeys: any;
   gridTitle: string;
   selectedRow: any;
+  public IsSingleChecked: boolean = true;
+  public IsMultipleChecked: boolean = false;
+  public is_Visible_Single: boolean = false;
+  public is_Visible_Multiple: boolean = false;
 
   constructor(private sharedService: SharedService,
     private secretKeyService: SecretKeyService,
@@ -52,6 +56,7 @@ export class SecretkeyComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.GetIssuedRegisterKeys();
     this.createsecretkeyForm();
+    this.is_Visible_Single = true;
   }
 
   createsecretkeyForm() {
@@ -103,6 +108,21 @@ export class SecretkeyComponent extends BaseComponent implements OnInit {
       console.log(err);
       this.toastr.error("Error while resend register key. Please try again.");
     });
+  }
+
+  onSelectionChange(isRadiobuttionClicked) {
+    if (isRadiobuttionClicked == "InActive") {
+      this.IsMultipleChecked = true;
+      this.IsSingleChecked = false;
+      this.is_Visible_Single = false;
+      this.is_Visible_Multiple = true;
+    }
+    else {
+      this.IsMultipleChecked = false;
+      this.IsSingleChecked = true;
+      this.is_Visible_Single = true;
+      this.is_Visible_Multiple = false;
+    }
   }
 
 }

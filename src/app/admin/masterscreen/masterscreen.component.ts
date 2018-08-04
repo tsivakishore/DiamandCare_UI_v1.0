@@ -193,7 +193,7 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
         }
       }, err => {
         this.isShowModal = 1;
-        this.toastr.error("Oops! There has been an error while applying personal loan.Please try again.");
+        this.toastr.error("Oops! There has been an error while updating franchise details .Please try again.");
       });
     }
     else {

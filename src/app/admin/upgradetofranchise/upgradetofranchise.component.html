@@ -1,0 +1,105 @@
+<div class="upgradefranchisescreen-container" @slideUp>
+    <div class="upgradefranchisescreen-form">
+      <form [formGroup]="frmUpgradeToFranchise" (submit)="UpgradeToFranchise(frmUpgradeToFranchise.value,frmUpgradeToFranchise.valid)">
+        <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">Upgrade to Franchise</h3>
+        <div class="clearfix"></div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="label" style="color: #fff;">User ID</div>
+              <div class="clearfix"></div>
+              <input type="text" class="form-control" placeholder="UserID or UserName" pTooltip="UserID or UserName"
+                tooltipPosition="top" formControlName="UserID" required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(frmUpgradeToFranchise.get('UserID'))" [errMsg]="'Please enter user id or username'"></validation>
+                <validation *ngIf="isValidField(frmUpgradeToFranchise.get('UserID'))" [errMsg]="'Please enter valid user id or username'"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="label" style="color: #fff;">{{'documentationFee1' | translate}}</div>
+              <div class="clearfix"></div>
+              <input type="text" class="form-control" placeholder="{{'documentationFee1' | translate}}" pTooltip="{{'documentationFee1' | translate}}"
+                tooltipPosition="top" formControlName="DocumentationAdminFee1" required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(frmUpgradeToFranchise.get('DocumentationAdminFee1'))" [errMsg]="'documentationFeeRqrd' | translate"></validation>
+                <validation *ngIf="isValidField(frmUpgradeToFranchise.get('DocumentationAdminFee1'))" [errMsg]="'validdocumentationFee' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="label" style="color: #fff;">{{'prePaidLoan' | translate}}</div>
+              <div class="clearfix"></div>
+              <input type="text" class="form-control" placeholder="{{'prePaidLoan' | translate}}" pTooltip="{{'prePaidLoan' | translate}}"
+                tooltipPosition="top" formControlName="PrepaidLoanCharges" required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(frmUpgradeToFranchise.get('PrepaidLoanCharges'))" [errMsg]="'prePaidLoanRqrd' | translate"></validation>
+                <validation *ngIf="isValidField(frmUpgradeToFranchise.get('PrepaidLoanCharges'))" [errMsg]="'validPrePaidLoan' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="label" style="color: #fff;">State GST</div>
+              <div class="clearfix"></div>
+              <input type="text" class="form-control" placeholder="State GST" pTooltip="State GST" tooltipPosition="top" formControlName="SGST"
+                required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(frmUpgradeToFranchise.get('SGST'))" [errMsg]="'SGSTRqrd' | translate"></validation>
+                <validation *ngIf="isValidField(frmUpgradeToFranchise.get('SGST'))" [errMsg]="'validSGSTCharges' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="label" style="color: #fff;">Central GST</div>
+              <div class="clearfix"></div>
+              <input type="text" class="form-control" placeholder="Central GST" pTooltip="Central GST" tooltipPosition="top" formControlName="CGST"
+                required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(frmUpgradeToFranchise.get('CGST'))" [errMsg]="'CGSTRqrd' | translate"></validation>
+                <validation *ngIf="isValidField(frmUpgradeToFranchise.get('CGST'))" [errMsg]="'validCGST' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="label" style="color: #fff;">IGST</div>
+              <div class="clearfix"></div>
+              <input type="text" class="form-control" placeholder="IGST" pTooltip="IGST" tooltipPosition="top" formControlName="IGST" required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(frmUpgradeToFranchise.get('IGST'))" [errMsg]="'IGSTRqrd' | translate"></validation>
+                <validation *ngIf="isValidField(frmUpgradeToFranchise.get('IGST'))" [errMsg]="'validIGST' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="label" style="color: #fff;">TDS</div>
+              <div class="clearfix"></div>
+              <input type="text" class="form-control" placeholder="TDS" pTooltip="TDS" tooltipPosition="top" formControlName="TDS" required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(frmUpgradeToFranchise.get('TDS'))" [errMsg]="'TDSRqrd' | translate"></validation>
+                <validation *ngIf="isValidField(frmUpgradeToFranchise.get('TDS'))" [errMsg]="'validTDS' | translate"></validation>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12 col-sm-12 col-xs-12 margin-top-15">
+          <button type="submit" class="btn btn-primary" [disabled]="!frmUpgradeToFranchise.valid" pTooltip="{{'submit' | translate}}" tooltipPosition="top">{{'submit' | translate}}</button>
+        </div>
+        <div class="clearfix"></div>
+      </form>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  
+  <div class="sucess-msg">
+    <p-messages [(value)]="msgs"></p-messages>
+  </div>
+  
+  <admin-footer></admin-footer>

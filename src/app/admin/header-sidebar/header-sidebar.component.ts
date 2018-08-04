@@ -55,6 +55,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   Is_Visible_Roles: boolean = false;
   Is_Visible_UnderUserDetails: boolean = false;
   Is_Visible_Add_Roles = false;
+  Is_Visible_Upgrade_Franchise = false;
 
   constructor(private apiManager: APIManager, private sharedService: SharedService,
     private router: Router, public toastr: ToastsManager, public vcr: ViewContainerRef) {
@@ -105,6 +106,9 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
               case RouteConstants.ROLES:
                 this.Is_Visible_Add_Roles = true;
                 break;
+              case RouteConstants.UPGRADETOFRANCHISE:
+                this.Is_Visible_Upgrade_Franchise = true;
+                break;
             }
           }
           else if (this.roleID === BaseUrl.UserRoleID) {
@@ -126,6 +130,9 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
                 break;
               case RouteConstants.UNDERUSERDETAILS:
                 this.Is_Visible_UnderUserDetails = true;
+                break;
+              case RouteConstants.UPGRADETOFRANCHISE:
+                this.Is_Visible_Upgrade_Franchise = false;
                 break;
             }
           }
@@ -207,6 +214,10 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   get rolesUrl() {
     return "/" + RouteConstants.ROLES;
+  }
+
+  get upgradeFranchiseUrl() {
+    return "/" + RouteConstants.UPGRADETOFRANCHISE;
   }
 
   earnLoanEvent() {

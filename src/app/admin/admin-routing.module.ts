@@ -12,6 +12,7 @@ import { SettingsComponent } from "./settings/settings.component";
 import { AddroletouserComponent } from '../admin/addroletouser/addroletouser.component';
 import { UnderuserdetailsComponent } from '../admin/underuserdetails/underuserdetails.component';
 import { RolesComponent } from '../admin/roles/roles.component';
+import { UpgradetofranchiseComponent } from '../admin/upgradetofranchise/upgradetofranchise.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,11 @@ const routes: Routes = [
   {
     path: RouteConstants.SETTINGS,
     component: SettingsComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.UPGRADETOFRANCHISE,
+    component: UpgradetofranchiseComponent,
     canActivate: [AuthGaurd]
   }
 ];

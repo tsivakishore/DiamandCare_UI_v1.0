@@ -41,6 +41,12 @@
       </a>
     </li>
     <li tooltipPosition="top">
+      <a [routerLink]="upgradeFranchiseUrl" *ngIf="Is_Visible_Upgrade_Franchise" routerLinkActive="active">
+        <i class="material-icons">cloud_upload</i>
+        <span>Upgrade Franchise</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
       <a [routerLink]="appliedLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedLoanDetails" routerLinkActive="active">
         <i class="material-icons">assignment_ind</i>
         <span>Loan Details</span>
@@ -130,6 +136,12 @@
       <a [routerLink]="masterScreenUrl" *ngIf="Is_Visible_MasterScreen" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">add_to_queue</i>
         <span>Master Screen</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="upgradeFranchiseUrl" *ngIf="Is_Visible_Upgrade_Franchise" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">cloud_upload</i>
+        <span>Upgrade Franchise</span>
       </a>
     </li>
     <li>
