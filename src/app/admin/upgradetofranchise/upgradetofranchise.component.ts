@@ -10,13 +10,13 @@ import { dialog, slideUp } from "../animation";
 import { TranslateService } from "../../utility/translate/translate.service";
 import * as moment from 'moment';
 import { style, transition, animate, trigger } from "@angular/animations";
-import { MasterChargesService } from "../../utility/shared-service/mastercharges.service";
 import { FranchiseService } from "../../utility/shared-service/franchise.service";
 
 @Component({
   selector: 'app-upgradetofranchise',
   templateUrl: './upgradetofranchise.component.html',
   styleUrls: ['./upgradetofranchise.component.css'],
+  providers: [FranchiseService],
   animations: [
     trigger('dialog', [
       transition('void => *', [
@@ -30,25 +30,122 @@ import { FranchiseService } from "../../utility/shared-service/franchise.service
     slideUp
   ]
 })
-export class UpgradetofranchiseComponent implements OnInit {
-  frmUpgradeToFranchise: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+export class UpgradetofranchiseComponent extends BaseComponent implements OnInit {
+  frmUpgradeToFranchise: FormGroup;
+  lstUpgradeTypes: any;
+  Username: any;
+  UnderFranchiseDetails: any;
+  FranchiseTypeDetails: any;
+  defaultUnderFranchiseID: any;
+
+  constructor(private sharedService: SharedService,
+    private franchiseService: FranchiseService,
+    private fb: FormBuilder,
+    private apiManager: APIManager,
+    public toastr: ToastsManager,
+    public vcr: ViewContainerRef,
+    public translateService: TranslateService) {
+    super(toastr, vcr);
+  }
 
   ngOnInit() {
     this.createUpgradeFranchiseForm();
+    this.getFranchiseMasterDetails();
   }
 
   createUpgradeFranchiseForm() {
     this.frmUpgradeToFranchise = this.fb.group({
-      UserID: [''],
-      DocumentationAdminFee: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
-      DocumentationAdminFee1: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
-      PrepaidLoanCharges: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
-      SGST: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
-      CGST: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
-      IGST: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
-      TDS: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])]
+      UserID: ['', Validators.compose([Validators.required])],
+      UserName: ['', Validators.compose([Validators.required])],
+      UpgradeTo: [''],
+      FranchiseTypeID: [''],
+      UnderFranchiseID: [''],
+      ConditionsApplySelf: [''],
+      ConditionsApplyUnderJoinees: [''],
+      FranchiseJoinees: [''],
+      FranchiseJoineesMinimum: ['']
     })
   }
+
+  public getUpgradeTo() {
+    this.sharedService.setLoader(true);
+    this.franchiseService._getUpgradeTo().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.lstUpgradeTypes = res.m_Item3;
+      }
+    }, err => {
+      debugger;
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
+
+  // public getUsernameByDCIDorName() {
+  //   this.sharedService.setLoader(true);
+  //   this.franchiseService._getUsernameByDCIDorName().subscribe((res: any) => {
+  //     this.sharedService.setLoader(false);
+  //     if (res.m_Item1) {
+  //       this.Username = res.m_Item3;
+  //     }
+  //   }, err => {
+  //     console.log(err);
+  //     this.sharedService.setLoader(false);
+  //   })
+  // }
+
+  getUsernameByDCIDorName(DcIDorName: any) {
+    if (DcIDorName != "") {
+      this.franchiseService._getUsernameByDCIDorName(DcIDorName.UserID).subscribe(response => {
+        if (response.m_Item1) {
+          this.frmUpgradeToFranchise.patchValue({
+            UserName: response.m_Item3.UserName
+          })
+        }
+        else {
+          this.frmUpgradeToFranchise.patchValue({
+            UserName: ''
+          })
+          this.toastr.error(response.m_Item2);
+        }
+      }, err => {
+        this.toastr.error("Oops! There has been an error from server. Please try again.");
+      })
+    }
+  }
+
+  public getUnderFranchiseDetails(FranchiseType: any) {
+    this.sharedService.setLoader(true);
+    this.franchiseService._getUnderFranchiseDetails(FranchiseType).subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.UnderFranchiseDetails = res.m_Item3;
+        if (!!this.UnderFranchiseDetails) {
+          this.defaultUnderFranchiseID = this.UnderFranchiseDetails[0].UserID;
+          this.frmUpgradeToFranchise.controls['UnderFranchiseID'].setValue(this.defaultUnderFranchiseID, { onlySelf: true });
+        }
+      }
+      else {
+        this.UnderFranchiseDetails = [];
+      }
+    }, err => {
+      this.sharedService.setLoader(false);
+      console.log(err);
+    })
+  }
+
+  public getFranchiseMasterDetails() {
+    this.sharedService.setLoader(true);
+    this.franchiseService._getFranchiseMasterDetails().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.FranchiseTypeDetails = res.m_Item3;
+      }
+    }, err => {
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
+
 }

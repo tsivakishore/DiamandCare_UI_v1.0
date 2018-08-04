@@ -26,6 +26,30 @@ export class FranchiseService {
       });
   }
 
+  _getUpgradeTo() {
+    return this.httpService
+      .get(API.GETUPGRADETO)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  _getUsernameByDCIDorName(postData) {
+    return this.httpService
+      .get(API.GETUSERNAMEBYDCIDorNAME+ '?DcIDorName=' + postData)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  _getUnderFranchiseDetails(postData) {
+    return this.httpService
+      .get(API.GETUNDERFRANCHISEDETAILS + '?FranchiseTypeID=' + postData)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
   private extractData(res: Response, show?: boolean) {
     let data = res.json();
     let msg = data.message;

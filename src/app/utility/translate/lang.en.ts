@@ -165,7 +165,7 @@ export const LANG_EN_TRANS = {
   'validIGST': 'Please provide valid IGST charges',
   'TDSRqrd': 'TDS charges required',
   'validTDS': 'Please provide valid TDS charges',
-
+  'userIDUserNameRqrd': 'User Id or User name required',
   'viewLoanDetails': 'Loan Details',
   'editLoanDetails': 'Edit Loan Details',
   'loanAmountRqrd': 'Loan amount required',
