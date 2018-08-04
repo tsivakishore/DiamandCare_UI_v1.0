@@ -11,12 +11,13 @@ import { TranslateService } from "../../utility/translate/translate.service";
 import * as moment from 'moment';
 import { style, transition, animate, trigger } from "@angular/animations";
 import { MasterChargesService } from "../../utility/shared-service/mastercharges.service";
+import { FranchiseService } from "../../utility/shared-service/franchise.service";
 
 @Component({
   selector: 'app-masterscreen',
   templateUrl: './masterscreen.component.html',
   styleUrls: ['./masterscreen.component.css'],
-  providers: [MasterChargesService],
+  providers: [MasterChargesService, FranchiseService],
   animations: [
     trigger('dialog', [
       transition('void => *', [
@@ -35,11 +36,16 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
   masterScreenForm: FormGroup;
   isAddressValid: boolean = true;
   masterCharges: any;
+  lstFranchise: any;
   gridTitle: string;
   selectedRow: any;
+  isShowModal: number = 1;
+  fgFranchise: FormGroup;
+  
 
   constructor(private sharedService: SharedService,
     private masterChargesService: MasterChargesService,
+    private franchiseService: FranchiseService,
     private fb: FormBuilder,
     private apiManager: APIManager,
     public toastr: ToastsManager,
@@ -51,19 +57,31 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.GetMasterCharges();
     this.createmasterScreenForm();
+    this.getFranchiseMasterDetails();
+  }
+
+  createFranchiseForm() {
+    this.fgFranchise = this.fb.group({
+      ID: new FormControl(''),
+      FranchiseType: new FormControl(''),
+      PaymentReceiptPercentage: new FormControl(''),
+      TargetJoineesPerMonth: new FormControl(''),
+      MinimumJoineesAvg: new FormControl(''),
+    })
   }
 
   createmasterScreenForm() {
     this.masterScreenForm = this.fb.group({
       MasterID: [''],
       DocumentationAdminFee: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
+      DocumentationAdminFee1: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
       PrepaidLoanCharges: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
-      AreaFee: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
-      DistrictFee: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
-      DistrictClusterFee: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
-      StateFee: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
-      StateClusterFee: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
-      MotherFee: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
+      // AreaFee: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
+      // DistrictFee: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
+      // DistrictClusterFee: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
+      // StateFee: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
+      // StateClusterFee: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
+      // MotherFee: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
       SGST: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
       CGST: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
       IGST: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
@@ -80,13 +98,14 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
           this.masterScreenForm.patchValue({
             MasterID: this.masterCharges.MasterID,
             DocumentationAdminFee: this.masterCharges.DocumentationAdminFee,
+            DocumentationAdminFee1: this.masterCharges.DocumentationAdminFee1,
             PrepaidLoanCharges: this.masterCharges.PrepaidLoanCharges,
-            AreaFee: this.masterCharges.AreaFee,
-            DistrictFee: this.masterCharges.DistrictFee,
-            DistrictClusterFee: this.masterCharges.DistrictClusterFee,
-            StateFee: this.masterCharges.StateFee,
-            StateClusterFee: this.masterCharges.StateClusterFee,
-            MotherFee: this.masterCharges.MotherFee,
+            // AreaFee: this.masterCharges.AreaFee,
+            // DistrictFee: this.masterCharges.DistrictFee,
+            // DistrictClusterFee: this.masterCharges.DistrictClusterFee,
+            // StateFee: this.masterCharges.StateFee,
+            // StateClusterFee: this.masterCharges.StateClusterFee,
+            // MotherFee: this.masterCharges.MotherFee,
             SGST: this.masterCharges.SGST,
             CGST: this.masterCharges.CGST,
             IGST: this.masterCharges.IGST,
@@ -111,13 +130,14 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
         this.masterScreenForm.patchValue({
           MasterID: this.masterCharges.MasterID,
           DocumentationAdminFee: this.masterCharges.DocumentationAdminFee,
+          DocumentationAdminFee1: this.masterCharges.DocumentationAdminFee1,
           PrepaidLoanCharges: this.masterCharges.PrepaidLoanCharges,
-          AreaFee: this.masterCharges.AreaFee,
-          DistrictFee: this.masterCharges.DistrictFee,
-          DistrictClusterFee: this.masterCharges.DistrictClusterFee,
-          StateFee: this.masterCharges.StateFee,
-          StateClusterFee: this.masterCharges.StateClusterFee,
-          MotherFee: this.masterCharges.MotherFee,
+          // AreaFee: this.masterCharges.AreaFee,
+          // DistrictFee: this.masterCharges.DistrictFee,
+          // DistrictClusterFee: this.masterCharges.DistrictClusterFee,
+          // StateFee: this.masterCharges.StateFee,
+          // StateClusterFee: this.masterCharges.StateClusterFee,
+          // MotherFee: this.masterCharges.MotherFee,
           SGST: this.masterCharges.SGST,
           CGST: this.masterCharges.CGST,
           IGST: this.masterCharges.IGST,
@@ -129,4 +149,59 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       this.sharedService.setLoader(false);
     })
   }
+
+  public getFranchiseMasterDetails() {
+    this.sharedService.setLoader(true);
+    this.franchiseService._getFranchiseMasterDetails().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        console.log(res.m_Item3);
+        this.lstFranchise = res.m_Item3;
+      }
+    }, err => {
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
+
+  EditFranchise(rowIndex) {
+    this.isShowModal = 3;
+    this.createFranchiseForm();
+    this.selectedRow = this.lstFranchise[rowIndex];
+    this.fgFranchise.patchValue({
+      ID: this.selectedRow.ID,
+      FranchiseType: this.selectedRow.FranchiseType,
+      PaymentReceiptPercentage:this.selectedRow.PaymentReceiptPercentage,
+      TargetJoineesPerMonth:this.selectedRow.TargetJoineesPerMonth,
+      MinimumJoineesAvg:this.selectedRow.MinimumJoineesAvg
+    })
+
+  }
+  onEditFranchise(frmdata: any, isValidForm) {
+    if (isValidForm) {
+      this.apiManager.postAPI(API.EDITFRANCHISE, frmdata).subscribe(response => {
+        if (response.m_Item1) {
+          this.isShowModal = 1;
+          this.toastr.success(response.m_Item2);
+          this.fgFranchise.reset();
+          this.getFranchiseMasterDetails();
+        }
+        else {
+          this.toastr.error(response.m_Item2);
+          this.isShowModal = 1;
+        }
+      }, err => {
+        this.isShowModal = 1;
+        this.toastr.error("Oops! There has been an error while applying personal loan.Please try again.");
+      });
+    }
+    else {
+      this.toastr.error("Form is not valid");
+    }
+  }
+
+  closeForm() {
+    this.isShowModal = 1;
+  }
+  
 }

@@ -127,6 +127,7 @@ export const LANG_EN_TRANS = {
   //  Master screen variables
   'masterScreen': 'Master Screen',
   'documentationFee': 'Documentation & Admin Fee',
+  'documentationFee1': 'Documentation & Admin Fee 1',
   'prePaidLoan': 'Prepaid Loan Charges',
   'franchisecommission': 'Franchise & Commission',
   'area': 'Area',
@@ -137,6 +138,8 @@ export const LANG_EN_TRANS = {
   'mother': 'Mother',
   'documentationFeeRqrd': 'Please provide Documentation & Admin Fee',
   'validdocumentationFee': 'Please provide valid Documentation & Admin Fee',
+  'documentationFeeRqrd1': 'Please provide Documentation & Admin Fee1',
+  'validdocumentationFee1': 'Please provide valid Documentation & Admin Fee1',
   'prePaidLoanRqrd': 'Please provide Prepaid Loan Charges',
   'validPrePaidLoan': 'Please provide valid Prepaid Loan Charges',
   'areaRqrd': 'Please provide area charges',
