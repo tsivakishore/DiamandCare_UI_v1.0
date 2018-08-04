@@ -31,7 +31,7 @@ import { FranchiseService } from "../../utility/shared-service/franchise.service
   ]
 })
 export class UpgradetofranchiseComponent implements OnInit {
-  upgradefranchisescreen: FormGroup;
+  frmUpgradeToFranchise: FormGroup;
 
   constructor(private fb: FormBuilder) { }
 
@@ -40,7 +40,7 @@ export class UpgradetofranchiseComponent implements OnInit {
   }
 
   createUpgradeFranchiseForm() {
-    this.upgradefranchisescreen = this.fb.group({
+    this.frmUpgradeToFranchise = this.fb.group({
       UserID: [''],
       DocumentationAdminFee: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
       DocumentationAdminFee1: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
