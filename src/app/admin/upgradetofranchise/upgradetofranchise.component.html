@@ -17,8 +17,8 @@
           <div class="col-md-6">
             <div class="label" style="color: #fff;">User Name</div>
             <div class="clearfix"></div>
-            <input type="text" class="form-control" placeholder="UserName" pTooltip="UserName" tooltipPosition="top"
-              formControlName="UserName" readonly required/>
+            <input type="text" class="form-control" placeholder="UserName" pTooltip="UserName" tooltipPosition="top" formControlName="UserName"
+              readonly required/>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -34,9 +34,6 @@
             <div class="input-validation-msg">
             </div>
           </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="row">
           <div class="col-md-6">
             <div class="label" style="color: #fff;">Under Franchise</div>
             <div class="clearfix"></div>
@@ -59,9 +56,6 @@
             <div class="input-validation-msg">
             </div>
           </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="row">
           <div class="col-md-6">
             <div class="label" style="color: #fff;">Conditions Apply Under Joinees</div>
             <div class="clearfix"></div>
@@ -79,7 +73,19 @@
             <div class="label" style="color: #fff;">Franchise Joinees</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" formControlName="FranchiseJoinees" required/>
-
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmUpgradeToFranchise.get('FranchiseJoinees'))" [errMsg]="'franchiseRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(frmUpgradeToFranchise.get('FranchiseJoinees'))" [errMsg]="'validFranchiseJoinees' | translate"></validation>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">Franchise Joinees Minimum</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" formControlName="FranchiseJoineesMinimum" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmUpgradeToFranchise.get('FranchiseJoineesMinimum'))" [errMsg]="'franchiseJoineesMinimumRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(frmUpgradeToFranchise.get('FranchiseJoineesMinimum'))" [errMsg]="'validFranchiseJoineesMinimum' | translate"></validation>
+            </div>
           </div>
         </div>
         <div class="clearfix"></div>

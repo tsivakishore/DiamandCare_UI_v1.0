@@ -58,13 +58,12 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
     this.frmUpgradeToFranchise = this.fb.group({
       UserID: ['', Validators.compose([Validators.required])],
       UserName: ['', Validators.compose([Validators.required])],
-      UpgradeTo: [''],
       FranchiseTypeID: [''],
-      UnderFranchiseID: [''],
+      UnderFranchiseID: [null],
       ConditionsApplySelf: [''],
       ConditionsApplyUnderJoinees: [''],
-      FranchiseJoinees: [''],
-      FranchiseJoineesMinimum: ['']
+      FranchiseJoinees: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_REGEXP)])],
+      FranchiseJoineesMinimum: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_REGEXP)])],
     })
   }
 
@@ -81,19 +80,6 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
       this.sharedService.setLoader(false);
     })
   }
-
-  // public getUsernameByDCIDorName() {
-  //   this.sharedService.setLoader(true);
-  //   this.franchiseService._getUsernameByDCIDorName().subscribe((res: any) => {
-  //     this.sharedService.setLoader(false);
-  //     if (res.m_Item1) {
-  //       this.Username = res.m_Item3;
-  //     }
-  //   }, err => {
-  //     console.log(err);
-  //     this.sharedService.setLoader(false);
-  //   })
-  // }
 
   getUsernameByDCIDorName(DcIDorName: any) {
     if (DcIDorName != "") {
@@ -124,10 +110,15 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
         if (!!this.UnderFranchiseDetails) {
           this.defaultUnderFranchiseID = this.UnderFranchiseDetails[0].UserID;
           this.frmUpgradeToFranchise.controls['UnderFranchiseID'].setValue(this.defaultUnderFranchiseID, { onlySelf: true });
+          this.frmUpgradeToFranchise.controls['UnderFranchiseID'].setValidators(null);
+          this.frmUpgradeToFranchise.get('UnderFranchiseID').updateValueAndValidity({ onlySelf: false, emitEvent: false });
         }
       }
       else {
-        this.UnderFranchiseDetails = [];
+        this.UnderFranchiseDetails = null;
+        this.frmUpgradeToFranchise.controls['UnderFranchiseID'].setValue('', { onlySelf: true });
+        this.frmUpgradeToFranchise.controls['UnderFranchiseID'].setValidators(Validators.compose([Validators.required]));
+        this.frmUpgradeToFranchise.get('UnderFranchiseID').updateValueAndValidity({ onlySelf: true, emitEvent: false });
       }
     }, err => {
       this.sharedService.setLoader(false);
