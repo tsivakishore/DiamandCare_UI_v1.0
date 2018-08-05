@@ -37,7 +37,9 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
   Username: any;
   UnderFranchiseDetails: any;
   FranchiseTypeDetails: any;
+  FranchiseTypes: any;
   defaultUnderFranchiseID: any;
+  userID: number;
 
   constructor(private sharedService: SharedService,
     private franchiseService: FranchiseService,
@@ -51,7 +53,7 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
 
   ngOnInit() {
     this.createUpgradeFranchiseForm();
-    this.getFranchiseMasterDetails();
+    this.getFranchiseTypes();
   }
 
   createUpgradeFranchiseForm() {
@@ -81,10 +83,11 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
     })
   }
 
-  getUsernameByDCIDorName(DcIDorName: any) {
+  onUsernameByDCIDorName(DcIDorName: any) {
     if (DcIDorName != "") {
       this.franchiseService._getUsernameByDCIDorName(DcIDorName.UserID).subscribe(response => {
         if (response.m_Item1) {
+          this.userID = response.m_Item3.UserID
           this.frmUpgradeToFranchise.patchValue({
             UserName: response.m_Item3.UserName
           })
@@ -139,4 +142,33 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
     })
   }
 
+  public getFranchiseTypes() {
+    this.sharedService.setLoader(true);
+    this.franchiseService._getFranchiseTypes().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.FranchiseTypes = res.m_Item3;
+      }
+    }, err => {
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
+
+  public UpgradeToFranchise(formUpgradeToFranchise, isValidForm) {
+    if (isValidForm) {
+      formUpgradeToFranchise.UserID = this.userID;
+      this.apiManager.postAPI(API.INSERTorUPDATEFRANCHISEDETAILS, formUpgradeToFranchise).subscribe(response => {
+        if (response.m_Item1) {
+          this.frmUpgradeToFranchise.reset();
+          this.toastr.success(response.m_Item2);
+        }
+        else
+          this.toastr.error(response.m_Item2);
+      }, err => {
+        console.log(err);
+        this.toastr.error("Error while upgrade franchise. Please try again.");
+      });
+    }
+  }
 }

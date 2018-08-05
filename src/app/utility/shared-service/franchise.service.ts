@@ -26,6 +26,14 @@ export class FranchiseService {
       });
   }
 
+  _getFranchiseTypes() {
+    return this.httpService
+      .get(API.GETFRANCHISETYPES)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
   _getUpgradeTo() {
     return this.httpService
       .get(API.GETUPGRADETO)

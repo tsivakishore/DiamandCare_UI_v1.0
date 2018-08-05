@@ -9,7 +9,7 @@
             <div class="label" style="color: #fff;">User ID</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" placeholder="UserID or UserName" pTooltip="UserID or UserName" tooltipPosition="top"
-              formControlName="UserID" (change)="getUsernameByDCIDorName(frmUpgradeToFranchise.value)" required/>
+              formControlName="UserID" (change)="onUsernameByDCIDorName(frmUpgradeToFranchise.value)" required/>
             <div class="input-validation-msg">
               <validation *ngIf="isRequiredField(frmUpgradeToFranchise.get('UserID'))" [errMsg]="'userIDUserNameRqrd' | translate"></validation>
             </div>
@@ -29,7 +29,7 @@
             <select class="form-control dropdownstyle" (change)="getUnderFranchiseDetails($event.target.value)" formControlName="FranchiseTypeID"
               required>
               <option value="" disabled selected>--Select Franchise Type--</option>
-              <option *ngFor="let franchiseType of FranchiseTypeDetails" value="{{franchiseType.ID}}">{{franchiseType.FranchiseType}}</option>
+              <option *ngFor="let franchiseType of FranchiseTypes" value="{{franchiseType.ID}}">{{franchiseType.FranchiseType}}</option>
             </select>
             <div class="input-validation-msg">
             </div>
@@ -50,7 +50,7 @@
             <div class="label" style="color: #fff;">Conditions Apply Self</div>
             <div class="clearfix"></div>
             <span class="-addon checkbox check-primary bg-transparent">
-              <input type="checkbox" formControlName="ConditionsApplySelf" required>
+              <input type="checkbox" formControlName="ConditionsApplySelf">
               <label for="ConditionsApplySelf">&nbsp;</label>
             </span>
             <div class="input-validation-msg">
@@ -60,7 +60,7 @@
             <div class="label" style="color: #fff;">Conditions Apply Under Joinees</div>
             <div class="clearfix"></div>
             <span class="-addon checkbox check-primary bg-transparent">
-              <input type="checkbox" formControlName="ConditionsApplyUnderJoinees" required>
+              <input type="checkbox" formControlName="ConditionsApplyUnderJoinees">
               <label for="ConditionsApplyUnderJoinees">&nbsp;</label>
             </span>
             <div class="input-validation-msg">
