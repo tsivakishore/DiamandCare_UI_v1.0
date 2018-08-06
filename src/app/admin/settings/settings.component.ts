@@ -131,9 +131,9 @@ export class SettingsComponent extends BaseComponent implements OnInit {
       AccountHolderName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])),
       AccountNumber: new FormControl('', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(50), <any>Validators.pattern(CommonRegexp.ALPHA_NUMERIC)])),
       ConfirmAccountNumber: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(50), <any>Validators.pattern(CommonRegexp.ALPHA_NUMERIC)]),
-      IFSCCode: new FormControl('', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(50), <any>Validators.pattern(CommonRegexp.ALPHABETS_SPECIALCHAR_REGEXP)])),
-      BranchName: new FormControl('', Validators.compose([Validators.minLength(2), Validators.maxLength(50), Validators.pattern(CommonRegexp.ALPHABETS_SPECIALCHAR_REGEXP)])),
-      BranchAddress: new FormControl('', Validators.compose([Validators.minLength(2), Validators.maxLength(250), Validators.pattern(CommonRegexp.ALPHABETS_SPECIALCHAR_REGEXP)])),
+      IFSCCode: new FormControl('', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(50), <any>Validators.pattern(CommonRegexp.ALPHA_NUMERIC)])),
+      BranchName: new FormControl('', Validators.compose([Validators.minLength(2), Validators.maxLength(50)])),
+      BranchAddress: new FormControl('', Validators.compose([Validators.minLength(2), Validators.maxLength(250)])),
     }, { validator: this.validBankAccountNumber });
   }
 

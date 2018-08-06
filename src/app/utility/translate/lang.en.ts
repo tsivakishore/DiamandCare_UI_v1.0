@@ -167,6 +167,8 @@ export const LANG_EN_TRANS = {
   'validTDS': 'Please provide valid TDS charges',
   'userIDUserNameRqrd': 'User Id or User name required',
   'franchiseRqrd':'Please enter franchise joinees',
+  'noOfKeysRqrd':'Please enter number of keys to generate',
+  'validNoOfKeys':'Only accept digits',
   'franchiseJoineesMinimumRqrd':'Please enter minimum franchise joinees',
   'validFranchiseJoinees':'Only accept digits',
   'validFranchiseJoineesMinimum':'Only accept digits',

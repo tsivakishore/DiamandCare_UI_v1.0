@@ -84,8 +84,9 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
   }
 
   onUsernameByDCIDorName(DcIDorName: any) {
+    DcIDorName = DcIDorName.UserID;
     if (DcIDorName != "") {
-      this.franchiseService._getUsernameByDCIDorName(DcIDorName.UserID).subscribe(response => {
+      this.franchiseService._getUsernameByDCIDorName(DcIDorName).subscribe(response => {
         if (response.m_Item1) {
           this.userID = response.m_Item3.UserID
           this.frmUpgradeToFranchise.patchValue({

@@ -34,10 +34,22 @@ import { SecretKeyService } from "../../utility/shared-service/secretkey.service
 export class SecretkeyComponent extends BaseComponent implements OnInit {
 
   secretkeyForm: FormGroup;
+  multipleSecretkeyForm: FormGroup;
   isAddressValid: boolean = true;
   listRegKeys: any;
   gridTitle: string;
   selectedRow: any;
+  FranchiseDetails: any;
+  MasterChargesDetails: any;
+  WalletDetails: any;
+  defaultKeyType: any;
+  TotalAmount: any;
+  RegistrationCharges: number = 0;
+  KeyType: any;
+  isChecked: boolean = false;
+  isNoOfKeysDisabled: boolean = false;
+  userID: number;
+
   public IsSingleChecked: boolean = true;
   public IsMultipleChecked: boolean = false;
   public is_Visible_Single: boolean = false;
@@ -56,12 +68,28 @@ export class SecretkeyComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.GetIssuedRegisterKeys();
     this.createsecretkeyForm();
+    this.createMultipleSecretkeyForm();
     this.is_Visible_Single = true;
+    this.defaultKeyType = 'P';
+    this.KeyType = "P";
+    this.isChecked = false;
+    this.multipleSecretkeyForm.controls['KeyType'].setValue(this.defaultKeyType, { onlySelf: true });
   }
 
   createsecretkeyForm() {
     this.secretkeyForm = this.fb.group({
       PhoneNumber: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(CommonRegexp.NUMERIC_REGEXP)])],
+    })
+  }
+
+  createMultipleSecretkeyForm() {
+    this.multipleSecretkeyForm = this.fb.group({
+      UserID: ['', Validators.compose([Validators.required])],
+      UserName: ['', Validators.compose([Validators.required])],
+      WalletBalance: [''],
+      KeyType: [null],
+      NoOfKeys: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_REGEXP)])],
+      IsWallet: []
     })
   }
 
@@ -77,6 +105,82 @@ export class SecretkeyComponent extends BaseComponent implements OnInit {
       }, err => {
         this.toastr.error("Error while generate register key. Please try again.");
       });
+    }
+  }
+
+  generateMultipleSecretKey(formParam, isValid) {
+    if (isValid) {
+      formParam.UserID = this.userID;
+      this.apiManager.postAPI(API.GENERATEMULTIPLESECRETKEYS, formParam).subscribe(response => {
+        if (response.m_Item1) {
+          this.toastr.success(response.m_Item2);
+          this.GetIssuedRegisterKeys();
+        }
+        else
+          this.toastr.error(response.m_Item2);
+      }, err => {
+        this.toastr.error("Error while generate multiple register keys. Please try again.");
+      });
+    }
+  }
+
+  onChangeUsernameByDCIDorName(DcIDorName: any) {
+    DcIDorName = DcIDorName.UserID;
+    if (DcIDorName != "") {
+      this.secretKeyService._getUsernameWalletMasterChargesByDCIDorName(DcIDorName).subscribe(response => {
+        if (response.m_Item1) {
+          this.FranchiseDetails = response.m_Item3.Franchise;
+          this.userID = this.FranchiseDetails.UserID
+          this.MasterChargesDetails = response.m_Item3.MasterCharges;
+          this.WalletDetails = response.m_Item3.Wallet;
+          this.RegistrationCharges = this.MasterChargesDetails.RegistrationCharges;
+          this.isNoOfKeysDisabled = false;
+          this.multipleSecretkeyForm.patchValue({
+            UserName: this.FranchiseDetails.UserName,
+            WalletBalance: this.WalletDetails.Balance
+          })
+          console.log(this.FranchiseDetails)
+          console.log(this.MasterChargesDetails)
+          console.log(this.WalletDetails)
+        }
+        else {
+          this.multipleSecretkeyForm.patchValue({
+            UserName: ''
+          })
+          this.toastr.error(response.m_Item2);
+        }
+      }, err => {
+        this.toastr.error("Oops! There has been an error from server. Please try again.");
+      })
+    }
+    else {
+      this.FranchiseDetails = [];
+      this.MasterChargesDetails = [];
+      this.WalletDetails = [];
+      this.multipleSecretkeyForm.patchValue({
+        UserName: ''
+      })
+    }
+  }
+
+  onChangeNoOfKeys(noOfKeys: number) {
+    if (noOfKeys > 0 && this.RegistrationCharges > 0) {
+      this.TotalAmount = noOfKeys * this.RegistrationCharges;
+      if (this.isChecked == true && !!this.WalletDetails && !!this.TotalAmount) {
+        if (this.WalletDetails.Balance < this.TotalAmount) {
+          this.toastr.error("Wallet Balance is insufficient");
+          this.multipleSecretkeyForm.patchValue({
+            NoOfKeys: ''
+          })
+          this.TotalAmount = '';
+        }
+      }
+    }
+    else {
+      this.multipleSecretkeyForm.patchValue({
+        NoOfKeys: ''
+      })
+      this.TotalAmount = '';
     }
   }
 
@@ -124,5 +228,49 @@ export class SecretkeyComponent extends BaseComponent implements OnInit {
       this.is_Visible_Multiple = false;
     }
   }
+
+  onCheckedChange(isCheckboxClicked) {
+    debugger;
+    if (isCheckboxClicked == "on") {
+      debugger;
+      if (this.KeyType == "P" && !!this.WalletDetails && !!this.TotalAmount) {
+        if (this.WalletDetails.Balance < this.TotalAmount) {
+          this.toastr.error("Wallet Balance is insufficient");
+          this.multipleSecretkeyForm.patchValue({
+            NoOfKeys: ''
+          })
+          this.TotalAmount = '';
+        }
+      }
+      else {
+        this.isChecked = false;
+        this.multipleSecretkeyForm.patchValue({
+          IsWallet: false
+        })
+      }
+    }
+  }
+
+  onChangeKeyType(keyType: any) {
+    if (keyType == "F") {
+      this.KeyType = "F"
+      this.isChecked = false;
+        this.multipleSecretkeyForm.patchValue({
+          IsWallet: false
+        })
+      // this.multipleSecretkeyForm.controls['NoOfKeys'].setValidators(null);
+      // this.multipleSecretkeyForm.get('NoOfKeys').updateValueAndValidity({ onlySelf: false, emitEvent: false });
+    }
+    else if (keyType == "P") {
+      this.KeyType = "P"
+      this.multipleSecretkeyForm.controls['NoOfKeys'].setValidators(Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_REGEXP)]));
+      this.multipleSecretkeyForm.get('NoOfKeys').updateValueAndValidity({ onlySelf: true, emitEvent: false });
+    }
+  }
+
+  KeyTypes = [
+    { KeyID: "F", KeyName: "Free" },
+    { KeyID: "P", KeyName: "Paid" },
+  ];
 
 }

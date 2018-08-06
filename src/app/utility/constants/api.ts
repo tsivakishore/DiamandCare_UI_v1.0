@@ -42,6 +42,8 @@ export class API {
   public static PREPAIDLOAN = 'loan/prepaidloan';
   public static SENDSECRETKEY = 'RegisterKey/RegisterKeyGenearation';
   public static GETSECRETKEYS = 'RegisterKey/GetIssuedRegisterKeys';
+  public static GENERATEMULTIPLESECRETKEYS = 'RegisterKey/GenerateMultipleRegisterKeys';
+  public static GETUSERNAMEWALLETMASTERCHARGESBYDCIDorNAME = 'RegisterKey/GetUsernameWalletMasterChargesByDCIDorName';
   public static RESENDSECRETKEY = 'Shared/ResendSMS';
   public static VERIFY_SECRETKEY = 'Shared/VerifyKey';
   public static GETMODEOFTRANSFER = 'Shared/GetModeofTransfer';
