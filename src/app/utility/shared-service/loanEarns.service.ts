@@ -41,6 +41,14 @@ export class LoanEarnsService {
         return Observable.throw(new Error(error.status));
       });
   }
+
+  _getPaidLoansByUserID() {
+    return this.httpService
+      .get(API.GETPAIDLOANSBYUSERID)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
   
   _getApprovedLoans() {
     return this.httpService
@@ -78,6 +86,14 @@ export class LoanEarnsService {
   _checkPLExist() {
     return this.httpService
       .get(API.CHECKPL)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  _checkRenewalStatus() {
+    return this.httpService
+      .get(API.CHECKRENEWALSTATUS)
       .map(res => this.extractData(res, true)).catch((error: any) => {
         return Observable.throw(new Error(error.status));
       });
