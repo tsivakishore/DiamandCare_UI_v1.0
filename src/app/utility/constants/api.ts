@@ -58,10 +58,15 @@ export class API {
   public static GETTREEVIEWDATA = 'treedata/GetTreeData';
   public static INSERTORUPDATEBANKDETAILS = 'userbankdetails/InsertorUpdateUserBankDetails';
   public static GETUSERBANKDETAILS = 'userbankdetails/GetUserBankDetails';
-  public static NEWROLE='role/newrole';
-  public static UPDATEROLE='role/updaterole';
-  public static GETFRANCHISEMASTER='franchisedetails/GetFranchiseMasterDetails';
-  public static EDITFRANCHISE='franchisedetails/UpdateFranchise';
+  public static NEWROLE = 'role/newrole';
+  public static UPDATEROLE = 'role/updaterole';
+  public static GETFRANCHISEMASTER = 'franchisedetails/GetFranchiseMasterDetails';
+  public static GETFRANCHISETYPES = 'franchisedetails/GetFranchiseTypes';
+  public static EDITFRANCHISE = 'franchisedetails/UpdateFranchise';
+  public static GETUPGRADETO = 'franchisedetails/GetUpgradeTo';
+  public static GETUSERNAMEBYDCIDorNAME = 'franchisedetails/GetUsernameByDCIDorName';
+  public static GETUNDERFRANCHISEDETAILS = 'franchisedetails/GetUnderFranchiseDetails';
+  public static INSERTorUPDATEFRANCHISEDETAILS = 'franchisedetails/InsertorUpdateFranchiseDetails';
 
   // EXTERNAL API CALLERS
 

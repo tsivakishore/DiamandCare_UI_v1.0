@@ -165,7 +165,11 @@ export const LANG_EN_TRANS = {
   'validIGST': 'Please provide valid IGST charges',
   'TDSRqrd': 'TDS charges required',
   'validTDS': 'Please provide valid TDS charges',
-
+  'userIDUserNameRqrd': 'User Id or User name required',
+  'franchiseRqrd':'Please enter franchise joinees',
+  'franchiseJoineesMinimumRqrd':'Please enter minimum franchise joinees',
+  'validFranchiseJoinees':'Only accept digits',
+  'validFranchiseJoineesMinimum':'Only accept digits',
   'viewLoanDetails': 'Loan Details',
   'editLoanDetails': 'Edit Loan Details',
   'loanAmountRqrd': 'Loan amount required',
