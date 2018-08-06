@@ -1,7 +1,9 @@
 <div class="secretkey-container" @slideUp>
   <div class="secretkey-form">
     <form>
-      <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">{{'earnLoansTitle' | translate}}</h3>
+      <h3 class="col-md-6 col-sm-6 col-xs-6" style="color: #00c8aa;">{{'earnLoansTitle' | translate}}</h3>
+      <button type="button" class="ui-button-reset-transparent" [ngClass]="colorCodeRenew()" [disabled]="checkRenewEnable()" style="width: 100px;height: 30px; float:right; padding: left 10px; "
+        pButton (click)="renew()">Renew my ID</button>
       <div class="clearfix"></div>
 
       <!-- Show list of register keys start here -->
@@ -91,7 +93,7 @@
                   <div class="col-md-6" style="width:100px">
                     <!-- [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" -->
                     <button type="button" style="width: 50px;height: 20px;" class="ui-button-reset-transparent" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)"
-                      [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" *ngIf="checkPrepaidLoanHidden(listOfEarnLoans.EPLoans,listOfEarnLoans.Groups)"
+                      [disabled]="checkPrepaidLoanEligibility(listOfEarnLoans.LoanStatus,listOfEarnLoans.Groups)" *ngIf="checkPrepaidLoanHidden(listOfEarnLoans.EPLoans,listOfEarnLoans.Groups)"
                       pButton (click)="ApplyPrepaidLoan(ri)">Apply</button>
                   </div>
                 </div>

@@ -26,6 +26,7 @@ export class API {
   public static GETAPPROVEDLOANS = 'loan/getapprovedloandetails';
   public static GETNOTAPPROVEDLOANS = 'loan/getnotapprovedloandetails';
   public static GETAPPROVEDLOANSBYUSERID = 'loan/getapprovedloandetailsuser';
+  public static GETPAIDLOANSBYUSERID = 'loan/GetPaidLoanDetailsByUserID';
   public static GETNOTAPPROVEDLOANSBYUSERID = 'loan/getnotapprovedloandetailsuser';
   public static GETLOANDETAILS = 'loan/getloandetails';
   public static DOWNLOADS = 'loan/downloadfile';
@@ -34,6 +35,7 @@ export class API {
   public static CHECKHB = 'loan/checkhealthbenefit';
   public static CHECKHL = 'loan/checkhomeloan';
   public static CHECKRB = 'loan/riskbenefit';
+  public static CHECKRENEWALSTATUS = 'loan/CheckRenewalStatus';
   public static PERSONALLOAN = 'loan/personalloan';
   public static FEEREIMBURSEMENT = 'loan/feereimbursement';
   public static HEALTHBENEFITS = 'loan/healthbenefits';

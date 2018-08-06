@@ -43,7 +43,9 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
   frmApplyPrepaidLoan: FormGroup;
 
   isAddressValid: boolean = true;
-  listOfEarnLoans: any;
+  renewalStatus: boolean = false;
+  listOfEarnLoans: any[];
+  lstPaidLoans: any[];
   gridTitle: string;
   selectedRow: any;
   lstModeofTransfer: any[];
@@ -91,7 +93,10 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
+    debugger;
+    this.GetPaidLoans();
     this.GetLoans();
+    
     this.GetModeofTransfer();
     this.createApplyPLLoanForm();
     this.createApplyFeeReimbursementForm();
@@ -178,6 +183,7 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.listOfEarnLoans = res.m_Item3;
+        this.checkRenewalStatus();
       }
     }, err => {
       console.log(err);
@@ -185,11 +191,36 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
     })
   }
 
+  public GetPaidLoans() {
+    this.sharedService.setLoader(true);
+    this.loanEarnsService._getPaidLoansByUserID().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.lstPaidLoans = res.m_Item3;
+      }
+      else {
+        this.lstPaidLoans = [];
+      }
+    }, err => {
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
+
+
   public GetModeofTransfer() {
     this.commonService._getModeofTransfer().subscribe((res: any) => {
       if (res.m_Item1) {
         this.lstModeofTransfer = res.m_Item3;
       }
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  public checkRenewalStatus() {
+    this.loanEarnsService._checkRenewalStatus().subscribe((res: any) => {
+      this.renewalStatus = res.m_Item1;
     }, err => {
       console.log(err);
     })
@@ -493,12 +524,54 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
     }
   }
 
-  checkLoanEligibility(LoanStatus: string) {
+  checkLoanEligibility(LoanStatus: string, Groups: number) {
+
     if (LoanStatus == "NotEligible") {
       return true;
     }
     else if (LoanStatus == "Eligible") {
       return false;
+    }
+  }
+
+  checkRenewEnable() {
+    if (this.renewalStatus == false) {
+      return true;
+    }
+    else if (this.renewalStatus == true) {
+      if (!!this.listOfEarnLoans) {
+        if (this.listOfEarnLoans.filter(obj => obj.LoanStatus == "Eligible").length >= 3)
+          return false;
+        else
+          return true;
+      }
+    }
+  }
+
+  colorCodeRenew() {
+    if (this.renewalStatus == false) {
+      return "btnnoteligible";
+    }
+    else if (this.renewalStatus == true) {
+      if (this.listOfEarnLoans.filter(obj => obj.LoanStatus == "Eligible").length >= 3)
+        return "btneligible";
+      else
+        return "btnnoteligible";
+    }
+  }
+
+  checkPrepaidLoanEligibility(LoanStatus: string, gid: number) {
+    if (!!this.lstPaidLoans) {
+      var index = this.lstPaidLoans.findIndex(obj => obj.GroupsID == gid)
+      if (LoanStatus == "NotEligible") {
+        return true;
+      }
+      else if (LoanStatus == "Eligible" && index !== -1) {
+        return true;
+      }
+      else if (LoanStatus == "Eligible" && index == -1) {
+        return false;
+      }
     }
   }
 
