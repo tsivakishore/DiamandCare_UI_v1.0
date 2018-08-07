@@ -190,7 +190,7 @@ export class SecretkeyComponent extends BaseComponent implements OnInit {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.listRegKeys = res.m_Item3;
-        this.gridTitle = "Lisi of Secret Keys"
+        this.gridTitle = "List of Secret Keys"
       }
     }, err => {
       console.log(err);

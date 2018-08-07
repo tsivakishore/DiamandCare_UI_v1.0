@@ -51,6 +51,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
   verifykeyError: string;
   isValidKey: boolean = false;
   validSecretKey: string;
+  keyType: string;
   validPhoneNumber: string;
   sponserDetails: any;
   underDetails: any[];
@@ -105,7 +106,8 @@ export class RegisterComponent extends BaseComponent implements OnInit {
       UnderName: new FormControl(''),
       SecretCode: new FormControl(''),
       RoleID: new FormControl(''),
-      EncryptPassword: ['']
+      EncryptPassword: [''],
+      UserStatusID: 2
     }, { validator: this.validPassword });
   }
 
@@ -158,6 +160,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
     this.secretKeyForm = this.formBuilder.group({
       RegKey: new FormControl('', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])),
       PhoneNumber: new FormControl(''),
+      KeyType: ''
     });
   }
 
@@ -167,7 +170,8 @@ export class RegisterComponent extends BaseComponent implements OnInit {
       this.apiManager.postAPI(API.VERIFY_SECRETKEY, formValue).subscribe(response => {
         if (response.m_Item1) {
           this.validSecretKey = formValue.RegKey;
-          this.validPhoneNumber = formValue.PhoneNumber
+          this.validPhoneNumber = formValue.PhoneNumber;
+          this.keyType = response.m_Item3;
           this.createRegisterForm();
           this.GetSourceOfUser();
           this.registerForm.controls['SourceID'].setValue(this.defaultSourceID, { onlySelf: true });
@@ -175,7 +179,8 @@ export class RegisterComponent extends BaseComponent implements OnInit {
           this.registerForm.controls['UnderID'].setValue(this.defaultUndeID, { onlySelf: true });
           this.registerForm.patchValue({
             SecretCode: this.validSecretKey,
-            PhoneNumber: this.validPhoneNumber
+            PhoneNumber: this.validPhoneNumber,
+            UserStatusID: (this.keyType == 'P') ? 1 : 2
           })
           this.activeModal = 2;
           this.activeForm = 2;
