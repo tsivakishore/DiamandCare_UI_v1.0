@@ -133,6 +133,7 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
           DocumentationAdminFee: this.masterCharges.DocumentationAdminFee,
           DocumentationAdminFee1: this.masterCharges.DocumentationAdminFee1,
           PrepaidLoanCharges: this.masterCharges.PrepaidLoanCharges,
+          RegistrationCharges: this.masterCharges.RegistrationCharges,
           // AreaFee: this.masterCharges.AreaFee,
           // DistrictFee: this.masterCharges.DistrictFee,
           // DistrictClusterFee: this.masterCharges.DistrictClusterFee,
