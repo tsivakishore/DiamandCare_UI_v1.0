@@ -149,10 +149,20 @@ export class LoginComponent extends BaseComponent implements OnInit {
     this.sharedService.setRoleName(body.roleName);
     this.getUserDetaildByLoginID();
     this.sharedService.setLoader(false);
+
     if (body.roleId === BaseUrl.AdminRoleID) {
       this.router.navigate(["/" + RouteConstants.APPLIEDLOANDETAILS]);
     }
     if (body.roleId === BaseUrl.UserRoleID) {
+      this.router.navigate(["/" + RouteConstants.EARNLOANS]);
+    }
+    if (body.roleId === BaseUrl.FranchiseRoleID) {
+      this.router.navigate(["/" + RouteConstants.EARNLOANS]);
+    }
+    if (body.roleId === BaseUrl.SchoolRoleID) {
+      this.router.navigate(["/" + RouteConstants.EARNLOANS]);
+    }
+    if (body.roleId === BaseUrl.DeveloperRoleID) {
       this.router.navigate(["/" + RouteConstants.EARNLOANS]);
     }
 

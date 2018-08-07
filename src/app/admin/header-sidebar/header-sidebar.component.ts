@@ -136,6 +136,63 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
                 break;
             }
           }
+          else if (this.roleID === BaseUrl.FranchiseRoleID) {
+            switch (menu) {
+              case RouteConstants.SETTINGS:
+                this.Is_Visible_Settings = true;
+                break;
+              case RouteConstants.EARNLOANS:
+                this.Is_Visible_EarnLoans = true;
+                break;
+              case RouteConstants.APPLIEDUSERLOANDETAILS:
+                this.Is_Visible_AppliedUserLoanDetails = true;
+                break;
+              case RouteConstants.UNDERUSERDETAILS:
+                this.Is_Visible_UnderUserDetails = true;
+                break;
+            }
+          }
+          else if (this.roleID === BaseUrl.SchoolRoleID) {
+            switch (menu) {
+              case RouteConstants.SETTINGS:
+                this.Is_Visible_Settings = true;
+                break;
+              case RouteConstants.EARNLOANS:
+                this.Is_Visible_EarnLoans = true;
+                break;
+              case RouteConstants.APPLIEDUSERLOANDETAILS:
+                this.Is_Visible_AppliedUserLoanDetails = true;
+                break;
+              case RouteConstants.UNDERUSERDETAILS:
+                this.Is_Visible_UnderUserDetails = true;
+                break;
+            }
+          }
+          else if (this.roleID === BaseUrl.DeveloperRoleID) {
+            switch (menu) {
+              case RouteConstants.SETTINGS:
+                this.Is_Visible_Settings = true;
+                break;
+              case RouteConstants.EARNLOANS:
+                this.Is_Visible_EarnLoans = true;
+                break;
+              case RouteConstants.APPLIEDUSERLOANDETAILS:
+                this.Is_Visible_AppliedUserLoanDetails = true;
+                break;
+              case RouteConstants.ADDROLETOUSER:
+                this.Is_Visible_Roles = false;
+                break;
+              case RouteConstants.ROLES:
+                this.Is_Visible_Add_Roles = false;
+                break;
+              case RouteConstants.UNDERUSERDETAILS:
+                this.Is_Visible_UnderUserDetails = true;
+                break;
+              case RouteConstants.UPGRADETOFRANCHISE:
+                this.Is_Visible_Upgrade_Franchise = false;
+                break;
+            }
+          }
           else
             this.logout();
         });

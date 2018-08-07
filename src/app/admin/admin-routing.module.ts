@@ -13,6 +13,7 @@ import { AddroletouserComponent } from '../admin/addroletouser/addroletouser.com
 import { UnderuserdetailsComponent } from '../admin/underuserdetails/underuserdetails.component';
 import { RolesComponent } from '../admin/roles/roles.component';
 import { UpgradetofranchiseComponent } from '../admin/upgradetofranchise/upgradetofranchise.component';
+import { DisplayscreensComponent } from '../admin/displayscreens/displayscreens.component';
 
 const routes: Routes = [
   {

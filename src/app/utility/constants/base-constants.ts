@@ -14,6 +14,9 @@ export class BaseUrl {
   public static Image: string = "";
   public static AdminRoleID: string = "928f6866-a684-412f-a68c-30fdba25885b";
   public static UserRoleID: string = "a4d94ea6-d20a-4b17-b8c2-cf299edb254a";
+  public static FranchiseRoleID: string = "9cc2f65f-7cc5-4ddb-b162-760775879796";
+  public static SchoolRoleID: string = "8622fd1f-a666-4c3e-b5d8-2b079a1d09c8";
+  public static DeveloperRoleID: string = "7fa03e4a-a905-4c92-b326-9f84243db386";
 
   public static productImage = "products/";
   public static flagImage = "countryFlags/";
