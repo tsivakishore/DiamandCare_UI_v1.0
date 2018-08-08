@@ -5,10 +5,10 @@ export class BaseUrl {
   public static URL: string = "";
 
   /* Attach your Node API here */
-  // public static Api: string = "http://localhost:64682/api/";
-  // public static LoginApi: string = "http://localhost:64682/";
-  public static Api: string = "http://api.diamandcare.com/api/";
-  public static LoginApi: string = "http://api.diamandcare.com/";
+  public static Api: string = "http://localhost:62780/api/";
+  public static LoginApi: string = "http://localhost:62780/";
+  // public static Api: string = "http://api.diamandcare.com/api/";
+  // public static LoginApi: string = "http://api.diamandcare.com/";
 
   public static ATTACHMENT_URL = ""
   public static Image: string = "";
