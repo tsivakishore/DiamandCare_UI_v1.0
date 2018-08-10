@@ -38,6 +38,7 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
   UnderFranchiseDetails: any;
   FranchiseTypeDetails: any;
   FranchiseTypes: any;
+  FranchiseTypeIDDetails: any;
   defaultUnderFranchiseID: any;
   userID: number;
 
@@ -111,11 +112,18 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.UnderFranchiseDetails = res.m_Item3;
+        this.FranchiseTypeIDDetails = res.m_Item4;
         if (!!this.UnderFranchiseDetails) {
           this.defaultUnderFranchiseID = this.UnderFranchiseDetails[0].UserID;
           this.frmUpgradeToFranchise.controls['UnderFranchiseID'].setValue(this.defaultUnderFranchiseID, { onlySelf: true });
           this.frmUpgradeToFranchise.controls['UnderFranchiseID'].setValidators(null);
           this.frmUpgradeToFranchise.get('UnderFranchiseID').updateValueAndValidity({ onlySelf: false, emitEvent: false });
+        }
+        if (!!this.FranchiseTypeIDDetails) {
+          this.frmUpgradeToFranchise.patchValue({
+            FranchiseJoinees: this.FranchiseTypeIDDetails.TargetJoineesPerMonth,
+            FranchiseJoineesMinimum: this.FranchiseTypeIDDetails.MinimumJoineesAvg
+          })
         }
       }
       else {
