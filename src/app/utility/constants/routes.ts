@@ -15,4 +15,6 @@ export class RouteConstants {
   public static NOTFOUND = 'not-found';
   public static ROLES = 'roles';
   public static UPGRADETOFRANCHISE = 'upgradetofranchise';
+  public static LOANDISPATCHED = 'loandispatched';
+  public static SCREENPERMISSIONS = 'screenpermissions';
 }

@@ -47,6 +47,12 @@
       </a>
     </li>
     <li tooltipPosition="top">
+      <a [routerLink]="loanDispatchedUrl" *ngIf="Is_Visible_Loans_Dispatched" routerLinkActive="active">
+        <i class="material-icons">check_box</i>
+        <span>Loans Dispatched Status</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
       <a [routerLink]="appliedLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedLoanDetails" routerLinkActive="active">
         <i class="material-icons">assignment_ind</i>
         <span>Loan Details</span>
@@ -142,6 +148,12 @@
       <a [routerLink]="upgradeFranchiseUrl" *ngIf="Is_Visible_Upgrade_Franchise" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">cloud_upload</i>
         <span>Upgrade Franchise</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="loanDispatchedUrl" *ngIf="Is_Visible_Loans_Dispatched" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">check_box</i>
+        <span>Loans Dispatched Status</span>
       </a>
     </li>
     <li>

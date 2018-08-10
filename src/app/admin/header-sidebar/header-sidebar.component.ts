@@ -56,6 +56,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   Is_Visible_UnderUserDetails: boolean = false;
   Is_Visible_Add_Roles = false;
   Is_Visible_Upgrade_Franchise = false;
+  Is_Visible_Loans_Dispatched = false;
 
   constructor(private apiManager: APIManager, private sharedService: SharedService,
     private router: Router, public toastr: ToastsManager, public vcr: ViewContainerRef) {
@@ -108,6 +109,9 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
                 break;
               case RouteConstants.UPGRADETOFRANCHISE:
                 this.Is_Visible_Upgrade_Franchise = true;
+                break;
+              case RouteConstants.LOANDISPATCHED:
+                this.Is_Visible_Loans_Dispatched = true;
                 break;
             }
           }
@@ -225,10 +229,6 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
     this.sharedService.logout();
   }
 
-  unauthorizedLogout() {
-    this.sharedService.logout();
-  }
-
   get dashboardUrl() {
     return "/" + RouteConstants.DASHBOARD;
   }
@@ -275,6 +275,14 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   get upgradeFranchiseUrl() {
     return "/" + RouteConstants.UPGRADETOFRANCHISE;
+  }
+
+  get loanDispatchedUrl() {
+    return "/" + RouteConstants.LOANDISPATCHED;
+  }
+
+  get screenPermissionsUrl() {
+    return "/" + RouteConstants.SCREENPERMISSIONS;
   }
 
   earnLoanEvent() {

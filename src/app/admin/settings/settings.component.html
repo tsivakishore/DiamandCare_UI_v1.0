@@ -27,10 +27,10 @@
       <li class="padding-top-15" (click)="onShowUserProfileModal()">
         <div>Edit Profile</div>
       </li>
-      <li (click)="onAddOrModifyAddress()">
+      <li (click)="onShowAddOrModifyAddressModel()">
         <div>Add/Modify Address</div>
       </li>
-      <li (click)="onChangePassword()">
+      <li (click)="onShowPasswordModel()">
         <div>{{'changePassword' | translate}}</div>
       </li>
       <div class="row">
@@ -46,11 +46,11 @@
             </p-dataTable>
           </div>
         </div>
-        <li *ngIf="isBankAccountLink" style="padding: 10px 0 0 25px;" (click)="onChangeBankAccount()">
+        <li *ngIf="isBankAccountLink" style="padding: 10px 0 0 25px;" (click)="onShowBankAccountModel()">
           <div>Add Bank Account Details</div>
         </li>
       </div>
-      <li (click)="onChangeAddNomineeDetails()">
+      <li (click)="onShowAddNomineeModel()">
         <div>Add Nominee Details</div>
       </li>
     </ul>
@@ -481,22 +481,32 @@
           <div class="col-md-6 padding-right-0">
             <div class="label" style="color: #fff;">Nominee Name</div>
             <div class="clearfix"></div>
-            <input type="text" placeholder="NomineeName" pTooltip="NomineeName" tooltipPosition="top" class="form-control" Autofocus
+            <input type="text" placeholder="NomineeName" pTooltip="NomineeName" tooltipPosition="top" class="form-control"
               formControlName="NomineeName" required/>
             <div class="input-validation-msg">
               <validation *ngIf="isRequiredField(frmNomineeDetails.get('NomineeName'))" [errMsg]="'nomineeNameRqrd' | translate"></validation>
               <validation *ngIf="isValidLength(frmNomineeDetails.get('NomineeName'))" [errMsg]="'nomineeNameLnth' | translate"></validation>
             </div>
           </div>
-          <div class="col-md-6 padding-right-0">
+          <div class="col-md-3 padding-right-0">
             <div class="label" style="color: #fff;">Nominee Relationship</div>
-            <select class="form-control" formControlName="NomineeRelationshipID">
+            <select class="form-control" formControlName="NomineeRelationshipID" (change)="onChangeRelationship($event.target.value)">
               <option *ngFor="let nominee of NomineeRelations" value={{nominee.NomineeRelationshipID}}>
                 {{nominee.NomineeRelations}}
               </option>
             </select>
             <div class="input-validation-msg">
               <validation *ngIf="isRequiredField(frmNomineeDetails.get('NomineeRelationshipID'))" [errMsg]="'nomineeRelationShipRqrd' | translate"></validation>
+            </div>
+          </div>
+          <div class="col-md-3 padding-right-0" *ngIf="isVisible_OtherRelations" >
+            <div class="label" style="color: #fff;">Other Relationship</div>
+            <div class="clearfix"></div>
+            <input type="text" placeholder="Other Relationship" pTooltip="Other Relationship" tooltipPosition="top" class="form-control"
+              formControlName="OtherRelationship" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmNomineeDetails.get('OtherRelationship'))" [errMsg]="'otherRelationshipRqrd' | translate"></validation>
+              <validation *ngIf="isValidLength(frmNomineeDetails.get('OtherRelationship'))" [errMsg]="'otherRelationshipLnth' | translate"></validation>
             </div>
           </div>
         </div>

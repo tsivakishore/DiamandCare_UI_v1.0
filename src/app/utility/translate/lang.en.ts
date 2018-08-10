@@ -101,6 +101,8 @@ export const LANG_EN_TRANS = {
   'bankIDRqrd': 'Please select bank name',
   'nomineeNameRqrd': 'Please provide nominee name',
   'nomineeNameLnth': 'Nominee name length should be in between 3 to 50 chars',
+  'otherRelationshipRqrd':'Provide nominee relationship',
+  'otherRelationshipLnth': 'Length should be in between 3 to 20 chars',
   'nomineeAddressRqrd': 'Please provide nominee address',
   'nomineeAddressLnth': 'Nominee address length should be in between 2 to 250 chars',
   'PhoneNumberLength': 'Phone number should be 10 digits',

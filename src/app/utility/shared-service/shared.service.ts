@@ -116,17 +116,6 @@ export class SharedService {
     this.router.navigate(["/"]);
   }
 
-  unauthorizedLogout(): void {
-    sessionStorage.clear();
-    this.setToken(null);
-    this.setUser(null);
-    this.setUserName(null);
-    this.setUserID(null);
-    this.setRoleID(null);
-    this.setLoginRequired(true);
-    this.router.navigate(["/"+ RouteConstants.LOGIN]);
-  }
-
   getProfileUpdated(): Observable<boolean> {
     return this.isProfileUpdated.asObservable();
   }

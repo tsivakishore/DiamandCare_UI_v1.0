@@ -88,6 +88,16 @@ export class UserAuthService {
       .catch(this.handleError.bind(this));
   }
 
+  _getUserNomineeDetails(postData) {
+    const token = this.sharedService.isLoggedIn() ? this.sharedService.getToken() : AppConstant.staticToken;
+    let headers = new HttpHeaders(token ? { 'Authorization': `bearer ${token}` } : null);
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    return this.httpClient.get(BaseUrl.Api + API.GETNOMINEEDETAILS + '?UserID=' + postData, { headers: headers })
+      .toPromise()
+      .then(this.extractDataDownload.bind(this))
+      .catch(this.handleError.bind(this));
+  }
+
   _getBankNames() {
     const token = this.sharedService.isLoggedIn() ? this.sharedService.getToken() : AppConstant.staticToken;
     let headers = new HttpHeaders(token ? { 'Authorization': `bearer ${token}` } : null);

@@ -47,6 +47,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
   checked: boolean;
   userDetails: any;
   userAddress: any;
+  userNomineeDetails: any;
   AccountTypes: any[];
   NomineeRelations: any[];
   BankNames: any[];
@@ -55,6 +56,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
   userID: number;
   isBankGrid: boolean = false;
   isBankAccountLink: boolean = false;
+  isVisible_OtherRelations: boolean = false;
 
   constructor(public fb: FormBuilder,
     private translateService: TranslateService,
@@ -149,11 +151,12 @@ export class SettingsComponent extends BaseComponent implements OnInit {
 
   createNomineeDetailsForm() {
     this.frmNomineeDetails = this.fb.group({
-      Id: new FormControl(''),
-      NomineeID: new FormControl(''),
+      UserID: new FormControl(''),
+      NomineeID: new FormControl(null),
       NomineeName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50), <any>Validators.pattern(CommonRegexp.ALPHA_NUMERIC)])),
       NomineeRelationshipID: new FormControl('', Validators.compose([Validators.required])),
-      NomineeAddress: new FormControl('', [Validators.minLength(2), Validators.maxLength(250), <any>Validators.pattern(CommonRegexp.ALPHABETS_SPECIALCHAR_REGEXP)]),
+      OtherRelationship: new FormControl(null),
+      NomineeAddress: new FormControl('', [Validators.minLength(2), Validators.maxLength(500)]),
       PhoneNumber: new FormControl('', Validators.compose([Validators.minLength(10), Validators.maxLength(10), <any>Validators.pattern(CommonRegexp.NUMERIC_REGEXP)])),
     });
   }
@@ -241,6 +244,27 @@ export class SettingsComponent extends BaseComponent implements OnInit {
     }
   }
 
+  AddOrModifyNomineeDetails(formNomineeDetails, IsValidForm) {
+    if (IsValidForm) {
+      formNomineeDetails.UserID = this.userID;
+      this.apiManager.postAPI(API.ADDorMODIFYNOMINEE, formNomineeDetails).subscribe(response => {
+        if (response.m_Item1) {
+          this.toastr.success(response.m_Item2);
+        }
+        else {
+          this.toastr.error(response.m_Item2);
+        }
+        this.isShowModal = 1;
+      }, err => {
+        this.isShowModal = 1;
+        this.toastr.error("Opps! Error while add/updating nominee details. Please try again.");
+      })
+    }
+    else {
+      this.toastr.error("Invalid form data.");
+    }
+  }
+
   AddBankAccountDetails(formBankAccount, IsValidForm) {
     if (IsValidForm) {
       formBankAccount.UserID = this.userID;
@@ -273,12 +297,12 @@ export class SettingsComponent extends BaseComponent implements OnInit {
     this.isShowModal = 2;
   }
 
-  onChangePassword() {
+  onShowPasswordModel() {
     this.createChangePassword();
     this.isShowModal = 3;
   }
 
-  onAddOrModifyAddress() {
+  onShowAddOrModifyAddressModel() {
     this.isShowModal = 4;
     this.createAddressForm();
     this.userAuthService._getUserAddress().then((res: any) => {
@@ -296,7 +320,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
 
   }
 
-  onChangeBankAccount() {
+  onShowBankAccountModel() {
     this.isShowModal = 5;
     this.GetBanks();
     this.createBankAccountForm();
@@ -304,11 +328,25 @@ export class SettingsComponent extends BaseComponent implements OnInit {
     // this.frmNomineeDetails.controls['BankID'].setValue(this.defaultBankID, { onlySelf: true });
   }
 
-  onChangeAddNomineeDetails() {
+  onShowAddNomineeModel() {
     this.isShowModal = 6;
     this.GetNomineeRelations();
     this.createNomineeDetailsForm();
-    this.frmNomineeDetails.controls['NomineeRelationshipID'].setValue(1, { onlySelf: true });
+
+    this.userAuthService._getUserNomineeDetails(this.userID).then((res: any) => {
+      if (res.m_Item1) {
+        this.userNomineeDetails = res.m_Item3;
+        this.frmNomineeDetails.patchValue(this.userNomineeDetails);
+        let nomineeRelationshipID = this.userNomineeDetails.NomineeRelationshipID;
+        this.frmNomineeDetails.controls['NomineeRelationshipID'].setValue(nomineeRelationshipID, { onlySelf: true });
+      }
+      else {
+        this.frmNomineeDetails.controls['NomineeRelationshipID'].setValue(1, { onlySelf: true });
+        this.isVisible_OtherRelations = false;
+      }
+    }, err => {
+      console.log(err);
+    })
   }
 
   changePassword(formChangePassword, IsValidForm) {
@@ -370,6 +408,20 @@ export class SettingsComponent extends BaseComponent implements OnInit {
     }, err => {
       console.log(err);
     })
+  }
+
+  onChangeRelationship(RelationshipID: number) {
+    if (RelationshipID == 13) {
+      this.isVisible_OtherRelations = true;
+      this.frmNomineeDetails.controls['OtherRelationship'].setValidators(Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20), <any>Validators.pattern(CommonRegexp.ALPHA_NUMERIC)]));
+      this.frmNomineeDetails.get('OtherRelationship').updateValueAndValidity({ onlySelf: true, emitEvent: false });
+    }
+    else {
+      this.isVisible_OtherRelations = false;
+      this.frmNomineeDetails.controls['OtherRelationship'].setValidators(null);
+      this.frmNomineeDetails.controls['OtherRelationship'].setValue('');
+      this.frmNomineeDetails.get('OtherRelationship').updateValueAndValidity({ onlySelf: true, emitEvent: false });
+    }
   }
 
   closeForm() {

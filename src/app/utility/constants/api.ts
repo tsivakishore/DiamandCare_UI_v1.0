@@ -10,6 +10,8 @@ export class API {
   public static UPDATEUSERPROFILE = 'user/updateuserprofile';
   public static USERADDRESS = 'user/useraddress';
   public static UPDATEUSERADDRESS = 'user/updateuseraddress';
+  public static GETNOMINEEDETAILS = 'user/getnomineedetails';
+  public static ADDorMODIFYNOMINEE = 'user/addupdatenomineedetails';
   public static UPDATE_USER_DETAIL = 'user/updateuserdetails';
   public static UPDATE_SECURE_LOGIN = 'user/updatesecurelogin';
   public static STATE = 'Shared/GetState';

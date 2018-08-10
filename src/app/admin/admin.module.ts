@@ -21,6 +21,7 @@ import { TreeviewComponent } from '../admin/underuserdetails/treeview/treeview.c
 import { RolesComponent } from '../admin/roles/roles.component';
 import { UpgradetofranchiseComponent } from '../admin/upgradetofranchise/upgradetofranchise.component';
 import { DisplayscreensComponent } from '../admin/displayscreens/displayscreens.component';
+import { LoandispatchedComponent } from '../admin/loandispatched/loandispatched.component';
 
 @NgModule({
   imports: [
@@ -50,6 +51,7 @@ import { DisplayscreensComponent } from '../admin/displayscreens/displayscreens.
     UnderuserdetailsComponent,
     UpgradetofranchiseComponent,
     DisplayscreensComponent,
+    LoandispatchedComponent,
     TreeviewComponent,
     SettingsComponent,
     FooterComponent
