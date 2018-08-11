@@ -71,7 +71,7 @@ export class API {
   public static GETUSERNAMEBYDCIDorNAME = 'franchisedetails/GetUsernameByDCIDorName';
   public static GETUNDERFRANCHISEDETAILS = 'franchisedetails/GetUnderFranchiseDetails';
   public static INSERTorUPDATEFRANCHISEDETAILS = 'franchisedetails/InsertorUpdateFranchiseDetails';
-
+  public static GETWALLET = 'wallet/getwallet';
   // EXTERNAL API CALLERS
 
   public static DASHBOARD = "";

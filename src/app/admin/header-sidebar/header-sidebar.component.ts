@@ -31,20 +31,20 @@ import { ToastsManager } from "ng2-toastr";
 export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   @Output() menuToggle = new EventEmitter<boolean>();
-  etherBalance: string = "0";
-  tokenBalance: string = "0";
+  walletBalance: string = "0";
   isOpenSidebar: boolean = true;
   isOpenMobileSidebar: boolean = false;
   currentPath: string;
   user: User;
   address;
-  loaderEther: boolean = false;
+  loadBalance: boolean = false;
   loaderProof: boolean = false;
   UserDetails: any;
   userName: string;
   userID: string;
   roleID: string;
   roleName: string;
+
 
   Is_Visible_EarnLoans: boolean = false;
   Is_Visible_AppliedLoanDetails: boolean = false;
@@ -70,6 +70,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
     this.UserDetails = this.sharedService.getUser();
     this.userName = this.sharedService.getUserName().toUpperCase();
     this.roleName = this.sharedService.getRoleName();
+    this.getWallet();
   }
 
   getMenusBasedOnRole(userID: string) {
@@ -293,11 +294,11 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
     this.sharedService.trackMixPanelEvent("Third Step Button");
   }
 
-  checkAccountBalance(account) {
-    if (this.loaderEther)
-      this.sharedService.trackMixPanelEvent("Refresh Ether Balance");
+  // checkAccountBalance(account) {
+  //   if (this.loaderEther)
+  //     this.sharedService.trackMixPanelEvent("Refresh Ether Balance");
 
-  }
+  // }
 
   getProofTokensRaised(erc20Units): number {
     if (erc20Units) {
@@ -308,4 +309,14 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
     }
   }
 
+  getWallet() {
+    this.apiManager.getAPI(API.GETWALLET).subscribe(response => {
+      debugger;
+      if (response.m_Item1) {
+        debugger;
+        this.walletBalance = response.m_Item3.Balance;
+      }
+      this.loadBalance = response.m_Item1;
+    });
+  }
 }
