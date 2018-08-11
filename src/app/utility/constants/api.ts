@@ -72,6 +72,8 @@ export class API {
   public static GETUNDERFRANCHISEDETAILS = 'franchisedetails/GetUnderFranchiseDetails';
   public static INSERTorUPDATEFRANCHISEDETAILS = 'franchisedetails/InsertorUpdateFranchiseDetails';
   public static GETWALLET = 'wallet/getwallet';
+  public static GETFRANCHISEUSERNAMEWALLETBYIDORNAME = 'franchisedetails/GetFranchiseUsernameWalletByIDorName';
+  public static UPDATEFRANCHISEWALLETBALANCE = 'franchisedetails/UpdateFranchiseWalletBalance';
   // EXTERNAL API CALLERS
 
   public static DASHBOARD = "";
