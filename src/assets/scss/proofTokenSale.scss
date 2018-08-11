@@ -314,7 +314,7 @@ login,register{
 }
 
 .phone-number-modal{
-  color: $white;
+  color: red !important;
   width: 500px;
   left: calc(50% - 270px);
   z-index: 999;

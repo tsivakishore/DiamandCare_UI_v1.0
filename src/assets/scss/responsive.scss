@@ -17,31 +17,31 @@ $tablet : "only screen and (min-width: 768px) and (max-width:1108px)";
     width: 1000px!important;
     overflow: auto;
   }
-  // .header-container{
-  //   .progressbar{
-  //     li{
-  //       a{
-  //         .top-menu{
-  //           top: -22px;
-  //           right: 5px;
-  //           width: 123px;
-  //           padding: 3px 0px;
-  //           a{
-  //             font-size: 12px!important;
-  //           }
-  //         }
-  //         .bottom-menu{
-  //           top: 31px;
-  //           right: 5px;
-  //           width: 123px;
-  //           a{
-  //             font-size: 12px!important;
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+  .header-container{
+    .progressbar{
+      li{
+        a{
+          .top-menu{
+            top: -22px;
+            right: 5px;
+            width: 123px;
+            padding: 3px 0px;
+            a{
+              font-size: 12px!important;
+            }
+          }
+          .bottom-menu{
+            top: 31px;
+            right: 5px;
+            width: 123px;
+            a{
+              font-size: 12px!important;
+            }
+          }
+        }
+      }
+    }
+  }
   .timer-date {
     font-size: 17px!important;
   }
@@ -105,16 +105,16 @@ $tablet : "only screen and (min-width: 768px) and (max-width:1108px)";
           width: 100%!important;
         }
       }
-      // .top-menu,.bottom-menu{
-      //   padding: 4px 7px!important;
-      //   position: relative !important;
-      //   left: 0px !important;
-      //   float: left;
-      //   top: 0px!important;
-      //   margin-left: 10px;
-      //   width: 132px!important;
-      //   margin-top: 7px;
-      // }
+      .top-menu,.bottom-menu{
+        padding: 4px 7px!important;
+        position: relative !important;
+        left: 0px !important;
+        float: left;
+        top: 0px!important;
+        margin-left: 10px;
+        width: 132px!important;
+        margin-top: 7px;
+      }
     }
   }
   .ui-datatable-tablewrapper{

@@ -6,7 +6,7 @@
   .ui-datatable table {
     width: 1000px !important;
     overflow: auto; }
-/* 
+
   .header-container .progressbar li a .top-menu {
     top: -22px;
     right: 5px;
@@ -15,8 +15,9 @@
   .header-container .progressbar li a .bottom-menu {
     top: 31px;
     right: 5px;
-    width: 123px; } */
+    width: 123px; }
    }
+   
 @media only screen and (min-width: 320px) and (max-width: 767px) {
   .desktop-view {
     display: none; }
