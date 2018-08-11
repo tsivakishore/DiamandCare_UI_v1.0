@@ -41,7 +41,9 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
   selectedRow: any;
   isShowModal: number = 1;
   fgFranchise: FormGroup;
-  
+  fgWallet: FormGroup;
+  userID: number;
+
 
   constructor(private sharedService: SharedService,
     private masterChargesService: MasterChargesService,
@@ -69,7 +71,60 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       MinimumJoineesAvg: new FormControl(''),
     })
   }
+  createWalletForm() {
+    this.fgWallet = this.fb.group({
+      UserID: ['', Validators.compose([Validators.required])],
+      UserName: ['', Validators.compose([Validators.required])],
+      AvailableBalance: [''],
+      AddBalance: ['', Validators.compose([Validators.required])]
+    })
+  }
 
+  onAddBalanceToWallet() {
+    this.createWalletForm();
+    this.isShowModal = 3;
+  }
+
+  getFranchiseUsernameWalletByIDorName(DcIDorName: any) {
+    DcIDorName = DcIDorName.UserID;
+    if (DcIDorName != "") {
+      this.franchiseService._getFranchiseUsernameWalletByIDorName(DcIDorName).subscribe(response => {
+        if (response.m_Item1) {
+          this.userID = response.m_Item3.UserID
+          this.fgWallet.patchValue({
+            UserName: response.m_Item3.UserName,
+            AvailableBalance: response.m_Item4.Balance
+          })
+        }
+        else {
+          this.fgWallet.patchValue({
+            UserName: ''
+          })
+          this.toastr.error(response.m_Item2);
+        }
+      }, err => {
+        this.toastr.error("Oops! There has been an error from server. Please try again.");
+      })
+    }
+  }
+  public onSaveBalance(FgWallet, isValidForm) {
+    if (isValidForm) {
+      FgWallet.UserID = this.userID;
+      this.apiManager.postAPI(API.UPDATEFRANCHISEWALLETBALANCE, FgWallet).subscribe(response => {
+        if (response.m_Item1) {
+          this.isShowModal = 1;
+          this.fgWallet.reset();
+          this.toastr.success(response.m_Item2);
+        }
+        else {
+          this.toastr.error(response.m_Item2);
+        }
+      }, err => {
+        console.log(err);
+        this.toastr.error("Error while upgrade franchise. Please try again.");
+      });
+    }
+  }
   createmasterScreenForm() {
     this.masterScreenForm = this.fb.group({
       MasterID: [''],
@@ -172,9 +227,9 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
     this.fgFranchise.patchValue({
       ID: this.selectedRow.ID,
       FranchiseType: this.selectedRow.FranchiseType,
-      PaymentReceiptPercentage:this.selectedRow.PaymentReceiptPercentage,
-      TargetJoineesPerMonth:this.selectedRow.TargetJoineesPerMonth,
-      MinimumJoineesAvg:this.selectedRow.MinimumJoineesAvg
+      PaymentReceiptPercentage: this.selectedRow.PaymentReceiptPercentage,
+      TargetJoineesPerMonth: this.selectedRow.TargetJoineesPerMonth,
+      MinimumJoineesAvg: this.selectedRow.MinimumJoineesAvg
     })
 
   }
@@ -204,5 +259,5 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
   closeForm() {
     this.isShowModal = 1;
   }
-  
+
 }

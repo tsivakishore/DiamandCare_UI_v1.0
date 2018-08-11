@@ -25,15 +25,12 @@ export class API {
   public static LOANAPPROVED = 'loan/approvedorrejectloan';
   public static GETLOANS = 'loan/getloans';
   public static GETLOANDETAILSBYLOANID = 'loan/getloandetailsbyloanid';
-
   public static GETAPPROVEDLOANS = 'loan/getapprovedloandetails';
   public static GETPENDINGLOANS = 'loan/getpendingloandetails';
   public static GETREJECTEDLOANS = 'loan/GetRejectedLoanDetails';
-
   public static GETAPPROVEDLOANSBYUSERID = 'loan/getapprovedloandetailsuserid';
   public static GETPENDINGLOANSBYUSERID = 'loan/getpendingloandetailsuserid';
   public static GETREJECTEDLOANSBYUSERID = 'loan/GetRejectedLoanDetailsByUserID';
-
   public static GETTRANSFERPENDINGLOANS = 'loan/GetLoansAmountTransferPending';
   public static GETPAIDLOANSBYUSERID = 'loan/GetPaidLoanDetailsByUserID';
   public static GETLOANDETAILS = 'loan/getloandetails';
@@ -80,6 +77,8 @@ export class API {
   public static GETWALLET = 'wallet/getwallet';
   public static GETTRANSFERSTATUS = 'Shared/loantransferstatus';
   public static GETTRANSFERAPPROVALSTATUS = 'loan/LoanTransferApprovedOrRejected';
+  public static GETFRANCHISEUSERNAMEWALLETBYIDORNAME = 'franchisedetails/GetFranchiseUsernameWalletByIDorName';
+  public static UPDATEFRANCHISEWALLETBALANCE = 'franchisedetails/UpdateFranchiseWalletBalance';
   // EXTERNAL API CALLERS
 
   public static DASHBOARD = "";
