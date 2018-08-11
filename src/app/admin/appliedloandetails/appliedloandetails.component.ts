@@ -36,8 +36,9 @@ export class AppliedloandetailsComponent implements OnInit {
   loanDetailsList: any[];
 
   listOfApprovedLoans: any[];
-  listOfNotApprovedLoans: any[];
-  OriginalNotApprovedLoans: any[];
+  listOfPendingLoans: any[];
+  OriginalPendingLoans: any[];
+  listOfRejectedLoans: any[];
 
   selectedLoanDetails: any;
   userID: string;
@@ -76,7 +77,8 @@ export class AppliedloandetailsComponent implements OnInit {
   ngOnInit() {
     this.createLoanDetailsForm();
     this.GetApprovedLoans();
-    this.GetNotApprovedLoans();
+    this.GetPendingLoans();
+    this.GetPendingLoans();
   }
 
   createLoanDetailsForm() {
@@ -88,38 +90,40 @@ export class AppliedloandetailsComponent implements OnInit {
     })
   }
 
-  // public getLoanDetailsByLoanID() {
-  //   this.loanEarnsService._getLoanDetailsByLoanID().subscribe((res: any) => {
-  //     if (res.m_Item1) {
-  //       this.OriginalLoanDetailsList = res.m_Item3;
-  //       this.loanDetailsList = this.OriginalLoanDetailsList;
-  //     }
-  //   })
-  // }
-
   public GetApprovedLoans() {
     this.sharedService.setLoader(true);
     this.loanEarnsService._getApprovedLoans().subscribe((res: any) => {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.listOfApprovedLoans = res.m_Item3;
+        console.log(this.listOfApprovedLoans)
       }
     }, err => {
-      console.log(err);
       this.sharedService.setLoader(false);
     })
   }
 
-  public GetNotApprovedLoans() {
+  public GetPendingLoans() {
     this.sharedService.setLoader(true);
-    this.loanEarnsService._getNotApprovedLoans().subscribe((res: any) => {
+    this.loanEarnsService._getPendingLoans().subscribe((res: any) => {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
-        this.OriginalNotApprovedLoans = res.m_Item3;
-        this.listOfNotApprovedLoans = this.OriginalNotApprovedLoans;
+        this.OriginalPendingLoans = res.m_Item3;
+        this.listOfPendingLoans = this.OriginalPendingLoans;
       }
     }, err => {
-      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
+
+  public GetRejectedLoans() {
+    this.sharedService.setLoader(true);
+    this.loanEarnsService._getRejectedLoans().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.listOfRejectedLoans = res.m_Item3;
+      }
+    }, err => {
       this.sharedService.setLoader(false);
     })
   }
@@ -127,7 +131,7 @@ export class AppliedloandetailsComponent implements OnInit {
   ViewLoanDetails(rowIndex) {
     try {
       this.sharedService.setLoader(true);
-      this.selectedLoanDetails = this.OriginalNotApprovedLoans[rowIndex];
+      this.selectedLoanDetails = this.OriginalPendingLoans[rowIndex];
       this.selectedLoanID = this.selectedLoanDetails.LoanID;
       this.loanEarnsService._getLoanDetailsByLoanID(this.selectedLoanID).then((res: any) => {
         this.sharedService.setLoader(false);
@@ -187,7 +191,7 @@ export class AppliedloandetailsComponent implements OnInit {
         if (response.m_Item1) {
           this.isShowModal = 1;
           this.GetApprovedLoans();
-          this.GetNotApprovedLoans();
+          this.GetPendingLoans();
           this.toastr.success(response.m_Item2);
         }
         else {
@@ -286,12 +290,12 @@ export class AppliedloandetailsComponent implements OnInit {
       this.loanID = Number(searchValue);
 
     if (this.loanID > 0) {
-      this.listOfNotApprovedLoans = this.OriginalNotApprovedLoans.filter(element => element.LoanID && element.LoanID == this.loanID);
-      if (this.listOfNotApprovedLoans.length == 0)
-        this.listOfNotApprovedLoans = undefined;
+      this.listOfPendingLoans = this.OriginalPendingLoans.filter(element => element.LoanID && element.LoanID == this.loanID);
+      if (this.listOfPendingLoans.length == 0)
+        this.listOfPendingLoans = undefined;
     }
     else
-      this.listOfNotApprovedLoans = this.OriginalNotApprovedLoans;
+      this.listOfPendingLoans = this.OriginalPendingLoans;
   }
 
   getLoanType(loanTypeCode: string) {

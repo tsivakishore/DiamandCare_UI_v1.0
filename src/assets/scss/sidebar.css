@@ -230,7 +230,7 @@
         cursor: pointer; }
         .header-container .progressbar li > a a:hover {
           text-decoration: underline; }
-      /* .header-container .progressbar li > a .top-menu {
+      .header-container .progressbar li > a .top-menu {
         position: absolute;
         top: -27px;
         border: 2px solid #00c8aa;
@@ -258,6 +258,6 @@
         position: relative;
         top: 1px;
         float: right;
-        cursor: pointer; } */
+        cursor: pointer; }
 
 /*# sourceMappingURL=sidebar.css.map */

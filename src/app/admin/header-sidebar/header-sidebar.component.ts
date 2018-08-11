@@ -311,9 +311,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   getWallet() {
     this.apiManager.getAPI(API.GETWALLET).subscribe(response => {
-      debugger;
       if (response.m_Item1) {
-        debugger;
         this.walletBalance = response.m_Item3.Balance;
       }
       this.loadBalance = response.m_Item1;

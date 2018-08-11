@@ -44,6 +44,14 @@ export class CommonService {
             });
     }
 
+    _getLoanTransferStatus() {
+        return this.httpService
+            .get(API.GETTRANSFERSTATUS)
+            .map(res => this.extractData(res, true)).catch((error: any) => {
+                return Observable.throw(new Error(error.status));
+            });
+    }
+
     _getUserBankDetails(ID: number) {
         const token = this.sharedService.isLoggedIn() ? this.sharedService.getToken() : AppConstant.staticToken;
         let headers = new HttpHeaders(token ? { 'Authorization': `bearer ${token}` } : null);

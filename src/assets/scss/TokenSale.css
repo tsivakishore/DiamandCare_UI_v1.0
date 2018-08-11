@@ -236,7 +236,7 @@
         cursor: pointer; }
         .header-container .progressbar li > a a:hover {
           text-decoration: underline; }
-      /* .header-container .progressbar li > a .top-menu {
+      .header-container .progressbar li > a .top-menu {
         position: absolute;
         top: -23px;
         border: 2px solid #00c8aa;
@@ -264,7 +264,7 @@
         position: relative;
         top: 1px;
         float: right;
-        cursor: pointer; } */
+        cursor: pointer; }
 
 li.twoTabActive a, li.AllTabActive a {
   color: #00c8aa; }
@@ -3935,7 +3935,7 @@ button[disabled] {
     width: 1000px !important;
     overflow: auto; }
 
-  /* .header-container .progressbar li a .top-menu {
+  .header-container .progressbar li a .top-menu {
     top: -22px;
     right: 5px;
     width: 123px;
@@ -3947,7 +3947,7 @@ button[disabled] {
     right: 5px;
     width: 123px; }
     .header-container .progressbar li a .bottom-menu a {
-      font-size: 12px !important; } */
+      font-size: 12px !important; }
 
   .timer-date {
     font-size: 17px !important; }

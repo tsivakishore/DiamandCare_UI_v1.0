@@ -42,6 +42,30 @@ export class LoanEarnsService {
       });
   }
 
+  _getPendingLoansByUserID() {
+    return this.httpService
+      .get(API.GETPENDINGLOANSBYUSERID)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  _getRejectedLoansByUserID() {
+    return this.httpService
+      .get(API.GETREJECTEDLOANSBYUSERID)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  _getLoansAmountTransferPending() {
+    return this.httpService
+      .get(API.GETTRANSFERPENDINGLOANS)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
   _getPaidLoansByUserID() {
     return this.httpService
       .get(API.GETPAIDLOANSBYUSERID)
@@ -58,17 +82,17 @@ export class LoanEarnsService {
       });
   }
 
-  _getNotApprovedLoans() {
+  _getPendingLoans() {
     return this.httpService
-      .get(API.GETNOTAPPROVEDLOANS)
+      .get(API.GETPENDINGLOANS)
       .map(res => this.extractData(res, true)).catch((error: any) => {
         return Observable.throw(new Error(error.status));
       });
   }
 
-  _getNotApprovedLoansByUserID() {
+  _getRejectedLoans() {
     return this.httpService
-      .get(API.GETNOTAPPROVEDLOANSBYUSERID)
+      .get(API.GETREJECTEDLOANS)
       .map(res => this.extractData(res, true)).catch((error: any) => {
         return Observable.throw(new Error(error.status));
       });

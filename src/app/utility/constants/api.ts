@@ -25,11 +25,17 @@ export class API {
   public static LOANAPPROVED = 'loan/approvedorrejectloan';
   public static GETLOANS = 'loan/getloans';
   public static GETLOANDETAILSBYLOANID = 'loan/getloandetailsbyloanid';
+
   public static GETAPPROVEDLOANS = 'loan/getapprovedloandetails';
-  public static GETNOTAPPROVEDLOANS = 'loan/getnotapprovedloandetails';
-  public static GETAPPROVEDLOANSBYUSERID = 'loan/getapprovedloandetailsuser';
+  public static GETPENDINGLOANS = 'loan/getpendingloandetails';
+  public static GETREJECTEDLOANS = 'loan/GetRejectedLoanDetails';
+
+  public static GETAPPROVEDLOANSBYUSERID = 'loan/getapprovedloandetailsuserid';
+  public static GETPENDINGLOANSBYUSERID = 'loan/getpendingloandetailsuserid';
+  public static GETREJECTEDLOANSBYUSERID = 'loan/GetRejectedLoanDetailsByUserID';
+
+  public static GETTRANSFERPENDINGLOANS = 'loan/GetLoansAmountTransferPending';
   public static GETPAIDLOANSBYUSERID = 'loan/GetPaidLoanDetailsByUserID';
-  public static GETNOTAPPROVEDLOANSBYUSERID = 'loan/getnotapprovedloandetailsuser';
   public static GETLOANDETAILS = 'loan/getloandetails';
   public static DOWNLOADS = 'loan/downloadfile';
   public static CHECKPL = 'loan/checkpersonalloan';
@@ -72,6 +78,8 @@ export class API {
   public static GETUNDERFRANCHISEDETAILS = 'franchisedetails/GetUnderFranchiseDetails';
   public static INSERTorUPDATEFRANCHISEDETAILS = 'franchisedetails/InsertorUpdateFranchiseDetails';
   public static GETWALLET = 'wallet/getwallet';
+  public static GETTRANSFERSTATUS = 'Shared/loantransferstatus';
+  public static GETTRANSFERAPPROVALSTATUS = 'loan/LoanTransferApprovedOrRejected';
   // EXTERNAL API CALLERS
 
   public static DASHBOARD = "";

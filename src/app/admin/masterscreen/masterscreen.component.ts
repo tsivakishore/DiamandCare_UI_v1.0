@@ -157,7 +157,6 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
     this.franchiseService._getFranchiseMasterDetails().subscribe((res: any) => {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
-        console.log(res.m_Item3);
         this.lstFranchise = res.m_Item3;
       }
     }, err => {

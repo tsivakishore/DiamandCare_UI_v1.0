@@ -36,7 +36,8 @@ import { CommonService } from "../../utility/shared-service/common.service";
 export class UserloandetailsComponent extends BaseComponent implements OnInit {
 
   listOfApprovedLoans: any[];
-  listOfNotApprovedLoans: any[];
+  listOfPendingLoans: any[];
+  listOfRejectedLoans: any[];
 
   constructor(private sharedService: SharedService,
     private loanEarnsService: LoanEarnsService,
@@ -51,7 +52,8 @@ export class UserloandetailsComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.GetApprovedLoans();
-    this.GetNotApprovedLoans();
+    this.GetPendingLoans();
+    this.GetRejectedLoans();
   }
 
   public GetApprovedLoans() {
@@ -62,64 +64,32 @@ export class UserloandetailsComponent extends BaseComponent implements OnInit {
         this.listOfApprovedLoans = res.m_Item3;
       }
     }, err => {
-      console.log(err);
       this.sharedService.setLoader(false);
     })
   }
 
-  public GetNotApprovedLoans() {
+  public GetPendingLoans() {
     this.sharedService.setLoader(true);
-    this.loanEarnsService._getNotApprovedLoansByUserID().subscribe((res: any) => {
+    this.loanEarnsService._getPendingLoansByUserID().subscribe((res: any) => {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
-        this.listOfNotApprovedLoans = res.m_Item3;
+        this.listOfPendingLoans = res.m_Item3;
       }
     }, err => {
-      console.log(err);
       this.sharedService.setLoader(false);
     })
   }
 
-  getLoanType(loanTypeCode: string) {
-    if (loanTypeCode.toUpperCase().trim() == "PL")
-      return "Personal Loan";
-    else if (loanTypeCode.toUpperCase().trim() == "FR")
-      return "Fee Reimbursement";
-    else if (loanTypeCode.toUpperCase().trim() == "HB")
-      return "Health Benefits";
-    else if (loanTypeCode.toUpperCase().trim() == "RB")
-      return "Risk Benefit";
-    else if (loanTypeCode.toUpperCase().trim() == "HL")
-      return "Home Loan";
-  }
-
-  getModeofTransfer(ModeofTransfer: number) {
-    if (ModeofTransfer == 1)
-      return "Check";
-    else if (ModeofTransfer == 2)
-      return "Cash";
-    else if (ModeofTransfer == 3)
-      return "DD";
-    else if (ModeofTransfer == 4)
-      return "A/C Transfer";
-  }
-
-  getLoanStatus(LoanStatusID: number) {
-    if (LoanStatusID == 1)
-      return "Payment Pending";
-    else if (LoanStatusID == 2)
-      return "Partial Payment done";
-    else if (LoanStatusID == 3)
-      return "Payment Done";
-  }
-
-  IsLoanApproved(isApproved: number) {
-    if (isApproved == 0)
-      return "Pending";
-    else if (isApproved == 1)
-      return "Approved";
-    else if (isApproved == 3)
-      return "Rejected";
+  public GetRejectedLoans() {
+    this.sharedService.setLoader(true);
+    this.loanEarnsService._getRejectedLoansByUserID().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.listOfRejectedLoans = res.m_Item3;
+      }
+    }, err => {
+      this.sharedService.setLoader(false);
+    })
   }
 
 }

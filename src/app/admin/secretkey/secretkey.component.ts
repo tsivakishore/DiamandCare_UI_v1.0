@@ -148,9 +148,6 @@ export class SecretkeyComponent extends BaseComponent implements OnInit {
             UserName: this.FranchiseDetails.UserName,
             WalletBalance: this.WalletDetails.Balance
           })
-          console.log(this.FranchiseDetails)
-          console.log(this.MasterChargesDetails)
-          console.log(this.WalletDetails)
         }
         else {
           this.multipleSecretkeyForm.patchValue({

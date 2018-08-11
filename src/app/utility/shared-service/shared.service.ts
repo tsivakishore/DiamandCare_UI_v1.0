@@ -132,7 +132,6 @@ export class SharedService {
   setUser(value: User): void {
     sessionStorage.setItem(APPStorage.USER, JSON.stringify(value));
     this._user = value;
-    //console.log(this._user);
     this.isProfileUpdated.next(true);
   }
 
