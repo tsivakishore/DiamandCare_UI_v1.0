@@ -67,7 +67,7 @@ export const LANG_EN_TRANS = {
   'generateSecretKey': 'Generate Secret Key',
   'generateMultipleSecretKey': 'Generate Multiple Secret Key',
   'phoneNumber': 'Phone Number',
-  'phoneNumberRqrd': 'Please enter phone number.',
+  'phoneNumberRqrd': 'Please enter phone number',
   'validPhoneNumber': 'Please enter valid phone number',
   'validLength': 'Please enter 10 digit phone number',
   'secretkey': 'Generate Key',

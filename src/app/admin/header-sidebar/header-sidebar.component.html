@@ -70,6 +70,7 @@
         <span>Under Users</span>
       </a>
     </li>
+
     <li tooltipPosition="top">
       <a [routerLink]="bankAccountUrl" *ngIf="Is_Visible_BankAccount" routerLinkActive="active">
         <i class="material-icons">account_box</i>
@@ -232,20 +233,30 @@
         </a>
       </li>
 
-      <li (click)="currentRoute();earnLoanEvent()" [ngClass]="{'twoTabActive':currentPath == 'wallet','AllTabActive':currentPath == 'buy-token'}">
+      <li (click)="currentRoute();earnLoanEvent()" [ngClass]="{'AllTabActive':currentPath == 'wallet'}">
         <a [routerLink]="earnLoansUrl" routerLinkActive="active">
           <span>Loans</span>
         </a>
       </li>
 
-      <li (click)="currentRoute();underUserDetailsEvent()" [ngClass]="{'AllTabActive':currentPath == 'buy-token'}">
+      <!-- <li (click)="currentRoute();underUserDetailsEvent()" [ngClass]="{'AllTabActive':currentPath == 'buy-token'}">
         <a [routerLink]="underUserDetailsUrl" routerLinkActive="active">
           <span>Under Users</span>
         </a>
-      </li>
-
+      </li> -->
       <li>
+        <a>
+          <!-- <div class="top-menu" *ngIf="Is_Visible_Etherem_Balance"> -->
+          <div class="top-menu">
+            <a [routerLink]="etherUrl" pTooltip="{{'walletBalance' | translate}}" tooltipPosition="left" routerLinkActive="active">
+              <div *ngIf="!loadBalance" class="button-loader"></div>
+              <span *ngIf="loadBalance">Rs.{{walletBalance}}</span>
+            </a>
+            <i class="material-icons" pTooltip="{{'refresh' | translate}}" tooltipPosition="right" (click)="loadBalance=false;getWallet()">refresh</i>
+          </div>
+        </a>
       </li>
+      
     </ul>
     <div class="clearfix"></div>
   </div>

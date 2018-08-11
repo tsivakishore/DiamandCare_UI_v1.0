@@ -218,7 +218,7 @@
 
 <div class="confirm-modal-overay" *ngIf="isShowModal == 2" (click)="closeForm()"></div>
 
-<div class="phone-number-modal" style="margin-left: 15px;margin-top: 50px;" *ngIf="isShowModal == 3" @dialog>
+<div class="phone-number-modal" style="margin-left: 15px;margin-top: 50px;" *ngIf="isShowModal == 2" @dialog>
   <form [formGroup]="fgFranchise" (submit)="onEditFranchise(fgFranchise.value,fgFranchise.valid)">
     <div class="modal-container" style="height: 300px !important;">
       <div class="modal-header" style="background: #797b85;">

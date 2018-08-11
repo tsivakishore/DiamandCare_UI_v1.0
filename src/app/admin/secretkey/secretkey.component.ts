@@ -33,8 +33,10 @@ import { SecretKeyService } from "../../utility/shared-service/secretkey.service
 })
 export class SecretkeyComponent extends BaseComponent implements OnInit {
 
+  isShowModal: number = 1;
   secretkeyForm: FormGroup;
   multipleSecretkeyForm: FormGroup;
+  phoneNumberForm: FormGroup;
   isAddressValid: boolean = true;
   listRegKeys: any;
   gridTitle: string;
@@ -69,6 +71,7 @@ export class SecretkeyComponent extends BaseComponent implements OnInit {
     this.GetIssuedRegisterKeys();
     this.createsecretkeyForm();
     this.createMultipleSecretkeyForm();
+    this.createPhoneNumberForm();
     this.is_Visible_Single = true;
     this.defaultKeyType = 'P';
     this.KeyType = "P";
@@ -79,6 +82,12 @@ export class SecretkeyComponent extends BaseComponent implements OnInit {
   createsecretkeyForm() {
     this.secretkeyForm = this.fb.group({
       PhoneNumber: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(CommonRegexp.NUMERIC_REGEXP)])],
+    })
+  }
+
+  createPhoneNumberForm() {
+    this.phoneNumberForm = this.fb.group({
+      PhoneNumber: new FormControl('', Validators.compose([Validators.minLength(10), Validators.maxLength(10), <any>Validators.pattern(CommonRegexp.NUMERIC_REGEXP)]))
     })
   }
 
@@ -198,20 +207,34 @@ export class SecretkeyComponent extends BaseComponent implements OnInit {
     })
   }
 
-  ResendSecretKey(rowIndex) {
-    this.sharedService.setLoader(true);
+  ResendSecretKey(phoneNumber, isValidForm) {
+    if (isValidForm) {
+      this.selectedRow.PhoneNumber = phoneNumber;
+      this.apiManager.postAPI(API.RESENDSECRETKEY, this.selectedRow).subscribe(response => {
+        if (response.m_Item1) {
+          this.toastr.success(response.m_Item2);
+          this.isShowModal = 1;
+        }
+        else {
+          this.toastr.error(response.m_Item2);
+        }
+      }, err => {
+        this.isShowModal = 1;
+        this.toastr.error("Error while resend register key. Please try again.");
+      });
+    }
+    else {
+      this.toastr.error("Invalid form data.");
+    }
+  }
+
+  onShowPhoneNumberModal(rowIndex) {
     this.selectedRow = this.listRegKeys[rowIndex];
-    this.apiManager.postAPI(API.RESENDSECRETKEY, this.selectedRow).subscribe(response => {
-      if (response.m_Item1) {
-        this.toastr.success(response.m_Item2);
-      }
-      else {
-        this.toastr.error(response.m_Item2);
-      }
-    }, err => {
-      console.log(err);
-      this.toastr.error("Error while resend register key. Please try again.");
-    });
+    this.createPhoneNumberForm();
+    this.phoneNumberForm.patchValue({
+      PhoneNumber: this.selectedRow.PhoneNumber
+    })
+    this.isShowModal = 2;
   }
 
   onSelectionChange(isRadiobuttionClicked) {
@@ -255,9 +278,9 @@ export class SecretkeyComponent extends BaseComponent implements OnInit {
     if (keyType == "F") {
       this.KeyType = "F"
       this.isChecked = false;
-        this.multipleSecretkeyForm.patchValue({
-          IsWallet: false
-        })
+      this.multipleSecretkeyForm.patchValue({
+        IsWallet: false
+      })
       // this.multipleSecretkeyForm.controls['NoOfKeys'].setValidators(null);
       // this.multipleSecretkeyForm.get('NoOfKeys').updateValueAndValidity({ onlySelf: false, emitEvent: false });
     }

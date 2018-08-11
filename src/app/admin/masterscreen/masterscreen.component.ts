@@ -167,7 +167,7 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
   }
 
   EditFranchise(rowIndex) {
-    this.isShowModal = 3;
+    this.isShowModal = 2;
     this.createFranchiseForm();
     this.selectedRow = this.lstFranchise[rowIndex];
     this.fgFranchise.patchValue({
