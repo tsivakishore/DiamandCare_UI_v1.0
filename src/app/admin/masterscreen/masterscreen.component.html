@@ -184,14 +184,20 @@
   </div>
   <div class="clearfix"></div>
   <div class="settings-container">
-  <div class="col-md-12 col-xs-12 settings-list" @slideUp>
-    <ul>
-      <li class="padding-top-15" (click)="onAddBalanceToWallet()">
-        <div>Add Balance To Wallet</div>
-      </li>
-    </ul>
+    <div class="col-md-12 col-xs-12 settings-list" @slideUp>
+      <ul>
+        <li class="padding-top-15" (click)="onAddBalanceToWallet()">
+          <div>Add Balance To Wallet</div>
+        </li>
+        <li class="padding-top-15" (click)="onLoanWaiveOff()">
+          <div>Loan Waiveoff</div>
+        </li>
+        <li class="padding-top-15" (click)="onFreeToPaidKey()">
+          <div>Upgrade Free To Paid Key</div>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
 </div>
 <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">{{'franchisecommission' | translate}}</h3>
 <div class="clearfix"></div>
@@ -302,32 +308,34 @@
       <div class="modal-body" style="height: 50px;">
         <div class="col-md-12">
           <div class="margin-top-15 col-md-12">
-              <div class="label" style="color: #fff;">User ID or User Name</div>
+            <div class="label" style="color: #fff;">User ID or User Name</div>
             <div>
               <input type="text" class="form-control" placeholder="UserID or UserName" pTooltip="UserID or UserName" tooltipPosition="top"
-              formControlName="UserID" (change)="getFranchiseUsernameWalletByIDorName(fgWallet.value)" required/>
-            <div class="input-validation-msg">
-              <validation *ngIf="isRequiredField(fgWallet.get('UserID'))" [errMsg]="'userIDUserNameRqrd' | translate"></validation>
+                formControlName="UserID" (change)="getFranchiseUsernameWalletByIDorName(fgWallet.value)" required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(fgWallet.get('UserID'))" [errMsg]="'userIDUserNameRqrd' | translate"></validation>
+              </div>
             </div>
-          </div>
           </div>
           <div class="clearfix"></div>
           <div class=" margin-top-15 col-md-12">
             <div class="label" style="color: #fff;">User Name</div>
-            <input type="text" class="form-control" placeholder="User Name" pTooltip="User Name" tooltipPosition="top"
-              formControlName="UserName" readonly />
-            </div>
-            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="User Name" pTooltip="User Name" tooltipPosition="top" formControlName="UserName"
+              readonly />
+          </div>
+          <div class="clearfix"></div>
           <div class=" margin-top-15 col-md-12">
             <div class="label" style="color: #fff;">Available Balance</div>
             <input type="text" class="form-control" placeholder="Available Balance" pTooltip="Available Balance" tooltipPosition="top"
               formControlName="AvailableBalance" readonly />
-            </div>
+              
+          </div>
           <div class="clearfix"></div>
           <div class=" margin-top-15 col-md-12">
             <div class="label" style="color: #fff;">Balance To Add</div>
             <div>
-              <input type="text" pTooltip="Add Balance" placeholder="Add Balance" tooltipPosition="top" class="form-control" formControlName="AddBalance"/>
+              <input type="text" pTooltip="Add Balance" placeholder="Add Balance" tooltipPosition="top" class="form-control" formControlName="AddBalance"
+              />
               <div class="input-validation-msg">
                 <validation *ngIf="isRequiredField(fgWallet.get('AddBalance'))" [errMsg]="'Please Add Balance' | translate"></validation>
               </div>
@@ -341,6 +349,118 @@
       <div class="modal-footer">
         <div class="col-md-7 col-md-offset-3">
           <button type="submit" [disabled]="!fgWallet.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
+          <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+<div class="phone-number-modal" style="margin-left: 15px;margin-top: 50px;" *ngIf="isShowModal == 4" @dialog>
+  <form [formGroup]="fgLoanWaive" (submit)="onSaveLoanWaiveOff(fgLoanWaive.value,fgLoanWaive.valid)">
+    <div class="modal-container" style="height: 300px !important;">
+      <div class="modal-header" style="background: #797b85;">
+        <h5>Loan Waiveoff</h5>
+        <i class="material-icons" (click)="closeForm()">close</i>
+      </div>
+      <div class="clearfix"></div>
+      <div class="clearfix"></div>
+      <div class="modal-body" style="height: 50px;">
+        <div class="col-md-12">
+          <div class="margin-top-15 col-md-12">
+            <div class="label" style="color: #fff;">User ID or User Name</div>
+            <div>
+              <input type="text" class="form-control" placeholder="UserID or UserName" pTooltip="UserID or UserName" tooltipPosition="top"
+                formControlName="UserID" (change)="onUsernameByDCIDorName(fgLoanWaive.value)" required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(fgLoanWaive.get('UserID'))" [errMsg]="'userIDUserNameRqrd' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div class="label" style="color: #fff;">User Name</div>
+            <input type="text" class="form-control" placeholder="User Name" pTooltip="User Name" tooltipPosition="top" formControlName="UserName"
+              readonly />
+              <div class="input-validation-msg">
+              </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">Loan Waiveoff</div>
+            <div class="clearfix"></div>
+            <span class="-addon checkbox check-primary bg-transparent">
+              <input type="checkbox" [(ngModel)]="isChecked" formControlName="LoanWaiveoff">
+              
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-7 col-md-offset-3">
+          <button type="submit" [disabled]="!fgLoanWaive.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
+          <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+<div class="phone-number-modal" style="margin-left: 15px;margin-top: 50px;" *ngIf="isShowModal == 5" @dialog>
+  <form [formGroup]="fgFreeToPaid" (submit)="onSaveFreeToPaidKey(fgFreeToPaid.value,fgFreeToPaid.valid)">
+    <div class="modal-container" style="height: 300px !important;">
+      <div class="modal-header" style="background: #797b85;">
+        <h5>Loan Waiveoff</h5>
+        <i class="material-icons" (click)="closeForm()">close</i>
+      </div>
+      <div class="clearfix"></div>
+      <div class="clearfix"></div>
+      <div class="modal-body" style="height: 50px;">
+        <div class="col-md-12">
+          <div class="margin-top-15 col-md-12">
+            <div class="label" style="color: #fff;">User ID or User Name</div>
+            <div>
+              <input type="text" class="form-control" placeholder="UserID or UserName" pTooltip="UserID or UserName" tooltipPosition="top"
+                formControlName="UserID" (change)="getUserNameWithFreeKey(fgFreeToPaid.value)" required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(fgFreeToPaid.get('UserID'))" [errMsg]="'userIDUserNameRqrd' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div class="label" style="color: #fff;">User Name</div>
+            <input type="text" class="form-control" placeholder="User Name" pTooltip="User Name" tooltipPosition="top" formControlName="UserName"
+              readonly />
+              <div class="input-validation-msg">
+              </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div class="label" style="color: #fff;">Key Cost</div>
+            <div>
+              <input type="text" pTooltip="Key Cost" placeholder="Key Cost" tooltipPosition="top" class="form-control" formControlName="KeyCost"
+              />
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(fgFreeToPaid.get('KeyCost'))" [errMsg]="'Please Enter Key Cost' | translate"></validation>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-7 col-md-offset-3">
+          <button type="submit" [disabled]="!fgFreeToPaid.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
           <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
         </div>
         <div class="clearfix"></div>

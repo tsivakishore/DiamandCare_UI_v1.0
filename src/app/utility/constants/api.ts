@@ -79,6 +79,10 @@ export class API {
   public static GETTRANSFERAPPROVALSTATUS = 'loan/LoanTransferApprovedOrRejected';
   public static GETFRANCHISEUSERNAMEWALLETBYIDORNAME = 'franchisedetails/GetFranchiseUsernameWalletByIDorName';
   public static UPDATEFRANCHISEWALLETBALANCE = 'franchisedetails/UpdateFranchiseWalletBalance';
+  public static UPDATELOANWAIVEOFF = 'user/updateloanwaiveoff';
+  public static GETFREETOPAIDUSERDETAILS = 'user/getfreetopaiduserdetails';
+  public static UPDATEFREETOPAIDKEYDETAILS = 'user/updatefreetopaidkeydetails';
+
   // EXTERNAL API CALLERS
 
   public static DASHBOARD = "";
