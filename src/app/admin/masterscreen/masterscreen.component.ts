@@ -42,6 +42,8 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
   isShowModal: number = 1;
   fgFranchise: FormGroup;
   fgWallet: FormGroup;
+  fgLoanWaive: FormGroup;
+  fgFreeToPaid: FormGroup;
   userID: number;
 
 
@@ -79,12 +81,32 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       AddBalance: ['', Validators.compose([Validators.required])]
     })
   }
-
+  createLoanWaiveForm() {
+    this.fgLoanWaive = this.fb.group({
+      UserID: ['', Validators.compose([Validators.required])],
+      UserName: ['', Validators.compose([Validators.required])],
+      LoanWaiveoff: []
+    })
+  }
+  createFreeToPaidKeyForm() {
+    this.fgFreeToPaid = this.fb.group({
+      UserID: ['', Validators.compose([Validators.required])],
+      UserName: ['', Validators.compose([Validators.required])],
+      KeyCost: []
+    })
+  }
   onAddBalanceToWallet() {
     this.createWalletForm();
     this.isShowModal = 3;
   }
-
+  onLoanWaiveOff() {
+    this.createLoanWaiveForm();
+    this.isShowModal = 4;
+  }
+  onFreeToPaidKey() {
+    this.createFreeToPaidKeyForm();
+    this.isShowModal = 5;
+  }
   getFranchiseUsernameWalletByIDorName(DcIDorName: any) {
     DcIDorName = DcIDorName.UserID;
     if (DcIDorName != "") {
@@ -114,6 +136,86 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
         if (response.m_Item1) {
           this.isShowModal = 1;
           this.fgWallet.reset();
+          this.toastr.success(response.m_Item2);
+        }
+        else {
+          this.toastr.error(response.m_Item2);
+        }
+      }, err => {
+        console.log(err);
+        this.toastr.error("Error while upgrade franchise. Please try again.");
+      });
+    }
+  }
+  onUsernameByDCIDorName(DcIDorName: any) {
+    DcIDorName = DcIDorName.UserID;
+    if (DcIDorName != "") {
+      this.franchiseService._getUsernameByDCIDorName(DcIDorName).subscribe(response => {
+        if (response.m_Item1) {
+          this.userID = response.m_Item3.UserID
+          this.fgLoanWaive.patchValue({
+            UserName: response.m_Item3.UserName
+          })
+        }
+        else {
+          this.fgLoanWaive.patchValue({
+            UserName: ''
+          })
+          this.toastr.error(response.m_Item2);
+        }
+      }, err => {
+        this.toastr.error("Oops! There has been an error from server. Please try again.");
+      })
+    }
+  }
+  getUserNameWithFreeKey(IDorName: any) {
+    IDorName = IDorName.UserID;
+    if (IDorName != "") {
+      debugger;
+      this.franchiseService._getUserNameWithFreeKey(IDorName).subscribe(response => {
+        if (response.m_Item1) {
+          this.userID = response.m_Item3.UserID
+          this.fgFreeToPaid.patchValue({
+            UserName: response.m_Item3.UserName,
+            KeyCost: response.m_Item4.RegistrationCharges
+          })
+        }
+        else {
+          this.fgFreeToPaid.patchValue({
+            UserName: ''
+          })
+          this.toastr.error(response.m_Item2);
+        }
+      }, err => {
+        this.toastr.error("Oops! There has been an error from server. Please try again.");
+      })
+    }
+  }
+  public onSaveLoanWaiveOff(fgLoanWaive, isValidForm) {
+    if (isValidForm) {
+      fgLoanWaive.UserID = this.userID;
+      this.masterChargesService._updateLoanWaiveoff(fgLoanWaive.UserID, fgLoanWaive.LoanWaiveoff).subscribe(response => {
+        if (response.m_Item1) {
+          this.isShowModal = 1;
+          this.fgLoanWaive.reset();
+          this.toastr.success(response.m_Item2);
+        }
+        else {
+          this.toastr.error(response.m_Item2);
+        }
+      }, err => {
+        console.log(err);
+        this.toastr.error("Error while upgrade franchise. Please try again.");
+      });
+    }
+  }
+  public onSaveFreeToPaidKey(fgFreeToPaid, isValidForm) {
+    if (isValidForm) {
+      fgFreeToPaid.UserID = this.userID;
+      this.masterChargesService._updateFreetoPaidKey(fgFreeToPaid.UserID, fgFreeToPaid.KeyCost).subscribe(response => {
+        if (response.m_Item1) {
+          this.isShowModal = 1;
+          this.fgFreeToPaid.reset();
           this.toastr.success(response.m_Item2);
         }
         else {

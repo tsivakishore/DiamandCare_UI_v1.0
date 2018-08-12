@@ -19,6 +19,20 @@ export class MasterChargesService {
             });
     }
 
+    _updateLoanWaiveoff(UserID, LoanWaiveoff) {
+        return this.httpService
+            .get(API.UPDATELOANWAIVEOFF + '?UserID=' + UserID + '&LoanWaiveoff=' + LoanWaiveoff)
+            .map(res => this.extractData(res, true)).catch((error: any) => {
+                return Observable.throw(new Error(error.status));
+            });
+    }
+    _updateFreetoPaidKey(UserID, KeyCost) {
+        return this.httpService
+            .get(API.UPDATEFREETOPAIDKEYDETAILS + '?UserID=' + UserID + '&KeyCost=' + KeyCost)
+            .map(res => this.extractData(res, true)).catch((error: any) => {
+                return Observable.throw(new Error(error.status));
+            });
+    }
     private extractData(res: Response, show?: boolean) {
         let data = res.json();
         let msg = data.message;
