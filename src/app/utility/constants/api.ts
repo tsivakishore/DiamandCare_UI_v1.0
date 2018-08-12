@@ -26,6 +26,8 @@ export class API {
   public static GETLOANS = 'loan/getloans';
   public static GETLOANDETAILSBYLOANID = 'loan/getloandetailsbyloanid';
   public static GETAPPROVEDLOANS = 'loan/getapprovedloandetails';
+  public static GETACTIVELOANSBYUSERID = 'loan/GetActiveLoanDetailsByUserID';
+  public static UPDATEUSERLOANPAYMENT = 'loan/UpdateUserLoanPayment';
   public static GETPENDINGLOANS = 'loan/getpendingloandetails';
   public static GETREJECTEDLOANS = 'loan/GetRejectedLoanDetails';
   public static GETAPPROVEDLOANSBYUSERID = 'loan/getapprovedloandetailsuserid';

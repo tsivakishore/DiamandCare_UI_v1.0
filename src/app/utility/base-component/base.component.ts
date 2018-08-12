@@ -46,4 +46,8 @@ export class BaseComponent implements OnInit {
     return formControlName.hasError('minlength') || formControlName.hasError('maxlength');
   }
 
+  isZero(formControlName){
+    return formControlName.hasError('zero');
+  }
+
 }

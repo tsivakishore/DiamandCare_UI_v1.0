@@ -96,7 +96,6 @@ export class AppliedloandetailsComponent implements OnInit {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.listOfApprovedLoans = res.m_Item3;
-        console.log(this.listOfApprovedLoans)
       }
     }, err => {
       this.sharedService.setLoader(false);

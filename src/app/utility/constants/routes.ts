@@ -17,4 +17,5 @@ export class RouteConstants {
   public static UPGRADETOFRANCHISE = 'upgradetofranchise';
   public static LOANDISPATCHED = 'loandispatched';
   public static SCREENPERMISSIONS = 'screenpermissions';
+  public static LOANPAYMENT = 'loanpayment';
 }

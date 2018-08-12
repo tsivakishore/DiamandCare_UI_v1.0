@@ -78,7 +78,6 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
         this.lstUpgradeTypes = res.m_Item3;
       }
     }, err => {
-      debugger;
       console.log(err);
       this.sharedService.setLoader(false);
     })

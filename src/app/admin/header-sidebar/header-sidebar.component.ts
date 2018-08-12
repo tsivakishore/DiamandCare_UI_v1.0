@@ -57,6 +57,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   Is_Visible_Add_Roles = false;
   Is_Visible_Upgrade_Franchise = false;
   Is_Visible_Loans_Dispatched = false;
+  Is_Visible_LoanPayment = false;
 
   constructor(private apiManager: APIManager, private sharedService: SharedService,
     private router: Router, public toastr: ToastsManager, public vcr: ViewContainerRef) {
@@ -113,6 +114,9 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
                 break;
               case RouteConstants.LOANDISPATCHED:
                 this.Is_Visible_Loans_Dispatched = true;
+                break;
+              case RouteConstants.LOANPAYMENT:
+                this.Is_Visible_LoanPayment = true;
                 break;
             }
           }
@@ -284,6 +288,10 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   get screenPermissionsUrl() {
     return "/" + RouteConstants.SCREENPERMISSIONS;
+  }
+
+  get loanPaymentsUrl() {
+    return "/" + RouteConstants.LOANPAYMENT;
   }
 
   earnLoanEvent() {

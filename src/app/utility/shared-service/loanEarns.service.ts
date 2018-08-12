@@ -73,10 +73,18 @@ export class LoanEarnsService {
         return Observable.throw(new Error(error.status));
       });
   }
-  
+
   _getApprovedLoans() {
     return this.httpService
       .get(API.GETAPPROVEDLOANS)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  _getActiveLoansByUserID() {
+    return this.httpService
+      .get(API.GETACTIVELOANSBYUSERID)
       .map(res => this.extractData(res, true)).catch((error: any) => {
         return Observable.throw(new Error(error.status));
       });
@@ -101,6 +109,14 @@ export class LoanEarnsService {
   _getLoanDetails() {
     return this.httpService
       .get(API.GETLOANDETAILS)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  _updateUserLoanPayment(UserID, LoanID, AmountToPay) {
+    return this.httpService
+      .get(API.UPDATEUSERLOANPAYMENT + '?UserID=' + UserID + '&LoanID=' + LoanID + '&AmountToPay=' + AmountToPay)
       .map(res => this.extractData(res, true)).catch((error: any) => {
         return Observable.throw(new Error(error.status));
       });

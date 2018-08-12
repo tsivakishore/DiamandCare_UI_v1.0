@@ -15,6 +15,7 @@ import { RolesComponent } from '../admin/roles/roles.component';
 import { UpgradetofranchiseComponent } from '../admin/upgradetofranchise/upgradetofranchise.component';
 import { DisplayscreensComponent } from '../admin/displayscreens/displayscreens.component';
 import { LoandispatchedComponent } from '../admin/loandispatched/loandispatched.component';
+import { LoanpaymentComponent } from './loanpayment/loanpayment.component';
 
 const routes: Routes = [
   {
@@ -80,6 +81,11 @@ const routes: Routes = [
   {
     path: RouteConstants.SCREENPERMISSIONS,
     component: DisplayscreensComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.LOANPAYMENT,
+    component: LoanpaymentComponent,
     canActivate: [AuthGaurd]
   }
 ];

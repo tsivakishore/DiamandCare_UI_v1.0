@@ -93,7 +93,6 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger;
     this.GetPaidLoans();
     this.GetLoans();
     

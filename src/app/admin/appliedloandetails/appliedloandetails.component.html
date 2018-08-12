@@ -34,9 +34,9 @@
             <p-column [style]="{'width':'130px'}" field="AdminCharges" header="Admin Charges" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="ModeofTransferType" header="Modeof Transfer" [sortable]="true"> </p-column>
             <p-column [style]="{'width':'105px'}" field="LoanStatusID" header="Payment" [sortable]="true">
-              <ng-template let-listOfApprovedLoans="rowData" pTemplate="body" let-ri="rowIndex">
+              <ng-template let-listOfPendingLoans="rowData" pTemplate="body" let-ri="rowIndex">
                 <div class="col-md-12" style="margin-left: -15px;">
-                  {{getLoanStatus(listOfApprovedLoans.LoanStatusID)}}
+                  {{getLoanStatus(listOfPendingLoans.LoanStatusID)}}
                 </div>
               </ng-template>
             </p-column>
@@ -128,9 +128,9 @@
             <p-column [style]="{'width':'130px'}" field="AdminCharges" header="Admin Charges" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="ModeofTransferType" header="Modeof Transfer" [sortable]="true"> </p-column>
             <p-column [style]="{'width':'105px'}" field="LoanStatusID" header="Payment" [sortable]="true">
-              <ng-template let-listOfApprovedLoans="rowData" pTemplate="body" let-ri="rowIndex">
+              <ng-template let-listOfRejectedLoans="rowData" pTemplate="body" let-ri="rowIndex">
                 <div class="col-md-12" style="margin-left: -15px;">
-                  {{getLoanStatus(listOfApprovedLoans.LoanStatusID)}}
+                  {{getLoanStatus(listOfRejectedLoans.LoanStatusID)}}
                 </div>
               </ng-template>
             </p-column>

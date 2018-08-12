@@ -178,6 +178,10 @@ export const LANG_EN_TRANS = {
   'editLoanDetails': 'Edit Loan Details',
   'loanAmountRqrd': 'Loan amount required',
   'validLoanAmount': 'Enter valid loan amount',
+  'amountToPayRqrd':'Payment amount required',
+  'validAmountToPay':'Please enter valid payment amount',
+  'isZero':'Payment amount should not be zero',
+
   'noRecords': 'No records found',
   'dataLoading': 'Loading....',
   // common varaibles

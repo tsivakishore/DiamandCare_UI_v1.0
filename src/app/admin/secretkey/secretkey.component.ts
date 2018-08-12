@@ -250,9 +250,7 @@ export class SecretkeyComponent extends BaseComponent implements OnInit {
   }
 
   onCheckedChange(isCheckboxClicked) {
-    debugger;
     if (isCheckboxClicked == "on") {
-      debugger;
       if (this.KeyType == "P" && !!this.WalletDetails && !!this.TotalAmount) {
         if (this.WalletDetails.Balance < this.TotalAmount) {
           this.toastr.error("Wallet Balance is insufficient");

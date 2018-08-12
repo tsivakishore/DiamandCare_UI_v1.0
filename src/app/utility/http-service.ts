@@ -49,7 +49,6 @@ export class HttpService extends Http {
       .do((res: Response) => {
         this.onSubscribeSuccess(res);
       }, (error: any) => {
-        debugger;
         this.onSubscribeError(error);
       })
       .finally(() => {

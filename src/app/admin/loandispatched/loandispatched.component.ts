@@ -92,7 +92,6 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
 
   LoanTransferSattus(formLoanTransferStatus, isValidForm) {
     if (isValidForm) {
-      debugger;
       formLoanTransferStatus.UserID = this.selectedRow.UserID;
       formLoanTransferStatus.TransferStatusID = formLoanTransferStatus.ID;
       formLoanTransferStatus.LoanID = this.selectedRow.LoanID;
@@ -117,7 +116,6 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
 
   onShowTransferModal(rowIndex) {
     this.selectedRow = this.listOfTransferPendingLoans[rowIndex];
-    debugger;
     this.createTransferStatusForm();
     this.isShowModal = 2;
   }

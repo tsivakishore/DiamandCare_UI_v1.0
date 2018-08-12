@@ -53,6 +53,12 @@
       </a>
     </li>
     <li tooltipPosition="top">
+      <a [routerLink]="loanPaymentsUrl" *ngIf="Is_Visible_LoanPayment" routerLinkActive="active">
+        <i class="material-icons">payment</i>
+        <span>Loan Payments</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
       <a [routerLink]="appliedLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedLoanDetails" routerLinkActive="active">
         <i class="material-icons">assignment_ind</i>
         <span>Loan Details</span>
@@ -158,6 +164,12 @@
       </a>
     </li>
     <li>
+      <a [routerLink]="loanPaymentsUrl" *ngIf="Is_Visible_LoanPayment" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">payment</i>
+        <span>Loan Payments</span>
+      </a>
+    </li>
+    <li>
       <a [routerLink]="appliedLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedLoanDetails" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">assignment_ind</i>
         <span>Loan Details</span>
@@ -248,15 +260,15 @@
         <a>
           <!-- <div class="top-menu" *ngIf="Is_Visible_Etherem_Balance"> -->
           <div class="top-menu">
-            <a [routerLink]="etherUrl" pTooltip="{{'walletBalance' | translate}}" tooltipPosition="left" routerLinkActive="active">
-              <div *ngIf="!loadBalance" class="button-loader"></div>
-              <span *ngIf="loadBalance">Rs.{{walletBalance}}</span>
+            <a pTooltip="{{'walletBalance' | translate}}" tooltipPosition="top" routerLinkActive="active">
+              <div *ngIf="loadBalance" class="button-loader"></div>
+              <span *ngIf="!loadBalance">Rs {{walletBalance}}</span>
             </a>
             <i class="material-icons" pTooltip="{{'refresh' | translate}}" tooltipPosition="right" (click)="loadBalance=false;getWallet()">refresh</i>
           </div>
         </a>
       </li>
-      
+
     </ul>
     <div class="clearfix"></div>
   </div>
