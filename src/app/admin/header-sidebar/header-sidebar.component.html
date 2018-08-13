@@ -261,8 +261,8 @@
           <!-- <div class="top-menu" *ngIf="Is_Visible_Etherem_Balance"> -->
           <div class="top-menu">
             <a pTooltip="{{'walletBalance' | translate}}" tooltipPosition="top" routerLinkActive="active">
-              <div *ngIf="loadBalance" class="button-loader"></div>
-              <span *ngIf="!loadBalance">Rs {{walletBalance}}</span>
+              <div *ngIf="!loadBalance" class="button-loader"></div>
+              <span *ngIf="loadBalance">Rs {{walletBalance}}</span>
             </a>
             <i class="material-icons" pTooltip="{{'refresh' | translate}}" tooltipPosition="right" (click)="loadBalance=false;getWallet()">refresh</i>
           </div>

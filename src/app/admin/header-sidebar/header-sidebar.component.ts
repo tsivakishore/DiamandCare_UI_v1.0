@@ -156,8 +156,17 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
               case RouteConstants.APPLIEDUSERLOANDETAILS:
                 this.Is_Visible_AppliedUserLoanDetails = true;
                 break;
+              case RouteConstants.ADDROLETOUSER:
+                this.Is_Visible_Roles = false;
+                break;
+              case RouteConstants.ROLES:
+                this.Is_Visible_Add_Roles = false;
+                break;
               case RouteConstants.UNDERUSERDETAILS:
                 this.Is_Visible_UnderUserDetails = true;
+                break;
+              case RouteConstants.UPGRADETOFRANCHISE:
+                this.Is_Visible_Upgrade_Franchise = false;
                 break;
             }
           }

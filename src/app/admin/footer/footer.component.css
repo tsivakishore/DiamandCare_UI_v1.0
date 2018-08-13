@@ -13,3 +13,12 @@
 		width: 100%;
 	}
 }
+
+@media screen and (min-width:1400px) and (max-width:1972px) {
+	
+	.admin-footer {
+		position: relative !important;
+		bottom: -30% !important;
+		width: 100%;
+	}
+}
