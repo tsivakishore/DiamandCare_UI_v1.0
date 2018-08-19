@@ -21,3 +21,15 @@
     background-color: #353c48 !important;
     border-color: #353c48 !important;
 }
+.margin-top-40{
+    margin-top: 40px !important;
+    text-align: end;
+}
+
+.i-styles{
+    background-color: #00c8aa;
+    border: 2px solid #00c8aa;
+    width: 50px;
+    text-align: center;
+    color: white;
+}
