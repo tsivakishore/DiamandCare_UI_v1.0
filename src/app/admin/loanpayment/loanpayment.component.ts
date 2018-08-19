@@ -80,8 +80,12 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
     this.loanEarnsService._getActiveLoansByUserID().subscribe((res: any) => {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
-        this.OriginalActiveUserLoans = res.m_Item3;
-        this.listOfActiveUserLoans = this.OriginalActiveUserLoans;
+        this.listOfActiveUserLoans = res.m_Item3;
+      }
+      else {
+        this.listOfActiveUserLoans = [];
+        if (this.listOfActiveUserLoans.length == 0)
+          this.listOfActiveUserLoans = undefined;
       }
     }, err => {
       this.sharedService.setLoader(false);
