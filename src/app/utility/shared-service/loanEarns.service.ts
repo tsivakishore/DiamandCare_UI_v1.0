@@ -57,7 +57,34 @@ export class LoanEarnsService {
         return Observable.throw(new Error(error.status));
       });
   }
-
+  _getRejectedLoansByDCIDorUserName(UserID) {
+    return this.httpService
+      .get(API.GETREJECTEDLOANSBYDCIDORUSERNAME + '?DCIDorName=' + UserID)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+  _gettTransferPendingLoansByDCIDorUserName(UserID) {
+    return this.httpService
+      .get(API.GETTRANSFERPEDNIGLOANSBYDCIDORUSERNAME + '?DCIDorName=' + UserID)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+  _gettTransferedLoansByDCIDorUserName(UserID) {
+    return this.httpService
+      .get(API.GETTRANSFEREDLOANSBYDCIDORUSERNAME + '?DCIDorName=' + UserID)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+  _gettTransferRejectedLoansByDCIDorUserName(UserID) {
+    return this.httpService
+      .get(API.GETTRANSFERREJECTEDLOANSBYDCIDORUSERNAME + '?DCIDorName=' + UserID)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
   _getLoansAmountTransferPending() {
     return this.httpService
       .get(API.GETTRANSFERPENDINGLOANS)
@@ -65,7 +92,20 @@ export class LoanEarnsService {
         return Observable.throw(new Error(error.status));
       });
   }
-
+  _getLoansAmountTransfered() {
+    return this.httpService
+      .get(API.GETTRANSFEREDLOANS)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+  _getLoansAmountTransferRejectedLoans() {
+    return this.httpService
+      .get(API.GETTRANSFERREJECTEDLOANS)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
   _getPaidLoansByUserID() {
     return this.httpService
       .get(API.GETPAIDLOANSBYUSERID)
@@ -81,7 +121,13 @@ export class LoanEarnsService {
         return Observable.throw(new Error(error.status));
       });
   }
-
+  _getApprovedLoansByDCIDorUserName(UserID) {
+    return this.httpService
+      .get(API.GETAPPROVEDLOANSBYDCIDORUSERNAME + '?DCIDorName=' + UserID)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
   _getActiveLoansByUserID() {
     return this.httpService
       .get(API.GETACTIVELOANSBYUSERID)
@@ -97,7 +143,13 @@ export class LoanEarnsService {
         return Observable.throw(new Error(error.status));
       });
   }
-
+  _getPendingLoansByDCIDorUserName(UserID) {
+    return this.httpService
+      .get(API.GETPENDINGLOANSBYDCIDORUSERNAME + '?DCIDorName=' + UserID)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
   _getRejectedLoans() {
     return this.httpService
       .get(API.GETREJECTEDLOANS)
@@ -105,7 +157,13 @@ export class LoanEarnsService {
         return Observable.throw(new Error(error.status));
       });
   }
-
+  _getRejectedLoansDCIDorUserName(UserID) {
+    return this.httpService
+      .get(API.GETREJECTEDLOANSDCIDORUSERNAME + '?DCIDorName=' + UserID)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
   _getLoanDetails() {
     return this.httpService
       .get(API.GETLOANDETAILS)
