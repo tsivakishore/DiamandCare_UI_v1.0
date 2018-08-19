@@ -47,15 +47,9 @@
       </a>
     </li>
     <li tooltipPosition="top">
-      <a [routerLink]="loanDispatchedUrl" *ngIf="Is_Visible_Loans_Dispatched" routerLinkActive="active">
-        <i class="material-icons">check_box</i>
-        <span>Transfer Pending Loans</span>
-      </a>
-    </li>
-    <li tooltipPosition="top">
-      <a [routerLink]="loanPaymentsUrl" *ngIf="Is_Visible_LoanPayment" routerLinkActive="active">
-        <i class="material-icons">payment</i>
-        <span>Loan Payments</span>
+      <a [routerLink]="appliedUserLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedUserLoanDetails" routerLinkActive="active">
+        <i class="material-icons">dashboard</i>
+        <span>My Loan Details</span>
       </a>
     </li>
     <li tooltipPosition="top">
@@ -65,9 +59,15 @@
       </a>
     </li>
     <li tooltipPosition="top">
-      <a [routerLink]="appliedUserLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedUserLoanDetails" routerLinkActive="active">
-        <i class="material-icons">dashboard</i>
-        <span>My Loan Details</span>
+      <a [routerLink]="loanDispatchedUrl" *ngIf="Is_Visible_Loans_Dispatched" routerLinkActive="active">
+        <i class="material-icons">check_box</i>
+        <span>Transfer Pending Loans</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
+      <a [routerLink]="loanPaymentsUrl" *ngIf="Is_Visible_LoanPayment" routerLinkActive="active">
+        <i class="material-icons">payment</i>
+        <span>Loan Payments</span>
       </a>
     </li>
     <li tooltipPosition="top">
@@ -158,15 +158,9 @@
       </a>
     </li>
     <li>
-      <a [routerLink]="loanDispatchedUrl" *ngIf="Is_Visible_Loans_Dispatched" routerLinkActive="active" (click)="closeSidebar()">
-        <i class="material-icons">check_box</i>
-        <span>Transfer Pending Loans</span>
-      </a>
-    </li>
-    <li>
-      <a [routerLink]="loanPaymentsUrl" *ngIf="Is_Visible_LoanPayment" routerLinkActive="active" (click)="closeSidebar()">
-        <i class="material-icons">payment</i>
-        <span>Loan Payments</span>
+      <a [routerLink]="appliedUserLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedUserLoanDetails" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">dashboard</i>
+        <span>My Loan Details</span>
       </a>
     </li>
     <li>
@@ -176,9 +170,15 @@
       </a>
     </li>
     <li>
-      <a [routerLink]="appliedUserLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedUserLoanDetails" routerLinkActive="active" (click)="closeSidebar()">
-        <i class="material-icons">dashboard</i>
-        <span>My Loan Details</span>
+      <a [routerLink]="loanDispatchedUrl" *ngIf="Is_Visible_Loans_Dispatched" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">check_box</i>
+        <span>Transfer Pending Loans</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="loanPaymentsUrl" *ngIf="Is_Visible_LoanPayment" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">payment</i>
+        <span>Loan Payments</span>
       </a>
     </li>
     <li>
