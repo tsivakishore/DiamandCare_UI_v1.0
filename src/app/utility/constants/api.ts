@@ -34,7 +34,7 @@ export class API {
   public static GETPENDINGLOANSBYUSERID = 'loan/getpendingloandetailsuserid';
   public static GETREJECTEDLOANSBYUSERID = 'loan/GetRejectedLoanDetailsByUserID';
   public static GETTRANSFERPENDINGLOANS = 'loan/GetLoansAmountTransferPending';
-  public static GETPAIDLOANSBYUSERID = 'loan/GetPaidLoanDetailsByUserID';
+  public static GETPAIDLOANSBYUSERID = 'loan/GetPaidLoanDetailsByUserID';  
   public static GETLOANDETAILS = 'loan/getloandetails';
   public static DOWNLOADS = 'loan/downloadfile';
   public static CHECKPL = 'loan/checkpersonalloan';
@@ -84,6 +84,9 @@ export class API {
   public static UPDATELOANWAIVEOFF = 'user/updateloanwaiveoff';
   public static GETFREETOPAIDUSERDETAILS = 'user/getfreetopaiduserdetails';
   public static UPDATEFREETOPAIDKEYDETAILS = 'user/updatefreetopaidkeydetails';
+  public static GETPAIDLOANS = 'loan/GetPaidLoanDetails';
+  public static GETPAIDLOANSBYUSERNAMEorDCID = 'loan/GetPaidLoanDetailsByUserNameorDCID';
+  public static GETACTIVELOANSBYUSERNAMEorDCID = 'loan/GetActiveLoanDetailsByUserNameorDCID';
 
   // EXTERNAL API CALLERS
 

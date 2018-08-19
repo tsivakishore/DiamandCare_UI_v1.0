@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { style, transition, animate, trigger } from "@angular/animations";
 import { dialog, slideUp } from "../animation";
@@ -32,6 +32,7 @@ import { TranslateService } from "../../utility/translate/translate.service";
 })
 
 export class LoanpaymentComponent extends BaseComponent implements OnInit {
+  @ViewChild('txtSearcByLoanId') txtSearcByLoanId: ElementRef;
 
   isShowModal: number = 1;
   frmLoanDetails: FormGroup;
@@ -39,6 +40,7 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
 
   listOfActiveUserLoans: any[];
   OriginalActiveUserLoans: any[];
+  lstAllPaidLoans: any[];
   loanID: number;
   LoanID: number;
   LoanAmount: any;
@@ -61,6 +63,7 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.createLoanDetailsForm();
     this.GetActiveLoansByUserID();
+    this.GetAllPaidLoans();
   }
 
   createLoanDetailsForm() {
@@ -79,11 +82,33 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
       if (res.m_Item1) {
         this.OriginalActiveUserLoans = res.m_Item3;
         this.listOfActiveUserLoans = this.OriginalActiveUserLoans;
-        console.log(this.listOfActiveUserLoans)
       }
     }, err => {
       this.sharedService.setLoader(false);
     })
+  }
+
+  public GetAllPaidLoans() {
+    this.sharedService.setLoader(true);
+    this.loanEarnsService._getPaidLoans().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.lstAllPaidLoans = res.m_Item3;
+      }
+      else {
+        this.lstAllPaidLoans = [];
+        if (this.lstAllPaidLoans.length == 0)
+          this.lstAllPaidLoans = undefined;
+      }
+    }, err => {
+      this.sharedService.setLoader(false);
+    })
+  }
+
+  Refresh() {
+    this.GetActiveLoansByUserID();
+    this.GetAllPaidLoans();
+    this.txtSearcByLoanId.nativeElement.value = '';
   }
 
   ViewLoanDetails(rowIndex) {
@@ -105,16 +130,22 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
       this.loanEarnsService._updateUserLoanPayment(this.UserID, this.LoanID, this.AmountToPay).subscribe((res: any) => {
         this.sharedService.setLoader(false);
         if (res.m_Item1) {
+          debugger;
           this.isShowModal = 1;
           this.toastr.success(res.m_Item2);
+          this.GetAllPaidLoans();
+          this.GetActiveLoansByUserID();
+          debugger;
         }
         else
           this.toastr.error(res.m_Item2);
       }, err => {
+        debugger;
         this.sharedService.setLoader(false);
       })
     }
     else {
+      debugger;
       this.sharedService.setLoader(false);
       this.toastr.error("Form is not valid");
     }
@@ -128,6 +159,51 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
     else {
       this.isValidAmount = false;
       this.isValidAmountError = "";
+    }
+  }
+
+  public GetActiveLoansByUserNameorDCID(DcIDorName: string) {
+    if (!!DcIDorName && DcIDorName.trim().length >= 5) {
+      try {
+        this.sharedService.setLoader(true);
+        this.loanEarnsService._getActiveLoansByUserNameorDCID(DcIDorName).subscribe((res: any) => {
+          if (res.m_Item1) {
+            this.listOfActiveUserLoans = [];
+            this.listOfActiveUserLoans = res.m_Item3;
+          }
+          else {
+            this.listOfActiveUserLoans = [];
+            this.listOfActiveUserLoans = res.m_Item3;
+            if (this.listOfActiveUserLoans.length == 0)
+              this.listOfActiveUserLoans = undefined;
+          }
+        })
+
+        this.loanEarnsService._getPaidLoansByUserNameorDCID(DcIDorName).subscribe((res: any) => {
+          if (res.m_Item1) {
+            this.lstAllPaidLoans = [];
+            this.lstAllPaidLoans = res.m_Item3;
+          }
+          else {
+            this.lstAllPaidLoans = [];
+            this.lstAllPaidLoans = res.m_Item3;
+            if (this.lstAllPaidLoans.length == 0)
+              this.lstAllPaidLoans = undefined;
+          }
+        })
+      }
+      finally {
+        this.sharedService.setLoader(false);
+      }
+    }
+    else {
+      this.listOfActiveUserLoans = [];
+      if (this.listOfActiveUserLoans.length == 0)
+        this.listOfActiveUserLoans = undefined;
+
+      this.lstAllPaidLoans = [];
+      if (this.lstAllPaidLoans.length == 0)
+        this.lstAllPaidLoans = undefined;
     }
   }
 

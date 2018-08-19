@@ -74,6 +74,22 @@ export class LoanEarnsService {
       });
   }
 
+  _getPaidLoans() {
+    return this.httpService
+      .get(API.GETPAIDLOANS)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  _getPaidLoansByUserNameorDCID(DcIDorName) {
+    return this.httpService
+      .get(API.GETPAIDLOANSBYUSERNAMEorDCID + '?DcIDorName=' + DcIDorName)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
   _getApprovedLoans() {
     return this.httpService
       .get(API.GETAPPROVEDLOANS)
@@ -85,6 +101,14 @@ export class LoanEarnsService {
   _getActiveLoansByUserID() {
     return this.httpService
       .get(API.GETACTIVELOANSBYUSERID)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  _getActiveLoansByUserNameorDCID(DcIDorName) {
+    return this.httpService
+      .get(API.GETACTIVELOANSBYUSERNAMEorDCID + '?DcIDorName=' + DcIDorName)
       .map(res => this.extractData(res, true)).catch((error: any) => {
         return Observable.throw(new Error(error.status));
       });
