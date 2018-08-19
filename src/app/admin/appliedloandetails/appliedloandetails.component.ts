@@ -283,20 +283,62 @@ export class AppliedloandetailsComponent implements OnInit {
   }
 
   onSearchChange(searchValue: string) {
-    if (searchValue.trim() == "")
-      this.loanID = 0;
-    else
-      this.loanID = Number(searchValue);
-
-    if (this.loanID > 0) {
-      this.listOfPendingLoans = this.OriginalPendingLoans.filter(element => element.LoanID && element.LoanID == this.loanID);
-      if (this.listOfPendingLoans.length == 0)
-        this.listOfPendingLoans = undefined;
+    if (!!searchValue && searchValue.trim().length >= 5) {
+      this.sharedService.setLoader(true);
+      this.getApprovedLoansByDCIDorUserName(searchValue);
+      this.getPendingLoansByDCIDorUserName(searchValue);
+      this.getRejectedLoansDCIDorUserName(searchValue);
+      this.sharedService.setLoader(false);
     }
-    else
-      this.listOfPendingLoans = this.OriginalPendingLoans;
   }
+  getApprovedLoansByDCIDorUserName(searchValue: string) {
+    this.loanEarnsService._getApprovedLoansByDCIDorUserName(searchValue).subscribe((res: any) => {
 
+      if (res.m_Item1) {
+        this.listOfApprovedLoans = res.m_Item3;
+      }
+      else {
+        this.listOfApprovedLoans = [];
+        if(this.listOfApprovedLoans.length===0){
+          this.listOfApprovedLoans = undefined;
+        }
+      }
+    }, err => {
+      this.listOfApprovedLoans = [];
+    })
+  }
+  getPendingLoansByDCIDorUserName(searchValue: string) {
+    this.loanEarnsService._getPendingLoansByDCIDorUserName(searchValue).subscribe((res: any) => {
+
+      if (res.m_Item1) {
+        this.listOfPendingLoans = res.m_Item3;
+      }
+      else {
+        this.listOfPendingLoans = [];
+        if(this.listOfPendingLoans.length===0){
+          this.listOfPendingLoans = undefined;
+        }
+      }
+    }, err => {
+      this.listOfPendingLoans = [];
+    })
+  }
+  getRejectedLoansDCIDorUserName(searchValue: string) {
+    this.loanEarnsService._getRejectedLoansDCIDorUserName(searchValue).subscribe((res: any) => {
+
+      if (res.m_Item1) {
+        this.listOfRejectedLoans = res.m_Item3;
+      }
+      else {
+        this.listOfRejectedLoans = [];
+        if(this.listOfRejectedLoans.length===0){
+          this.listOfRejectedLoans = undefined;
+        }
+      }
+    }, err => {
+      this.listOfRejectedLoans = [];
+    })
+  }
   getLoanType(loanTypeCode: string) {
     if (loanTypeCode.toUpperCase().trim() == "PL")
       return "Personal Loan";

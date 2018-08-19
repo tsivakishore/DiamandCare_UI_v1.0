@@ -33,6 +33,7 @@ export class API {
   public static GETAPPROVEDLOANSBYUSERID = 'loan/getapprovedloandetailsuserid';
   public static GETPENDINGLOANSBYUSERID = 'loan/getpendingloandetailsuserid';
   public static GETREJECTEDLOANSBYUSERID = 'loan/GetRejectedLoanDetailsByUserID';
+  public static GETREJECTEDLOANSBYDCIDORUSERNAME = 'loan/GetRejectedLoanDetailsByDCIDorUserName';
   public static GETTRANSFERPENDINGLOANS = 'loan/GetLoansAmountTransferPending';
   public static GETPAIDLOANSBYUSERID = 'loan/GetPaidLoanDetailsByUserID';  
   public static GETLOANDETAILS = 'loan/getloandetails';
@@ -87,6 +88,14 @@ export class API {
   public static GETPAIDLOANS = 'loan/GetPaidLoanDetails';
   public static GETPAIDLOANSBYUSERNAMEorDCID = 'loan/GetPaidLoanDetailsByUserNameorDCID';
   public static GETACTIVELOANSBYUSERNAMEorDCID = 'loan/GetActiveLoanDetailsByUserNameorDCID';
+  public static GETTRANSFERPEDNIGLOANSBYDCIDORUSERNAME = 'loan/GetLoansAmountTransferPendingByDCIDorName';
+  public static GETTRANSFEREDLOANS = 'loan/GetLoansAmountTransfered';
+  public static GETTRANSFERREJECTEDLOANS = 'loan/GetLoansAmountTransferRejected';
+  public static GETTRANSFERREJECTEDLOANSBYDCIDORUSERNAME = 'loan/GetLoansAmountTransferRejectedByDCIDorName';
+  public static GETTRANSFEREDLOANSBYDCIDORUSERNAME = 'loan/GetLoansAmountTransferedByDCIDorName';
+  public static GETAPPROVEDLOANSBYDCIDORUSERNAME = 'loan/getapprovedloandetailsByDCIDorName';
+  public static GETPENDINGLOANSBYDCIDORUSERNAME = 'loan/getpendingloandetailsByDCIDorName';
+  public static GETREJECTEDLOANSDCIDORUSERNAME = 'loan/getRejectedLoanDetailsDCIDorName';
 
   // EXTERNAL API CALLERS
 

@@ -1,20 +1,18 @@
 <div class="secretkey-container" @slideUp>
   <!-- Not Approved Loans grid start -->
   <div class="secretkey-form">
+      <div class="col-md-4 col-xs-12 col-sm-12 margin-top-15">
+          <div class="label" style="color: white;">Search by Username or DCID</div>
+          <input type="text" id="txtSearcByLoanId" class="form-control" placeholder="Search by Username or DCID" (input)="onSearchChange($event.target.value)"
+          />      
+        </div>
+        <div class="col-md-8 col-xs-12 col-sm-12 margin-top-40">
+            <button type="button" style="height: 25px;width: 70px;" class="ui-button-reset-transparent" (click)="ngOnInit()"
+            pButton>Refresh</button>
+        </div>
     <div>
       <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #dadae2;font-size: x-large;font-weight: bold;">Pending Loans</h3>
       <div class="clearfix"></div>
-
-      <div>
-        <div>
-          <div class="col-md-4 col-xs-12 col-sm-12 margin-top-15">
-            <div class="label" style="color: white;">{{'searchByLoanID' | translate}}</div>
-            <input type="text" id="txtSearcByLoanId" class="form-control" placeholder="{{'searchByLoanID' | translate}}" (input)="onSearchChange($event.target.value)"
-            />
-          </div>
-          <div class="clearfix"></div>
-        </div>
-      </div>
       <br/>
 
       <!-- Show list of Pending Loans start here -->

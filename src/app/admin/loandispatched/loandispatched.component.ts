@@ -37,9 +37,15 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
   isShowModal: number = 1;
 
   listOfTransferPendingLoans: any[];
+  listOfTransferedLoans: any[];
+  listOfTransferRejectedLoans: any[];
   listOfTransferStatus: any[];
   loanTransferStatusForm: FormGroup;
   selectedRow: any;
+  loanID: number;
+  OriginalTransferPendingLoans: any[];
+  OriginalTransferedLoans: any[];
+  OriginalTransferRejectedLoans: any[];
 
   constructor(private sharedService: SharedService,
     private loanEarnsService: LoanEarnsService,
@@ -56,6 +62,8 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
     this.GetAllTransferPendingLoans();
     this.GetLoanTransferStatus();
     this.createTransferStatusForm();
+    this.GetAllTransferedLoans();
+    this.GetAllTransferRejectedLoans();
   }
 
   createTransferStatusForm() {
@@ -79,7 +87,30 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
       this.sharedService.setLoader(false);
     })
   }
-
+  public GetAllTransferedLoans() {
+    this.sharedService.setLoader(true);
+    this.loanEarnsService._getLoansAmountTransfered().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.listOfTransferedLoans = res.m_Item3;
+      }
+    }, err => {
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
+  public GetAllTransferRejectedLoans() {
+    this.sharedService.setLoader(true);
+    this.loanEarnsService._getLoansAmountTransferRejectedLoans().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.listOfTransferRejectedLoans = res.m_Item3;
+      }
+    }, err => {
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
   public GetLoanTransferStatus() {
     this.commonService._getLoanTransferStatus().subscribe((res: any) => {
       if (res.m_Item1) {
@@ -99,6 +130,9 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
         if (response.m_Item1) {
           this.isShowModal = 1;
           this.toastr.success(response.m_Item2);
+          this.GetAllTransferPendingLoans();
+          this.GetAllTransferedLoans();
+          this.GetAllTransferRejectedLoans();
         }
         else {
           this.toastr.error(response.m_Item2);
@@ -122,6 +156,64 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
 
   colorCodeRenew() {
     return "btntransfer";
+  }
+
+  onSearchChange(searchValue: string) {
+    if (!!searchValue && searchValue.trim().length >= 5) {
+      this.sharedService.setLoader(true);
+      this.getTransferPendingLoansByDCICorName(searchValue);
+      this.getTransferedLoansByDCICorName(searchValue);
+      this.getTransferRejectedLoansByDCICorName(searchValue);
+      this.sharedService.setLoader(false);
+    }
+  }
+  getTransferPendingLoansByDCICorName(searchValue: string) {
+    this.loanEarnsService._gettTransferPendingLoansByDCIDorUserName(searchValue).subscribe((res: any) => {
+
+      if (res.m_Item1) {
+        this.listOfTransferPendingLoans = res.m_Item3;
+      }
+      else {
+        this.listOfTransferPendingLoans = [];
+        if(this.listOfTransferPendingLoans.length===0){
+          this.listOfTransferPendingLoans = undefined;
+        }
+      }
+    }, err => {
+
+    })
+  }
+  getTransferedLoansByDCICorName(searchValue: string) {
+    this.loanEarnsService._gettTransferedLoansByDCIDorUserName(searchValue).subscribe((res: any) => {
+
+      if (res.m_Item1) {
+        this.listOfTransferedLoans = res.m_Item3;
+      }
+      else {
+        this.listOfTransferedLoans = [];
+        if(this.listOfTransferedLoans.length===0){
+          this.listOfTransferedLoans = undefined;
+        }
+      }
+    }, err => {
+      this.listOfTransferedLoans = [];
+    })
+  }
+  getTransferRejectedLoansByDCICorName(searchValue: string) {
+    this.loanEarnsService._gettTransferRejectedLoansByDCIDorUserName(searchValue).subscribe((res: any) => {
+
+      if (res.m_Item1) {
+        this.listOfTransferRejectedLoans = res.m_Item3;
+      }
+      else {
+        this.listOfTransferRejectedLoans = [];
+        if(this.listOfTransferRejectedLoans.length===0){
+          this.listOfTransferRejectedLoans = undefined;
+        }
+      }
+    }, err => {
+      this.listOfTransferRejectedLoans = [];
+    })
   }
 
 }
