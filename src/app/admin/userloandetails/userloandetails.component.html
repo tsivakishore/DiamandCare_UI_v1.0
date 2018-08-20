@@ -21,7 +21,13 @@
                         <p-column [style]="{'width':'130px'}" field="LoanApprovalStatus" header="Approval Status" [sortable]="true"></p-column>
                         <p-column [style]="{'width':'130px'}" field="TransferStatus" header="Transfer Status" [sortable]="true"></p-column>
                         <p-column [style]="{'width':'130px'}" field="LoanStatusName" header="Payment Status" [sortable]="true"></p-column>
-                        <p-column [style]="{'width':'130px'}" field="CreatedOn" header="Applied Date" [sortable]="true"></p-column>
+                        <p-column [style]="{'width':'130px'}" field="CreatedOn" header="Applied On" [sortable]="true">
+                            <ng-template let-listOfApprovedLoans="rowData" pTemplate="body" let-ri="rowIndex">
+                                <div class="col-md-12" style="margin-left: -15px;">
+                                    {{getFormattedDate(listOfApprovedLoans.CreatedOn)}}
+                                </div>
+                            </ng-template>
+                        </p-column>
                     </p-dataTable>
                 </div>
 
@@ -64,7 +70,13 @@
                         <p-column [style]="{'width':'130px'}" field="LoanApprovalStatus" header="Approval Status" [sortable]="true"></p-column>
                         <p-column [style]="{'width':'130px'}" field="TransferStatus" header="Transfer Status" [sortable]="true"></p-column>
                         <p-column [style]="{'width':'130px'}" field="LoanStatusName" header="Payment Status" [sortable]="true"></p-column>
-                        <p-column [style]="{'width':'130px'}" field="CreatedOn" header="Applied Date" [sortable]="true"></p-column>
+                        <p-column [style]="{'width':'130px'}" field="CreatedOn" header="Applied On" [sortable]="true">
+                            <ng-template let-listOfPendingLoans="rowData" pTemplate="body" let-ri="rowIndex">
+                                <div class="col-md-12" style="margin-left: -15px;">
+                                    {{getFormattedDate(listOfPendingLoans.CreatedOn)}}
+                                </div>
+                            </ng-template>
+                        </p-column>
                     </p-dataTable>
                 </div>
 
@@ -107,7 +119,13 @@
                         <p-column [style]="{'width':'130px'}" field="LoanApprovalStatus" header="Approval Status" [sortable]="true"></p-column>
                         <p-column [style]="{'width':'130px'}" field="TransferStatus" header="Transfer Status" [sortable]="true"></p-column>
                         <p-column [style]="{'width':'130px'}" field="LoanStatusName" header="Payment Status" [sortable]="true"></p-column>
-                        <p-column [style]="{'width':'130px'}" field="CreatedOn" header="Applied Date" [sortable]="true"></p-column>
+                        <p-column [style]="{'width':'130px'}" field="CreatedOn" header="Applied On" [sortable]="true">
+                            <ng-template let-listOfRejectedLoans="rowData" pTemplate="body" let-ri="rowIndex">
+                                <div class="col-md-12" style="margin-left: -15px;">
+                                    {{getFormattedDate(listOfRejectedLoans.CreatedOn)}}
+                                </div>
+                            </ng-template>
+                        </p-column>
                     </p-dataTable>
                 </div>
 

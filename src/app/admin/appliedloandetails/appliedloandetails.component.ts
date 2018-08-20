@@ -299,6 +299,7 @@ export class AppliedloandetailsComponent implements OnInit {
       this.sharedService.setLoader(false);
     }
   }
+
   getApprovedLoansByDCIDorUserName(searchValue: string) {
     this.loanEarnsService._getApprovedLoansByDCIDorUserName(searchValue).subscribe((res: any) => {
 
@@ -307,7 +308,7 @@ export class AppliedloandetailsComponent implements OnInit {
       }
       else {
         this.listOfApprovedLoans = [];
-        if(this.listOfApprovedLoans.length===0){
+        if (this.listOfApprovedLoans.length === 0) {
           this.listOfApprovedLoans = undefined;
         }
       }
@@ -315,6 +316,7 @@ export class AppliedloandetailsComponent implements OnInit {
       this.listOfApprovedLoans = [];
     })
   }
+
   getPendingLoansByDCIDorUserName(searchValue: string) {
     this.loanEarnsService._getPendingLoansByDCIDorUserName(searchValue).subscribe((res: any) => {
 
@@ -323,7 +325,7 @@ export class AppliedloandetailsComponent implements OnInit {
       }
       else {
         this.listOfPendingLoans = [];
-        if(this.listOfPendingLoans.length===0){
+        if (this.listOfPendingLoans.length === 0) {
           this.listOfPendingLoans = undefined;
         }
       }
@@ -331,6 +333,7 @@ export class AppliedloandetailsComponent implements OnInit {
       this.listOfPendingLoans = [];
     })
   }
+
   getRejectedLoansDCIDorUserName(searchValue: string) {
     this.loanEarnsService._getRejectedLoansDCIDorUserName(searchValue).subscribe((res: any) => {
 
@@ -339,7 +342,7 @@ export class AppliedloandetailsComponent implements OnInit {
       }
       else {
         this.listOfRejectedLoans = [];
-        if(this.listOfRejectedLoans.length===0){
+        if (this.listOfRejectedLoans.length === 0) {
           this.listOfRejectedLoans = undefined;
         }
       }
@@ -347,6 +350,7 @@ export class AppliedloandetailsComponent implements OnInit {
       this.listOfRejectedLoans = [];
     })
   }
+
   getLoanType(loanTypeCode: string) {
     if (loanTypeCode.toUpperCase().trim() == "PL")
       return "Personal Loan";
@@ -387,6 +391,16 @@ export class AppliedloandetailsComponent implements OnInit {
       return "Approved";
     else if (isApproved == 3)
       return "Rejected";
+  }
+
+  getFormattedDate(date1) {
+    var date = new Date(date1);
+    var year = date.getFullYear();
+    var month = (1 + date.getMonth()).toString();
+    month = month.length > 1 ? month : '0' + month;
+    var day = date.getDate().toString();
+    day = day.length > 1 ? day : '0' + day;
+    return day + '-' + month + '-' + year;
   }
 
   closeForm() {

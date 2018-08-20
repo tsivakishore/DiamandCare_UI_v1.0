@@ -93,9 +93,8 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.GetPaidLoans();
+    //this.GetPaidLoans();
     this.GetLoans();
-    
     this.GetModeofTransfer();
     this.createApplyPLLoanForm();
     this.createApplyFeeReimbursementForm();
@@ -560,18 +559,10 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
   }
 
   checkPrepaidLoanEligibility(LoanStatus: string, gid: number) {
-    if (!!this.lstPaidLoans) {
-      var index = this.lstPaidLoans.findIndex(obj => obj.GroupsID == gid)
-      if (LoanStatus == "NotEligible") {
-        return true;
-      }
-      else if (LoanStatus == "Eligible" && index !== -1) {
-        return true;
-      }
-      else if (LoanStatus == "Eligible" && index == -1) {
-        return false;
-      }
-    }
+    if (LoanStatus == "NotEligible")
+      return true;
+    else
+      return false;
   }
 
   checkHomeLoanEligibility(LoanStatus: string, GroupID: number) {

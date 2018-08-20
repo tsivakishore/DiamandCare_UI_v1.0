@@ -84,7 +84,7 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
         this.listOfTransferPendingLoans = [];
         this.listOfTransferPendingLoans = res.m_Item3;
       }
-      else{
+      else {
         this.listOfTransferPendingLoans = [];
         if (this.listOfTransferPendingLoans.length == 0)
           this.listOfTransferPendingLoans = undefined;
@@ -94,6 +94,7 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
       this.sharedService.setLoader(false);
     })
   }
+
   public GetAllTransferedLoans() {
     this.sharedService.setLoader(true);
     this.loanEarnsService._getLoansAmountTransfered().subscribe((res: any) => {
@@ -102,7 +103,7 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
         this.listOfTransferedLoans = [];
         this.listOfTransferedLoans = res.m_Item3;
       }
-      else{
+      else {
         this.listOfTransferedLoans = [];
         if (this.listOfTransferedLoans.length == 0)
           this.listOfTransferedLoans = undefined;
@@ -112,6 +113,7 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
       this.sharedService.setLoader(false);
     })
   }
+
   public GetAllTransferRejectedLoans() {
     this.sharedService.setLoader(true);
     this.loanEarnsService._getLoansAmountTransferRejectedLoans().subscribe((res: any) => {
@@ -120,7 +122,7 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
         this.listOfTransferRejectedLoans = [];
         this.listOfTransferRejectedLoans = res.m_Item3;
       }
-      else{
+      else {
         this.listOfTransferRejectedLoans = [];
         if (this.listOfTransferRejectedLoans.length == 0)
           this.listOfTransferRejectedLoans = undefined;
@@ -130,6 +132,7 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
       this.sharedService.setLoader(false);
     })
   }
+
   public GetLoanTransferStatus() {
     this.commonService._getLoanTransferStatus().subscribe((res: any) => {
       if (res.m_Item1) {
@@ -173,7 +176,7 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
     this.isShowModal = 2;
   }
 
-  Refresh(){
+  Refresh() {
     this.GetAllTransferPendingLoans();
     this.GetAllTransferedLoans();
     this.GetAllTransferRejectedLoans();
@@ -193,6 +196,7 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
       this.sharedService.setLoader(false);
     }
   }
+
   getTransferPendingLoansByDCICorName(searchValue: string) {
     this.loanEarnsService._gettTransferPendingLoansByDCIDorUserName(searchValue).subscribe((res: any) => {
 
@@ -201,7 +205,7 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
       }
       else {
         this.listOfTransferPendingLoans = [];
-        if(this.listOfTransferPendingLoans.length===0){
+        if (this.listOfTransferPendingLoans.length === 0) {
           this.listOfTransferPendingLoans = undefined;
         }
       }
@@ -209,6 +213,7 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
 
     })
   }
+
   getTransferedLoansByDCICorName(searchValue: string) {
     this.loanEarnsService._gettTransferedLoansByDCIDorUserName(searchValue).subscribe((res: any) => {
 
@@ -217,7 +222,7 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
       }
       else {
         this.listOfTransferedLoans = [];
-        if(this.listOfTransferedLoans.length===0){
+        if (this.listOfTransferedLoans.length === 0) {
           this.listOfTransferedLoans = undefined;
         }
       }
@@ -225,6 +230,7 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
       this.listOfTransferedLoans = [];
     })
   }
+
   getTransferRejectedLoansByDCICorName(searchValue: string) {
     this.loanEarnsService._gettTransferRejectedLoansByDCIDorUserName(searchValue).subscribe((res: any) => {
 
@@ -233,7 +239,7 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
       }
       else {
         this.listOfTransferRejectedLoans = [];
-        if(this.listOfTransferRejectedLoans.length===0){
+        if (this.listOfTransferRejectedLoans.length === 0) {
           this.listOfTransferRejectedLoans = undefined;
         }
       }
@@ -242,4 +248,13 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
     })
   }
 
+  getFormattedDate(date1) {
+    var date = new Date(date1);
+    var year = date.getFullYear();
+    var month = (1 + date.getMonth()).toString();
+    month = month.length > 1 ? month : '0' + month;
+    var day = date.getDate().toString();
+    day = day.length > 1 ? day : '0' + day;
+    return day + '-' + month + '-' + year;
+  }
 }

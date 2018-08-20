@@ -126,6 +126,16 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
     this.isShowModal = 2;
   }
 
+  getFormattedDate(date1) {
+    var date = new Date(date1);
+    var year = date.getFullYear();
+    var month = (1 + date.getMonth()).toString();
+    month = month.length > 1 ? month : '0' + month;
+    var day = date.getDate().toString();
+    day = day.length > 1 ? day : '0' + day;
+    return day + '-' + month + '-' + year;
+  }
+
   onSubmitLoanPayment(formLoanDetails, isValidForm) {
     this.sharedService.setLoader(true);
     this.UserID = formLoanDetails.UserID;
