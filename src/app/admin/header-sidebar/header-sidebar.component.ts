@@ -10,11 +10,13 @@ import { API } from "../../utility/constants/api";
 import { APIManager } from "../../utility/shared-service/apimanager.service";
 import { BaseUrl } from '../../utility/constants/base-constants';
 import { ToastsManager } from "ng2-toastr";
+import { CommonService } from "../../utility/shared-service/common.service";
 
 @Component({
   selector: 'header-sidebar',
   templateUrl: './header-sidebar.component.html',
   styleUrls: ['./header-sidebar.component.css'],
+  providers: [CommonService],
   animations: [
     trigger('sideAmination', [
       transition('void => *', [
@@ -32,13 +34,14 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   @Output() menuToggle = new EventEmitter<boolean>();
   walletBalance: string = "0";
+  walletHoldBalance: string = "0";
   isOpenSidebar: boolean = true;
   isOpenMobileSidebar: boolean = false;
   currentPath: string;
   user: User;
   address;
   loadBalance: boolean = false;
-  loaderProof: boolean = false;
+  isUserWallet: boolean = false;
   UserDetails: any;
   userName: string;
   userID: string;
@@ -59,7 +62,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   Is_Visible_Loans_Dispatched = false;
   Is_Visible_LoanPayment = false;
 
-  constructor(private apiManager: APIManager, private sharedService: SharedService,
+  constructor(private apiManager: APIManager, private sharedService: SharedService, private commonService: CommonService,
     private router: Router, public toastr: ToastsManager, public vcr: ViewContainerRef) {
     super(toastr, vcr);
   }
@@ -71,7 +74,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
     this.UserDetails = this.sharedService.getUser();
     this.userName = this.sharedService.getUserName().toUpperCase();
     this.roleName = this.sharedService.getRoleName();
-    this.getWallet();
+    this.getWalletBalance();
   }
 
   getMenusBasedOnRole(userID: string) {
@@ -81,6 +84,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
         response.m_Item3.forEach(element => {
           var menu = element.MenuName;
           if (this.roleID === BaseUrl.AdminRoleID) {
+            this.isUserWallet = true;
             switch (menu) {
               case RouteConstants.SETTINGS:
                 this.Is_Visible_Settings = true;
@@ -121,6 +125,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
             }
           }
           else if (this.roleID === BaseUrl.UserRoleID) {
+            this.isUserWallet = false;
             switch (menu) {
               case RouteConstants.SETTINGS:
                 this.Is_Visible_Settings = true;
@@ -146,6 +151,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
             }
           }
           else if (this.roleID === BaseUrl.FranchiseRoleID) {
+            this.isUserWallet = true;
             switch (menu) {
               case RouteConstants.SETTINGS:
                 this.Is_Visible_Settings = true;
@@ -171,6 +177,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
             }
           }
           else if (this.roleID === BaseUrl.SchoolRoleID) {
+            this.isUserWallet = false;
             switch (menu) {
               case RouteConstants.SETTINGS:
                 this.Is_Visible_Settings = true;
@@ -187,6 +194,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
             }
           }
           else if (this.roleID === BaseUrl.DeveloperRoleID) {
+            this.isUserWallet = false;
             switch (menu) {
               case RouteConstants.SETTINGS:
                 this.Is_Visible_Settings = true;
@@ -233,6 +241,17 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   onMobileToggleSidebar() {
     this.isOpenMobileSidebar = !this.isOpenMobileSidebar;
     this.menuToggle.emit(this.isOpenMobileSidebar);
+  }
+
+  public getWalletBalance() {
+    this.commonService._getWalletBalance().then((response: any) => {
+      if (response.m_Item1) {
+        this.walletBalance = response.m_Item3.Balance;
+        this.walletHoldBalance = response.m_Item3.HoldAmount;
+      }
+      this.loadBalance = response.m_Item1;
+    }, err => {
+    })
   }
 
   closeSidebar() {
@@ -311,27 +330,4 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
     this.sharedService.trackMixPanelEvent("Third Step Button");
   }
 
-  // checkAccountBalance(account) {
-  //   if (this.loaderEther)
-  //     this.sharedService.trackMixPanelEvent("Refresh Ether Balance");
-
-  // }
-
-  getProofTokensRaised(erc20Units): number {
-    if (erc20Units) {
-      return Math.round(erc20Units / (10 ** 18));
-    }
-    else {
-      return 0;
-    }
-  }
-
-  getWallet() {
-    this.apiManager.getAPI(API.GETWALLET).subscribe(response => {
-      if (response.m_Item1) {
-        this.walletBalance = response.m_Item3.Balance;
-      }
-      this.loadBalance = response.m_Item1;
-    });
-  }
 }

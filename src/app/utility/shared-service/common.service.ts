@@ -88,6 +88,13 @@ export class CommonService {
             .catch(this.handleError.bind(this));
     }
 
+    _getWalletBalance() {
+        return this.apiManager.getAPI(API.GETWALLET)
+            .toPromise()
+            .then(this.extractDataDownload.bind(this))
+            .catch(this.handleError.bind(this));
+    }
+
     private extractDataDownload(res: Response) {
         let body = res;
         return body || {};

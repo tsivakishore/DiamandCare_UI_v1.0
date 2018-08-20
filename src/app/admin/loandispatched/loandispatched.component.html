@@ -2,12 +2,12 @@
   <div class="secretkey-form">
     <div class="col-md-4 col-xs-12 col-sm-12 margin-top-15">
       <div class="label" style="color: white;">Search by Username or DCID</div>
-      <input type="text" id="txtSearcByLoanId" class="form-control" placeholder="Search by Username or DCID" (input)="onSearchChange($event.target.value)"
+      <input type="text" #txtSearcByLoanId id="txtSearcByLoanId" class="form-control" placeholder="Search by Username or DCID" (input)="onSearchChange($event.target.value)"
       />
     </div>
     <div class="col-md-8 col-xs-12 col-sm-12 margin-top-40">
       <a>
-        <i class="material-icons i-styles" pTooltip="{{'refresh' | translate}}" tooltipPosition="top" (click)="ngOnInit()">refresh</i>
+        <i class="material-icons i-styles" pTooltip="{{'refresh' | translate}}" tooltipPosition="top" (click)="Refresh()">refresh</i>
       </a>
     </div>
     <div class="clearfix"></div>
@@ -33,11 +33,13 @@
             <p-column [style]="{'width':'130px'}" field="LoanAmount" header="Loan Amount" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="IssuedAmount" header="Issued Amount" [sortable]="true"></p-column>
             <p-column [style]="{'width':'125px'}" field="AmountToPay" header="Amount To Pay" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'125px'}" field="AmountPaid" header="Amount Paid" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="AdminCharges" header="Admin Charges" [sortable]="true"></p-column>
-            <!-- <p-column [style]="{'width':'130px'}" field="ModeofTransferType" header="Modeof Transfer" [sortable]="true"> </p-column> -->
-            <p-column [style]="{'width':'130px'}" field="LoanApprovalStatus" header="Approval Status" [sortable]="true"> </p-column>
-            <p-column [style]="{'width':'130px'}" field="TransferStatus" header="Transfer Status" [sortable]="true"> </p-column>
-            <p-column [style]="{'width':'105px'}" field="LoanStatusName" header="Loan Status" [sortable]="true"> </p-column>
+            <p-column [style]="{'width':'130px'}" field="ModeofTransferType" header="Payment Type" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanTypeDescription" header="Loan Type" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanApprovalStatus" header="Approval Status" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="TransferStatus" header="Transfer Status" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanStatusName" header="Payment Status" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="CreatedOn" header="Applied Date" [sortable]="true"></p-column>
           </p-dataTable>
         </div>
@@ -66,11 +68,13 @@
             <p-column [style]="{'width':'130px'}" field="LoanAmount" header="Loan Amount" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="IssuedAmount" header="Issued Amount" [sortable]="true"></p-column>
             <p-column [style]="{'width':'125px'}" field="AmountToPay" header="Amount To Pay" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'125px'}" field="AmountPaid" header="Amount Paid" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="AdminCharges" header="Admin Charges" [sortable]="true"></p-column>
-            <!-- <p-column [style]="{'width':'130px'}" field="ModeofTransferType" header="Modeof Transfer" [sortable]="true"> </p-column> -->
-            <p-column [style]="{'width':'130px'}" field="LoanApprovalStatus" header="Approval Status" [sortable]="true"> </p-column>
-            <p-column [style]="{'width':'130px'}" field="TransferStatus" header="Transfer Status" [sortable]="true"> </p-column>
-            <p-column [style]="{'width':'105px'}" field="LoanStatusName" header="Loan Status" [sortable]="true"> </p-column>
+            <p-column [style]="{'width':'130px'}" field="ModeofTransferType" header="Payment Type" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanTypeDescription" header="Loan Type" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanApprovalStatus" header="Approval Status" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="TransferStatus" header="Transfer Status" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanStatusName" header="Payment Status" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="CreatedOn" header="Applied Date" [sortable]="true"></p-column>
           </p-dataTable>
         </div>
@@ -96,15 +100,17 @@
             [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" selectionMode="single" [(selection)]="selectedRow">
             <p-column [style]="{'width':'100px'}" field="LoanID" header="LoanID" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="UserName" header="User Name" [sortable]="true"></p-column>
-            <p-column [style]="{'width':'130px'}" field="LoanTypeDescription" header="Loan Type" [sortable]="true"> </p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanTypeDescription" header="Loan Type" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="LoanAmount" header="Loan Amount" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="IssuedAmount" header="Issued Amount" [sortable]="true"></p-column>
             <p-column [style]="{'width':'125px'}" field="AmountToPay" header="Amount To Pay" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'125px'}" field="AmountPaid" header="Amount Paid" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="AdminCharges" header="Admin Charges" [sortable]="true"></p-column>
-            <!-- <p-column [style]="{'width':'130px'}" field="ModeofTransferType" header="Modeof Transfer" [sortable]="true"> </p-column> -->
-            <p-column [style]="{'width':'130px'}" field="LoanApprovalStatus" header="Approval Status" [sortable]="true"> </p-column>
-            <p-column [style]="{'width':'130px'}" field="TransferStatus" header="Transfer Status" [sortable]="true"> </p-column>
-            <p-column [style]="{'width':'105px'}" field="LoanStatusName" header="Loan Status" [sortable]="true"> </p-column>
+            <p-column [style]="{'width':'130px'}" field="ModeofTransferType" header="Payment Type" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanTypeDescription" header="Loan Type" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanApprovalStatus" header="Approval Status" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="TransferStatus" header="Transfer Status" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanStatusName" header="Payment Status" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="CreatedOn" header="Applied Date" [sortable]="true"></p-column>
           </p-dataTable>
         </div>

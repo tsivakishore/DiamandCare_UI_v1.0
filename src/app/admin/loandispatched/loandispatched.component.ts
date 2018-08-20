@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewChild, ElementRef } from '@angular/core';
 import { SharedService } from "../../utility/shared-service/shared.service";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ToastsManager } from "ng2-toastr";
@@ -34,6 +34,7 @@ import { CommonService } from "../../utility/shared-service/common.service";
 })
 
 export class LoandispatchedComponent extends BaseComponent implements OnInit {
+  @ViewChild('txtSearcByLoanId') txtSearcByLoanId: ElementRef;
   isShowModal: number = 1;
 
   listOfTransferPendingLoans: any[];
@@ -59,9 +60,9 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.GetAllTransferPendingLoans();
     this.GetLoanTransferStatus();
     this.createTransferStatusForm();
+    this.GetAllTransferPendingLoans();
     this.GetAllTransferedLoans();
     this.GetAllTransferRejectedLoans();
   }
@@ -80,7 +81,13 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
     this.loanEarnsService._getLoansAmountTransferPending().subscribe((res: any) => {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
+        this.listOfTransferPendingLoans = [];
         this.listOfTransferPendingLoans = res.m_Item3;
+      }
+      else{
+        this.listOfTransferPendingLoans = [];
+        if (this.listOfTransferPendingLoans.length == 0)
+          this.listOfTransferPendingLoans = undefined;
       }
     }, err => {
       console.log(err);
@@ -92,7 +99,13 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
     this.loanEarnsService._getLoansAmountTransfered().subscribe((res: any) => {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
+        this.listOfTransferedLoans = [];
         this.listOfTransferedLoans = res.m_Item3;
+      }
+      else{
+        this.listOfTransferedLoans = [];
+        if (this.listOfTransferedLoans.length == 0)
+          this.listOfTransferedLoans = undefined;
       }
     }, err => {
       console.log(err);
@@ -104,7 +117,13 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
     this.loanEarnsService._getLoansAmountTransferRejectedLoans().subscribe((res: any) => {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
+        this.listOfTransferRejectedLoans = [];
         this.listOfTransferRejectedLoans = res.m_Item3;
+      }
+      else{
+        this.listOfTransferRejectedLoans = [];
+        if (this.listOfTransferRejectedLoans.length == 0)
+          this.listOfTransferRejectedLoans = undefined;
       }
     }, err => {
       console.log(err);
@@ -152,6 +171,13 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
     this.selectedRow = this.listOfTransferPendingLoans[rowIndex];
     this.createTransferStatusForm();
     this.isShowModal = 2;
+  }
+
+  Refresh(){
+    this.GetAllTransferPendingLoans();
+    this.GetAllTransferedLoans();
+    this.GetAllTransferRejectedLoans();
+    this.txtSearcByLoanId.nativeElement.value = '';
   }
 
   colorCodeRenew() {

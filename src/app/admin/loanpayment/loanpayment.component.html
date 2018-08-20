@@ -34,14 +34,17 @@
               </ng-template>
             </p-column>
             <p-column [style]="{'width':'100px'}" field="LoanID" header="LoanID" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'100px'}" field="UserName" header="UserName" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="LoanAmount" header="Loan Amount" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="IssuedAmount" header="Issued Amount" [sortable]="true"></p-column>
             <p-column [style]="{'width':'125px'}" field="AmountToPay" header="Amount To Pay" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'125px'}" field="AmountPaid" header="Amount Paid" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="AdminCharges" header="Admin Charges" [sortable]="true"></p-column>
-            <p-column [style]="{'width':'130px'}" field="ModeofTransferType" header="Modeof Transfer" [sortable]="true"> </p-column>
-            <p-column [style]="{'width':'105px'}" field="LoanStatusName" header="Payment" [sortable]="true"> </p-column>
-            <p-column [style]="{'width':'105px'}" field="LoanApprovalStatus" header="Loan Status" [sortable]="true"> </p-column>
-            <p-column [style]="{'width':'130px'}" field="LoanTypeDescription" header="Loan Type" [sortable]="true"> </p-column>
+            <p-column [style]="{'width':'130px'}" field="ModeofTransferType" header="Payment Type" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanTypeDescription" header="Loan Type" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanApprovalStatus" header="Approval Status" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="TransferStatus" header="Transfer Status" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanStatusName" header="Payment Status" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="CreatedOn" header="Applied Date" [sortable]="true"></p-column>
           </p-dataTable>
         </div>
@@ -69,14 +72,17 @@
           <p-dataTable [value]="lstAllPaidLoans" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
             selectionMode="single" [(selection)]="selectedRow">
             <p-column [style]="{'width':'100px'}" field="LoanID" header="LoanID" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'100px'}" field="UserName" header="UserName" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="LoanAmount" header="Loan Amount" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="IssuedAmount" header="Issued Amount" [sortable]="true"></p-column>
             <p-column [style]="{'width':'125px'}" field="AmountToPay" header="Amount To Pay" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'125px'}" field="AmountPaid" header="Amount Paid" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="AdminCharges" header="Admin Charges" [sortable]="true"></p-column>
-            <p-column [style]="{'width':'130px'}" field="ModeofTransferType" header="Modeof Transfer" [sortable]="true"> </p-column>
-            <p-column [style]="{'width':'105px'}" field="LoanStatusName" header="Payment" [sortable]="true"> </p-column>
-            <p-column [style]="{'width':'105px'}" field="LoanApprovalStatus" header="Loan Status" [sortable]="true"> </p-column>
-            <p-column [style]="{'width':'130px'}" field="LoanTypeDescription" header="Loan Type" [sortable]="true"> </p-column>
+            <p-column [style]="{'width':'130px'}" field="ModeofTransferType" header="Payment Type" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanTypeDescription" header="Loan Type" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanApprovalStatus" header="Approval Status" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="TransferStatus" header="Transfer Status" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanStatusName" header="Payment Status" [sortable]="true"></p-column>
             <p-column [style]="{'width':'130px'}" field="CreatedOn" header="Applied Date" [sortable]="true"></p-column>
           </p-dataTable>
         </div>

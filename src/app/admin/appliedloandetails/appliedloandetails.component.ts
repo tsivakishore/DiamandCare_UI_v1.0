@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { style, transition, animate, trigger } from "@angular/animations";
 import { dialog, slideUp } from "../animation";
@@ -29,6 +29,7 @@ import { APIManager } from "../../utility/shared-service/apimanager.service";
 })
 
 export class AppliedloandetailsComponent implements OnInit {
+  @ViewChild('txtSearcByLoanId') txtSearcByLoanId: ElementRef;
   isShowModal: number = 1;
   frmLoanDetails: FormGroup;
 
@@ -78,7 +79,7 @@ export class AppliedloandetailsComponent implements OnInit {
     this.createLoanDetailsForm();
     this.GetApprovedLoans();
     this.GetPendingLoans();
-    this.GetPendingLoans();
+    this.GetRejectedLoans();
   }
 
   createLoanDetailsForm() {
@@ -125,6 +126,13 @@ export class AppliedloandetailsComponent implements OnInit {
     }, err => {
       this.sharedService.setLoader(false);
     })
+  }
+
+  Refresh() {
+    this.GetApprovedLoans();
+    this.GetPendingLoans();
+    this.GetRejectedLoans();
+    this.txtSearcByLoanId.nativeElement.value = '';
   }
 
   ViewLoanDetails(rowIndex) {
