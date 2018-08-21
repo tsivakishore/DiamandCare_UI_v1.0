@@ -23,15 +23,33 @@
       <div class="clearfix"></div>
     </li>
     <li tooltipPosition="top">
+      <a [routerLink]="walletTransactionsUrl" *ngIf="Is_Visible_Wallet_Transactions" routerLinkActive="active">
+        <i class="material-icons">apps</i>
+        <span>Wallet Transactions</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
       <a [routerLink]="earnLoansUrl" routerLinkActive="active">
         <i class="material-icons">money</i>
         <span>Loans</span>
       </a>
     </li>
     <li tooltipPosition="top">
+      <a [routerLink]="applyUserLoansUrl" *ngIf="Is_Visible_Apply_Userloans" routerLinkActive="active">
+        <i class="material-icons">account_balance_wallet</i>
+        <span>Apply User Loans</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
       <a [routerLink]="secretKeyUrl" *ngIf="Is_Visible_SecretKey" routerLinkActive="active">
         <i class="material-icons">vpn_key</i>
         <span>Secret Key</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
+      <a [routerLink]="mySecretKeysUrl" *ngIf="Is_Visible_My_SecretKeys" routerLinkActive="active">
+        <i class="material-icons">screen_lock_landscape</i>
+        <span>My Secret Keys</span>
       </a>
     </li>
     <li tooltipPosition="top">
@@ -71,6 +89,24 @@
       </a>
     </li>
     <li tooltipPosition="top">
+      <a [routerLink]="franchiseRequestUrl" *ngIf="Is_Visible_Franchise_Request" routerLinkActive="active">
+        <i class="material-icons">vpn_key</i>
+        <span>Franchise Request</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
+      <a [routerLink]="franchiseTreeUrl" *ngIf="Is_Visible_Franchise_Tree" routerLinkActive="active">
+        <i class="material-icons">people_outline</i>
+        <span>Franchise Tree</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
+      <a [routerLink]="expensesUrl" *ngIf="Is_Visible_Expenses" routerLinkActive="active">
+        <i class="material-icons">account_balance</i>
+        <span>Expenses</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
       <a [routerLink]="underUserDetailsUrl" *ngIf="Is_Visible_UnderUserDetails" routerLinkActive="active">
         <i class="material-icons">supervisor_account</i>
         <span>Under Users</span>
@@ -91,7 +127,7 @@
     </li>
     <li tooltipPosition="top" routerLinkActive="active">
       <a [routerLink]="addUserToRoleUrl" *ngIf="Is_Visible_Roles" routerLinkActive="active">
-        <i class="material-icons">group add</i>
+        <i class="material-icons">person_add</i>
         <span>{{'Assign Role' | translate}}</span>
       </a>
     </li>
@@ -134,15 +170,33 @@
       <div class="clearfix"></div>
     </li>
     <li>
+      <a [routerLink]="walletTransactionsUrl" *ngIf="Is_Visible_Wallet_Transactions" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">apps</i>
+        <span>Wallet Transactions</span>
+      </a>
+    </li>
+    <li>
       <a [routerLink]="earnLoansUrl" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">money</i>
         <span>Loans</span>
       </a>
     </li>
     <li>
+      <a [routerLink]="applyUserLoansUrl" *ngIf="Is_Visible_Apply_Userloans" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">account_balance_wallet</i>
+        <span>Apply User Loans</span>
+      </a>
+    </li>
+    <li>
       <a [routerLink]="secretKeyUrl" *ngIf="Is_Visible_SecretKey" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">vpn_key</i>
         <span>Secret Key</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="mySecretKeysUrl" *ngIf="Is_Visible_My_SecretKeys" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">screen_lock_landscape</i>
+        <span>My Secret Keys</span>
       </a>
     </li>
     <li>
@@ -182,6 +236,24 @@
       </a>
     </li>
     <li>
+      <a [routerLink]="franchiseRequestUrl" *ngIf="Is_Visible_Franchise_Request" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">vpn_key</i>
+        <span>Franchise Request</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="franchiseTreeUrl" *ngIf="Is_Visible_Franchise_Tree" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">people_outline</i>
+        <span>Franchise Tree</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="expensesUrl" *ngIf="Is_Visible_Expenses" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">account_balance</i>
+        <span>Expenses</span>
+      </a>
+    </li>
+    <li>
       <a [routerLink]="underUserDetailsUrl" *ngIf="Is_Visible_UnderUserDetails" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">supervisor_account</i>
         <span>Under Users</span>
@@ -201,7 +273,7 @@
     </li>
     <li>
       <a [routerLink]="addUserToRoleUrl" *ngIf="Is_Visible_Roles" routerLinkActive="active" (click)="closeSidebar()">
-        <i class="material-icons">group add</i>
+        <i class="material-icons">person_add</i>
         <span>Assign Role</span>
       </a>
     </li>

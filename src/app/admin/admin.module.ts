@@ -23,6 +23,12 @@ import { UpgradetofranchiseComponent } from '../admin/upgradetofranchise/upgrade
 import { DisplayscreensComponent } from '../admin/displayscreens/displayscreens.component';
 import { LoandispatchedComponent } from '../admin/loandispatched/loandispatched.component';
 import { LoanpaymentComponent } from './loanpayment/loanpayment.component';
+import { MysecretkeysComponent } from './mysecretkeys/mysecretkeys.component';
+import { ApplyuserloansComponent } from './applyuserloans/applyuserloans.component';
+import { WallettransactionsComponent } from './wallettransactions/wallettransactions.component';
+import { FranchiserequestComponent } from './franchiserequest/franchiserequest.component';
+import { FranchisetreeComponent } from './franchisetree/franchisetree.component';
+import { ExpensesComponent } from './expenses/expenses.component';
 
 @NgModule({
   imports: [
@@ -56,8 +62,14 @@ import { LoanpaymentComponent } from './loanpayment/loanpayment.component';
     TreeviewComponent,
     SettingsComponent,
     FooterComponent,
-    LoanpaymentComponent
-],
+    LoanpaymentComponent,
+    MysecretkeysComponent,
+    ApplyuserloansComponent,
+    WallettransactionsComponent,
+    FranchiserequestComponent,
+    FranchisetreeComponent,
+    ExpensesComponent
+  ],
   exports: [HeaderSidebarComponent]
 })
 export class AdminModule { }

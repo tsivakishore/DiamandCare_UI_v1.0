@@ -62,6 +62,13 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   Is_Visible_Loans_Dispatched = false;
   Is_Visible_LoanPayment = false;
 
+  Is_Visible_My_SecretKeys = false;
+  Is_Visible_Apply_Userloans = false;
+  Is_Visible_Wallet_Transactions = false;
+  Is_Visible_Franchise_Request = false;
+  Is_Visible_Franchise_Tree = false;
+  Is_Visible_Expenses = false;
+
   constructor(private apiManager: APIManager, private sharedService: SharedService, private commonService: CommonService,
     private router: Router, public toastr: ToastsManager, public vcr: ViewContainerRef) {
     super(toastr, vcr);
@@ -122,6 +129,24 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
               case RouteConstants.LOANPAYMENT:
                 this.Is_Visible_LoanPayment = true;
                 break;
+              case RouteConstants.MYSECRETKEYS:
+                this.Is_Visible_My_SecretKeys = true;
+                break;
+              case RouteConstants.APPLYUSERLOANS:
+                this.Is_Visible_Apply_Userloans = true;
+                break;
+              case RouteConstants.WALLETTRANSACTIONS:
+                this.Is_Visible_Wallet_Transactions = true;
+                break;
+              case RouteConstants.FRANCHISEREQUEST:
+                this.Is_Visible_Franchise_Request = true;
+                break;
+              case RouteConstants.FRANCHISETREE:
+                this.Is_Visible_Franchise_Tree = true;
+                break;
+              case RouteConstants.EXPENSES:
+                this.Is_Visible_Expenses = true;
+                break;
             }
           }
           else if (this.roleID === BaseUrl.UserRoleID) {
@@ -173,6 +198,27 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
                 break;
               case RouteConstants.UPGRADETOFRANCHISE:
                 this.Is_Visible_Upgrade_Franchise = false;
+                break;
+              case RouteConstants.LOANPAYMENT:
+                this.Is_Visible_LoanPayment = true;
+                break;
+              case RouteConstants.MYSECRETKEYS:
+                this.Is_Visible_My_SecretKeys = true;
+                break;
+              case RouteConstants.APPLYUSERLOANS:
+                this.Is_Visible_Apply_Userloans = true;
+                break;
+              case RouteConstants.WALLETTRANSACTIONS:
+                this.Is_Visible_Wallet_Transactions = true;
+                break;
+              case RouteConstants.FRANCHISEREQUEST:
+                this.Is_Visible_Franchise_Request = true;
+                break;
+              case RouteConstants.FRANCHISETREE:
+                this.Is_Visible_Franchise_Tree = true;
+                break;
+              case RouteConstants.EXPENSES:
+                this.Is_Visible_Expenses = false;
                 break;
             }
           }
@@ -320,6 +366,30 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   get loanPaymentsUrl() {
     return "/" + RouteConstants.LOANPAYMENT;
+  }
+
+  get mySecretKeysUrl() {
+    return "/" + RouteConstants.MYSECRETKEYS;
+  }
+
+  get applyUserLoansUrl() {
+    return "/" + RouteConstants.APPLYUSERLOANS;
+  }
+
+  get walletTransactionsUrl() {
+    return "/" + RouteConstants.WALLETTRANSACTIONS;
+  }
+
+  get franchiseRequestUrl() {
+    return "/" + RouteConstants.FRANCHISEREQUEST;
+  }
+
+  get franchiseTreeUrl() {
+    return "/" + RouteConstants.FRANCHISETREE;
+  }
+
+  get expensesUrl() {
+    return "/" + RouteConstants.EXPENSES;
   }
 
   earnLoanEvent() {

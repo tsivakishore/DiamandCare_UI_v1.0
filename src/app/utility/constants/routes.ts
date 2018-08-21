@@ -18,4 +18,11 @@ export class RouteConstants {
   public static LOANDISPATCHED = 'loandispatched';
   public static SCREENPERMISSIONS = 'screenpermissions';
   public static LOANPAYMENT = 'loanpayment';
+  public static MYSECRETKEYS = 'mysecretkeys';
+  public static APPLYUSERLOANS = 'applyuserloans';
+  public static WALLETTRANSACTIONS = 'wallettransactions';
+  public static FRANCHISEREQUEST = 'franchiserequest';
+  public static FRANCHISETREE = 'franchisetree';
+  public static EXPENSES = 'expenses';
+
 }

@@ -16,6 +16,12 @@ import { UpgradetofranchiseComponent } from '../admin/upgradetofranchise/upgrade
 import { DisplayscreensComponent } from '../admin/displayscreens/displayscreens.component';
 import { LoandispatchedComponent } from '../admin/loandispatched/loandispatched.component';
 import { LoanpaymentComponent } from './loanpayment/loanpayment.component';
+import { MysecretkeysComponent } from './mysecretkeys/mysecretkeys.component';
+import { ApplyuserloansComponent } from './applyuserloans/applyuserloans.component';
+import { WallettransactionsComponent } from './wallettransactions/wallettransactions.component';
+import { FranchiserequestComponent } from './franchiserequest/franchiserequest.component';
+import { FranchisetreeComponent } from './franchisetree/franchisetree.component';
+import { ExpensesComponent } from './expenses/expenses.component';
 
 const routes: Routes = [
   {
@@ -86,6 +92,36 @@ const routes: Routes = [
   {
     path: RouteConstants.LOANPAYMENT,
     component: LoanpaymentComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.MYSECRETKEYS,
+    component: MysecretkeysComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.APPLYUSERLOANS,
+    component: ApplyuserloansComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.WALLETTRANSACTIONS,
+    component: WallettransactionsComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.FRANCHISEREQUEST,
+    component: FranchiserequestComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.FRANCHISETREE,
+    component: FranchisetreeComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.EXPENSES,
+    component: ExpensesComponent,
     canActivate: [AuthGaurd]
   }
 ];
