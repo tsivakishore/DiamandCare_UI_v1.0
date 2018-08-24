@@ -17,7 +17,7 @@ import { TranslateService } from "./translate/translate.service";
 
 import { DropdownModule } from "primeng/primeng";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { CountryCodeComponent } from './country-code/country-code.component';
+// import { CountryCodeComponent } from './country-code/country-code.component';
 import { SchoolCodeComponent } from './school-code/school-code.component';
 import { MyAutofocusDirective } from "../admin/focus.directive";
 
@@ -42,7 +42,7 @@ export function callService(backend: ConnectionBackend, options: RequestOptions,
     CheckEmpty,
     TranslatePipe,
     MyAutofocusDirective,
-    CountryCodeComponent,
+    // CountryCodeComponent,
     SchoolCodeComponent
   ],
   providers: [
@@ -65,7 +65,7 @@ export function callService(backend: ConnectionBackend, options: RequestOptions,
     BaseComponent,
     TranslatePipe,
     MyAutofocusDirective,
-    CountryCodeComponent,
+    // CountryCodeComponent,
     SchoolCodeComponent
   ]
 })

@@ -6,7 +6,6 @@ import { LoanEarnsService } from "../../utility/shared-service/loanEarns.service
 import { CommonService } from "../../utility/shared-service/common.service";
 import { SharedService } from "../../utility/shared-service/shared.service";
 import { ToastsManager } from "ng2-toastr";
-import { API } from "../../utility/constants/api";
 import { APIManager } from "../../utility/shared-service/apimanager.service";
 import { CommonRegexp } from "../../utility/constants/validations";
 import { BaseComponent } from "../../utility/base-component/base.component";
@@ -84,8 +83,6 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
       }
       else {
         this.listOfActiveUserLoans = [];
-        if (this.listOfActiveUserLoans.length == 0)
-          this.listOfActiveUserLoans = undefined;
       }
     }, err => {
       this.sharedService.setLoader(false);
@@ -101,8 +98,6 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
       }
       else {
         this.lstAllPaidLoans = [];
-        if (this.lstAllPaidLoans.length == 0)
-          this.lstAllPaidLoans = undefined;
       }
     }, err => {
       this.sharedService.setLoader(false);
@@ -188,8 +183,6 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
           else {
             this.listOfActiveUserLoans = [];
             this.listOfActiveUserLoans = res.m_Item3;
-            if (this.listOfActiveUserLoans.length == 0)
-              this.listOfActiveUserLoans = undefined;
           }
         })
 
@@ -201,8 +194,6 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
           else {
             this.lstAllPaidLoans = [];
             this.lstAllPaidLoans = res.m_Item3;
-            if (this.lstAllPaidLoans.length == 0)
-              this.lstAllPaidLoans = undefined;
           }
         })
       }
@@ -212,12 +203,7 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
     }
     else {
       this.listOfActiveUserLoans = [];
-      if (this.listOfActiveUserLoans.length == 0)
-        this.listOfActiveUserLoans = undefined;
-
       this.lstAllPaidLoans = [];
-      if (this.lstAllPaidLoans.length == 0)
-        this.lstAllPaidLoans = undefined;
     }
   }
 
@@ -229,8 +215,6 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
 
     if (this.loanID > 0) {
       this.listOfActiveUserLoans = this.OriginalActiveUserLoans.filter(element => element.LoanID && element.LoanID == this.loanID);
-      if (this.listOfActiveUserLoans.length == 0)
-        this.listOfActiveUserLoans = undefined;
     }
     else
       this.listOfActiveUserLoans = this.OriginalActiveUserLoans;

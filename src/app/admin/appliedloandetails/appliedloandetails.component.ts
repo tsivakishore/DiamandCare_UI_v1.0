@@ -308,9 +308,6 @@ export class AppliedloandetailsComponent implements OnInit {
       }
       else {
         this.listOfApprovedLoans = [];
-        if (this.listOfApprovedLoans.length === 0) {
-          this.listOfApprovedLoans = undefined;
-        }
       }
     }, err => {
       this.listOfApprovedLoans = [];
@@ -325,9 +322,6 @@ export class AppliedloandetailsComponent implements OnInit {
       }
       else {
         this.listOfPendingLoans = [];
-        if (this.listOfPendingLoans.length === 0) {
-          this.listOfPendingLoans = undefined;
-        }
       }
     }, err => {
       this.listOfPendingLoans = [];
@@ -342,9 +336,6 @@ export class AppliedloandetailsComponent implements OnInit {
       }
       else {
         this.listOfRejectedLoans = [];
-        if (this.listOfRejectedLoans.length === 0) {
-          this.listOfRejectedLoans = undefined;
-        }
       }
     }, err => {
       this.listOfRejectedLoans = [];
@@ -391,6 +382,18 @@ export class AppliedloandetailsComponent implements OnInit {
       return "Approved";
     else if (isApproved == 3)
       return "Rejected";
+  }
+
+  get listOfPendingLoansLength() {
+    return this.listOfPendingLoans ? this.listOfPendingLoans.length : 0
+  }
+
+  get listOfApprovedLoansLength() {
+    return this.listOfApprovedLoans ? this.listOfApprovedLoans.length : 0
+  }
+
+  get listOfRejectedLoansLength() {
+    return this.listOfRejectedLoans ? this.listOfRejectedLoans.length : 0
   }
 
   getFormattedDate(date1) {

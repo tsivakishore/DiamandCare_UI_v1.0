@@ -8,7 +8,6 @@ import { APIManager } from "../../utility/shared-service/apimanager.service";
 import { API } from "../../utility/constants/api";
 import { dialog, slideUp } from "../animation";
 import { TranslateService } from "../../utility/translate/translate.service";
-import * as moment from 'moment';
 import { style, transition, animate, trigger } from "@angular/animations";
 import { MasterChargesService } from "../../utility/shared-service/mastercharges.service";
 import { FranchiseService } from "../../utility/shared-service/franchise.service";

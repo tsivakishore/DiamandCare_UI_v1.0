@@ -1,15 +1,12 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { dialog, slideUp } from "../animation";
-import { Router } from "@angular/router";
 import { API } from "../../utility/constants/api";
 import { APIManager } from "../../utility/shared-service/apimanager.service";
-import { SharedService } from "../../utility/shared-service/shared.service";
 import { BaseComponent } from "../../utility/base-component/base.component";
 import { TranslateService } from "../../utility/translate/translate.service";
 import { style, transition, animate, trigger } from "@angular/animations";
 import { Message, SelectItem } from "primeng/primeng";
-import * as moment from 'moment';
 import { Role } from './role-model';
 import { UserAuthService } from "../../user-auth/user-auth.service";
 import { ToastsManager } from 'ng2-toastr';

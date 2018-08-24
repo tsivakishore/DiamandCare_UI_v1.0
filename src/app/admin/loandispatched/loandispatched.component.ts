@@ -3,13 +3,10 @@ import { SharedService } from "../../utility/shared-service/shared.service";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ToastsManager } from "ng2-toastr";
 import { BaseComponent } from "../../utility/base-component/base.component";
-import { CommonRegexp } from "../../utility/constants/validations";
 import { APIManager } from "../../utility/shared-service/apimanager.service";
 import { API } from "../../utility/constants/api";
 import { dialog, slideUp } from "../animation";
 import { TranslateService } from "../../utility/translate/translate.service";
-import * as moment from 'moment';
-import { Message } from "primeng/primeng";
 import { style, transition, animate, trigger } from "@angular/animations";
 import { LoanEarnsService } from "../../utility/shared-service/loanEarns.service";
 import { CommonService } from "../../utility/shared-service/common.service";
@@ -86,8 +83,6 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
       }
       else {
         this.listOfTransferPendingLoans = [];
-        if (this.listOfTransferPendingLoans.length == 0)
-          this.listOfTransferPendingLoans = undefined;
       }
     }, err => {
       console.log(err);
@@ -105,8 +100,6 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
       }
       else {
         this.listOfTransferedLoans = [];
-        if (this.listOfTransferedLoans.length == 0)
-          this.listOfTransferedLoans = undefined;
       }
     }, err => {
       console.log(err);
@@ -124,8 +117,6 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
       }
       else {
         this.listOfTransferRejectedLoans = [];
-        if (this.listOfTransferRejectedLoans.length == 0)
-          this.listOfTransferRejectedLoans = undefined;
       }
     }, err => {
       console.log(err);
@@ -205,9 +196,6 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
       }
       else {
         this.listOfTransferPendingLoans = [];
-        if (this.listOfTransferPendingLoans.length === 0) {
-          this.listOfTransferPendingLoans = undefined;
-        }
       }
     }, err => {
 
@@ -222,9 +210,6 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
       }
       else {
         this.listOfTransferedLoans = [];
-        if (this.listOfTransferedLoans.length === 0) {
-          this.listOfTransferedLoans = undefined;
-        }
       }
     }, err => {
       this.listOfTransferedLoans = [];
@@ -239,9 +224,6 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
       }
       else {
         this.listOfTransferRejectedLoans = [];
-        if (this.listOfTransferRejectedLoans.length === 0) {
-          this.listOfTransferRejectedLoans = undefined;
-        }
       }
     }, err => {
       this.listOfTransferRejectedLoans = [];

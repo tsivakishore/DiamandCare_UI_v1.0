@@ -8,8 +8,6 @@ import { APIManager } from "../../utility/shared-service/apimanager.service";
 import { API } from "../../utility/constants/api";
 import { dialog, slideUp } from "../animation";
 import { TranslateService } from "../../utility/translate/translate.service";
-import * as moment from 'moment';
-import { Message } from "primeng/primeng";
 import { style, transition, animate, trigger } from "@angular/animations";
 import { SecretKeyService } from "../../utility/shared-service/secretkey.service";
 

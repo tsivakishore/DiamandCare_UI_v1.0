@@ -3,14 +3,8 @@ import { SharedService } from "../../utility/shared-service/shared.service";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ToastsManager } from "ng2-toastr";
 import { BaseComponent } from "../../utility/base-component/base.component";
-import { CommonRegexp } from "../../utility/constants/validations";
 import { APIManager } from "../../utility/shared-service/apimanager.service";
-import { API } from "../../utility/constants/api";
-
 import { TranslateService } from "../../utility/translate/translate.service";
-import * as moment from 'moment';
-import { Message } from "primeng/primeng";
-import { style, transition, animate, trigger } from "@angular/animations";
 import { TreeViewDataService } from "../../utility/shared-service/treeviewdata.service";
 
 @Component({

@@ -7,9 +7,9 @@
 
             <!-- Show list of Approved Loans start here -->
             <div>
-                <div *ngIf="listOfApprovedLoans!=0" style="overflow: auto;">
+                <div style="overflow: auto;">
                     <p-dataTable id="approvedloand" [value]="listOfApprovedLoans" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3"
-                        [rowsPerPageOptions]="[5,10,20]" selectionMode="single" [(selection)]="selectedRow">
+                        [rowsPerPageOptions]="[5,10,20]">
                         <p-column [style]="{'width':'100px'}" field="LoanID" header="LoanID" [sortable]="true"></p-column>
                         <p-column [style]="{'width':'130px'}" field="LoanAmount" header="Loan Amount" [sortable]="true"></p-column>
                         <p-column [style]="{'width':'130px'}" field="IssuedAmount" header="Issued Amount" [sortable]="true"></p-column>
@@ -30,14 +30,6 @@
                         </p-column>
                     </p-dataTable>
                 </div>
-
-                <!--when row length is 0-->
-                <div class="PTB70" *ngIf="listOfApprovedLoans==0">
-                    <div class="col-md-12 text-center">
-                        <p>{{'noRecords' | translate}}</p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
             </div>
             <!-- Show list of Approved Loans end here -->
 
@@ -56,9 +48,8 @@
 
             <!-- Show list of Pending Loans start here -->
             <div>
-                <div *ngIf="listOfPendingLoans!=0" style="overflow: auto;">
-                    <p-dataTable [value]="listOfPendingLoans" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
-                        selectionMode="single" [(selection)]="selectedRow">
+                <div style="overflow: auto;">
+                    <p-dataTable [value]="listOfPendingLoans" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
                         <p-column [style]="{'width':'100px'}" field="LoanID" header="LoanID" [sortable]="true"></p-column>
                         <p-column [style]="{'width':'130px'}" field="LoanAmount" header="Loan Amount" [sortable]="true"></p-column>
                         <p-column [style]="{'width':'130px'}" field="IssuedAmount" header="Issued Amount" [sortable]="true"></p-column>
@@ -79,14 +70,6 @@
                         </p-column>
                     </p-dataTable>
                 </div>
-
-                <!--when row length is 0-->
-                <div class="PTB70" *ngIf="listOfPendingLoans==0">
-                    <div class="col-md-12 text-center">
-                        <p>{{'noRecords' | translate}}</p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
             </div>
             <!-- Show list of Pending Loans end here -->
 
@@ -105,9 +88,8 @@
 
             <!-- Show list of Rejected Loans start here -->
             <div>
-                <div *ngIf="listOfRejectedLoans!=0" style="overflow: auto;">
-                    <p-dataTable [value]="listOfRejectedLoans" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
-                        selectionMode="single" [(selection)]="selectedRow">
+                <div style="overflow: auto;">
+                    <p-dataTable [value]="listOfRejectedLoans" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
                         <p-column [style]="{'width':'100px'}" field="LoanID" header="LoanID" [sortable]="true"></p-column>
                         <p-column [style]="{'width':'130px'}" field="LoanAmount" header="Loan Amount" [sortable]="true"></p-column>
                         <p-column [style]="{'width':'130px'}" field="IssuedAmount" header="Issued Amount" [sortable]="true"></p-column>
@@ -127,14 +109,6 @@
                             </ng-template>
                         </p-column>
                     </p-dataTable>
-                </div>
-
-                <!--when row length is 0-->
-                <div class="PTB70" *ngIf="listOfRejectedLoans==0">
-                    <div class="col-md-12 text-center">
-                        <p>{{'noRecords' | translate}}</p>
-                    </div>
-                    <div class="clearfix"></div>
                 </div>
             </div>
             <!-- Show list of Rejected Loans end here -->
