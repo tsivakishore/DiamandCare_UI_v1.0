@@ -192,6 +192,13 @@ export const LANG_EN_TRANS = {
   'changePassword': 'Change Password',
   'chngePhnNumber': 'Change Phone Number',
   'phnNumber': 'Phone Number',
-  'settings': 'User Settings'
+  'settings': 'User Settings',
+
+  //Wallet
+  'amount': 'Amount',
+  'amountrequired': 'Amount required',
+  'TransactionAmountLnth':'Amount Length missmatch',
+  'purpose':'Purpose',
+  'purposerequired':'Purpose required'
 };
 

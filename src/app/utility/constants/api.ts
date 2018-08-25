@@ -96,6 +96,9 @@ export class API {
   public static GETAPPROVEDLOANSBYDCIDORUSERNAME = 'loan/getapprovedloandetailsByDCIDorName';
   public static GETPENDINGLOANSBYDCIDORUSERNAME = 'loan/getpendingloandetailsByDCIDorName';
   public static GETREJECTEDLOANSDCIDORUSERNAME = 'loan/getRejectedLoanDetailsDCIDorName';
+  public static GETSECRETKEYSBYUserID = 'RegisterKey/GetIssuedRegisterKeysByUserID';
+  public static GETWALLETRECENTEXPENSES = 'wallet/GetWalletRecentExpenses';
+  public static INSERTWALLETEXPENSES = 'wallet/InsertWalletExpenses';
 
   // EXTERNAL API CALLERS
 
