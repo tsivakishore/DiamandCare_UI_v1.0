@@ -99,6 +99,7 @@ export class API {
   public static GETSECRETKEYSBYUserID = 'RegisterKey/GetIssuedRegisterKeysByUserID';
   public static GETWALLETRECENTEXPENSES = 'wallet/GetWalletRecentExpenses';
   public static INSERTWALLETEXPENSES = 'wallet/InsertWalletExpenses';
+  public static GETWALLETTRANSACTIONS = 'wallet/GetWalletTransactions';
 
   // EXTERNAL API CALLERS
 

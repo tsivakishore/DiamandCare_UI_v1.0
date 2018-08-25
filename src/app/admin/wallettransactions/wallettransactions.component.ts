@@ -37,12 +37,12 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
     public vcr: ViewContainerRef, ) { super(toastr, vcr); }
 
   ngOnInit() {
-    this.getWalletRecentExpenses();
+    this.getWalletTransactions();
   }
   
-  public getWalletRecentExpenses() {
+  public getWalletTransactions() {
     this.sharedService.setLoader(true);
-    this.walletServ._getWalletRecentExpenses().subscribe((res: any) => {
+    this.walletServ._getWalletTransactions().subscribe((res: any) => {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.WalletExpensesList = res.m_Item3;
