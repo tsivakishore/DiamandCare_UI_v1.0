@@ -53,6 +53,12 @@
       </a>
     </li>
     <li tooltipPosition="top">
+      <a [routerLink]="generateMySecreteKeysUrl" *ngIf="Is_Visible_Generate_My_SecretKeys" routerLinkActive="active">
+        <i class="material-icons">keyboard</i>
+        <span>Generate My Key</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
       <a [routerLink]="masterScreenUrl" *ngIf="Is_Visible_MasterScreen" routerLinkActive="active">
         <i class="material-icons">add_to_queue</i>
         <span>Master Screen</span>
@@ -61,7 +67,13 @@
     <li tooltipPosition="top">
       <a [routerLink]="upgradeFranchiseUrl" *ngIf="Is_Visible_Upgrade_Franchise" routerLinkActive="active">
         <i class="material-icons">cloud_upload</i>
-        <span>Upgrade Franchise</span>
+        <span>Upgrade To Franchise</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
+      <a [routerLink]="upgradeToSchoolUrl" *ngIf="Is_Visible_Upgrade_School" routerLinkActive="active">
+        <i class="material-icons">school</i>
+        <span>Upgrade To School</span>
       </a>
     </li>
     <li tooltipPosition="top">
@@ -90,7 +102,7 @@
     </li>
     <li tooltipPosition="top">
       <a [routerLink]="franchiseRequestUrl" *ngIf="Is_Visible_Franchise_Request" routerLinkActive="active">
-        <i class="material-icons">vpn_key</i>
+        <i class="material-icons">update</i>
         <span>Franchise Request</span>
       </a>
     </li>
@@ -107,8 +119,14 @@
       </a>
     </li>
     <li tooltipPosition="top">
+      <a [routerLink]="requestFundsUrl" *ngIf="Is_Visible_Request_Funds" routerLinkActive="active">
+        <i class="material-icons">send</i>
+        <span>Request Funds</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
       <a [routerLink]="underUserDetailsUrl" *ngIf="Is_Visible_UnderUserDetails" routerLinkActive="active">
-        <i class="material-icons">supervisor_account</i>
+        <i class="material-icons">device_hub</i>
         <span>Under Users</span>
       </a>
     </li>
@@ -200,6 +218,12 @@
       </a>
     </li>
     <li>
+      <a [routerLink]="generateMySecreteKeysUrl" *ngIf="Is_Visible_Generate_My_SecretKeys" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">keyboard</i>
+        <span>Generate My Key</span>
+      </a>
+    </li>
+    <li>
       <a [routerLink]="masterScreenUrl" *ngIf="Is_Visible_MasterScreen" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">add_to_queue</i>
         <span>Master Screen</span>
@@ -208,7 +232,13 @@
     <li>
       <a [routerLink]="upgradeFranchiseUrl" *ngIf="Is_Visible_Upgrade_Franchise" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">cloud_upload</i>
-        <span>Upgrade Franchise</span>
+        <span>Upgrade To Franchise</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="upgradeToSchoolUrl" *ngIf="Is_Visible_Upgrade_School" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">school</i>
+        <span>Upgrade To School</span>
       </a>
     </li>
     <li>
@@ -237,7 +267,7 @@
     </li>
     <li>
       <a [routerLink]="franchiseRequestUrl" *ngIf="Is_Visible_Franchise_Request" routerLinkActive="active" (click)="closeSidebar()">
-        <i class="material-icons">vpn_key</i>
+        <i class="material-icons">update</i>
         <span>Franchise Request</span>
       </a>
     </li>
@@ -254,8 +284,14 @@
       </a>
     </li>
     <li>
+      <a [routerLink]="requestFundsUrl" *ngIf="Is_Visible_Request_Funds" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">send</i>
+        <span>Request Funds</span>
+      </a>
+    </li>
+    <li>
       <a [routerLink]="underUserDetailsUrl" *ngIf="Is_Visible_UnderUserDetails" routerLinkActive="active" (click)="closeSidebar()">
-        <i class="material-icons">supervisor_account</i>
+        <i class="material-icons">device_hub</i>
         <span>Under Users</span>
       </a>
     </li>

@@ -22,6 +22,9 @@ import { WallettransactionsComponent } from './wallettransactions/wallettransact
 import { FranchiserequestComponent } from './franchiserequest/franchiserequest.component';
 import { FranchisetreeComponent } from './franchisetree/franchisetree.component';
 import { ExpensesComponent } from './expenses/expenses.component';
+import { RequestfundsComponent } from './requestfunds/requestfunds.component';
+import { UpgradetoschoolComponent } from './upgradetoschool/upgradetoschool.component';
+import { GeneratemysecretkeysComponent } from './generatemysecretkeys/generatemysecretkeys.component';
 
 const routes: Routes = [
   {
@@ -122,6 +125,21 @@ const routes: Routes = [
   {
     path: RouteConstants.EXPENSES,
     component: ExpensesComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.GENERATEMYKEY,
+    component: GeneratemysecretkeysComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.REQUESTFUNDS,
+    component: RequestfundsComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.UPGRADETOSCHOOL,
+    component: UpgradetoschoolComponent,
     canActivate: [AuthGaurd]
   }
 ];

@@ -61,13 +61,15 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   Is_Visible_Upgrade_Franchise = false;
   Is_Visible_Loans_Dispatched = false;
   Is_Visible_LoanPayment = false;
-
   Is_Visible_My_SecretKeys = false;
   Is_Visible_Apply_Userloans = false;
   Is_Visible_Wallet_Transactions = false;
   Is_Visible_Franchise_Request = false;
   Is_Visible_Franchise_Tree = false;
   Is_Visible_Expenses = false;
+  Is_Visible_Upgrade_School = false;
+  Is_Visible_Request_Funds = false;
+  Is_Visible_Generate_My_SecretKeys = false;
 
   constructor(private apiManager: APIManager, private sharedService: SharedService, private commonService: CommonService,
     private router: Router, public toastr: ToastsManager, public vcr: ViewContainerRef) {
@@ -147,6 +149,15 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
               case RouteConstants.EXPENSES:
                 this.Is_Visible_Expenses = true;
                 break;
+              case RouteConstants.UPGRADETOSCHOOL:
+                this.Is_Visible_Upgrade_School = true;
+                break;
+              case RouteConstants.REQUESTFUNDS:
+                this.Is_Visible_Request_Funds = true;
+                break;
+              case RouteConstants.GENERATEMYKEY:
+                this.Is_Visible_Generate_My_SecretKeys = true;
+                break;
             }
           }
           else if (this.roleID === BaseUrl.UserRoleID) {
@@ -172,6 +183,15 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
                 break;
               case RouteConstants.UPGRADETOFRANCHISE:
                 this.Is_Visible_Upgrade_Franchise = false;
+                break;
+              case RouteConstants.UPGRADETOSCHOOL:
+                this.Is_Visible_Upgrade_School = false;
+                break;
+              case RouteConstants.REQUESTFUNDS:
+                this.Is_Visible_Request_Funds = true;
+                break;
+              case RouteConstants.GENERATEMYKEY:
+                this.Is_Visible_Generate_My_SecretKeys = false;
                 break;
             }
           }
@@ -219,6 +239,15 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
                 break;
               case RouteConstants.EXPENSES:
                 this.Is_Visible_Expenses = false;
+                break;
+              case RouteConstants.UPGRADETOSCHOOL:
+                this.Is_Visible_Upgrade_School = true;
+                break;
+              case RouteConstants.REQUESTFUNDS:
+                this.Is_Visible_Request_Funds = true;
+                break;
+              case RouteConstants.GENERATEMYKEY:
+                this.Is_Visible_Generate_My_SecretKeys = true;
                 break;
             }
           }
@@ -390,6 +419,18 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   get expensesUrl() {
     return "/" + RouteConstants.EXPENSES;
+  }
+
+  get requestFundsUrl() {
+    return "/" + RouteConstants.REQUESTFUNDS;
+  }
+
+  get upgradeToSchoolUrl() {
+    return "/" + RouteConstants.UPGRADETOSCHOOL;
+  }
+
+  get generateMySecreteKeysUrl() {
+    return "/" + RouteConstants.GENERATEMYKEY;
   }
 
   earnLoanEvent() {
