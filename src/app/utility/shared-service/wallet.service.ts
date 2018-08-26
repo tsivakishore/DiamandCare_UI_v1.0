@@ -6,35 +6,19 @@ import { Response } from "@angular/http";
 import { ToastsManager } from "ng2-toastr/ng2-toastr";
 
 @Injectable()
-export class SecretKeyService {
+export class WalletService {
 
     constructor(private httpService: HttpService, private toastManager: ToastsManager) {
     }
 
-    _getSecretKey() {
+    _getWalletRecentExpenses() {
         return this.httpService
-            .get(API.GETSECRETKEYS)
-            .map(res => this.extractData(res, true)).catch((error: any) => {
-                return Observable.throw(new Error(error.status));
-            });
-    }
-    _getSecretKeyByUserID() {
-        return this.httpService
-            .get(API.GETSECRETKEYSBYUserID)
+            .get(API.GETWALLETRECENTEXPENSES)
             .map(res => this.extractData(res, true)).catch((error: any) => {
                 return Observable.throw(new Error(error.status));
             });
     }
 
-    _getUsernameWalletMasterChargesByDCIDorName(postData) {
-        return this.httpService
-          .get(API.GETUSERNAMEWALLETMASTERCHARGESBYDCIDorNAME+ '?DcIDorName=' + postData)
-          .map(res => this.extractData(res, true)).catch((error: any) => {
-            return Observable.throw(new Error(error.status));
-          });
-      }
-
-      
     private extractData(res: Response, show?: boolean) {
         let data = res.json();
         let msg = data.message;
@@ -42,5 +26,12 @@ export class SecretKeyService {
             this.toastManager.success(msg);
         }
         return data || {};
+    }
+    _getWalletTransactions() {
+        return this.httpService
+            .get(API.GETWALLETTRANSACTIONS)
+            .map(res => this.extractData(res, true)).catch((error: any) => {
+                return Observable.throw(new Error(error.status));
+            });
     }
 }
