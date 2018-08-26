@@ -1,3 +1,618 @@
-<p>
-  applyuserloans works!
-</p>
+<div class="secretkey-container" @slideUp>
+  <div class="secretkey-form">
+    <form>
+      <div>
+        <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">Apply Loan for User</h3>
+        <button type="button" class="ui-button-reset-transparent" [ngClass]="colorCodeRenew()" [disabled]="checkRenewEnable()" style="width: 100px;height: 30px; float:right; padding: left 10px; "
+          pButton (click)="renew()">Renew my ID</button>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-md-4 col-xs-12 col-sm-12 margin-top-15">
+        <div class="label" style="color: white;">Search by Username or DCID</div>
+        <input type="text" #txtSearcByLoanId id="txtSearcByLoanId" class="form-control" placeholder="Search by Username or DCID"
+          (input)="onSearchChange($event.target.value)" />
+      </div>
+      <div class="clearfix"></div>
+
+      <!-- Show list of loans start here -->
+      <div>
+        <div style="overflow: auto;">
+          <p-dataTable [value]="listOfEarnLoans" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
+            selectionMode="single" [(selection)]="selectedRow">
+            <p-column field="Groups" [style]="{'width':'80px'}" header="Groups" [sortable]="true"></p-column>
+            <p-column field="ExpectedUsers" [style]="{'width':'100px'}" header="Expected Users" [sortable]="true"></p-column>
+            <p-column field="JoinedUsers" [style]="{'width':'100px'}" header="Joined Users" [sortable]="true"></p-column>
+            <p-column field="EPLoans" [style]="{'width':'160px'}" header="Personal Loan" [sortable]="true">
+              <ng-template let-listOfEarnLoans="rowData" pTemplate="body" let-ri="rowIndex">
+                <div class="col-md-12" style="margin-left: -30px;">
+                  <div class="col-md-6" style="width:100px">
+                    <label>{{listOfEarnLoans.EPLoans}}</label>
+                  </div>
+                  <div class="col-md-6" style="width:100px">
+                    <!-- [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" -->
+                    <button type="button" style="width: 50px;height: 20px;" class="ui-button-reset-transparent" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)"
+                      [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" *ngIf="checkHidden(listOfEarnLoans.EPLoans)"
+                      pButton (click)="ApplyPersonalLoan(ri)">Apply</button>
+                  </div>
+                </div>
+              </ng-template>
+            </p-column>
+            <p-column [style]="{'width':'165px'}" field="FeesReimbursement" header="Fee Reimbursement" [sortable]="true">
+              <ng-template let-listOfEarnLoans="rowData" pTemplate="body" let-ri="rowIndex">
+                <div class="col-md-12" style="margin-left: -15px;">
+                  <div class="col-md-6" style="width:100px">
+                    <label>{{feesReimbursementValue}}</label>
+                  </div>
+                  <div class="col-md-6" style="width:100px">
+                    <!-- [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" -->
+                    <button type="button" style="width: 50px;height: 20px;" class="ui-button-reset-transparent" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)"
+                      [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" *ngIf="checkFeesReimbursementHidden(listOfEarnLoans.FeesReimbursement)"
+                      pButton (click)="ApplyFeesReimbursement(ri)">Apply</button>
+                  </div>
+                </div>
+              </ng-template>
+            </p-column>
+            <p-column field="HealthBenefit" [style]="{'width':'175px'}" header="Health Benefits" [sortable]="true">
+              <ng-template let-listOfEarnLoans="rowData" pTemplate="body" let-ri="rowIndex">
+                <div class="col-md-12" style="margin-left: -25px;">
+                  <div class="col-md-6" style="width:100px">
+                    <label>{{healthBenefitValue}}</label>
+                  </div>
+                  <div class="col-md-6" style="width:100px">
+                    <!-- [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" -->
+                    <button type="button" style="width: 50px;height: 20px;" class="ui-button-reset-transparent" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)"
+                      [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" *ngIf="checkHealthBenefitHidden(listOfEarnLoans.HealthBenefit)"
+                      pButton (click)="ApplyHealthBenefit(ri)">Apply</button>
+                  </div>
+                </div>
+              </ng-template>
+            </p-column>
+            <p-column field="RiskBenefit" [style]="{'width':'160px'}" header="Risk Benefit" [sortable]="true">
+              <ng-template let-listOfEarnLoans="rowData" pTemplate="body" let-ri="rowIndex">
+                <div class="col-md-12" style="margin-left: -40px;">
+                  <div class="col-md-6" style="width:100px">
+                    <label>{{riskBenefitValue}}</label>
+                  </div>
+                  <div class="col-md-6" style="width:100px">
+                    <!-- [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" -->
+                    <button type="button" style="width: 50px;height: 20px;" class="ui-button-reset-transparent" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)"
+                      [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" *ngIf="checkRiskBenefitHidden(listOfEarnLoans.RiskBenefit)"
+                      pButton (click)="ApplyRiskBenefitLoan(ri)">Apply</button>
+                  </div>
+                </div>
+              </ng-template>
+            </p-column>
+
+            <p-column header="Home Loan" [style]="{'width':'80px'}">
+              <ng-template let-listOfEarnLoans="rowData" pTemplate="body" let-ri="rowIndex">
+                <div class="col-md-12" style="margin-left: -15px;">
+                  <div class="col-md-6" style="width:100px">
+                    <!-- [disabled]="checkHomeLoanEligibility(listOfEarnLoans.LoanStatus,listOfEarnLoans.Groups)" -->
+                    <button type="button" style="width: 50px;height: 20px;" class="ui-button-reset-transparent" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)"
+                      [disabled]="checkHomeLoanEligibility(listOfEarnLoans.LoanStatus,listOfEarnLoans.Groups)" *ngIf="checkHomeLoanHidden(listOfEarnLoans.LoanStatus,listOfEarnLoans.Groups)"
+                      pButton (click)="ApplyHomeLoan(ri)">Apply</button>
+                  </div>
+                </div>
+              </ng-template>
+            </p-column>
+            <p-column header="Prepaid Loan" [style]="{'width':'100px'}">
+              <ng-template let-listOfEarnLoans="rowData" pTemplate="body" let-ri="rowIndex">
+                <div class="col-md-12" style="margin-left: -15px;">
+                  <div class="col-md-6" style="width:100px">
+                    <!-- [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" -->
+                    <button type="button" style="width: 50px;height: 20px;" class="ui-button-reset-transparent" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)"
+                      [disabled]="checkPrepaidLoanEligibility(listOfEarnLoans.LoanStatus,listOfEarnLoans.Groups)" *ngIf="checkPrepaidLoanHidden(listOfEarnLoans.EPLoans,listOfEarnLoans.Groups)"
+                      pButton (click)="ApplyPrepaidLoan(ri)">Apply</button>
+                  </div>
+                </div>
+              </ng-template>
+            </p-column>
+
+          </p-dataTable>
+        </div>
+      </div>
+      <!-- Show list of loans end here -->
+
+    </form>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+<!-- Personal Loan Popup code start -->
+<div class="phone-number-modal" style="margin-left: 15px;margin-top: 50px;" *ngIf="isShowModal == 2" @dialog>
+  <form [formGroup]="frmApplyPLLoan" (submit)="onApplyPLLoan(frmApplyPLLoan.value,frmApplyPLLoan.valid)">
+    <div class="modal-container" style="height: 300px !important;">
+      <div class="modal-header" style="background: #797b85;">
+        <h5>Apply Personal Loan</h5>
+        <i class="material-icons" (click)="closeForm()">close</i>
+      </div>
+      <div class="clearfix"></div>
+      <div class="clearfix"></div>
+
+      <div class="modal-body" style="height: 50px;">
+        <div class="col-md-12">
+          <div class="margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Group ID" tooltipPosition="top" class="form-control" formControlName="GroupID" readonly/>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Loan Amount" tooltipPosition="top" class="form-control" formControlName="LoanAmount" readonly/>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="margin-top-10 col-xs-12 col-md-6">
+            <select class="form-control ddlSelect" (change)="filterPLChanged($event.target.value)" formControlName="ModeofTransfer"
+              required>
+              <!-- <option value="" disabled selected>Select Mode of Transfer</option> -->
+              <option *ngFor="let mode of lstModeofTransfer" value="{{mode.ID}}">{{mode.Mode}}</option>
+            </select>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmApplyPLLoan.get('ModeofTransfer'))" [errMsg]="'modeofTransferReq' | translate"></validation>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-7 col-md-offset-3">
+          <button type="submit" [disabled]="!frmApplyPLLoan.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Apply</button>
+          <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+<!-- Personal Loan Popup code end -->
+
+<!-- Fee Reimbursement Popup code start -->
+<div class="phone-number-modal" style="margin-left: 15px;margin-top: -60px;" *ngIf="isShowModal == 3" @dialog>
+  <form [formGroup]="frmApplyFeeReimbursement" (submit)="onApplyFeeReimbursement(frmApplyFeeReimbursement.value,frmApplyFeeReimbursement.valid)">
+    <div class="modal-container" style="width: 100%; height: 515px !important;">
+      <div class="modal-header" style="background: #797b85;">
+        <h5>Apply Fee Reimbursement</h5>
+        <i class="material-icons" (click)="closeForm()">close</i>
+      </div>
+      <div class="clearfix"></div>
+      <div class="clearfix"></div>
+
+      <div class="modal-body" style="height: 300px;">
+        <div class="col-md-12">
+          <div class="margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Group ID" tooltipPosition="top" class="form-control" formControlName="GroupID" readonly/>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Loan Amount" tooltipPosition="top" class="form-control" formControlName="LoanAmount" required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(frmApplyFeeReimbursement.get('LoanAmount'))" [errMsg]="'loanAmountRqrd' | translate"></validation>
+                <validation *ngIf="isValidField(frmApplyFeeReimbursement.get('LoanAmount'))" [errMsg]="'validLoanAmount' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+
+          <div class="margin-top-10 col-xs-12 col-md-6">
+            <select class="form-control ddlSelect" (change)="filterFRChanged($event.target.value)" formControlName="ModeofTransfer"
+              required>
+              <!-- <option value="" disabled selected>Select Mode of Transfer</option> -->
+              <option *ngFor="let mode of lstModeofTransfer" value="{{mode.ID}}">{{mode.Mode}}</option>
+            </select>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmApplyFeeReimbursement.get('ModeofTransfer'))" [errMsg]="'modeofTransferReq' | translate"></validation>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+
+          <div class="col-md-12" style="margin-top:-15px">
+            <div class="col-md-11 padding-right-0 padding-left-0 margin-top-20">
+              <input type="text" class="form-control" formControlName="KYCDocumentName" placeholder="{{fileKYCDocument}}" required readonly/>
+            </div>
+            <div class="col-md-1 file-icons padding-right-0 padding-right-0 margin-top-20">
+              <input type="file" (change)="selectFeeReimbursementFiles($event.target,'KYC')" pTooltip="{{fileKYCDocument}}" tooltipPosition="top"
+                accept=".pdf,.jpg,.jpeg,.png" class="form-control" required/>
+              <i class="material-icons">attach_file</i>
+            </div>
+            <div class="input-validation-msg customMsg">
+              <div class="label" *ngIf="isValidKYCDocument" style="width: 375px;">
+                <p style="color:red;font-size: 13px;text-align: left;">{{msgError}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="col-md-11 padding-right-0 padding-left-0 margin-top-20">
+              <input type="text" class="form-control" formControlName="BonafideFileName" placeholder="{{fileBonafideCertificate}}" required
+                readonly/>
+            </div>
+            <div class="col-md-1 file-icons padding-right-0 padding-right-0 margin-top-20">
+              <input type="file" (change)="selectFeeReimbursementFiles($event.target,'BC')" pTooltip="{{fileBonafideCertificate}}" tooltipPosition="top"
+                accept=".pdf,.jpg,.jpeg,.png" class="form-control" required/>
+              <i class="material-icons">attach_file</i>
+            </div>
+            <div class="input-validation-msg customMsg">
+              <div class="label" *ngIf="isValidBonafideFile" style="width: 375px;">
+                <p style="color:red;font-size: 13px;text-align: left;">{{msgError}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="col-md-11 padding-right-0 padding-left-0 margin-top-20">
+              <input type="text" class="form-control" formControlName="FeeReceiptFileName" placeholder="{{fileFeeReceiptDocument}}" required
+                readonly/>
+            </div>
+            <div class="col-md-1 file-icons padding-right-0 padding-right-0 margin-top-20">
+              <input type="file" (change)="selectFeeReimbursementFiles($event.target,'FR')" pTooltip="{{fileFeeReceiptDocument}}" tooltipPosition="top"
+                accept=".pdf,.jpg,.jpeg,.png" class="form-control" required/>
+              <i class="material-icons">attach_file</i>
+            </div>
+            <div class="input-validation-msg customMsg">
+              <div class="label" *ngIf="isValidFeeReceiptFile" style="width: 375px;">
+                <p style="color:red;font-size: 13px;text-align: left;">{{msgError}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="col-md-11 padding-right-0 padding-left-0 margin-top-20">
+              <input type="text" class="form-control" formControlName="FeeReimbursementOtherFile" placeholder="{{fileOtherDocument}}" readonly/>
+            </div>
+            <div class="col-md-1 file-icons padding-right-0 padding-right-0 margin-top-20">
+              <input type="file" (change)="selectFeeReimbursementFiles($event.target,'FRO')" pTooltip="{{fileOtherDocument}}" tooltipPosition="top"
+                accept=".pdf,.jpg,.jpeg,.png" class="form-control" />
+              <i class="material-icons">attach_file</i>
+            </div>
+            <div class="input-validation-msg customMsg">
+              <div class="label" *ngIf="isValidFeeOtherFile" style="width: 375px;">
+                <p style="color:red;font-size: 13px;text-align: left;">{{msgError}}</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-7 col-md-offset-3">
+          <button type="submit" [disabled]="!frmApplyFeeReimbursement.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Apply</button>
+          <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+<!-- Fee Reimbursement Popup code end -->
+
+<!-- Health Benefits Popup code start -->
+<div class="phone-number-modal" style="margin-left: 15px;margin-top: -60px;" *ngIf="isShowModal == 4" @dialog>
+  <form [formGroup]="frmApplyHealthBenefits" (submit)="onApplyHealthBenefits(frmApplyHealthBenefits.value,frmApplyHealthBenefits.valid)">
+    <div class="modal-container" style="width: 100%; height: 515px !important;">
+      <div class="modal-header" style="background: #797b85;">
+        <h5>Apply Health Benefit</h5>
+        <i class="material-icons" (click)="closeForm()">close</i>
+      </div>
+      <div class="clearfix"></div>
+      <div class="clearfix"></div>
+
+      <div class="modal-body" style="height: 300px;">
+        <div class="col-md-12">
+          <div class="margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Group ID" tooltipPosition="top" class="form-control" formControlName="GroupID" readonly/>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Loan Amount" tooltipPosition="top" class="form-control" formControlName="LoanAmount" readonly/>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="margin-top-10 col-xs-12 col-md-6">
+            <select class="form-control ddlSelect" (change)="filterHBChanged($event.target.value)" formControlName="ModeofTransfer"
+              required>
+              <!-- <option value="" disabled selected>Select Mode of Transfer</option> -->
+              <option *ngFor="let mode of lstModeofTransfer" value="{{mode.ID}}">{{mode.Mode}}</option>
+            </select>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmApplyHealthBenefits.get('ModeofTransfer'))" [errMsg]="'modeofTransferReq' | translate"></validation>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="col-md-12" style="margin-top:-15px">
+            <div class="col-md-11 padding-right-0 padding-left-0 margin-top-20">
+              <input type="text" class="form-control" formControlName="KYCDocumentName" placeholder="{{fileKYCDocument}}" required readonly/>
+            </div>
+            <div class="col-md-1 file-icons padding-right-0 padding-right-0 margin-top-20">
+              <input type="file" (change)="selectHealthBenifitsFiles($event.target,'KYC')" pTooltip="{{fileKYCDocument}}" tooltipPosition="top"
+                accept=".pdf,.jpg,.jpeg,.png" class="form-control" required/>
+              <i class="material-icons">attach_file</i>
+            </div>
+            <div class="input-validation-msg customMsg">
+              <div class="label" *ngIf="isValidHBKYCDocument" style="width: 375px;">
+                <p style="color:red;font-size: 13px;text-align: left;">{{msgError}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="col-md-11 padding-right-0 padding-left-0 margin-top-20">
+              <input type="text" class="form-control" formControlName="HospitalAdmissionFormName" placeholder="{{fileHospitalAdmission}}"
+                required readonly/>
+            </div>
+            <div class="col-md-1 file-icons padding-right-0 padding-right-0 margin-top-20">
+              <input type="file" (change)="selectHealthBenifitsFiles($event.target,'HA')" pTooltip="{{fileHospitalAdmission}}" tooltipPosition="top"
+                accept=".pdf,.jpg,.jpeg,.png" class="form-control" required/>
+              <i class="material-icons">attach_file</i>
+            </div>
+            <div class="input-validation-msg customMsg">
+              <div class="label" *ngIf="isValidHospitalAdmissionFile" style="width: 375px;">
+                <p style="color:red;font-size: 13px;text-align: left;">{{msgError}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="col-md-11 padding-right-0 padding-left-0 margin-top-20">
+              <input type="text" class="form-control" formControlName="EstimatedHospitalChargesDocName" placeholder="{{fileEstimatedHospitalCharges}}"
+                required readonly/>
+            </div>
+            <div class="col-md-1 file-icons padding-right-0 padding-right-0 margin-top-20">
+              <input type="file" (change)="selectHealthBenifitsFiles($event.target,'HC')" pTooltip="{{fileEstimatedHospitalCharges}}" tooltipPosition="top"
+                accept=".pdf,.jpg,.jpeg,.png" class="form-control" required/>
+              <i class="material-icons">attach_file</i>
+            </div>
+            <div class="input-validation-msg customMsg">
+              <div class="label" *ngIf="isValidEstimatedHospitalChargesFile" style="width: 375px;">
+                <p style="color:red;font-size: 13px;text-align: left;">{{msgError}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="col-md-11 padding-right-0 padding-left-0 margin-top-20">
+              <input type="text" class="form-control" formControlName="EstimatedHospitalOtherFile" placeholder="{{fileOtherDocument}}"
+                readonly/>
+            </div>
+            <div class="col-md-1 file-icons padding-right-0 padding-right-0 margin-top-20">
+              <input type="file" (change)="selectHealthBenifitsFiles($event.target,'EHO')" pTooltip="{{fileOtherDocument}}" tooltipPosition="top"
+                accept=".pdf,.jpg,.jpeg,.png" class="form-control" />
+              <i class="material-icons">attach_file</i>
+            </div>
+            <div class="input-validation-msg customMsg">
+              <div class="label" *ngIf="isValidEstimatedHospitalOtherFile" style="width: 375px;">
+                <p style="color:red;font-size: 13px;text-align: left;">{{msgError}}</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-7 col-md-offset-3">
+          <button type="submit" [disabled]="!frmApplyHealthBenefits.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Apply</button>
+          <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+<!-- Health Benefits Popup code end -->
+
+<!-- Risk Benefit Popup code start -->
+<div class="phone-number-modal" style="margin-left: 15px;margin-top: -60px;" *ngIf="isShowModal == 5" @dialog>
+  <form [formGroup]="frmApplyRiskBenefit" (submit)="onApplyRiskBenefit(frmApplyRiskBenefit.value,frmApplyRiskBenefit.valid)">
+    <div class="modal-container" style="width: 100%; height: 460px !important;">
+      <div class="modal-header" style="background: #797b85;">
+        <h5>Apply Risk Benefit</h5>
+        <i class="material-icons" (click)="closeForm()">close</i>
+      </div>
+      <div class="clearfix"></div>
+      <div class="clearfix"></div>
+
+      <div class="modal-body" style="height: 300px;">
+        <div class="col-md-12">
+          <div class="margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Group ID" tooltipPosition="top" class="form-control" formControlName="GroupID" readonly/>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Loan Amount" tooltipPosition="top" class="form-control" formControlName="LoanAmount" readonly/>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="margin-top-10 col-xs-12 col-md-6">
+            <select class="form-control ddlSelect" (change)="filterRBChanged($event.target.value)" formControlName="ModeofTransfer"
+              required>
+              <!-- <option value="" disabled selected>Select Mode of Transfer</option> -->
+              <option *ngFor="let mode of lstModeofTransfer" value="{{mode.ID}}">{{mode.Mode}}</option>
+            </select>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmApplyRiskBenefit.get('ModeofTransfer'))" [errMsg]="'modeofTransferReq' | translate"></validation>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="col-md-12" style="margin-top:-15px">
+            <div class="col-md-11 padding-right-0 padding-left-0 margin-top-20">
+              <input type="text" class="form-control" formControlName="KYCDocumentName" placeholder="{{fileKYCDocument}}" required readonly/>
+            </div>
+            <div class="col-md-1 file-icons padding-right-0 padding-right-0 margin-top-20">
+              <input type="file" (change)="selectRiskBenifitsFiles($event.target,'KYC')" pTooltip="{{fileKYCDocument}}" tooltipPosition="top"
+                accept=".pdf,.jpg,.jpeg,.png" class="form-control" required/>
+              <i class="material-icons">attach_file</i>
+            </div>
+            <div class="input-validation-msg customMsg">
+              <div class="label" *ngIf="isValidRBKYCDocument" style="width: 375px;">
+                <p style="color:red;font-size: 13px;text-align: left;">{{msgError}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="col-md-11 padding-right-0 padding-left-0 margin-top-20">
+              <input type="text" class="form-control" formControlName="DeathCertificateFileName" placeholder="{{fileDeathCertificate}}"
+                required readonly/>
+            </div>
+            <div class="col-md-1 file-icons padding-right-0 padding-right-0 margin-top-20">
+              <input type="file" (change)="selectRiskBenifitsFiles($event.target,'DC')" pTooltip="{{fileDeathCertificate}}" tooltipPosition="top"
+                accept=".pdf,.jpg,.jpeg,.png" class="form-control" required/>
+              <i class="material-icons">attach_file</i>
+            </div>
+            <div class="input-validation-msg customMsg">
+              <div class="label" *ngIf="isValidDeathCertificateFileNameFile" style="width: 375px;">
+                <p style="color:red;font-size: 13px;text-align: left;">{{msgError}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="col-md-11 padding-right-0 padding-left-0 margin-top-20">
+              <input type="text" class="form-control" formControlName="RiskBenefitOtherFile" placeholder="{{fileOtherDocument}}" readonly/>
+            </div>
+            <div class="col-md-1 file-icons padding-right-0 padding-right-0 margin-top-20">
+              <input type="file" (change)="selectRiskBenifitsFiles($event.target,'ROD')" pTooltip="{{fileOtherDocument}}" tooltipPosition="top"
+                accept=".pdf,.jpg,.jpeg,.png" class="form-control" />
+              <i class="material-icons">attach_file</i>
+            </div>
+            <div class="input-validation-msg customMsg">
+              <div class="label" *ngIf="isValidRiskBenefitOtherFile" style="width: 375px;">
+                <p style="color:red;font-size: 13px;text-align: left;">{{msgError}}</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-7 col-md-offset-3">
+          <button type="submit" [disabled]="!frmApplyRiskBenefit.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Apply</button>
+          <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+<!-- Risk Benefit Popup code end -->
+
+<!-- Home Loan Popup code start -->
+<div class="phone-number-modal" style="margin-left: 15px;margin-top: -10px;" *ngIf="isShowModal == 6" @dialog>
+  <form [formGroup]="frmApplyHomeLoan" (submit)="onApplyHomeLoan(frmApplyHomeLoan.value,frmApplyHomeLoan.valid)">
+    <div class="modal-container" style="width: 100%; height: 255px !important;">
+      <div class="modal-header" style="background: #797b85;">
+        <h5>Apply Home Loan</h5>
+        <i class="material-icons" (click)="closeForm()">close</i>
+      </div>
+      <div class="clearfix"></div>
+      <div class="clearfix"></div>
+
+      <div class="modal-body" style="height: 75px;">
+        <div class="col-md-12">
+          <div class="margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Group ID" tooltipPosition="top" class="form-control" formControlName="GroupID" readonly/>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-7 col-md-offset-3">
+          <button type="submit" [disabled]="!frmApplyHomeLoan.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Apply</button>
+          <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+<!-- Home Loan Popup code end -->
+
+<!-- Prepaid Loan Popup code start -->
+<div class="phone-number-modal" style="margin-left: 15px;margin-top: -10px;" *ngIf="isShowModal == 7" @dialog>
+  <form [formGroup]="frmApplyPrepaidLoan" (submit)="onApplyPrepaid(frmApplyPrepaidLoan.value,frmApplyPrepaidLoan.valid)">
+    <div class="modal-container" style="width: 100%; height: 255px !important;">
+      <div class="modal-header" style="background: #797b85;">
+        <h5>Apply Prepaid Loan</h5>
+        <i class="material-icons" (click)="closeForm()">close</i>
+      </div>
+      <div class="clearfix"></div>
+      <div class="clearfix"></div>
+
+      <div class="modal-body" style="height: 75px;">
+        <div class="col-md-12">
+          <div class="margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Group ID" tooltipPosition="top" class="form-control" formControlName="GroupID" readonly/>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <!-- <div class=" margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Loan Amount" tooltipPosition="top" class="form-control" formControlName="LoanAmount" readonly/>
+            </div>
+          </div>
+          <div class="clearfix"></div> -->
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-7 col-md-offset-3">
+          <button type="submit" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Apply</button>
+          <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+<!-- Prepaid Loan Popup code end -->
+
+<div class="confirm-modal-overay" *ngIf="isShowModal == 2 || isShowModal == 3 || isShowModal == 4 || isShowModal == 5 || isShowModal == 6 || isShowModal == 7"
+  (click)="closeForm()"></div>
+
+<!-- <div class="sucess-msg">
+  <p-messages [(value)]="msgs"></p-messages>
+</div> -->
+
+<admin-footer></admin-footer>
