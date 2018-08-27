@@ -106,6 +106,7 @@ export class LoanEarnsService {
         return Observable.throw(new Error(error.status));
       });
   }
+
   _getPaidLoansByUserID() {
     return this.httpService
       .get(API.GETPAIDLOANSBYUSERID)
@@ -137,6 +138,7 @@ export class LoanEarnsService {
         return Observable.throw(new Error(error.status));
       });
   }
+
   _getApprovedLoansByDCIDorUserName(UserID) {
     return this.httpService
       .get(API.GETAPPROVEDLOANSBYDCIDORUSERNAME + '?DCIDorName=' + UserID)
@@ -144,6 +146,7 @@ export class LoanEarnsService {
         return Observable.throw(new Error(error.status));
       });
   }
+
   _getActiveLoansByUserID() {
     return this.httpService
       .get(API.GETACTIVELOANSBYUSERID)
@@ -167,6 +170,7 @@ export class LoanEarnsService {
         return Observable.throw(new Error(error.status));
       });
   }
+
   _getPendingLoansByDCIDorUserName(UserID) {
     return this.httpService
       .get(API.GETPENDINGLOANSBYDCIDORUSERNAME + '?DCIDorName=' + UserID)
@@ -174,6 +178,7 @@ export class LoanEarnsService {
         return Observable.throw(new Error(error.status));
       });
   }
+
   _getRejectedLoans() {
     return this.httpService
       .get(API.GETREJECTEDLOANS)
@@ -181,6 +186,7 @@ export class LoanEarnsService {
         return Observable.throw(new Error(error.status));
       });
   }
+
   _getRejectedLoansDCIDorUserName(UserID) {
     return this.httpService
       .get(API.GETREJECTEDLOANSDCIDORUSERNAME + '?DCIDorName=' + UserID)
@@ -188,6 +194,7 @@ export class LoanEarnsService {
         return Observable.throw(new Error(error.status));
       });
   }
+
   _getLoanDetails() {
     return this.httpService
       .get(API.GETLOANDETAILS)
@@ -275,6 +282,68 @@ export class LoanEarnsService {
       .toPromise()
       .then(this.extractDataDownload.bind(this))
       .catch(this.handleError.bind(this));
+  }
+
+  
+  _getLoansForUser(DCIDorName) {
+    return this.httpService
+      .get(API.GETLOANSFORUSER + '?DCIDorName=' + DCIDorName)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  //Check Personal loan By UserId
+  _checkPLExistByUserID(UserID) {
+    return this.httpService
+      .get(API.CHECKPLBYUSERID + '?UserID=' + UserID)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  _checkRenewalStatusByUserID(UserID) {
+    return this.httpService
+      .get(API.CHECKRENEWALSTATUSBYUSERID + '?UserID=' + UserID)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  //Check Fee reimbursement
+  _checkFRExistByUserID(UserID) {
+    return this.httpService
+      .get(API.CHECKFRBYUSERID + '?UserID=' + UserID)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  //Check Home Loan
+  _checkHLExistByUserID(UserID) {
+    return this.httpService
+      .get(API.CHECKHLBYUSERID + '?UserID=' + UserID)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  //Check Health benefit
+  _checkHBExistByUserID(UserID) {
+    return this.httpService
+      .get(API.CHECKHBBYUSERID + '?UserID=' + UserID)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  //Check Risk benefit
+  _checkRBExistByUserID(UserID) {
+    return this.httpService
+      .get(API.CHECKRBBYUSERID + '?UserID=' + UserID)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
   }
 
   private extractDataDownload(res: Response) {

@@ -24,5 +24,8 @@ export class RouteConstants {
   public static FRANCHISEREQUEST = 'franchiserequest';
   public static FRANCHISETREE = 'franchisetree';
   public static EXPENSES = 'expenses';
+  public static REQUESTFUNDS = 'requestfunds';
+  public static UPGRADETOSCHOOL = 'upgradetoschool';
+  public static GENERATEMYKEY = 'generatemysecretkeys';
 
 }

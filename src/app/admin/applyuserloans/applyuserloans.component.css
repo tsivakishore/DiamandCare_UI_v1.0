@@ -1,0 +1,13 @@
+.btnnoteligible{
+    background-color: #e85454 !important;
+    border: 0px solid #e85454 !important;
+}
+.btneligible{
+    background-color: #00c8aa !important;
+    border: 0px solid #00c8aa !important;
+}
+
+.ddlSelect{
+    width: 440px;
+    margin-top: 5px;
+}

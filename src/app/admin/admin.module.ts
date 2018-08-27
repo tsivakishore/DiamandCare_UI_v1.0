@@ -29,6 +29,9 @@ import { WallettransactionsComponent } from './wallettransactions/wallettransact
 import { FranchiserequestComponent } from './franchiserequest/franchiserequest.component';
 import { FranchisetreeComponent } from './franchisetree/franchisetree.component';
 import { ExpensesComponent } from './expenses/expenses.component';
+import { RequestfundsComponent } from './requestfunds/requestfunds.component';
+import { UpgradetoschoolComponent } from './upgradetoschool/upgradetoschool.component';
+import { GeneratemysecretkeysComponent } from './generatemysecretkeys/generatemysecretkeys.component';
 
 @NgModule({
   imports: [
@@ -68,7 +71,10 @@ import { ExpensesComponent } from './expenses/expenses.component';
     WallettransactionsComponent,
     FranchiserequestComponent,
     FranchisetreeComponent,
-    ExpensesComponent
+    ExpensesComponent,
+    RequestfundsComponent,
+    UpgradetoschoolComponent,
+    GeneratemysecretkeysComponent
   ],
   exports: [HeaderSidebarComponent]
 })
