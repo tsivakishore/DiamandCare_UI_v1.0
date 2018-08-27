@@ -174,6 +174,32 @@
             </div>
           </div>
         </div>
+        <!-- Pin commission, Fund Transfer charges Start-->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">PIN Commission</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="PIN Commission" pTooltip="PIN Commission" tooltipPosition="top" formControlName="PinCommission"
+              required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(masterScreenForm.get('PinCommission'))" [errMsg]="'PINCommRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(masterScreenForm.get('PinCommission'))" [errMsg]="'validPINComm' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">Fund Transfer Charges</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="Fund Transfer Charges" pTooltip="Fund Transfer Charges" tooltipPosition="top" formControlName="FundTransferCharges"
+              required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(masterScreenForm.get('FundTransferCharges'))" [errMsg]="'FNDTRNSCHRGRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(masterScreenForm.get('FundTransferCharges'))" [errMsg]="'validFNDTRNSCHRG' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <!-- Pin commission, Fund Transfer charges End-->
       </div>
       <div class="clearfix"></div>
       <div class="col-md-12 col-sm-12 col-xs-12 margin-top-15">
@@ -328,7 +354,7 @@
             <div class="label" style="color: #fff;">Available Balance</div>
             <input type="text" class="form-control" placeholder="Available Balance" pTooltip="Available Balance" tooltipPosition="top"
               formControlName="AvailableBalance" readonly />
-              
+
           </div>
           <div class="clearfix"></div>
           <div class=" margin-top-15 col-md-12">
@@ -385,8 +411,8 @@
             <div class="label" style="color: #fff;">User Name</div>
             <input type="text" class="form-control" placeholder="User Name" pTooltip="User Name" tooltipPosition="top" formControlName="UserName"
               readonly />
-              <div class="input-validation-msg">
-              </div>
+            <div class="input-validation-msg">
+            </div>
           </div>
           <div class="clearfix"></div>
           <div class="col-md-6">
@@ -394,7 +420,7 @@
             <div class="clearfix"></div>
             <span class="-addon checkbox check-primary bg-transparent">
               <input type="checkbox" [(ngModel)]="isChecked" formControlName="LoanWaiveoff">
-              
+
             </span>
           </div>
         </div>
@@ -440,8 +466,8 @@
             <div class="label" style="color: #fff;">User Name</div>
             <input type="text" class="form-control" placeholder="User Name" pTooltip="User Name" tooltipPosition="top" formControlName="UserName"
               readonly />
-              <div class="input-validation-msg">
-              </div>
+            <div class="input-validation-msg">
+            </div>
           </div>
           <div class="clearfix"></div>
           <div class=" margin-top-15 col-md-12">

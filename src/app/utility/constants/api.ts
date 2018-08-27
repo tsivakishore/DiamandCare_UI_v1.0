@@ -100,6 +100,8 @@ export class API {
   public static GETWALLETRECENTEXPENSES = 'wallet/GetWalletRecentExpenses';
   public static INSERTWALLETEXPENSES = 'wallet/InsertWalletExpenses';
   public static GETWALLETTRANSACTIONS = 'wallet/GetWalletTransactions';
+  public static GETFUNDREQUEST = 'wallet/GetFundRequest';
+  public static GETFUNDREQUESTSTATUS = 'wallet/GetFundRequestStatus';
 
   // EXTERNAL API CALLERS
 
