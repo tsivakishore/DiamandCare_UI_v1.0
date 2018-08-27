@@ -805,5 +805,16 @@ export class ApplyuserloansComponent extends BaseComponent implements OnInit {
   closeForm() {
     this.isShowModal = 1;
   }
-
+  
+  public getWalletTransactions() {
+    this.sharedService.setLoader(true);
+    this.walletServ._getWalletTransactions().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.WalletExpensesList = res.m_Item3;
+      }
+    }, err => {
+      this.sharedService.setLoader(false);
+    })
+  }
 }

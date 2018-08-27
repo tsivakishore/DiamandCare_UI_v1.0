@@ -199,6 +199,7 @@ export const LANG_EN_TRANS = {
   'amountrequired': 'Amount required',
   'TransactionAmountLnth':'Amount Length missmatch',
   'purpose':'Purpose',
-  'purposerequired':'Purpose required'
+  'purposerequired':'Purpose required',
+  'walletTrnsctns': 'Wallet Transactions'
 };
 

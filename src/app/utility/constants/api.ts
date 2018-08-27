@@ -120,6 +120,8 @@ export class API {
   public static GETUSERDETAILSBYDCIDOrUSERNAME = 'user/UserDetailsByDCIDOrUserName';
   public static GETUSERDETAILSBYUSERID = 'user/UserDetailsByUserID';
   public static USERADDRESSBYID = 'user/useraddressbyId';
+  public static GETFUNDREQUEST = 'wallet/GetFundRequest';
+  public static GETFUNDREQUESTSTATUS = 'wallet/GetFundRequestStatus';
 
   // EXTERNAL API CALLERS
 

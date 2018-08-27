@@ -241,7 +241,9 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       SGST: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
       CGST: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
       IGST: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
-      TDS: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])]
+      TDS: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
+      PinCommission: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
+      FundTransferCharges: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])]
     })
   }
 
@@ -265,7 +267,9 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
             SGST: this.masterCharges.SGST,
             CGST: this.masterCharges.CGST,
             IGST: this.masterCharges.IGST,
-            TDS: this.masterCharges.TDS
+            TDS: this.masterCharges.TDS,
+            PinCommission: this.masterCharges.PinCommission,
+            FundTransferCharges: this.masterCharges.FundTransferCharges
           })
         }
         else
@@ -298,7 +302,9 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
           SGST: this.masterCharges.SGST,
           CGST: this.masterCharges.CGST,
           IGST: this.masterCharges.IGST,
-          TDS: this.masterCharges.TDS
+          TDS: this.masterCharges.TDS,
+          PinCommission: this.masterCharges.PinCommission,
+          FundTransferCharges: this.masterCharges.FundTransferCharges
         })
       }
     }, err => {
