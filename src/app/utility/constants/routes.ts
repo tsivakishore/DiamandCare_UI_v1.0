@@ -27,5 +27,6 @@ export class RouteConstants {
   public static REQUESTFUNDS = 'requestfunds';
   public static UPGRADETOSCHOOL = 'upgradetoschool';
   public static GENERATEMYKEY = 'generatemysecretkeys';
+  public static UPDETEUSERPROFILE = 'updateuserprofile';
 
 }

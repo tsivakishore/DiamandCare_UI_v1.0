@@ -70,6 +70,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   Is_Visible_Upgrade_School = false;
   Is_Visible_Request_Funds = false;
   Is_Visible_Generate_My_SecretKeys = false;
+  Is_Visible_Update_UsersProfile = false;
 
   constructor(private apiManager: APIManager, private sharedService: SharedService, private commonService: CommonService,
     private router: Router, public toastr: ToastsManager, public vcr: ViewContainerRef) {
@@ -158,10 +159,13 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
               case RouteConstants.GENERATEMYKEY:
                 this.Is_Visible_Generate_My_SecretKeys = true;
                 break;
+              case RouteConstants.UPDETEUSERPROFILE:
+                this.Is_Visible_Update_UsersProfile = true;
+                break;
             }
           }
           else if (this.roleID === BaseUrl.UserRoleID) {
-            this.isUserWallet = false;
+            this.isUserWallet = true;
             switch (menu) {
               case RouteConstants.SETTINGS:
                 this.Is_Visible_Settings = true;
@@ -191,7 +195,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
                 this.Is_Visible_Request_Funds = true;
                 break;
               case RouteConstants.GENERATEMYKEY:
-                this.Is_Visible_Generate_My_SecretKeys = false;
+                this.Is_Visible_Generate_My_SecretKeys = true;
                 break;
             }
           }
@@ -249,10 +253,13 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
               case RouteConstants.GENERATEMYKEY:
                 this.Is_Visible_Generate_My_SecretKeys = true;
                 break;
+              case RouteConstants.UPDETEUSERPROFILE:
+                this.Is_Visible_Update_UsersProfile = true;
+                break;
             }
           }
           else if (this.roleID === BaseUrl.SchoolRoleID) {
-            this.isUserWallet = false;
+            this.isUserWallet = true;
             switch (menu) {
               case RouteConstants.SETTINGS:
                 this.Is_Visible_Settings = true;
@@ -431,6 +438,10 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   get generateMySecreteKeysUrl() {
     return "/" + RouteConstants.GENERATEMYKEY;
+  }
+
+  get updateUsersProfileUrl() {
+    return "/" + RouteConstants.UPDETEUSERPROFILE;
   }
 
   earnLoanEvent() {

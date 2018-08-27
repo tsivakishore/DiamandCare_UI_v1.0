@@ -170,7 +170,6 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
   getUserNameWithFreeKey(IDorName: any) {
     IDorName = IDorName.UserID;
     if (IDorName != "") {
-      debugger;
       this.franchiseService._getUserNameWithFreeKey(IDorName).subscribe(response => {
         if (response.m_Item1) {
           this.userID = response.m_Item3.UserID

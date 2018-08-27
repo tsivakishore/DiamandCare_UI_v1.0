@@ -23,6 +23,12 @@
       <div class="clearfix"></div>
     </li>
     <li tooltipPosition="top">
+      <a [routerLink]="updateUsersProfileUrl" *ngIf="Is_Visible_Update_UsersProfile" routerLinkActive="active">
+        <i class="material-icons">settings</i>
+        <span>Modify Users Settings</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
       <a [routerLink]="walletTransactionsUrl" *ngIf="Is_Visible_Wallet_Transactions" routerLinkActive="active">
         <i class="material-icons">apps</i>
         <span>Wallet Transactions</span>
@@ -186,6 +192,12 @@
         <div class="clearfix"></div>
       </a>
       <div class="clearfix"></div>
+    </li>
+    <li>
+      <a [routerLink]="updateUsersProfileUrl" *ngIf="Is_Visible_Update_UsersProfile" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">settings</i>
+        <span>Modify Users Settings</span>
+      </a>
     </li>
     <li>
       <a [routerLink]="walletTransactionsUrl" *ngIf="Is_Visible_Wallet_Transactions" routerLinkActive="active" (click)="closeSidebar()">
@@ -359,7 +371,7 @@
         </a>
       </li>
       <li>
-        <a *ngIf="isUserWallet">
+        <a>
           <div class="top-menu">
             <a pTooltip="Balance" tooltipPosition="top" routerLinkActive="active">
               <div *ngIf="!loadBalance" class="button-loader"></div>

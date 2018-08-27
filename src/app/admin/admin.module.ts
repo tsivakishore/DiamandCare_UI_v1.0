@@ -32,6 +32,7 @@ import { ExpensesComponent } from './expenses/expenses.component';
 import { RequestfundsComponent } from './requestfunds/requestfunds.component';
 import { UpgradetoschoolComponent } from './upgradetoschool/upgradetoschool.component';
 import { GeneratemysecretkeysComponent } from './generatemysecretkeys/generatemysecretkeys.component';
+import { UpdateuserprofileComponent } from './updateuserprofile/updateuserprofile.component';
 
 @NgModule({
   imports: [
@@ -74,7 +75,8 @@ import { GeneratemysecretkeysComponent } from './generatemysecretkeys/generatemy
     ExpensesComponent,
     RequestfundsComponent,
     UpgradetoschoolComponent,
-    GeneratemysecretkeysComponent
+    GeneratemysecretkeysComponent,
+    UpdateuserprofileComponent
   ],
   exports: [HeaderSidebarComponent]
 })

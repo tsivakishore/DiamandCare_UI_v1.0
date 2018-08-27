@@ -95,6 +95,14 @@ export class CommonService {
             .catch(this.handleError.bind(this));
     }
 
+    _getFranchiseRequestStaus() {
+        return this.httpService
+            .get(API.GETFRANCHISEREQUESTSTATUS)
+            .map(res => this.extractData(res, true)).catch((error: any) => {
+                return Observable.throw(new Error(error.status));
+            });
+    }
+
     private extractDataDownload(res: Response) {
         let body = res;
         return body || {};

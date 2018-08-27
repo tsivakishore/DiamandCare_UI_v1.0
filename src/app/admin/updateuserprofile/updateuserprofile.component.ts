@@ -13,12 +13,13 @@ import { style, transition, animate, trigger } from "@angular/animations";
 import { slideUp } from "../animation";
 import { TranslateService } from "../../utility/translate/translate.service";
 import { CommonService } from "../../utility/shared-service/common.service";
+import { UserService } from "../../utility/shared-service/user.service";
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css'],
-  providers: [CommonService],
+  selector: 'app-updateuserprofile',
+  templateUrl: './updateuserprofile.component.html',
+  styleUrls: ['./updateuserprofile.component.css'],
+  providers: [CommonService, UserService],
   animations: [
     trigger('dialog', [
       transition('void => *', [
@@ -32,7 +33,9 @@ import { CommonService } from "../../utility/shared-service/common.service";
     slideUp
   ]
 })
-export class SettingsComponent extends BaseComponent implements OnInit {
+
+export class UpdateuserprofileComponent extends BaseComponent implements OnInit {
+
   isShowModal: number = 1;
   commonFunctions = new CommonFunctions();
   changePasswordForm: FormGroup;
@@ -42,7 +45,8 @@ export class SettingsComponent extends BaseComponent implements OnInit {
   frmNomineeDetails: FormGroup;
 
   status: string;
-  UserDetails: any;
+  // UserDetails: any;
+  UpdatedUserDetails: any;
   user: User;
   checked: boolean;
   userDetails: any;
@@ -54,9 +58,15 @@ export class SettingsComponent extends BaseComponent implements OnInit {
   UserBankDetails: any[];
   defaultBankID: string;
   userID: number;
+  UpdatedUserID: number = 0;
   isBankGrid: boolean = false;
   isBankAccountLink: boolean = false;
   isVisible_OtherRelations: boolean = false;
+
+  FirstName: string = "";
+  LastName: string = "";
+  PhoneNumber: string = "";
+  Email: string = "";
 
   constructor(public fb: FormBuilder,
     private translateService: TranslateService,
@@ -65,13 +75,13 @@ export class SettingsComponent extends BaseComponent implements OnInit {
     private toastManager: ToastsManager,
     private apiManager: APIManager,
     private userAuthService: UserAuthService,
+    private userService: UserService,
     private sharedService: SharedService) {
     super(toastManager, vcr);
   }
 
   ngOnInit() {
-    this.UserDetails = this.sharedService.getUser();
-    this.userID = this.UserDetails.UserID;
+    this.GetUserDetailsByDCIDorName('');
     this.createUserProfileForm();
     this.createChangePassword();
     this.createAddressForm();
@@ -82,6 +92,8 @@ export class SettingsComponent extends BaseComponent implements OnInit {
 
   createChangePassword() {
     this.changePasswordForm = this.fb.group({
+      Id: new FormControl(''),
+      UserID: new FormControl(''),
       OldPassword: new FormControl(''),
       Password: new FormControl('', Validators.compose([Validators.minLength(8), Validators.maxLength(50), Validators.pattern(CommonRegexp.PASSWORD_REGEXP)])),
       ConfirmPassword: new FormControl('', Validators.compose([Validators.minLength(8), Validators.maxLength(50), Validators.pattern(CommonRegexp.PASSWORD_REGEXP)])),
@@ -116,6 +128,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
   createAddressForm() {
     this.addressForm = this.fb.group({
       Id: new FormControl(''),
+      UserID: new FormControl(''),
       Address1: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(250)])),
       Address2: new FormControl('', Validators.compose([Validators.minLength(4), Validators.maxLength(250)])),
       City: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50), <any>Validators.pattern(CommonRegexp.ALPHABETS_SPECIALCHAR_REGEXP)]),
@@ -151,6 +164,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
 
   createNomineeDetailsForm() {
     this.frmNomineeDetails = this.fb.group({
+      Id: new FormControl(''),
       UserID: new FormControl(''),
       NomineeID: new FormControl(null),
       NomineeName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50), <any>Validators.pattern(CommonRegexp.ALPHA_NUMERIC)])),
@@ -161,22 +175,8 @@ export class SettingsComponent extends BaseComponent implements OnInit {
     });
   }
 
-  public GetUserProfile() {
-    this.userAuthService._getUserProfile().then((res: any) => {
-      if (res.m_Item1) {
-        this.userDetails = res.m_Item3;
-        this.sharedService.setUser(this.userDetails);
-      }
-      else {
-        this.toastr.error(res.m_Item2);
-      }
-    }, err => {
-      console.log(err);
-    })
-  }
-
-  public GetUserAddress() {
-    this.userAuthService._getUserAddress().then((res: any) => {
+  public GetUserAddress(Id: string) {
+    this.userService._getUserAddressById(Id).subscribe((res: any) => {
       if (res.m_Item1) {
         this.userAddress = res.m_Item3;
       }
@@ -207,11 +207,11 @@ export class SettingsComponent extends BaseComponent implements OnInit {
         if (response.m_Item1) {
           this.sharedService.setUser(response.m_Item3);
           this.toastr.success(response.m_Item2);
-          this.ngOnInit();
+          this.GetUserDetailsByDCIDorName(this.UpdatedUserDetails.UserName);
         }
         else {
           this.toastr.error(response.m_Item2);
-          this.sharedService.setUser(this.UserDetails);
+          this.sharedService.setUser(this.UpdatedUserDetails);
         }
         this.isShowModal = 1;
       }, err => {
@@ -226,6 +226,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
 
   AddOrModifyAddress(formAddress, IsValidForm) {
     if (IsValidForm) {
+      formAddress.Id = this.UpdatedUserDetails.Id;
       this.apiManager.postAPI(API.UPDATEUSERADDRESS, formAddress).subscribe(response => {
         if (response.m_Item1) {
           this.toastr.success(response.m_Item2);
@@ -246,7 +247,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
 
   AddOrModifyNomineeDetails(formNomineeDetails, IsValidForm) {
     if (IsValidForm) {
-      formNomineeDetails.UserID = this.userID;
+      formNomineeDetails.UserID = this.UpdatedUserID;
       this.apiManager.postAPI(API.ADDorMODIFYNOMINEE, formNomineeDetails).subscribe(response => {
         if (response.m_Item1) {
           this.toastr.success(response.m_Item2);
@@ -267,7 +268,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
 
   AddBankAccountDetails(formBankAccount, IsValidForm) {
     if (IsValidForm) {
-      formBankAccount.UserID = this.userID;
+      formBankAccount.UserID = this.UpdatedUserID;
       this.apiManager.postAPI(API.INSERTORUPDATEBANKDETAILS, formBankAccount).subscribe(response => {
         if (response.m_Item1) {
           this.toastr.success(response.m_Item2);
@@ -292,69 +293,76 @@ export class SettingsComponent extends BaseComponent implements OnInit {
   }
 
   onShowUserProfileModal() {
-    this.createUserProfileForm();
-    this.userProfileForm.patchValue(this.UserDetails);
-    this.isShowModal = 2;
+    if (!!this.UpdatedUserDetails) {
+      this.createUserProfileForm();
+      this.userProfileForm.patchValue(this.UpdatedUserDetails);
+      this.isShowModal = 2;
+    }
   }
 
   onShowPasswordModel() {
-    this.createChangePassword();
-    this.isShowModal = 3;
+    if (!!this.UpdatedUserDetails) {
+      this.createChangePassword();
+      this.isShowModal = 3;
+    }
   }
 
   onShowAddOrModifyAddressModel() {
-    this.isShowModal = 4;
-    this.createAddressForm();
-    this.userAuthService._getUserAddress().then((res: any) => {
-      if (res.m_Item1) {
-        this.userAddress = res.m_Item3;
-        this.addressForm.patchValue(this.userAddress);
-      }
-      else {
-        this.isShowModal = 1;
-        this.toastr.error(res.m_Item2);
-      }
-    }, err => {
-      console.log(err);
-    })
-
+    if (!!this.UpdatedUserDetails) {
+      this.isShowModal = 4;
+      this.createAddressForm();
+      this.userService._getUserAddressById(this.UpdatedUserDetails.Id).subscribe((res: any) => {
+        if (res.m_Item1) {
+          this.userAddress = res.m_Item3;
+          this.addressForm.patchValue(this.userAddress);
+        }
+        else {
+          this.isShowModal = 1;
+          this.toastr.error(res.m_Item2);
+        }
+      }, err => {
+        console.log(err);
+      })
+    }
   }
 
   onShowBankAccountModel() {
-    this.isShowModal = 5;
-    this.GetBanks();
-    this.createBankAccountForm();
-    // this.defaultBankID = "--Select Bank--"
-    // this.frmNomineeDetails.controls['BankID'].setValue(this.defaultBankID, { onlySelf: true });
+    if (!!this.UpdatedUserDetails) {
+      this.isShowModal = 5;
+      this.GetBanks();
+      this.createBankAccountForm();
+    }
   }
 
   onShowAddNomineeModel() {
-    this.isShowModal = 6;
-    this.GetNomineeRelations();
-    this.createNomineeDetailsForm();
+    if (!!this.UpdatedUserDetails) {
+      this.isShowModal = 6;
+      this.GetNomineeRelations();
+      this.createNomineeDetailsForm();
 
-    this.userAuthService._getUserNomineeDetails(this.userID).then((res: any) => {
-      if (res.m_Item1) {
-        this.userNomineeDetails = res.m_Item3;
-        this.frmNomineeDetails.patchValue(this.userNomineeDetails);
-        let nomineeRelationshipID = this.userNomineeDetails.NomineeRelationshipID;
-        this.frmNomineeDetails.controls['NomineeRelationshipID'].setValue(nomineeRelationshipID, { onlySelf: true });
-      }
-      else {
-        this.frmNomineeDetails.controls['NomineeRelationshipID'].setValue(1, { onlySelf: true });
-        this.isVisible_OtherRelations = false;
-      }
-    }, err => {
-      console.log(err);
-    })
+      this.userAuthService._getUserNomineeDetails(this.UpdatedUserID).then((res: any) => {
+        if (res.m_Item1) {
+          this.userNomineeDetails = res.m_Item3;
+          this.frmNomineeDetails.patchValue(this.userNomineeDetails);
+          let nomineeRelationshipID = this.userNomineeDetails.NomineeRelationshipID;
+          this.frmNomineeDetails.controls['NomineeRelationshipID'].setValue(nomineeRelationshipID, { onlySelf: true });
+        }
+        else {
+          this.frmNomineeDetails.controls['NomineeRelationshipID'].setValue(1, { onlySelf: true });
+          this.isVisible_OtherRelations = false;
+        }
+      }, err => {
+        console.log(err);
+      })
+    }
   }
 
   changePassword(formChangePassword, IsValidForm) {
     if (IsValidForm) {
-      this.apiManager.postAPI(API.CHANGEPASSWORD, formChangePassword).subscribe(response => {
+      formChangePassword.Id = this.UpdatedUserDetails.Id;
+      this.apiManager.postAPI(API.CHANGEPASSWORDBYID, formChangePassword).subscribe(response => {
         if (response.m_Item1) {
           this.toastr.success(response.m_Item2);
-          //this.sharedService.logout();
         }
         else {
           this.toastr.error(response.m_Item2);
@@ -395,7 +403,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
   }
 
   public GetUserBankDetails() {
-    this.commonService._getUserBankDetails(this.userID).then((res: any) => {
+    this.commonService._getUserBankDetails(this.UpdatedUserID).then((res: any) => {
       if (res.m_Item1) {
         this.isBankGrid = true;
         this.isBankAccountLink = false;
@@ -424,6 +432,36 @@ export class SettingsComponent extends BaseComponent implements OnInit {
     }
   }
 
+  public GetUserDetailsByDCIDorName(DCIDorName) {
+    this.sharedService.setLoader(true);
+    this.userService._getUserDetailsByDCIDorName(DCIDorName).subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.UpdatedUserDetails = res.m_Item3;
+        this.sharedService.setUser(this.UpdatedUserDetails);
+        this.FirstName = this.UpdatedUserDetails.FirstName;
+        this.LastName = this.UpdatedUserDetails.LastName;
+        this.PhoneNumber = this.UpdatedUserDetails.PhoneNumber;
+        this.Email = this.UpdatedUserDetails.Email;
+        this.UpdatedUserID = this.UpdatedUserDetails.UserID;
+      }
+      else {
+        this.FirstName = "";
+        this.LastName = "";
+        this.PhoneNumber = "";
+        this.Email = "";
+      }
+    }, err => {
+      this.sharedService.setLoader(false);
+    })
+  }
+
+  onSearchChange(searchValue: string) {
+    if (!!searchValue && searchValue.trim().length >= 5) {
+      this.GetUserDetailsByDCIDorName(searchValue);
+    }
+  }
+
   closeForm() {
     this.isShowModal = 1;
   }
@@ -440,4 +478,5 @@ export class SettingsComponent extends BaseComponent implements OnInit {
       this.isShowModal = 1;
     }
   }
+
 }

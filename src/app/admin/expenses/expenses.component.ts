@@ -65,7 +65,6 @@ export class ExpensesComponent extends BaseComponent implements OnInit {
   }
 
   onSubmitExpenses(formParam, IsValidForm) {
-    debugger;
     if (IsValidForm) {
       this.apiManager.postAPI(API.INSERTWALLETEXPENSES, formParam).subscribe(response => {
         if (response.m_Item1) {

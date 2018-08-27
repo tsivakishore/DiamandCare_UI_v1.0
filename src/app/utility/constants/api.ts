@@ -78,6 +78,7 @@ export class API {
   public static UPDATEUSERROLE = 'user/updateuserrole';
   public static FORGETPASSWORD = 'user/forgetpassword';
   public static CHANGEPASSWORD = 'user/changepassword';
+  public static CHANGEPASSWORDBYID = 'user/changepasswordbyId';
   public static GETTREEVIEWDATA = 'treedata/GetTreeData';
   public static INSERTORUPDATEBANKDETAILS = 'userbankdetails/InsertorUpdateUserBankDetails';
   public static GETUSERBANKDETAILS = 'userbankdetails/GetUserBankDetails';
@@ -113,6 +114,12 @@ export class API {
   public static GETWALLETRECENTEXPENSES = 'wallet/GetWalletRecentExpenses';
   public static INSERTWALLETEXPENSES = 'wallet/InsertWalletExpenses';
   public static GETWALLETTRANSACTIONS = 'wallet/GetWalletTransactions';
+  public static GETFRANCHISEREQUESTSTATUS = 'Shared/GetFranchiseRequestStaus';
+  public static SAVEFRANCHISEREQUEST = 'franchisedetails/SaveFranchiseRequest';
+  public static GETFRANCHISEUSERREQUESTS = 'franchisedetails/GetFranchiseUserRequests';
+  public static GETUSERDETAILSBYDCIDOrUSERNAME = 'user/UserDetailsByDCIDOrUserName';
+  public static GETUSERDETAILSBYUSERID = 'user/UserDetailsByUserID';
+  public static USERADDRESSBYID = 'user/useraddressbyId';
 
   // EXTERNAL API CALLERS
 

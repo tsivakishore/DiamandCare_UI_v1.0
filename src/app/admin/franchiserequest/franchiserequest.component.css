@@ -1,0 +1,10 @@
+.btnyes{
+    width: 90px; 
+    margin-left: 10px;
+}
+.btnno{
+    width: 90px;
+    background: #e85454;
+    border: #e85454; 
+    margin-left: 20px;
+}

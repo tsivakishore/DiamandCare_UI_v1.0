@@ -139,22 +139,18 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
       this.loanEarnsService._updateUserLoanPayment(this.UserID, this.LoanID, this.AmountToPay).subscribe((res: any) => {
         this.sharedService.setLoader(false);
         if (res.m_Item1) {
-          debugger;
           this.isShowModal = 1;
           this.toastr.success(res.m_Item2);
           this.GetAllPaidLoans();
           this.GetActiveLoansByUserID();
-          debugger;
         }
         else
           this.toastr.error(res.m_Item2);
       }, err => {
-        debugger;
         this.sharedService.setLoader(false);
       })
     }
     else {
-      debugger;
       this.sharedService.setLoader(false);
       this.toastr.error("Form is not valid");
     }

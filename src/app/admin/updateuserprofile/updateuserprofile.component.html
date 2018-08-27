@@ -1,28 +1,36 @@
 <div class="settings-container">
+  <div>
+    <div class="col-md-4 col-xs-12 col-sm-12 margin-top-15">
+      <div class="label" style="color: white;">Search by Username or DCID</div>
+      <input type="text" #txtSearcByLoanId id="txtSearcByLoanId" class="form-control" placeholder="Search by Username or DCID"
+        (input)="onSearchChange($event.target.value)" />
+    </div>
+    <div class="clearfix"></div>
+  </div>
   <div class="col-md-12 col-xs-12 user-data" @slideUp>
-    <h3>{{'userInfo' | translate}}</h3>
+    <h3>User Details</h3>
     <div class="col-md-4 col-xs-12 padding-left-10 margin-top-10">
       <label>{{'firstName' | translate}}</label>
-      <div>{{UserDetails.FirstName}}</div>
+      <div>{{FirstName}}</div>
     </div>
     <div class="col-md-4 col-xs-12 margin-top-10">
       <label>{{'lastName' | translate}}</label>
-      <div>{{UserDetails.LastName}}</div>
+      <div>{{LastName}}</div>
     </div>
     <div class="clearfix"></div>
 
     <div class="col-md-4 col-xs-12 padding-left-10 margin-top-10">
       <label>{{'phnNumber' | translate}}</label>
-      <div>{{UserDetails.PhoneNumber}}</div>
+      <div>{{PhoneNumber}}</div>
     </div>
     <div class="col-md-4 col-xs-12 margin-top-10">
       <label>{{'email' | translate}}</label>
-      <div>{{UserDetails.Email}}</div>
+      <div>{{Email}}</div>
     </div>
   </div>
 
   <div class="col-md-12 col-xs-12 settings-list" @slideUp>
-    <h3 class="main-header">My Settings</h3>
+    <h3 class="main-header">{{'settings' | translate}}</h3>
     <ul>
       <li class="padding-top-15" (click)="onShowUserProfileModal()">
         <div>Edit Profile</div>
@@ -374,8 +382,8 @@
               </option>
             </select>
             <!-- <div class="input-validation-msg">
-              <validation *ngIf="isRequiredField(frmNomineeDetails.get('BankID'))" [errMsg]="'bankIDRqrd' | translate"></validation>
-            </div> -->
+                <validation *ngIf="isRequiredField(frmNomineeDetails.get('BankID'))" [errMsg]="'bankIDRqrd' | translate"></validation>
+              </div> -->
           </div>
         </div>
         <div class="margin-top-10 col-md-12">
@@ -481,8 +489,8 @@
           <div class="col-md-6 padding-right-0">
             <div class="label" style="color: #fff;">Nominee Name</div>
             <div class="clearfix"></div>
-            <input type="text" placeholder="NomineeName" pTooltip="NomineeName" tooltipPosition="top" class="form-control"
-              formControlName="NomineeName" required/>
+            <input type="text" placeholder="NomineeName" pTooltip="NomineeName" tooltipPosition="top" class="form-control" formControlName="NomineeName"
+              required/>
             <div class="input-validation-msg">
               <validation *ngIf="isRequiredField(frmNomineeDetails.get('NomineeName'))" [errMsg]="'nomineeNameRqrd' | translate"></validation>
               <validation *ngIf="isValidLength(frmNomineeDetails.get('NomineeName'))" [errMsg]="'nomineeNameLnth' | translate"></validation>
@@ -499,7 +507,7 @@
               <validation *ngIf="isRequiredField(frmNomineeDetails.get('NomineeRelationshipID'))" [errMsg]="'nomineeRelationShipRqrd' | translate"></validation>
             </div>
           </div>
-          <div class="col-md-3 padding-right-0" *ngIf="isVisible_OtherRelations" >
+          <div class="col-md-3 padding-right-0" *ngIf="isVisible_OtherRelations">
             <div class="label" style="color: #fff;">Other Relationship</div>
             <div class="clearfix"></div>
             <input type="text" placeholder="Other Relationship" pTooltip="Other Relationship" tooltipPosition="top" class="form-control"

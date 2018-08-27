@@ -25,6 +25,7 @@ import { ExpensesComponent } from './expenses/expenses.component';
 import { RequestfundsComponent } from './requestfunds/requestfunds.component';
 import { UpgradetoschoolComponent } from './upgradetoschool/upgradetoschool.component';
 import { GeneratemysecretkeysComponent } from './generatemysecretkeys/generatemysecretkeys.component';
+import { UpdateuserprofileComponent } from './updateuserprofile/updateuserprofile.component';
 
 const routes: Routes = [
   {
@@ -140,6 +141,11 @@ const routes: Routes = [
   {
     path: RouteConstants.UPGRADETOSCHOOL,
     component: UpgradetoschoolComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.UPDETEUSERPROFILE,
+    component: UpdateuserprofileComponent,
     canActivate: [AuthGaurd]
   }
 ];

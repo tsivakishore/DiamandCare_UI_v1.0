@@ -41,6 +41,7 @@ export class FranchiseService {
         return Observable.throw(new Error(error.status));
       });
   }
+
   _getFranchiseUsernameWalletByIDorName(postData) {
     return this.httpService
       .get(API.GETFRANCHISEUSERNAMEWALLETBYIDORNAME+ '?DcIDorName=' + postData)
@@ -48,6 +49,7 @@ export class FranchiseService {
         return Observable.throw(new Error(error.status));
       });
   }
+
   _getUsernameByDCIDorName(postData) {
     return this.httpService
       .get(API.GETUSERNAMEBYDCIDorNAME+ '?DcIDorName=' + postData)
@@ -55,6 +57,7 @@ export class FranchiseService {
         return Observable.throw(new Error(error.status));
       });
   }
+
   _getUserNameWithFreeKey(postData) {
     return this.httpService
       .get(API.GETFREETOPAIDUSERDETAILS+ '?DcIDorName=' + postData)
@@ -62,9 +65,18 @@ export class FranchiseService {
         return Observable.throw(new Error(error.status));
       });
   }
+
   _getUnderFranchiseDetails(postData) {
     return this.httpService
       .get(API.GETUNDERFRANCHISEDETAILS + '?FranchiseTypeID=' + postData)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  _getFranchiseUserRequests() {
+    return this.httpService
+      .get(API.GETFRANCHISEUSERREQUESTS)
       .map(res => this.extractData(res, true)).catch((error: any) => {
         return Observable.throw(new Error(error.status));
       });

@@ -188,7 +188,7 @@ export const LANG_EN_TRANS = {
   'doYouQuestion': 'Any Questions? Contact us at',
   'submit': 'Submit',
   'save': 'Save',
-  'userInfo': 'User Information',
+  'userInfo': 'My Profile',
   'changePassword': 'Change Password',
   'chngePhnNumber': 'Change Phone Number',
   'phnNumber': 'Phone Number',
