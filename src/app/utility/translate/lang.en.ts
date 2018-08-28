@@ -32,6 +32,7 @@ export const LANG_EN_TRANS = {
   'modeofTransferReq': 'Please select mode of transfer',
   'frstNameRqrd': 'Please enter your first name',
   'lastNameRqrd': 'Please enter your last name',
+  'validLastName': 'Please enter valid last name',
   'userNameRqrd': 'Please enter your user name',
   'validUserName': 'Username atleast 1 Capital, 1 small and 1 digit',
   'userNameLnth': 'User name length in between 8 to 25',

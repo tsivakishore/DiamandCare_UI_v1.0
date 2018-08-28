@@ -200,6 +200,9 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
               case RouteConstants.MYSECRETKEYS:
                 this.Is_Visible_My_SecretKeys = true;
                 break;
+              case RouteConstants.LOANPAYMENT:
+                this.Is_Visible_LoanPayment = true;
+                break;
             }
           }
           else if (this.roleID === BaseUrl.FranchiseRoleID) {

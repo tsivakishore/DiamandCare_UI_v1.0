@@ -105,7 +105,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
       UserName: new FormControl(''),
       DcID: new FormControl(''),
       FirstName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])),
-      LastName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(50)])),
+      LastName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50),<any>Validators.pattern(CommonRegexp.ALPHABETS_REGEXP)])),
       PhoneNumber: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), <any>Validators.pattern(CommonRegexp.NUMERIC_REGEXP)]),
       Email: new FormControl('', Validators.compose([Validators.minLength(5), Validators.maxLength(100), <any>Validators.pattern(CommonRegexp.EMAIL_ADDRESS_REGEXP)])),
       FatherName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(50)])),

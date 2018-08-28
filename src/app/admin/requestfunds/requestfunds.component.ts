@@ -9,13 +9,13 @@ import { API } from "../../utility/constants/api";
 import { dialog, slideUp } from "../animation";
 import { TranslateService } from "../../utility/translate/translate.service";
 import { style, transition, animate, trigger } from "@angular/animations";
-import { SecretKeyService } from "../../utility/shared-service/secretkey.service";
+import { UserService } from "../../utility/shared-service/user.service";
 
 @Component({
   selector: 'app-requestfunds',
   templateUrl: './requestfunds.component.html',
   styleUrls: ['./requestfunds.component.css'],
-  providers: [SecretKeyService],
+  providers: [UserService],
   animations: [
     trigger('dialog', [
       transition('void => *', [
@@ -38,9 +38,10 @@ export class RequestfundsComponent extends BaseComponent implements OnInit {
   gridTitle: string;
   userID: number;
   UserDetails: any;
+  ToUserDetails: any;
 
   constructor(private sharedService: SharedService,
-    private secretKeyService: SecretKeyService,
+    private userService: UserService,
     private fb: FormBuilder,
     private apiManager: APIManager,
     public toastr: ToastsManager,
@@ -63,7 +64,7 @@ export class RequestfundsComponent extends BaseComponent implements OnInit {
       UserID: [''],
       UserName: [''],
       RequestTo: ['', Validators.compose([Validators.required])],
-      RequestAmount: new FormControl('', Validators.compose([Validators.min(1), Validators.maxLength(8), <any>Validators.pattern(CommonRegexp.NUMERIC_REGEXP)]))
+      RequestAmount: new FormControl('', Validators.compose([Validators.required, <any>Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)]))
     })
   }
 
@@ -82,27 +83,30 @@ export class RequestfundsComponent extends BaseComponent implements OnInit {
     }
   }
 
-  onChangeUsernameByDCIDorName(DcIDorName: any) {
-    if (DcIDorName != "") {
-      this.secretKeyService._getUserWalletMasterCharges(DcIDorName).subscribe(response => {
-        if (response.m_Item1) {
+  public onChangeUsernameByDCIDorName(DCIDorName) {
+    this.sharedService.setLoader(true);
+    if (DCIDorName != "") {
+      this.userService._getUserDetailsByDCIDorName(DCIDorName).subscribe((res: any) => {
+        this.sharedService.setLoader(false);
+        if (res.m_Item1) {
+          this.ToUserDetails = res.m_Item3;
           this.requestFundsForm.patchValue({
-            UserName: this.UserDetails.UserName,
+            RequestTo: this.ToUserDetails.UserName,
           })
         }
         else {
           this.requestFundsForm.patchValue({
-            UserName: ''
+            RequestTo: ''
           })
-          this.toastr.error(response.m_Item2);
+          this.toastr.error("Please provide valid user name or DCID");
         }
       }, err => {
-        this.toastr.error("Oops! There has been an error from server. Please try again.");
+        this.sharedService.setLoader(false);
       })
     }
     else {
       this.requestFundsForm.patchValue({
-        UserName: ''
+        RequestTo: ''
       })
     }
   }

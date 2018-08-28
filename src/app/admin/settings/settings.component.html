@@ -101,6 +101,7 @@
               formControlName="LastName" required/>
             <div class="input-validation-msg">
               <validation *ngIf="isRequiredField(userProfileForm.get('LastName'))" [errMsg]="'lastNameRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(userProfileForm.get('LastName'))" [errMsg]="'validLastName' | translate"></validation>
               <validation *ngIf="isValidLength(userProfileForm.get('LastName'))" [errMsg]="'lastNameLnth' | translate"></validation>
             </div>
           </div>

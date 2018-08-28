@@ -11,6 +11,7 @@ import { TranslateService } from "../../utility/translate/translate.service";
 import { style, transition, animate, trigger } from "@angular/animations";
 import { LoanEarnsService } from "../../utility/shared-service/loanEarns.service";
 import { CommonService } from "../../utility/shared-service/common.service";
+import { BaseUrl } from '../../utility/constants/base-constants';
 
 @Component({
   selector: 'app-loanearns',
@@ -39,6 +40,7 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
   frmApplyRiskBenefit: FormGroup;
   frmApplyHomeLoan: FormGroup;
   frmApplyPrepaidLoan: FormGroup;
+  NumberOfLevels: number;
 
   isAddressValid: boolean = true;
   renewalStatus: boolean = false;
@@ -98,6 +100,7 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
     this.createApplyFeeReimbursementForm();
     this.createApplyHealthBenefitsForm();
     this.createApplyRiskBenefitForm();
+    this.NumberOfLevels = BaseUrl.NumberOfLevels;
   }
 
   createApplyPLLoanForm() {
@@ -235,6 +238,7 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
             LoanAmount: this.selectedRow.EPLoans,
             LoanTypeCode: 'PL'
           })
+          this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, { onlySelf: true });
         }
         else {
           this.frmApplyPLLoan.reset();
@@ -285,6 +289,7 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
             LoanAmount: this.selectedRow.FeesReimbursement,
             LoanTypeCode: 'FR'
           })
+          this.frmApplyFeeReimbursement.controls['ModeofTransfer'].setValue(1, { onlySelf: true });
         }
         else {
           this.toastr.error(res.m_Item2);
@@ -334,6 +339,7 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
             LoanAmount: this.selectedRow.EPLoans,
             LoanTypeCode: 'HB'
           })
+          this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, { onlySelf: true });
         }
         else {
           this.toastr.error(res.m_Item2);
@@ -383,6 +389,7 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
             LoanAmount: this.selectedRow.EPLoans,
             LoanTypeCode: 'RB'
           })
+          this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, { onlySelf: true });
         }
         else {
           this.toastr.error(res.m_Item2);
@@ -431,6 +438,7 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
         LoanAmount: this.selectedRow.EPLoans,
         LoanTypeCode: 'HL'
       })
+      this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, { onlySelf: true });
     }
     finally {
       //this.sharedService.setLoader(false);
@@ -474,6 +482,7 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
             LoanTypeCode: 'PL',
             PrePaidLoan: true
           })
+          this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, { onlySelf: true });
         }
         else {
           this.toastr.error(res.m_Item2);
@@ -567,19 +576,19 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
     if (LoanStatus == "NotEligible") {
       return true;
     }
-    else if (LoanStatus == "Eligible" && GroupID == 10) {
+    else if (LoanStatus == "Eligible" && GroupID == this.NumberOfLevels) {
       return false;
     }
   }
 
   checkHomeLoanHidden(LoanStatus: string, GroupID: number) {
-    if (LoanStatus == "NotEligible" && GroupID == 10) {
+    if (LoanStatus == "NotEligible" && GroupID == this.NumberOfLevels) {
       return true;
     }
     else if (LoanStatus == "NotEligible") {
       return false;
     }
-    else if (LoanStatus == "Eligible" && GroupID == 10) {
+    else if (LoanStatus == "Eligible" && GroupID == this.NumberOfLevels) {
       return true;
     }
   }

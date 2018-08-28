@@ -199,6 +199,7 @@ export class AppliedloandetailsComponent implements OnInit {
           this.isShowModal = 1;
           this.GetApprovedLoans();
           this.GetPendingLoans();
+          this.GetRejectedLoans();
           this.toastr.success(response.m_Item2);
         }
         else {

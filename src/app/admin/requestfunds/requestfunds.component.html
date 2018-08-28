@@ -17,10 +17,10 @@
         </div>
         <div class="row col-md-12">
           <div class="col-md-6">
-            <div class="label" style="color: #fff;">Request To</div>
+            <div class="label" style="color: #fff;">Requested Username or DCID</div>
             <div class="clearfix"></div>
-            <input type="text" class="form-control" placeholder="Request To" pTooltip="Request To" tooltipPosition="top" formControlName="RequestTo"
-              (change)="onChangeNoOfKeys(requestFundsForm.value.RequestTo)" required/>
+            <input type="text" class="form-control" placeholder="Requested Username or DCID" pTooltip="Requested Username or DCID" tooltipPosition="top" formControlName="RequestTo"
+              (change)="onChangeUsernameByDCIDorName(requestFundsForm.value.RequestTo)" required/>
             <div class="input-validation-msg validationlabel">
               <validation *ngIf="isRequiredField(requestFundsForm.get('RequestTo'))" [errMsg]="'requestToRqrd' | translate"></validation>
               <validation *ngIf="isValidField(requestFundsForm.get('RequestTo'))" [errMsg]="'validRequestTo' | translate"></validation>
@@ -32,7 +32,7 @@
             <div class="label" style="color: #fff;">Request Amount</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" placeholder="Request Amount" pTooltip="Request Amount" tooltipPosition="top" formControlName="RequestAmount"
-              (change)="onChangeNoOfKeys(requestFundsForm.value.RequestAmount)" required/>
+              required/>
             <div class="input-validation-msg validationlabel">
               <validation *ngIf="isRequiredField(requestFundsForm.get('RequestAmount'))" [errMsg]="'requestAmountRqrd' | translate"></validation>
               <validation *ngIf="isValidField(requestFundsForm.get('RequestAmount'))" [errMsg]="'validRequestAmount' | translate"></validation>

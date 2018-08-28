@@ -351,6 +351,7 @@ export class ApplyuserloansComponent extends BaseComponent implements OnInit {
             LoanAmount: this.selectedRow.EPLoans,
             LoanTypeCode: 'HB'
           })
+          this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, {onlySelf: true});
         }
         else {
           this.toastr.error(res.m_Item2);
@@ -401,6 +402,7 @@ export class ApplyuserloansComponent extends BaseComponent implements OnInit {
             LoanAmount: this.selectedRow.EPLoans,
             LoanTypeCode: 'RB'
           })
+          this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, {onlySelf: true});
         }
         else {
           this.toastr.error(res.m_Item2);
@@ -450,6 +452,7 @@ export class ApplyuserloansComponent extends BaseComponent implements OnInit {
         LoanAmount: this.selectedRow.EPLoans,
         LoanTypeCode: 'HL'
       })
+      this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, {onlySelf: true});
     }
     finally {
       //this.sharedService.setLoader(false);
@@ -494,6 +497,7 @@ export class ApplyuserloansComponent extends BaseComponent implements OnInit {
             LoanTypeCode: 'PL',
             PrePaidLoan: true
           })
+          this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, {onlySelf: true});
         }
         else {
           this.toastr.error(res.m_Item2);
