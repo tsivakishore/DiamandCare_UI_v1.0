@@ -105,7 +105,13 @@
         <p-column field="TransactionAmount" header="Transaction Amount" [sortable]="true"></p-column>
         <p-column field="Purpose" header="Purpose" [sortable]="true"></p-column>
         <p-column field="UpdatedBy" header="Updated By" [sortable]="true"></p-column>
-        <p-column field="UpdatedOn" header="Updated On" [sortable]="true"></p-column>
+        <p-column field="UpdatedOn" header="Updated On" [sortable]="true">
+          <ng-template let-WalletExpensesList="rowData" pTemplate="body" let-ri="rowIndex">
+            <div class="col-md-12" style="margin-left: -15px;">
+              {{getFormattedDate(WalletExpensesList.UpdatedOn)}}
+            </div>
+          </ng-template>
+        </p-column>
       </p-dataTable>
     </div>
   </div>

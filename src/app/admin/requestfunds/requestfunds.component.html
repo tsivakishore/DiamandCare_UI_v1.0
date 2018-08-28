@@ -1,3 +1,53 @@
-<p>
-  requestfunds works!
-</p>
+<div class="secretkey-container" @slideUp>
+  <div class="secretkey-form">
+    <form [formGroup]="requestFundsForm" (submit)="requestFunds(requestFundsForm.value,requestFundsForm.valid)">
+      <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;font-weight: bold;">Request Funds</h3>
+      <div class="clearfix"></div>
+      <div class="col-md-12">
+        <div class="row col-md-12">
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">Request From</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" formControlName="UserName" readonly required/>
+            <div class="input-validation-msg">
+            </div>
+          </div>
+          <div class="col-md-6">
+          </div>
+        </div>
+        <div class="row col-md-12">
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">Request To</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="Request To" pTooltip="Request To" tooltipPosition="top" formControlName="RequestTo"
+              (change)="onChangeNoOfKeys(requestFundsForm.value.RequestTo)" required/>
+            <div class="input-validation-msg validationlabel">
+              <validation *ngIf="isRequiredField(requestFundsForm.get('RequestTo'))" [errMsg]="'requestToRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(requestFundsForm.get('RequestTo'))" [errMsg]="'validRequestTo' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="row col-md-12">
+          <div class="col-md-6">
+            <div class="label" style="color: #fff;">Request Amount</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="Request Amount" pTooltip="Request Amount" tooltipPosition="top" formControlName="RequestAmount"
+              (change)="onChangeNoOfKeys(requestFundsForm.value.RequestAmount)" required/>
+            <div class="input-validation-msg validationlabel">
+              <validation *ngIf="isRequiredField(requestFundsForm.get('RequestAmount'))" [errMsg]="'requestAmountRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(requestFundsForm.get('RequestAmount'))" [errMsg]="'validRequestAmount' | translate"></validation>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-md-12 col-sm-12 col-xs-12 margin-top-15">
+        <button type="submit" class="btn btn-primary btncancel" [disabled]="!requestFundsForm.valid" pTooltip="{{'secretkey' | translate}}"
+          tooltipPosition="top">Submit</button>
+      </div>
+      <div class="clearfix"></div>
+    </form>
+    <div class="clearfix"></div>
+  </div>
+</div>
+<admin-footer></admin-footer>

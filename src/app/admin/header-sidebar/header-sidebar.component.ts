@@ -197,6 +197,9 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
               case RouteConstants.GENERATEMYKEY:
                 this.Is_Visible_Generate_My_SecretKeys = true;
                 break;
+              case RouteConstants.MYSECRETKEYS:
+                this.Is_Visible_My_SecretKeys = true;
+                break;
             }
           }
           else if (this.roleID === BaseUrl.FranchiseRoleID) {
@@ -330,6 +333,8 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
       if (response.m_Item1) {
         this.walletBalance = response.m_Item3.Balance;
         this.walletHoldBalance = response.m_Item3.HoldAmount;
+        this.sharedService.setWalletBalance(this.walletBalance);
+        this.sharedService.setWalletHoldBalance(this.walletHoldBalance);
       }
       this.loadBalance = response.m_Item1;
     }, err => {

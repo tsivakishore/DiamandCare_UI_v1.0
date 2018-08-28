@@ -43,10 +43,14 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
   loanID: number;
   LoanID: number;
   LoanAmount: any;
+  OriginalLoanAmountPay: any;
   AmountToPay: any;
   UserID: number;
   isValidAmount: boolean = false;
   isValidAmountError: string;
+  walletBalance: string;
+  walletHoldBalance: string = "0";
+  loadBalance: boolean = false;
 
   constructor(public fb: FormBuilder,
     private loanEarnsService: LoanEarnsService,
@@ -63,6 +67,7 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
     this.createLoanDetailsForm();
     this.GetActiveLoansByUserID();
     this.GetAllPaidLoans();
+    this.walletBalance = this.sharedService.getWalletBalance();
   }
 
   createLoanDetailsForm() {
@@ -114,6 +119,7 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
     this.selectedRow = this.listOfActiveUserLoans[rowIndex];
     this.LoanID = this.selectedRow.LoanID;
     this.LoanAmount = this.selectedRow.LoanAmount;
+    this.OriginalLoanAmountPay = this.selectedRow.AmountToPay;
     this.frmLoanDetails.patchValue({
       AmountToPay: this.selectedRow.AmountToPay,
       UserID: this.selectedRow.UserID
@@ -135,6 +141,23 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
     this.sharedService.setLoader(true);
     this.UserID = formLoanDetails.UserID;
     this.AmountToPay = formLoanDetails.AmountToPay;
+
+    if (!!this.walletBalance && !!this.AmountToPay) {
+      if (this.walletBalance < this.AmountToPay) {
+        this.toastr.error("Wallet Balance is insufficient");
+        this.sharedService.setLoader(false);
+        return;
+      }
+    }
+
+    if (!!this.OriginalLoanAmountPay && !!this.AmountToPay) {
+      if (this.AmountToPay > this.OriginalLoanAmountPay) {
+        this.toastr.error("You need to pay only " + this.OriginalLoanAmountPay + ". Please enter correct amount to pay.");
+        this.sharedService.setLoader(false);
+        return;
+      }
+    }
+
     if (isValidForm) {
       this.loanEarnsService._updateUserLoanPayment(this.UserID, this.LoanID, this.AmountToPay).subscribe((res: any) => {
         this.sharedService.setLoader(false);
@@ -143,11 +166,15 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
           this.toastr.success(res.m_Item2);
           this.GetAllPaidLoans();
           this.GetActiveLoansByUserID();
+          this.getWalletBalance();
         }
-        else
+        else {
           this.toastr.error(res.m_Item2);
+          this.getWalletBalance();
+        }
       }, err => {
         this.sharedService.setLoader(false);
+        this.getWalletBalance();
       })
     }
     else {
@@ -222,6 +249,19 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
 
   colorCodeRenew() {
     return "btnpay";
+  }
+
+  public getWalletBalance() {
+    this.commonService._getWalletBalance().then((response: any) => {
+      if (response.m_Item1) {
+        this.walletBalance = response.m_Item3.Balance;
+        this.walletHoldBalance = response.m_Item3.HoldAmount;
+        this.sharedService.setWalletBalance(this.walletBalance);
+        this.sharedService.setWalletHoldBalance(this.walletHoldBalance);
+      }
+      this.loadBalance = response.m_Item1;
+    }, err => {
+    })
   }
 
 }

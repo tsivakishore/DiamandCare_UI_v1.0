@@ -22,6 +22,8 @@ export class SharedService {
   private _userID: string;
   private _roleID: string;
   private _roleName: string;
+  private _walletBalance: string;
+  private _walletHoldBalance: string;
   private _pass: string;
   private _refer: string;
   private isProfileUpdated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -183,6 +185,22 @@ export class SharedService {
       this._refer = sessionStorage.getItem(APPStorage.REFER);
     }
     return this._refer;
+  }
+
+  setWalletBalance(value: string): void {
+    this._walletBalance = value;
+  }
+
+  getWalletBalance(): string {
+    return this._walletBalance;
+  }
+
+  setWalletHoldBalance(value: string): void {
+    this._walletHoldBalance = value;
+  }
+
+  getWalletHoldBalance(): string {
+    return this._walletHoldBalance;
   }
 
   public ChekUserPermission(RoleID: string) {

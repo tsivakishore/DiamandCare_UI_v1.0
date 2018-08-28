@@ -28,13 +28,20 @@ export class SecretKeyService {
 
     _getUsernameWalletMasterChargesByDCIDorName(postData) {
         return this.httpService
-          .get(API.GETUSERNAMEWALLETMASTERCHARGESBYDCIDorNAME+ '?DcIDorName=' + postData)
-          .map(res => this.extractData(res, true)).catch((error: any) => {
-            return Observable.throw(new Error(error.status));
-          });
-      }
+            .get(API.GETUSERNAMEWALLETMASTERCHARGESBYDCIDorNAME + '?DcIDorName=' + postData)
+            .map(res => this.extractData(res, true)).catch((error: any) => {
+                return Observable.throw(new Error(error.status));
+            });
+    }
 
-      
+    _getUserWalletMasterCharges(postData) {
+        return this.httpService
+            .get(API.GETUSERWALLETMASTERCHARGES + '?DcIDorName=' + postData)
+            .map(res => this.extractData(res, true)).catch((error: any) => {
+                return Observable.throw(new Error(error.status));
+            });
+    }
+
     private extractData(res: Response, show?: boolean) {
         let data = res.json();
         let msg = data.message;

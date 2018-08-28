@@ -50,6 +50,7 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
     this.getFranchiseMasterDetails();
     this.getFundRequestStatus();
   }
+  
   public getWalletTransactions() {
     this.sharedService.setLoader(true);
     this.walletServ._getWalletTransactions().subscribe((res: any) => {
@@ -61,6 +62,7 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
       this.sharedService.setLoader(false);
     })
   }
+
   createFranchiseForm() {
     this.fdFundRequest = this.fb.group({
       ID: new FormControl(''),
@@ -69,6 +71,7 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
       RequestStatusID: new FormControl('')
     })
   }
+
   EditFranchise(rowIndex) {
     this.isShowModal = 2;
     this.createFranchiseForm();
@@ -80,8 +83,8 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
       RequestStatusID: this.selectedRow.RequestStatusID
     })
   }
+
   public getFranchiseMasterDetails() {
-    debugger;
     this.sharedService.setLoader(true);
     this.walletServ._getFundrequest().subscribe((res: any) => {
       this.sharedService.setLoader(false);
@@ -93,6 +96,7 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
       this.sharedService.setLoader(false);
     })
   }
+
   onEditFranchise(frmdata: any, isValidForm) {
     if (isValidForm) {
       this.apiManager.postAPI(API.EDITFRANCHISE, frmdata).subscribe(response => {
@@ -115,9 +119,11 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
       this.toastr.error("Form is not valid");
     }
   }
+
   closeForm() {
     this.isShowModal = 1;
   }
+
   public getFundRequestStatus() {
     this.allFndRqstList = [];
     if (!this.originalallRolesList) {
@@ -137,5 +143,15 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
         this.allFndRqstList.push({ label: o.Status, value: { StatusID: o.StatusID, label: o.Status } });
       });
     }
+  }
+
+  getFormattedDate(date1) {
+    var date = new Date(date1);
+    var year = date.getFullYear();
+    var month = (1 + date.getMonth()).toString();
+    month = month.length > 1 ? month : '0' + month;
+    var day = date.getDate().toString();
+    day = day.length > 1 ? day : '0' + day;
+    return day + '-' + month + '-' + year;
   }
 }

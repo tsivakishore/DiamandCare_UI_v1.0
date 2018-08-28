@@ -5,7 +5,6 @@ import { ConnectionBackend, HttpModule, RequestOptions, XHRBackend } from "@angu
 import { ProgressHudComponent } from "./progress-hud/progress-hud.component";
 import { HttpService } from "./http-service";
 import { SharedService } from "./shared-service/shared.service";
-import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { ValidationComponent } from "./validation/validation.component";
 import { APIManager } from "./shared-service/apimanager.service";
 import { BaseComponent } from "./base-component/base.component";
@@ -35,7 +34,6 @@ export function callService(backend: ConnectionBackend, options: RequestOptions,
   ],
   declarations: [
     ProgressHudComponent,
-    PageNotFoundComponent,
     ValidationComponent,
     NoDataComponent,
     BaseComponent,
@@ -58,7 +56,6 @@ export function callService(backend: ConnectionBackend, options: RequestOptions,
   ],
   exports: [
     ProgressHudComponent,
-    PageNotFoundComponent,
     ValidationComponent,
     NoDataComponent,
     CheckEmpty,

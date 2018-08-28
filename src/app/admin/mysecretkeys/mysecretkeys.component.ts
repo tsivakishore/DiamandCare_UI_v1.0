@@ -49,7 +49,7 @@ export class MysecretkeysComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.GetIssuedRegisterKeys();
-    this.gridTitle = "List of Secret Keys"
+    this.gridTitle = "List of My Secret Keys"
   }
   createPhoneNumberForm() {
     this.phoneNumberForm = this.fb.group({

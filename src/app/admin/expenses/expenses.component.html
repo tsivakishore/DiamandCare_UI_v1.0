@@ -6,8 +6,8 @@
         <div class="row">
           <div class="col-md-4 col-xs-12 col-sm-12 margin-top-15">
             <div class="label" style="color: white;">{{'amount' | translate}}</div>
-            <input type="text" id="txtAmount" formControlName="TransactionAmount" class="form-control" placeholder="{{'amount' | translate}}" tooltipPosition="top"
-              required/>
+            <input type="text" id="txtAmount" formControlName="TransactionAmount" class="form-control" placeholder="{{'amount' | translate}}"
+              tooltipPosition="top" required/>
             <div class="input-validation-msg">
               <validation *ngIf="isRequiredField(walletExpensesForm.get('TransactionAmount'))" [errMsg]="'amountrequired' | translate"></validation>
               <validation *ngIf="isValidLength(walletExpensesForm.get('TransactionAmount'))" [errMsg]="'TransactionAmountLnth' | translate"></validation>
@@ -15,20 +15,20 @@
           </div>
           <div class="col-md-4 col-xs-12 col-sm-12 margin-top-15">
             <div class="label" style="color: white;">{{'purpose' | translate}}</div>
-            <input type="text" id="txtPurpose" formControlName="Purpose" class="form-control" placeholder="{{'purpose' | translate}}" tooltipPosition="top"
-              required/>
+            <input type="text" id="txtPurpose" formControlName="Purpose" class="form-control" placeholder="{{'purpose' | translate}}"
+              tooltipPosition="top" required/>
             <div class="input-validation-msg">
               <validation *ngIf="isRequiredField(walletExpensesForm.get('Purpose'))" [errMsg]="'purposerequired' | translate"></validation>
             </div>
           </div>
           <div class="col-md-12 col-xs-12 col-sm-12" style="padding: 0 0 0 116px;">
             <button type="submit" *ngIf="!saveExpense" style="margin: 15px 0 0 0;width:8%;" [disabled]="!walletExpensesForm.valid" class="btn btn-primary"
-              pTooltip="{{'expensessave' | translate}}" tooltipPosition="top">{{'expensessave' | translate}}
-            </button>
-            <button type="button" *ngIf="updateExpense" (click)="onSubmitExpenses(walletExpensesForm.value,walletExpensesForm.valid)" style="margin: 15px 0 0 0;width:8%;"
-              [disabled]="!walletExpensesForm.valid" class="btn btn-primary" pTooltip="{{'updaterole' | translate}}" tooltipPosition="top">{{'updaterole' | translate}}
-            </button>
-            <button type="button" style="margin: 15px 0 0 0;width:8%;" class="btn btn-default" (click)="expensesreset()" pTooltip="{{'reset' | translate}}">{{'reset' | translate}}</button>
+              pTooltip="Save" tooltipPosition="top">Save </button>
+            <button type="button" *ngIf="updateExpense" (click)="onSubmitExpenses(walletExpensesForm.value,walletExpensesForm.valid)"
+              style="margin: 15px 0 0 0;width:8%;" [disabled]="!walletExpensesForm.valid" class="btn btn-primary" pTooltip="Update"
+              tooltipPosition="top">Update </button>
+            <button type="button" style="margin: 15px 0 0 0;width:8%;" class="btn btn-default" (click)="expensesreset()" tooltipPosition="top"
+              pTooltip="{{'reset' | translate}}">{{'reset' | translate}}</button>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -46,7 +46,8 @@
           <p-column field="UpdatedOn" header="Updated On" [sortable]="true"></p-column>
           <p-column styleClass="text-center" header="Action" field="Action">
             <ng-template let-WalletExpensesRowdata="rowData" pTemplate="body" let-ri="rowIndex">
-              <button type="button" style="height: 25px;width: 70px;" class="ui-button-reset-transparent" pButton (click)="editExpenses(WalletExpensesRowdata)" label="Edit">Edit</button>
+              <button type="button" style="height: 25px;width: 70px;" class="ui-button-reset-transparent" pButton (click)="editExpenses(WalletExpensesRowdata)"
+                label="Edit">Edit</button>
             </ng-template>
           </p-column>
         </p-dataTable>

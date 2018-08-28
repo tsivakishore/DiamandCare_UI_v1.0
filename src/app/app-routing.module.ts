@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RouteConstants } from './utility/constants/routes';
-import { PageNotFoundComponent } from "./utility/page-not-found/page-not-found.component";
 import { LandingComponent } from "./user-auth/landing/landing.component";
+import { LoginComponent } from "./user-auth/login/login.component";
 
 export const routes: Routes = [
   {
@@ -10,12 +10,12 @@ export const routes: Routes = [
     component: LandingComponent,
   },
   {
-    path: RouteConstants.NOTFOUND,
-    component: PageNotFoundComponent
+    path: RouteConstants.LOGIN,
+    component: LoginComponent
   },
   {
     path: '**',
-    redirectTo: RouteConstants.NOTFOUND,
+    redirectTo: RouteConstants.LOGIN,
     pathMatch: 'full',
   },
 ];

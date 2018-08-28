@@ -122,6 +122,8 @@ export class API {
   public static USERADDRESSBYID = 'user/useraddressbyId';
   public static GETFUNDREQUEST = 'wallet/GetFundRequest';
   public static GETFUNDREQUESTSTATUS = 'wallet/GetFundRequestStatus';
+  public static GETUSERWALLETMASTERCHARGES = 'RegisterKey/GetUserWalletMasterCharges';
+  public static REQUESTFUNDS = 'wallet/RequestFunds';
 
   // EXTERNAL API CALLERS
 

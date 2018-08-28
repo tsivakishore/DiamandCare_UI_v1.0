@@ -200,6 +200,10 @@ export const LANG_EN_TRANS = {
   'TransactionAmountLnth':'Amount Length missmatch',
   'purpose':'Purpose',
   'purposerequired':'Purpose required',
-  'walletTrnsctns': 'Wallet Transactions'
+  'walletTrnsctns': 'Wallet Transactions',
+  'requestToRqrd': 'Please enter request to username',
+  'validRequestTo': 'Valid request to username',
+  'requestAmountRqrd': 'Amount required',
+  'validRequestAmount': 'Please enter valid amount',
 };
 

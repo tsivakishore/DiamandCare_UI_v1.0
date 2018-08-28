@@ -53,15 +53,15 @@
       </a>
     </li>
     <li tooltipPosition="top">
-      <a [routerLink]="mySecretKeysUrl" *ngIf="Is_Visible_My_SecretKeys" routerLinkActive="active">
-        <i class="material-icons">screen_lock_landscape</i>
-        <span>My Secret Keys</span>
-      </a>
-    </li>
-    <li tooltipPosition="top">
       <a [routerLink]="generateMySecreteKeysUrl" *ngIf="Is_Visible_Generate_My_SecretKeys" routerLinkActive="active">
         <i class="material-icons">keyboard</i>
         <span>Generate My Key</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
+      <a [routerLink]="mySecretKeysUrl" *ngIf="Is_Visible_My_SecretKeys" routerLinkActive="active">
+        <i class="material-icons">screen_lock_landscape</i>
+        <span>My Secret Keys</span>
       </a>
     </li>
     <li tooltipPosition="top">
@@ -224,15 +224,15 @@
       </a>
     </li>
     <li>
-      <a [routerLink]="mySecretKeysUrl" *ngIf="Is_Visible_My_SecretKeys" routerLinkActive="active" (click)="closeSidebar()">
-        <i class="material-icons">screen_lock_landscape</i>
-        <span>My Secret Keys</span>
-      </a>
-    </li>
-    <li>
       <a [routerLink]="generateMySecreteKeysUrl" *ngIf="Is_Visible_Generate_My_SecretKeys" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">keyboard</i>
         <span>Generate My Key</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="mySecretKeysUrl" *ngIf="Is_Visible_My_SecretKeys" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">screen_lock_landscape</i>
+        <span>My Secret Keys</span>
       </a>
     </li>
     <li>
