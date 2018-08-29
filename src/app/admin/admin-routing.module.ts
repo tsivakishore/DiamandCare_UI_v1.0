@@ -144,7 +144,7 @@ const routes: Routes = [
     canActivate: [AuthGaurd]
   },
   {
-    path: RouteConstants.UPDETEUSERPROFILE,
+    path: RouteConstants.UPDATEUSERPROFILE,
     component: UpdateuserprofileComponent,
     canActivate: [AuthGaurd]
   }

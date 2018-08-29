@@ -1,20 +1,28 @@
 <div class="transaction-history-container" @slideUp>
-  <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">{{'franchisecommission' | translate}}</h3>
+  <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;margin-top: 15px;">All Fund Requests</h3>
   <div class="clearfix"></div>
   <div class="row">
     <div class="col-md-12">
       <div class="transaction-history-container">
         <div class="transaction-history-table box-shadow">
           <p-dataTable [value]="FundsRequestList" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
-            <p-column [style]="{'width':'80px'}" field="ID" header="ID" [sortable]="true"></p-column>
-            <p-column [style]="{'width':'100px'}" field="RequestedAmount" header="Requested Amount" [sortable]="true"></p-column>
-            <p-column [style]="{'width':'120px'}" field="RequestToUserID" header="Request To UserID" [sortable]="true"></p-column>
-            <p-column [style]="{'width':'200px'}" field="RequestStatusID" header="Request StatusID" [sortable]="true"></p-column>
-            <p-column [style]="{'width':'80px'}" header="Edit" [sortable]="true">
+            <!-- <p-column [style]="{'width':'80px'}" field="ID" header="Request ID" [sortable]="true"></p-column> -->
+            <p-column [style]="{'width':'120px'}" field="RequestedBy" header="Requested By" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="RequestedAmount" header="Requested Amount" [sortable]="true"></p-column>
+            <!-- <p-column [style]="{'width':'120px'}" field="RequestedTo" header="Request To" [sortable]="true"></p-column> -->
+            <p-column [style]="{'width':'120px'}" field="CreatedOn" header="Requested On" [sortable]="true">
+              <ng-template let-FundsRequestList="rowData" pTemplate="body" let-ri="rowIndex">
+                <div class="col-md-12" style="margin-left: -15px;">
+                  {{getFormattedDate(FundsRequestList.CreatedOn)}}
+                </div>
+              </ng-template>
+            </p-column>
+            <p-column [style]="{'width':'150px'}" field="Description" header="Request Status" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'80px'}" header="Approve">
               <ng-template let-data="rowData" pTemplate="body" let-ri="rowIndex">
                 <div class="col-md-12" style="margin-left: -30px;">
                   <div class="col-md-6" style="width:100px">
-                    <button type="button" style="width: 50px;height: 20px;" class="ui-button-reset-transparent" pButton (click)="EditFranchise(ri)">Edit</button>
+                    <button type="button" style="width: 50px;height: 20px;" class="ui-button-reset-transparent" pButton (click)="EditFundRequest(ri)">Edit</button>
                   </div>
                 </div>
               </ng-template>
@@ -26,59 +34,55 @@
   </div>
   <div class="confirm-modal-overay" *ngIf="isShowModal == 2" (click)="closeForm()"></div>
 
-  <div class="phone-number-modal" style="margin-left: 15px;margin-top: 50px;" *ngIf="isShowModal == 2" @dialog>
-    <form [formGroup]="fdFundRequest" (submit)="onEditFranchise(fdFundRequest.value,fdFundRequest.valid)">
-      <div class="modal-container" style="height: 400px !important;">
+  <div class="phone-number-modal" style="margin-left: 15px;margin-top: 100px;" *ngIf="isShowModal == 2" @dialog>
+    <form [formGroup]="fdFundRequest" (submit)="ApproveRequestFunds(fdFundRequest.value,fdFundRequest.valid)">
+      <div class="modal-container" style="height: 200px !important;">
         <div class="modal-header" style="background: #797b85;">
-          <h5>Edit Franchise</h5>
+          <h5>Approve Funds Request</h5>
           <i class="material-icons" (click)="closeForm()">close</i>
         </div>
         <div class="clearfix"></div>
-        <div class="clearfix"></div>
-
         <div class="modal-body" style="height: 50px;">
           <div class="col-md-12">
+            <!-- <div class="margin-top-15 col-md-12">
+              <div>
+                <div class="label" style="color: #fff;">Request ID</div>
+                <div class="clearfix"></div>
+                <input type="text" class="form-control" formControlName="ID" readonly/>
+              </div>
+            </div> -->
+            <div class="clearfix"></div>
             <div class="margin-top-15 col-md-12">
               <div>
-                <input type="text" pTooltip="ID" tooltipPosition="top" class="form-control" formControlName="ID" readonly/>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class=" margin-top-15 col-md-12">
-              <div>
-                <input type="text" pTooltip="Requested Amount" tooltipPosition="top" class="form-control" formControlName="RequestedAmount"
-                  />
-                  <div class="input-validation-msg">
-                    <validation *ngIf="isRequiredField(fdFundRequest.get('RequestedAmount'))" [errMsg]="'Please Enter Requested Amount' | translate"></validation>
-                  </div>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class=" margin-top-15 col-md-12">
-              <div>
-                <input type="text" pTooltip="Request To UserID" tooltipPosition="top" class="form-control" formControlName="RequestToUserID"
-                />
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class=" margin-top-15 col-md-12">
-              <div>
-                <input type="text" pTooltip="Request StatusID" tooltipPosition="top" class="form-control" formControlName="RequestStatusID"
-                />
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <!-- <div class="modal-body">
-              <div class="margin-top-10 col-md-12">
-                <div>
-                  <p-dropdown formControlName="FndRqstID" [options]="allFndRqstList" [(ngModel)]="selectedRole" [style]="{'width':'100%', 'height':'29px'}">
-                  </p-dropdown>
+                <div class="label" style="color: #fff;">Requested Amount</div>
+                <div class="clearfix"></div>
+                <input type="text" class="form-control" formControlName="RequestedAmount" />
+                <div class="input-validation-msg">
+                  <validation *ngIf="isRequiredField(fdFundRequest.get('RequestedAmount'))" [errMsg]="'Please Enter Requested Amount' | translate"></validation>
                 </div>
               </div>
             </div>
+            <div class="clearfix"></div>
+            <!-- <div class="margin-top-15 col-md-12">
+              <div>
+                <div class="label" style="color: #fff;">Requested From</div>
+                <div class="clearfix"></div>
+                <input type="text" class="form-control" formControlName="RequestToUserID" readonly/>
+              </div>
+            </div>
             <div class="clearfix"></div> -->
+            <div class="margin-top-15 col-md-12 col-sm-12 col-xs-12">
+              <div>
+                <div class="label" style="color: #fff;">Requested Status</div>
+                <div class="clearfix"></div>
+                <select class="form-control" formControlName="RequestStatusID" required>
+                  <option *ngFor="let fndRqstStatus of lstFndRqstStatus" value="{{fndRqstStatus.RequestStatusID}}">{{fndRqstStatus.Status}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="clearfix"></div>
             <div class="modal-footer">
-              <div class="col-md-7 col-md-offset-3">
+              <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
                 <button type="submit" [disabled]="!fdFundRequest.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
                 <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
               </div>
@@ -98,23 +102,23 @@
   <div class="transaction-history-table box-shadow"></div>
   <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">{{'walletTrnsctns' | translate}}</h3>
   <div class="row">
-  <div class="col-md-12" style="padding: 0 0 0 0;">
-    <div style="overflow: auto;">
-      <p-dataTable [value]="WalletExpensesList" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
-        <!-- <p-column field="ID" header="ID" [sortable]="true"></p-column> -->
-        <p-column field="TransactionAmount" header="Transaction Amount" [sortable]="true"></p-column>
-        <p-column field="Purpose" header="Purpose" [sortable]="true"></p-column>
-        <p-column field="UpdatedBy" header="Updated By" [sortable]="true"></p-column>
-        <p-column field="UpdatedOn" header="Updated On" [sortable]="true">
-          <ng-template let-WalletExpensesList="rowData" pTemplate="body" let-ri="rowIndex">
-            <div class="col-md-12" style="margin-left: -15px;">
-              {{getFormattedDate(WalletExpensesList.UpdatedOn)}}
-            </div>
-          </ng-template>
-        </p-column>
-      </p-dataTable>
+    <div class="col-md-12">
+      <div style="overflow: auto;">
+        <p-dataTable [value]="WalletExpensesList" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+          <!-- <p-column field="ID" header="ID" [sortable]="true"></p-column> -->
+          <p-column field="TransactionAmount" header="Transaction Amount" [sortable]="true"></p-column>
+          <p-column field="Purpose" header="Purpose" [sortable]="true"></p-column>
+          <p-column field="UpdatedBy" header="Updated By" [sortable]="true"></p-column>
+          <p-column field="UpdatedOn" header="Updated On" [sortable]="true">
+            <ng-template let-WalletExpensesList="rowData" pTemplate="body" let-ri="rowIndex">
+              <div class="col-md-12" style="margin-left: -15px;">
+                {{getFormattedDate(WalletExpensesList.UpdatedOn)}}
+              </div>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
     </div>
   </div>
-</div>
 </div>
 <admin-footer></admin-footer>

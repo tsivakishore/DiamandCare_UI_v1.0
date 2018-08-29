@@ -22,12 +22,11 @@
             </div>
           </div>
           <div class="col-md-12 col-xs-12 col-sm-12" style="padding: 0 0 0 116px;">
-            <button type="submit" *ngIf="!saveExpense" style="margin: 15px 0 0 0;width:8%;" [disabled]="!walletExpensesForm.valid" class="btn btn-primary"
-              pTooltip="Save" tooltipPosition="top">Save </button>
+            <button type="submit" *ngIf="!saveExpense" [disabled]="!walletExpensesForm.valid" class="btn btn-primary btnstyles" pTooltip="Save"
+              tooltipPosition="top">Save </button>
             <button type="button" *ngIf="updateExpense" (click)="onSubmitExpenses(walletExpensesForm.value,walletExpensesForm.valid)"
-              style="margin: 15px 0 0 0;width:8%;" [disabled]="!walletExpensesForm.valid" class="btn btn-primary" pTooltip="Update"
-              tooltipPosition="top">Update </button>
-            <button type="button" style="margin: 15px 0 0 0;width:8%;" class="btn btn-default" (click)="expensesreset()" tooltipPosition="top"
+              [disabled]="!walletExpensesForm.valid" class="btn btn-primary btnstyles" pTooltip="Update" tooltipPosition="top">Update </button>
+            <button type="button" class="btn btn-default btnstyles" (click)="expensesreset()" tooltipPosition="top"
               pTooltip="{{'reset' | translate}}">{{'reset' | translate}}</button>
           </div>
           <div class="clearfix"></div>

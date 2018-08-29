@@ -137,7 +137,7 @@
           </div>
           <div class="clearfix"></div>
           <div class="margin-top-10 col-xs-12 col-md-6">
-            <select class="form-control" style="width: 440px;margin-top: 5px;" (change)="filterPLChanged($event.target.value)" formControlName="ModeofTransfer"
+            <select class="form-control ddlstyle" (change)="filterPLChanged($event.target.value)" formControlName="ModeofTransfer"
               required>
               <option value="" disabled selected>Select Mode of Transfer</option>
               <option *ngFor="let mode of lstModeofTransfer" value="{{mode.ID}}">{{mode.Mode}}</option>
@@ -151,7 +151,7 @@
       <div class="clearfix"></div>
 
       <div class="modal-footer">
-        <div class="col-md-7 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-3">
           <button type="submit" [disabled]="!frmApplyPLLoan.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Apply</button>
           <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
         </div>
@@ -166,7 +166,7 @@
 <!-- Personal Loan Popup code end -->
 
 <!-- Fee Reimbursement Popup code start -->
-<div class="phone-number-modal" style="margin-left: 15px;margin-top: -60px;" *ngIf="isShowModal == 3" @dialog>
+<div class="phone-number-modal modeldialog" *ngIf="isShowModal == 3" @dialog>
   <form [formGroup]="frmApplyFeeReimbursement" (submit)="onApplyFeeReimbursement(frmApplyFeeReimbursement.value,frmApplyFeeReimbursement.valid)">
     <div class="modal-container" style="width: 100%; height: 515px !important;">
       <div class="modal-header" style="background: #797b85;">
@@ -196,7 +196,7 @@
           <div class="clearfix"></div>
 
           <div class="margin-top-10 col-xs-12 col-md-6">
-            <select class="form-control" style="width: 440px;margin-top: 5px;" (change)="filterFRChanged($event.target.value)" formControlName="ModeofTransfer"
+            <select class="form-control ddlstyle" (change)="filterFRChanged($event.target.value)" formControlName="ModeofTransfer"
               required>
               <option value="" disabled selected>Select Mode of Transfer</option>
               <option *ngFor="let mode of lstModeofTransfer" value="{{mode.ID}}">{{mode.Mode}}</option>
@@ -278,7 +278,7 @@
       <div class="clearfix"></div>
 
       <div class="modal-footer">
-        <div class="col-md-7 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-3">
           <button type="submit" [disabled]="!frmApplyFeeReimbursement.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Apply</button>
           <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
         </div>
@@ -318,7 +318,7 @@
           </div>
           <div class="clearfix"></div>
           <div class="margin-top-10 col-xs-12 col-md-6">
-            <select class="form-control" style="width: 440px;margin-top: 5px;" (change)="filterHBChanged($event.target.value)" formControlName="ModeofTransfer"
+            <select class="form-control ddlstyle" (change)="filterHBChanged($event.target.value)" formControlName="ModeofTransfer"
               required>
               <option value="" disabled selected>Select Mode of Transfer</option>
               <option *ngFor="let mode of lstModeofTransfer" value="{{mode.ID}}">{{mode.Mode}}</option>
@@ -400,7 +400,7 @@
       <div class="clearfix"></div>
 
       <div class="modal-footer">
-        <div class="col-md-7 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-3">
           <button type="submit" [disabled]="!frmApplyHealthBenefits.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Apply</button>
           <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
         </div>
@@ -440,7 +440,7 @@
           </div>
           <div class="clearfix"></div>
           <div class="margin-top-10 col-xs-12 col-md-6">
-            <select class="form-control" style="width: 440px;margin-top: 5px;" (change)="filterRBChanged($event.target.value)" formControlName="ModeofTransfer"
+            <select class="form-control ddlstyle" (change)="filterRBChanged($event.target.value)" formControlName="ModeofTransfer"
               required>
               <option value="" disabled selected>Select Mode of Transfer</option>
               <option *ngFor="let mode of lstModeofTransfer" value="{{mode.ID}}">{{mode.Mode}}</option>
@@ -504,7 +504,7 @@
       <div class="clearfix"></div>
 
       <div class="modal-footer">
-        <div class="col-md-7 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-3">
           <button type="submit" [disabled]="!frmApplyRiskBenefit.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Apply</button>
           <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
         </div>
@@ -542,7 +542,7 @@
       <div class="clearfix"></div>
 
       <div class="modal-footer">
-        <div class="col-md-7 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-3">
           <button type="submit" [disabled]="!frmApplyHomeLoan.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Apply</button>
           <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
         </div>
@@ -586,7 +586,7 @@
       <div class="clearfix"></div>
 
       <div class="modal-footer">
-        <div class="col-md-7 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-3">
           <button type="submit" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Apply</button>
           <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
         </div>

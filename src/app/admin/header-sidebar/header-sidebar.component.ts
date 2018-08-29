@@ -48,7 +48,6 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   roleID: string;
   roleName: string;
 
-
   Is_Visible_EarnLoans: boolean = false;
   Is_Visible_AppliedLoanDetails: boolean = false;
   Is_Visible_Settings: boolean = false;
@@ -159,7 +158,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
               case RouteConstants.GENERATEMYKEY:
                 this.Is_Visible_Generate_My_SecretKeys = true;
                 break;
-              case RouteConstants.UPDETEUSERPROFILE:
+              case RouteConstants.UPDATEUSERPROFILE:
                 this.Is_Visible_Update_UsersProfile = true;
                 break;
             }
@@ -201,7 +200,10 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
                 this.Is_Visible_My_SecretKeys = true;
                 break;
               case RouteConstants.LOANPAYMENT:
-                this.Is_Visible_LoanPayment = true;
+                this.Is_Visible_LoanPayment = false;
+                break;
+              case RouteConstants.WALLETTRANSACTIONS:
+                this.Is_Visible_Wallet_Transactions = true;
                 break;
             }
           }
@@ -251,7 +253,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
                 this.Is_Visible_Expenses = false;
                 break;
               case RouteConstants.UPGRADETOSCHOOL:
-                this.Is_Visible_Upgrade_School = true;
+                this.Is_Visible_Upgrade_School = false;
                 break;
               case RouteConstants.REQUESTFUNDS:
                 this.Is_Visible_Request_Funds = true;
@@ -259,8 +261,8 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
               case RouteConstants.GENERATEMYKEY:
                 this.Is_Visible_Generate_My_SecretKeys = true;
                 break;
-              case RouteConstants.UPDETEUSERPROFILE:
-                this.Is_Visible_Update_UsersProfile = true;
+              case RouteConstants.UPDATEUSERPROFILE:
+                this.Is_Visible_Update_UsersProfile = false;
                 break;
             }
           }
@@ -449,7 +451,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   }
 
   get updateUsersProfileUrl() {
-    return "/" + RouteConstants.UPDETEUSERPROFILE;
+    return "/" + RouteConstants.UPDATEUSERPROFILE;
   }
 
   earnLoanEvent() {

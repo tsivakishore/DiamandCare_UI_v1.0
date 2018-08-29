@@ -48,4 +48,12 @@ export class WalletService {
                 return Observable.throw(new Error(error.status));
             });
     }
+
+    _getUserFundRequestDetails() {
+        return this.httpService
+            .get(API.USERREQUESTFUNDSDETAILS)
+            .map(res => this.extractData(res, true)).catch((error: any) => {
+                return Observable.throw(new Error(error.status));
+            });
+    }
 }

@@ -124,6 +124,7 @@ export class API {
   public static GETFUNDREQUESTSTATUS = 'wallet/GetFundRequestStatus';
   public static GETUSERWALLETMASTERCHARGES = 'RegisterKey/GetUserWalletMasterCharges';
   public static REQUESTFUNDS = 'wallet/RequestFunds';
+  public static USERREQUESTFUNDSDETAILS = 'wallet/GetUserFundRequestDetails';
 
   // EXTERNAL API CALLERS
 

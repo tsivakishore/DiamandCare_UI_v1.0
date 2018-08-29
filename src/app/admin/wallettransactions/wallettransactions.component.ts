@@ -1,4 +1,3 @@
-import { RoleService } from '../../utility/shared-service/role.service';
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { style, transition, animate, trigger } from "@angular/animations";
 import { dialog, slideUp } from "../animation";
@@ -9,14 +8,13 @@ import { SharedService } from "../../utility/shared-service/shared.service";
 import { APIManager } from "../../utility/shared-service/apimanager.service";
 import { API } from "../../utility/constants/api";
 import { WalletService } from '../../utility/shared-service/wallet.service';
-import { CommonRegexp } from "../../utility/constants/validations";
 import { FranchiseService } from "../../utility/shared-service/franchise.service";
 
 @Component({
   selector: 'app-wallettransactions',
   templateUrl: './wallettransactions.component.html',
   styleUrls: ['./wallettransactions.component.css'],
-  providers: [WalletService,FranchiseService],
+  providers: [WalletService, FranchiseService],
   animations: [
     trigger('dialog', [
       transition('void => *', [
@@ -37,8 +35,7 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
   fdFundRequest: FormGroup;
   selectedRow: any;
   lstFranchise: any;
-  allFndRqstList:any;
-  originalallRolesList: any;
+  lstFndRqstStatus: any;
 
   constructor(private fb: FormBuilder, private walletServ: WalletService, private sharedService: SharedService,
     public toastr: ToastsManager, private apiManager: APIManager,
@@ -47,10 +44,10 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
 
   ngOnInit() {
     this.getWalletTransactions();
-    this.getFranchiseMasterDetails();
+    this.getFundsRequestByOthersDetails();
     this.getFundRequestStatus();
   }
-  
+
   public getWalletTransactions() {
     this.sharedService.setLoader(true);
     this.walletServ._getWalletTransactions().subscribe((res: any) => {
@@ -63,7 +60,7 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
     })
   }
 
-  createFranchiseForm() {
+  createFundsRequestForm() {
     this.fdFundRequest = this.fb.group({
       ID: new FormControl(''),
       RequestedAmount: ['', Validators.compose([Validators.required])],
@@ -72,19 +69,7 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
     })
   }
 
-  EditFranchise(rowIndex) {
-    this.isShowModal = 2;
-    this.createFranchiseForm();
-    this.selectedRow = this.FundsRequestList[rowIndex];
-    this.fdFundRequest.patchValue({
-      ID: this.selectedRow.ID,
-      RequestedAmount: this.selectedRow.RequestedAmount,
-      RequestToUserID: this.selectedRow.RequestToUserID,
-      RequestStatusID: this.selectedRow.RequestStatusID
-    })
-  }
-
-  public getFranchiseMasterDetails() {
+  public getFundsRequestByOthersDetails() {
     this.sharedService.setLoader(true);
     this.walletServ._getFundrequest().subscribe((res: any) => {
       this.sharedService.setLoader(false);
@@ -97,14 +82,27 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
     })
   }
 
-  onEditFranchise(frmdata: any, isValidForm) {
+  EditFundRequest(rowIndex) {
+    this.isShowModal = 2;
+    this.createFundsRequestForm();
+    this.selectedRow = this.FundsRequestList[rowIndex];
+    let requestStatusId = this.selectedRow.RequestStatusID;
+    this.fdFundRequest.patchValue({
+      ID: this.selectedRow.ID,
+      RequestedAmount: this.selectedRow.RequestedAmount,
+      RequestToUserID: this.selectedRow.RequestToUserID,
+    })
+    this.fdFundRequest.controls['RequestStatusID'].setValue(requestStatusId, { onlySelf: true })
+  }
+
+  ApproveRequestFunds(frmdata: any, isValidForm) {
     if (isValidForm) {
       this.apiManager.postAPI(API.EDITFRANCHISE, frmdata).subscribe(response => {
         if (response.m_Item1) {
           this.isShowModal = 1;
           this.toastr.success(response.m_Item2);
           this.fdFundRequest.reset();
-          this.getFranchiseMasterDetails();
+          this.getFundsRequestByOthersDetails();
         }
         else {
           this.toastr.error(response.m_Item2);
@@ -112,7 +110,7 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
         }
       }, err => {
         this.isShowModal = 1;
-        this.toastr.error("Oops! There has been an error while updating franchise details .Please try again.");
+        this.toastr.error("Oops! There has been an error while approve request funds.Please try again.");
       });
     }
     else {
@@ -125,24 +123,11 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
   }
 
   public getFundRequestStatus() {
-    this.allFndRqstList = [];
-    if (!this.originalallRolesList) {
-      this.walletServ._getFundrequestStatus().subscribe((res: any) => {
-        if (res.m_Item1) {
-          this.originalallRolesList = res.m_Item3;
-          this.allFndRqstList.push({ label: '--Select Role--', value: { RoleID: '', label: '--Select Role--' } });
-          this.originalallRolesList.map(o => {
-            this.allFndRqstList.push({ label: o.Status, value: { StatusID: o.StatusID, label: o.Status } });
-          });
-        }
-      })
-    }
-    else {
-      this.allFndRqstList.push({ label: '--Select Role--', value: { StatusID: '', label: '--Select Role--' } });
-      this.originalallRolesList.map(o => {
-        this.allFndRqstList.push({ label: o.Status, value: { StatusID: o.StatusID, label: o.Status } });
-      });
-    }
+    this.walletServ._getFundrequestStatus().subscribe((res: any) => {
+      if (res.m_Item1) {
+        this.lstFndRqstStatus = res.m_Item3;
+      }
+    })
   }
 
   getFormattedDate(date1) {

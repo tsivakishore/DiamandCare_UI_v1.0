@@ -17,13 +17,13 @@
             <input type="checkbox" formControlName="IsActive" style="margin: 10px 0 0 0;" />
           </div>
           <div class="col-md-12 col-xs-12 col-sm-12" style="padding: 0 0 0 116px;">
-            <button type="submit" *ngIf="!saveRole" style="margin: 15px 0 0 0;width:8%;" [disabled]="!roleForm.valid" class="btn btn-primary"
-              pTooltip="{{'rolesave' | translate}}" tooltipPosition="top">{{'rolesave' | translate}}
+            <button type="submit" *ngIf="!saveRole" [disabled]="!roleForm.valid" class="btn btn-primary btnstyles" pTooltip="{{'rolesave' | translate}}"
+              tooltipPosition="top">{{'rolesave' | translate}}
             </button>
-            <button type="button" *ngIf="updateRole" (click)="onUpdaterole(roleForm.value,roleForm.valid)" style="margin: 15px 0 0 0;width:8%;"
-              [disabled]="!roleForm.valid" class="btn btn-primary" pTooltip="{{'updaterole' | translate}}" tooltipPosition="top">{{'updaterole' | translate}}
+            <button type="button" *ngIf="updateRole" (click)="onUpdaterole(roleForm.value,roleForm.valid)" [disabled]="!roleForm.valid"
+              class="btn btn-primary btnstyles" pTooltip="{{'updaterole' | translate}}" tooltipPosition="top">{{'updaterole' | translate}}
             </button>
-            <button type="button" style="margin: 15px 0 0 0;width:8%;" class="btn btn-default" (click)="rolereset()" pTooltip="{{'reset' | translate}}">{{'reset' | translate}}</button>
+            <button type="button" class="btn btn-default btnstyles" (click)="rolereset()" pTooltip="{{'reset' | translate}}">{{'reset' | translate}}</button>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -42,7 +42,8 @@
           </p-column>
           <p-column styleClass="text-center" header="Action" field="Action">
             <ng-template let-rolesList="rowData" pTemplate="body" let-ri="rowIndex">
-              <button type="button" style="height: 25px;width: 70px;" class="ui-button-reset-transparent" pButton (click)="editRole(rolesList)" label="Edit">Edit</button>
+              <button type="button" style="height: 25px;width: 70px;" class="ui-button-reset-transparent" pButton (click)="editRole(rolesList)"
+                label="Edit">Edit</button>
             </ng-template>
           </p-column>
         </p-dataTable>

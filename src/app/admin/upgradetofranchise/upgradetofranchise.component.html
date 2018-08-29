@@ -3,9 +3,9 @@
     <form [formGroup]="frmUpgradeToFranchise" (submit)="UpgradeToFranchise(frmUpgradeToFranchise.value,frmUpgradeToFranchise.valid)">
       <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">Upgrade to Franchise</h3>
       <div class="clearfix"></div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">User ID</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" placeholder="UserID or UserName" pTooltip="UserID or UserName" tooltipPosition="top"
@@ -14,7 +14,7 @@
               <validation *ngIf="isRequiredField(frmUpgradeToFranchise.get('UserID'))" [errMsg]="'userIDUserNameRqrd' | translate"></validation>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">User Name</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" placeholder="UserName" pTooltip="UserName" tooltipPosition="top" formControlName="UserName"
@@ -23,7 +23,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">Franchise Type</div>
             <div class="clearfix"></div>
             <select class="form-control dropdownstyle" (change)="getUnderFranchiseDetails($event.target.value)" formControlName="FranchiseTypeID"
@@ -34,7 +34,7 @@
             <div class="input-validation-msg">
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">Under Franchise</div>
             <div class="clearfix"></div>
             <select class="form-control dropdownstyle" formControlName="UnderFranchiseID" required>
@@ -46,7 +46,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">Conditions Apply Self</div>
             <div class="clearfix"></div>
             <span class="-addon checkbox check-primary bg-transparent">
@@ -56,7 +56,7 @@
             <div class="input-validation-msg">
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">Conditions Apply Under Joinees</div>
             <div class="clearfix"></div>
             <span class="-addon checkbox check-primary bg-transparent">
@@ -69,7 +69,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">Franchise Joinees</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" formControlName="FranchiseJoinees" required/>
@@ -78,7 +78,7 @@
               <validation *ngIf="isValidField(frmUpgradeToFranchise.get('FranchiseJoinees'))" [errMsg]="'validFranchiseJoinees' | translate"></validation>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">Franchise Joinees Minimum</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" formControlName="FranchiseJoineesMinimum" required/>

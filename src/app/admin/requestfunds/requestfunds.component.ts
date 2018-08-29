@@ -10,12 +10,13 @@ import { dialog, slideUp } from "../animation";
 import { TranslateService } from "../../utility/translate/translate.service";
 import { style, transition, animate, trigger } from "@angular/animations";
 import { UserService } from "../../utility/shared-service/user.service";
+import { WalletService } from '../../utility/shared-service/wallet.service';
 
 @Component({
   selector: 'app-requestfunds',
   templateUrl: './requestfunds.component.html',
   styleUrls: ['./requestfunds.component.css'],
-  providers: [UserService],
+  providers: [UserService, WalletService],
   animations: [
     trigger('dialog', [
       transition('void => *', [
@@ -39,9 +40,11 @@ export class RequestfundsComponent extends BaseComponent implements OnInit {
   userID: number;
   UserDetails: any;
   ToUserDetails: any;
+  lstUserFundsRequestDetails: any;
 
   constructor(private sharedService: SharedService,
     private userService: UserService,
+    private walletServ: WalletService,
     private fb: FormBuilder,
     private apiManager: APIManager,
     public toastr: ToastsManager,
@@ -53,6 +56,7 @@ export class RequestfundsComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.UserDetails = this.sharedService.getUser();
     this.userID = this.UserDetails.UserID;
+    this.getUserFundRequestDetails();
     this.createrequestFundsForm();
     this.requestFundsForm.patchValue({
       UserName: this.UserDetails.UserName,
@@ -64,7 +68,9 @@ export class RequestfundsComponent extends BaseComponent implements OnInit {
       UserID: [''],
       UserName: [''],
       RequestTo: ['', Validators.compose([Validators.required])],
-      RequestAmount: new FormControl('', Validators.compose([Validators.required, <any>Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)]))
+      RequestToUserID: [''],
+      RequestedAmount: new FormControl('', Validators.compose([Validators.required, <any>Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])),
+      RequestStatusID: ['']
     })
   }
 
@@ -74,6 +80,12 @@ export class RequestfundsComponent extends BaseComponent implements OnInit {
       this.apiManager.postAPI(API.REQUESTFUNDS, formParam).subscribe(response => {
         if (response.m_Item1) {
           this.toastr.success(response.m_Item2);
+          this.requestFundsForm.patchValue({
+            RequestTo: '',
+            RequestToUserID: '',
+            RequestedAmount: ''
+          })
+          this.getUserFundRequestDetails();
         }
         else
           this.toastr.error(response.m_Item2);
@@ -92,6 +104,8 @@ export class RequestfundsComponent extends BaseComponent implements OnInit {
           this.ToUserDetails = res.m_Item3;
           this.requestFundsForm.patchValue({
             RequestTo: this.ToUserDetails.UserName,
+            RequestToUserID: this.ToUserDetails.UserID,
+            RequestStatusID: 1
           })
         }
         else {
@@ -109,6 +123,18 @@ export class RequestfundsComponent extends BaseComponent implements OnInit {
         RequestTo: ''
       })
     }
+  }
+
+  public getUserFundRequestDetails() {
+    this.sharedService.setLoader(true);
+    this.walletServ._getUserFundRequestDetails().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.lstUserFundsRequestDetails = res.m_Item3;
+      }
+    }, err => {
+      this.sharedService.setLoader(false);
+    })
   }
 
   getFormattedDate(date1) {

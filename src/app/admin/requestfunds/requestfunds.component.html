@@ -5,7 +5,7 @@
       <div class="clearfix"></div>
       <div class="col-md-12">
         <div class="row col-md-12">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="label" style="color: #fff;">Request From</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" formControlName="UserName" readonly required/>
@@ -16,11 +16,11 @@
           </div>
         </div>
         <div class="row col-md-12">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="label" style="color: #fff;">Requested Username or DCID</div>
             <div class="clearfix"></div>
-            <input type="text" class="form-control" placeholder="Requested Username or DCID" pTooltip="Requested Username or DCID" tooltipPosition="top" formControlName="RequestTo"
-              (change)="onChangeUsernameByDCIDorName(requestFundsForm.value.RequestTo)" required/>
+            <input type="text" class="form-control" placeholder="Requested Username or DCID" pTooltip="Requested Username or DCID" tooltipPosition="top"
+              formControlName="RequestTo" (change)="onChangeUsernameByDCIDorName(requestFundsForm.value.RequestTo)" required/>
             <div class="input-validation-msg validationlabel">
               <validation *ngIf="isRequiredField(requestFundsForm.get('RequestTo'))" [errMsg]="'requestToRqrd' | translate"></validation>
               <validation *ngIf="isValidField(requestFundsForm.get('RequestTo'))" [errMsg]="'validRequestTo' | translate"></validation>
@@ -28,14 +28,14 @@
           </div>
         </div>
         <div class="row col-md-12">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="label" style="color: #fff;">Request Amount</div>
             <div class="clearfix"></div>
-            <input type="text" class="form-control" placeholder="Request Amount" pTooltip="Request Amount" tooltipPosition="top" formControlName="RequestAmount"
+            <input type="text" class="form-control" placeholder="Request Amount" pTooltip="Request Amount" tooltipPosition="top" formControlName="RequestedAmount"
               required/>
             <div class="input-validation-msg validationlabel">
-              <validation *ngIf="isRequiredField(requestFundsForm.get('RequestAmount'))" [errMsg]="'requestAmountRqrd' | translate"></validation>
-              <validation *ngIf="isValidField(requestFundsForm.get('RequestAmount'))" [errMsg]="'validRequestAmount' | translate"></validation>
+              <validation *ngIf="isRequiredField(requestFundsForm.get('RequestedAmount'))" [errMsg]="'requestAmountRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(requestFundsForm.get('RequestedAmount'))" [errMsg]="'validRequestAmount' | translate"></validation>
             </div>
           </div>
         </div>
@@ -49,5 +49,28 @@
     </form>
     <div class="clearfix"></div>
   </div>
+  <div class="secretkey-form">
+    <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">My Fund Request Details</h3>
+    <div class="clearfix"></div>
+    <div>
+      <div style="overflow: auto;">
+        <p-dataTable [value]="lstUserFundsRequestDetails" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+          <p-column field="ID" header="Request Id" [sortable]="true"></p-column>
+          <!-- <p-column field="RequestedBy" header="Requested By" [sortable]="true"></p-column> -->
+          <p-column field="RequestedTo" header="Requested To" [sortable]="true"></p-column>
+          <p-column field="RequestedAmount" header="Requested Amount" [sortable]="true"></p-column>
+          <p-column field="Description" header="Requested Status" [sortable]="true"></p-column>
+          <p-column field="CreatedOn" header="Requested On" [sortable]="true">
+            <ng-template let-lstUserFundsRequestDetails="rowData" pTemplate="body" let-ri="rowIndex">
+              <div class="col-md-12" style="margin-left: -15px;">
+                {{getFormattedDate(lstUserFundsRequestDetails.CreatedOn)}}
+              </div>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
+    </div>
+  </div>
 </div>
+
 <admin-footer></admin-footer>

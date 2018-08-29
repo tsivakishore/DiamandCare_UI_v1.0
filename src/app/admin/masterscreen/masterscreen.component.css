@@ -5,3 +5,15 @@
   .changepassword-model{
     width: 500px !important;
   }
+
+  .divstyles{
+    margin-left: 15px;
+    margin-top: 50px;
+  }
+
+  @media only screen and (max-width: 767px) and (min-width: 320px){
+    .divstyles {
+      margin-left: 5px !important;
+      margin-top: 85px !important;
+    }
+}

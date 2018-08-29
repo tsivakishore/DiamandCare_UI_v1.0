@@ -354,20 +354,19 @@
 <div [ngClass]="{'body-container':true,'sidePanelHide':!isOpenSidebar}" @slideDown>
   <div class="header-container">
     <ul class="progressbar">
-      <li (click)="currentRoute()" *ngIf="Is_Visible_AppliedLoanDetails" [ngClass]="{'twoTabActive':currentPath == 'wallet','AllTabActive':currentPath == 'buy-token'}">
-        <a [routerLink]="appliedLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedLoanDetails" routerLinkActive="active">
-          <span>{{'viewLoanDetails' | translate}}</span>
+      <li (click)="currentRoute();earnLoanEvent()" [ngClass]="{'AllTabActive':currentPath == 'app-loanearns'}">
+        <a [routerLink]="earnLoansUrl" routerLinkActive="active">
+          <span>Loans</span>
         </a>
       </li>
-      <li (click)="currentRoute()" *ngIf="Is_Visible_AppliedUserLoanDetails" [ngClass]="{'twoTabActive':currentPath == 'wallet','AllTabActive':currentPath == 'buy-token'}">
+      <li (click)="currentRoute()" *ngIf="Is_Visible_AppliedUserLoanDetails" [ngClass]="{'AllTabActive':currentPath == 'app-appliedloandetails'}">
         <a [routerLink]="appliedUserLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedUserLoanDetails" routerLinkActive="active">
           <span>My Loan Details</span>
         </a>
       </li>
-
-      <li (click)="currentRoute();earnLoanEvent()" [ngClass]="{'AllTabActive':currentPath == 'wallet'}">
-        <a [routerLink]="earnLoansUrl" routerLinkActive="active">
-          <span>Loans</span>
+      <li (click)="currentRoute()" *ngIf="Is_Visible_My_SecretKeys" [ngClass]="{'AllTabActive':currentPath == 'app-mysecretkeys'}">
+        <a [routerLink]="mySecretKeysUrl" *ngIf="Is_Visible_My_SecretKeys" routerLinkActive="active">
+          <span>My Secret Keys</span>
         </a>
       </li>
       <li>

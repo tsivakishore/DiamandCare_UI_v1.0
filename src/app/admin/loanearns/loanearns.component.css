@@ -6,3 +6,19 @@
     background-color: #00c8aa !important;
     border: 0px solid #00c8aa !important;
 }
+
+.ddlstyle{
+    width: 440px;margin-top: 5px;
+}
+.modeldialog{
+    margin-left: 15px;
+    margin-top: -60px;
+}
+@media only screen and (max-width: 767px) and (min-width: 320px){
+    .ddlstyle {
+        width: 330px !important;margin-top: 5px;
+    }
+    .modeldialog {
+        margin-top: 90px !important;
+    }
+}

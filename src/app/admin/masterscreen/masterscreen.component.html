@@ -3,9 +3,9 @@
     <form [formGroup]="masterScreenForm" (submit)="AddMasterCharges(masterScreenForm.value,masterScreenForm.valid)">
       <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">{{'masterScreen' | translate}}</h3>
       <div class="clearfix"></div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">{{'documentationFee' | translate}}</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" placeholder="{{'documentationFee' | translate}}" pTooltip="{{'documentationFee' | translate}}"
@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">{{'documentationFee1' | translate}}</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" placeholder="{{'documentationFee1' | translate}}" pTooltip="{{'documentationFee1' | translate}}"
@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">{{'prePaidLoan' | translate}}</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" placeholder="{{'prePaidLoan' | translate}}" pTooltip="{{'prePaidLoan' | translate}}"
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">{{'registrationCharges' | translate}}</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" placeholder="{{'registrationCharges' | translate}}" pTooltip="{{'registrationCharges' | translate}}"
@@ -129,7 +129,7 @@
         </div> -->
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">State GST</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" placeholder="State GST" pTooltip="State GST" tooltipPosition="top" formControlName="SGST"
@@ -141,7 +141,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">Central GST</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" placeholder="Central GST" pTooltip="Central GST" tooltipPosition="top" formControlName="CGST"
@@ -153,7 +153,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">IGST</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" placeholder="IGST" pTooltip="IGST" tooltipPosition="top" formControlName="IGST" required/>
@@ -164,7 +164,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">TDS</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" placeholder="TDS" pTooltip="TDS" tooltipPosition="top" formControlName="TDS" required/>
@@ -176,7 +176,7 @@
         </div>
         <!-- Pin commission, Fund Transfer charges Start-->
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">PIN Commission</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" placeholder="PIN Commission" pTooltip="PIN Commission" tooltipPosition="top" formControlName="PinCommission"
@@ -188,7 +188,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">Fund Transfer Charges</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" placeholder="Fund Transfer Charges" pTooltip="Fund Transfer Charges" tooltipPosition="top" formControlName="FundTransferCharges"
@@ -259,7 +259,7 @@
 
 <div class="confirm-modal-overay" *ngIf="isShowModal == 2" (click)="closeForm()"></div>
 
-<div class="phone-number-modal" style="margin-left: 15px;margin-top: 50px;" *ngIf="isShowModal == 2" @dialog>
+<div class="phone-number-modal divstyles" *ngIf="isShowModal == 2" @dialog>
   <form [formGroup]="fgFranchise" (submit)="onEditFranchise(fgFranchise.value,fgFranchise.valid)">
     <div class="modal-container" style="height: 300px !important;">
       <div class="modal-header" style="background: #797b85;">
@@ -309,7 +309,7 @@
       <div class="clearfix"></div>
 
       <div class="modal-footer">
-        <div class="col-md-7 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-3">
           <button type="submit" [disabled]="!fgFranchise.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
           <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
         </div>
@@ -321,7 +321,7 @@
     </div>
   </form>
 </div>
-<div class="phone-number-modal" style="margin-left: 15px;margin-top: 50px;" *ngIf="isShowModal == 3" @dialog>
+<div class="phone-number-modal divstyles" *ngIf="isShowModal == 3" @dialog>
   <form [formGroup]="fgWallet" (submit)="onSaveBalance(fgWallet.value,fgWallet.valid)">
     <div class="modal-container" style="height: 300px !important;">
       <div class="modal-header" style="background: #797b85;">
@@ -373,7 +373,7 @@
       <div class="clearfix"></div>
 
       <div class="modal-footer">
-        <div class="col-md-7 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-3">
           <button type="submit" [disabled]="!fgWallet.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
           <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
         </div>
@@ -385,7 +385,7 @@
     </div>
   </form>
 </div>
-<div class="phone-number-modal" style="margin-left: 15px;margin-top: 50px;" *ngIf="isShowModal == 4" @dialog>
+<div class="phone-number-modal divstyles" *ngIf="isShowModal == 4" @dialog>
   <form [formGroup]="fgLoanWaive" (submit)="onSaveLoanWaiveOff(fgLoanWaive.value,fgLoanWaive.valid)">
     <div class="modal-container" style="height: 300px !important;">
       <div class="modal-header" style="background: #797b85;">
@@ -428,7 +428,7 @@
       <div class="clearfix"></div>
 
       <div class="modal-footer">
-        <div class="col-md-7 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-3">
           <button type="submit" [disabled]="!fgLoanWaive.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
           <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
         </div>
@@ -440,7 +440,7 @@
     </div>
   </form>
 </div>
-<div class="phone-number-modal" style="margin-left: 15px;margin-top: 50px;" *ngIf="isShowModal == 5" @dialog>
+<div class="phone-number-modal divstyles" *ngIf="isShowModal == 5" @dialog>
   <form [formGroup]="fgFreeToPaid" (submit)="onSaveFreeToPaidKey(fgFreeToPaid.value,fgFreeToPaid.valid)">
     <div class="modal-container" style="height: 300px !important;">
       <div class="modal-header" style="background: #797b85;">
@@ -485,7 +485,7 @@
       <div class="clearfix"></div>
 
       <div class="modal-footer">
-        <div class="col-md-7 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-3">
           <button type="submit" [disabled]="!fgFreeToPaid.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
           <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
         </div>
