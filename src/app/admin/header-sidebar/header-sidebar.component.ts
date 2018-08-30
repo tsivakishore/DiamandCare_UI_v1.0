@@ -70,6 +70,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   Is_Visible_Request_Funds = false;
   Is_Visible_Generate_My_SecretKeys = false;
   Is_Visible_Update_UsersProfile = false;
+  Is_Visible_My_LoanPayments = false;
 
   constructor(private apiManager: APIManager, private sharedService: SharedService, private commonService: CommonService,
     private router: Router, public toastr: ToastsManager, public vcr: ViewContainerRef) {
@@ -87,239 +88,97 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   }
 
   getMenusBasedOnRole(userID: string) {
-    // if (this.roleID == BaseUrl.AdminRoleID) {
-    this.apiManager.postAPI(API.GETMENU, { Id: userID }).subscribe(response => {
-      if (response.m_Item1) {
-        response.m_Item3.forEach(element => {
-          var menu = element.MenuName;
-          if (this.roleID === BaseUrl.AdminRoleID) {
-            this.isUserWallet = true;
-            switch (menu) {
-              case RouteConstants.SETTINGS:
-                this.Is_Visible_Settings = true;
-                break;
-              case RouteConstants.EARNLOANS:
-                this.Is_Visible_EarnLoans = true;
-                break;
-              case RouteConstants.APPLIEDLOANDETAILS:
-                this.Is_Visible_AppliedLoanDetails = true;
-                break;
-              case RouteConstants.APPLIEDUSERLOANDETAILS:
-                this.Is_Visible_AppliedUserLoanDetails = true;
-                break;
-              case RouteConstants.SECRETKEY:
-                this.Is_Visible_SecretKey = true;
-                break;
-              case RouteConstants.MASTERSCREEN:
-                this.Is_Visible_MasterScreen = true;
-                break;
-              case RouteConstants.ADDROLETOUSER:
-                this.Is_Visible_Roles = true;
-                break;
-              case RouteConstants.UNDERUSERDETAILS:
-                this.Is_Visible_UnderUserDetails = true;
-                break;
-              case RouteConstants.ROLES:
-                this.Is_Visible_Add_Roles = true;
-                break;
-              case RouteConstants.UPGRADETOFRANCHISE:
-                this.Is_Visible_Upgrade_Franchise = true;
-                break;
-              case RouteConstants.LOANDISPATCHED:
-                this.Is_Visible_Loans_Dispatched = true;
-                break;
-              case RouteConstants.LOANPAYMENT:
-                this.Is_Visible_LoanPayment = true;
-                break;
-              case RouteConstants.MYSECRETKEYS:
-                this.Is_Visible_My_SecretKeys = true;
-                break;
-              case RouteConstants.APPLYUSERLOANS:
-                this.Is_Visible_Apply_Userloans = true;
-                break;
-              case RouteConstants.WALLETTRANSACTIONS:
-                this.Is_Visible_Wallet_Transactions = true;
-                break;
-              case RouteConstants.FRANCHISEREQUEST:
-                this.Is_Visible_Franchise_Request = true;
-                break;
-              case RouteConstants.FRANCHISETREE:
-                this.Is_Visible_Franchise_Tree = true;
-                break;
-              case RouteConstants.EXPENSES:
-                this.Is_Visible_Expenses = true;
-                break;
-              case RouteConstants.UPGRADETOSCHOOL:
-                this.Is_Visible_Upgrade_School = true;
-                break;
-              case RouteConstants.REQUESTFUNDS:
-                this.Is_Visible_Request_Funds = true;
-                break;
-              case RouteConstants.GENERATEMYKEY:
-                this.Is_Visible_Generate_My_SecretKeys = true;
-                break;
-              case RouteConstants.UPDATEUSERPROFILE:
-                this.Is_Visible_Update_UsersProfile = true;
-                break;
-            }
-          }
-          else if (this.roleID === BaseUrl.UserRoleID) {
-            this.isUserWallet = true;
-            switch (menu) {
-              case RouteConstants.SETTINGS:
-                this.Is_Visible_Settings = true;
-                break;
-              case RouteConstants.EARNLOANS:
-                this.Is_Visible_EarnLoans = true;
-                break;
-              case RouteConstants.APPLIEDUSERLOANDETAILS:
-                this.Is_Visible_AppliedUserLoanDetails = true;
-                break;
-              case RouteConstants.ADDROLETOUSER:
-                this.Is_Visible_Roles = false;
-                break;
-              case RouteConstants.ROLES:
-                this.Is_Visible_Add_Roles = false;
-                break;
-              case RouteConstants.UNDERUSERDETAILS:
-                this.Is_Visible_UnderUserDetails = true;
-                break;
-              case RouteConstants.UPGRADETOFRANCHISE:
-                this.Is_Visible_Upgrade_Franchise = false;
-                break;
-              case RouteConstants.UPGRADETOSCHOOL:
-                this.Is_Visible_Upgrade_School = false;
-                break;
-              case RouteConstants.REQUESTFUNDS:
-                this.Is_Visible_Request_Funds = true;
-                break;
-              case RouteConstants.GENERATEMYKEY:
-                this.Is_Visible_Generate_My_SecretKeys = true;
-                break;
-              case RouteConstants.MYSECRETKEYS:
-                this.Is_Visible_My_SecretKeys = true;
-                break;
-              case RouteConstants.LOANPAYMENT:
-                this.Is_Visible_LoanPayment = false;
-                break;
-              case RouteConstants.WALLETTRANSACTIONS:
-                this.Is_Visible_Wallet_Transactions = true;
-                break;
-            }
-          }
-          else if (this.roleID === BaseUrl.FranchiseRoleID) {
-            this.isUserWallet = true;
-            switch (menu) {
-              case RouteConstants.SETTINGS:
-                this.Is_Visible_Settings = true;
-                break;
-              case RouteConstants.EARNLOANS:
-                this.Is_Visible_EarnLoans = true;
-                break;
-              case RouteConstants.APPLIEDUSERLOANDETAILS:
-                this.Is_Visible_AppliedUserLoanDetails = true;
-                break;
-              case RouteConstants.ADDROLETOUSER:
-                this.Is_Visible_Roles = false;
-                break;
-              case RouteConstants.ROLES:
-                this.Is_Visible_Add_Roles = false;
-                break;
-              case RouteConstants.UNDERUSERDETAILS:
-                this.Is_Visible_UnderUserDetails = true;
-                break;
-              case RouteConstants.UPGRADETOFRANCHISE:
-                this.Is_Visible_Upgrade_Franchise = false;
-                break;
-              case RouteConstants.LOANPAYMENT:
-                this.Is_Visible_LoanPayment = true;
-                break;
-              case RouteConstants.MYSECRETKEYS:
-                this.Is_Visible_My_SecretKeys = true;
-                break;
-              case RouteConstants.APPLYUSERLOANS:
-                this.Is_Visible_Apply_Userloans = true;
-                break;
-              case RouteConstants.WALLETTRANSACTIONS:
-                this.Is_Visible_Wallet_Transactions = true;
-                break;
-              case RouteConstants.FRANCHISEREQUEST:
-                this.Is_Visible_Franchise_Request = true;
-                break;
-              case RouteConstants.FRANCHISETREE:
-                this.Is_Visible_Franchise_Tree = true;
-                break;
-              case RouteConstants.EXPENSES:
-                this.Is_Visible_Expenses = false;
-                break;
-              case RouteConstants.UPGRADETOSCHOOL:
-                this.Is_Visible_Upgrade_School = false;
-                break;
-              case RouteConstants.REQUESTFUNDS:
-                this.Is_Visible_Request_Funds = true;
-                break;
-              case RouteConstants.GENERATEMYKEY:
-                this.Is_Visible_Generate_My_SecretKeys = true;
-                break;
-              case RouteConstants.UPDATEUSERPROFILE:
-                this.Is_Visible_Update_UsersProfile = false;
-                break;
-            }
-          }
-          else if (this.roleID === BaseUrl.SchoolRoleID) {
-            this.isUserWallet = true;
-            switch (menu) {
-              case RouteConstants.SETTINGS:
-                this.Is_Visible_Settings = true;
-                break;
-              case RouteConstants.EARNLOANS:
-                this.Is_Visible_EarnLoans = true;
-                break;
-              case RouteConstants.APPLIEDUSERLOANDETAILS:
-                this.Is_Visible_AppliedUserLoanDetails = true;
-                break;
-              case RouteConstants.UNDERUSERDETAILS:
-                this.Is_Visible_UnderUserDetails = true;
-                break;
-            }
-          }
-          else if (this.roleID === BaseUrl.DeveloperRoleID) {
-            this.isUserWallet = false;
-            switch (menu) {
-              case RouteConstants.SETTINGS:
-                this.Is_Visible_Settings = true;
-                break;
-              case RouteConstants.EARNLOANS:
-                this.Is_Visible_EarnLoans = true;
-                break;
-              case RouteConstants.APPLIEDUSERLOANDETAILS:
-                this.Is_Visible_AppliedUserLoanDetails = true;
-                break;
-              case RouteConstants.ADDROLETOUSER:
-                this.Is_Visible_Roles = false;
-                break;
-              case RouteConstants.ROLES:
-                this.Is_Visible_Add_Roles = false;
-                break;
-              case RouteConstants.UNDERUSERDETAILS:
-                this.Is_Visible_UnderUserDetails = true;
-                break;
-              case RouteConstants.UPGRADETOFRANCHISE:
-                this.Is_Visible_Upgrade_Franchise = false;
-                break;
-            }
-          }
-          else
-            this.logout();
-        });
-      }
-    });
+    if (this.roleID === BaseUrl.AdminRoleID) {
+      this.isUserWallet = true;
+      this.Is_Visible_Settings = true;
+      this.Is_Visible_EarnLoans = true;
+      this.Is_Visible_AppliedLoanDetails = true;
+      this.Is_Visible_AppliedUserLoanDetails = true;
+      this.Is_Visible_SecretKey = true;
+      this.Is_Visible_MasterScreen = true;
+      this.Is_Visible_Roles = true;
+      this.Is_Visible_UnderUserDetails = true;
+      this.Is_Visible_Add_Roles = true;
+      this.Is_Visible_Upgrade_Franchise = true;
+      this.Is_Visible_Loans_Dispatched = true;
+      this.Is_Visible_LoanPayment = true;
+      this.Is_Visible_My_SecretKeys = true;
+      this.Is_Visible_Apply_Userloans = true;
+      this.Is_Visible_Wallet_Transactions = true;
+      this.Is_Visible_Franchise_Request = true;
+      this.Is_Visible_Franchise_Tree = true;
+      this.Is_Visible_Expenses = true;
+      this.Is_Visible_Upgrade_School = true;
+      this.Is_Visible_Request_Funds = true;
+      this.Is_Visible_Generate_My_SecretKeys = true;
+      this.Is_Visible_Update_UsersProfile = true;
+      this.Is_Visible_My_LoanPayments = true;
+    }
+    else if (this.roleID === BaseUrl.UserRoleID) {
+      this.isUserWallet = true;
+      this.Is_Visible_Settings = true;
+      this.Is_Visible_EarnLoans = true;
+      this.Is_Visible_AppliedUserLoanDetails = true;
+      this.Is_Visible_Roles = false;
+      this.Is_Visible_Add_Roles = false;
+      this.Is_Visible_UnderUserDetails = true;
+      this.Is_Visible_Upgrade_Franchise = false;
+      this.Is_Visible_Upgrade_School = false;
+      this.Is_Visible_Request_Funds = true;
+      this.Is_Visible_Generate_My_SecretKeys = true;
+      this.Is_Visible_My_SecretKeys = true;
+      this.Is_Visible_LoanPayment = false;
+      this.Is_Visible_Wallet_Transactions = true;
+      this.Is_Visible_My_LoanPayments = true;
+    }
+    else if (this.roleID === BaseUrl.FranchiseRoleID) {
+      this.isUserWallet = true;
+      this.Is_Visible_Settings = true;
+      this.Is_Visible_EarnLoans = true;
+      this.Is_Visible_AppliedUserLoanDetails = true;
+      this.Is_Visible_Roles = false;
+      this.Is_Visible_Add_Roles = false;
+      this.Is_Visible_UnderUserDetails = true;
+      this.Is_Visible_Upgrade_Franchise = false;
+      this.Is_Visible_LoanPayment = true;
+      this.Is_Visible_My_SecretKeys = true;
+      this.Is_Visible_Apply_Userloans = true;
+      this.Is_Visible_Wallet_Transactions = true;
+      this.Is_Visible_Franchise_Request = true;
+      this.Is_Visible_Franchise_Tree = true;
+      this.Is_Visible_Expenses = false;
+      this.Is_Visible_Upgrade_School = false;
+      this.Is_Visible_Request_Funds = true;
+      this.Is_Visible_Generate_My_SecretKeys = true;
+      this.Is_Visible_Update_UsersProfile = false;
+      this.Is_Visible_My_LoanPayments = true;
+    }
+    else if (this.roleID === BaseUrl.SchoolRoleID) {
+      this.isUserWallet = true;
+      this.Is_Visible_Settings = true;
+      this.Is_Visible_EarnLoans = true;
+      this.Is_Visible_AppliedUserLoanDetails = true;
+      this.Is_Visible_UnderUserDetails = true;
+      this.Is_Visible_My_LoanPayments = true;
+    }
+    else if (this.roleID === BaseUrl.DeveloperRoleID) {
+      this.isUserWallet = false;
+      this.Is_Visible_Settings = true;
+      this.Is_Visible_EarnLoans = true;
+      this.Is_Visible_AppliedUserLoanDetails = true;
+      this.Is_Visible_Roles = false;
+      this.Is_Visible_Add_Roles = false;
+      this.Is_Visible_UnderUserDetails = true;
+      this.Is_Visible_Upgrade_Franchise = false;
+      this.Is_Visible_My_LoanPayments = true;
+    }
+    else
+      this.logout();
   }
 
   currentRoute() {
     let currentRoute = window.location.pathname;
     let currentRoute1 = currentRoute.split('/');
-    // console.log("current Route:=>",currentRoute1[1]);
     this.currentPath = currentRoute1[1];
   }
 
@@ -452,6 +311,10 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   get updateUsersProfileUrl() {
     return "/" + RouteConstants.UPDATEUSERPROFILE;
+  }
+
+  get myLoanPaymentsUrl() {
+    return "/" + RouteConstants.MYLOANPAYMENTS;
   }
 
   earnLoanEvent() {

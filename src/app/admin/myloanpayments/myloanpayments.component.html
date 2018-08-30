@@ -1,0 +1,147 @@
+<div class="secretkey-container" @slideUp>
+  <div class="secretkey-form">
+    <div>
+      <h3 class="col-md-12 col-sm-12 col-xs-12" style="font-size: x-large;font-weight: bold;">My Loan Payments</h3>
+      <div class="clearfix"></div>
+      <div>
+        <div>
+          <div class="col-md-12 col-xs-12 col-sm-12 margin-top-40">
+            <a>
+              <i class="material-icons i-styles" pTooltip="{{'refresh' | translate}}" tooltipPosition="top" (click)="Refresh()">refresh</i>
+            </a>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #dadae2;font-size: x-large;font-weight: bold;margin-top: -15px;">Active Loans</h3>
+      <div class="clearfix"></div>
+      <!-- Show list of My Pending Loans start here -->
+      <div>
+        <div style="overflow: auto;">
+          <p-dataTable [value]="listOfActiveUserLoans" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
+            selectionMode="single" [(selection)]="selectedRow">
+            <p-column [style]="{'width':'140px'}" header="Pay" field="LoanID" [sortable]="true">
+              <ng-template let-listOfActiveUserLoans="rowData" pTemplate="body" let-ri="rowIndex">
+                <button type="button" [ngClass]="colorCodeRenew()" class="ui-button-reset-transparent btnwidth" pButton (click)="ViewLoanDetails(ri)">Pay</button>
+              </ng-template>
+            </p-column>
+            <p-column [style]="{'width':'100px'}" field="LoanID" header="LoanID" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'100px'}" field="UserName" header="UserName" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanAmount" header="Loan Amount" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="IssuedAmount" header="Issued Amount" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'125px'}" field="AmountToPay" header="Amount To Pay" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'125px'}" field="AmountPaid" header="Amount Paid" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="AdminCharges" header="Admin Charges" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="ModeofTransferType" header="Payment Type" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanTypeDescription" header="Loan Type" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanApprovalStatus" header="Approval Status" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="TransferStatus" header="Transfer Status" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanStatusName" header="Payment Status" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="CreatedOn" header="Applied On" [sortable]="true">
+              <ng-template let-listOfActiveUserLoans="rowData" pTemplate="body" let-ri="rowIndex">
+                <div class="col-md-12" style="margin-left: -15px;">
+                  {{getFormattedDate(listOfActiveUserLoans.CreatedOn)}}
+                </div>
+              </ng-template>
+            </p-column>
+          </p-dataTable>
+        </div>
+      </div>
+      <!-- Show list of My Pending Loans end here -->
+
+    </div>
+    <div class="clearfix"></div>
+
+    <div>
+      <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #dadae2;font-size: x-large;font-weight: bold;">Payment Paid Loans</h3>
+      <div class="clearfix"></div>
+
+      <!-- Show list of my paid Loans start here -->
+      <div>
+        <div style="overflow: auto;">
+          <p-dataTable [value]="lstAllPaidLoans" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
+            selectionMode="single" [(selection)]="selectedRow">
+            <p-column [style]="{'width':'100px'}" field="LoanID" header="LoanID" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'100px'}" field="UserName" header="UserName" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanAmount" header="Loan Amount" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="IssuedAmount" header="Issued Amount" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'125px'}" field="AmountToPay" header="Amount To Pay" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'125px'}" field="AmountPaid" header="Amount Paid" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="AdminCharges" header="Admin Charges" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="ModeofTransferType" header="Payment Type" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanTypeDescription" header="Loan Type" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanApprovalStatus" header="Approval Status" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="TransferStatus" header="Transfer Status" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="LoanStatusName" header="Payment Status" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'130px'}" field="CreatedOn" header="Applied On" [sortable]="true">
+              <ng-template let-lstAllPaidLoans="rowData" pTemplate="body" let-ri="rowIndex">
+                <div class="col-md-12" style="margin-left: -15px;">
+                  {{getFormattedDate(lstAllPaidLoans.CreatedOn)}}
+                </div>
+              </ng-template>
+            </p-column>
+          </p-dataTable>
+        </div>
+      </div>
+      <!-- Show list of my paid Loans end here -->
+
+    </div>
+    <div class="clearfix"></div>
+
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+<admin-footer></admin-footer>
+<!-- Payment Popup code start -->
+<div class="phone-number-modal" style="margin-left: 15px;margin-top: 50px;" *ngIf="isShowModal == 2" @dialog>
+  <form [formGroup]="frmLoanDetails" (submit)="onSubmitLoanPayment(frmLoanDetails.value,frmLoanDetails.valid)">
+    <div class="modal-container">
+      <div class="modal-header" style="background: #797b85;">
+        <h5>Loan Details</h5>
+        <i class="material-icons" (click)="closeForm()">close</i>
+      </div>
+      <div class="clearfix"></div>
+      <div class="clearfix"></div>
+
+      <div class="modal-body">
+        <div class="col-md-12">
+          <div class="col-md-12">
+            <div class="col-md-4">
+              <div class="label">Loan ID : {{LoanID}}</div>
+            </div>
+            <div class="col-md-8">
+              <div class="label">Loan Amount : {{LoanAmount}}</div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="margin-top-15 col-md-12">
+            <div class="label" style="color: #fff;">Amount to Pay</div>
+            <div class="clearfix"></div>
+            <input type="text" pTooltip="Amount to Pay" tooltipPosition="top" class="form-control" (change)="onChangeAmountToPay($event.target.value)"
+              formControlName="AmountToPay" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmLoanDetails.get('AmountToPay'))" [errMsg]="'amountToPayRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(frmLoanDetails.get('AmountToPay'))" [errMsg]="'validAmountToPay' | translate"></validation>
+            </div>
+            <!-- <div *ngIf="isValidAmount"><span>{{isValidAmountError}}</span></div> -->
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-7 col-md-offset-3">
+          <button type="submit" [disabled]="!frmLoanDetails.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+<!-- Payment Popup code end -->
+
+<div class="confirm-modal-overay" *ngIf="isShowModal == 2" (click)="closeForm()"></div>

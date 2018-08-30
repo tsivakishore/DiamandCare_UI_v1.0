@@ -107,6 +107,12 @@
       </a>
     </li>
     <li tooltipPosition="top">
+      <a [routerLink]="myLoanPaymentsUrl" *ngIf="Is_Visible_My_LoanPayments" routerLinkActive="active">
+        <i class="material-icons">subtitles</i>
+        <span>My Loan Payments</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
       <a [routerLink]="franchiseRequestUrl" *ngIf="Is_Visible_Franchise_Request" routerLinkActive="active">
         <i class="material-icons">update</i>
         <span>Franchise Request</span>
@@ -275,6 +281,12 @@
       <a [routerLink]="loanPaymentsUrl" *ngIf="Is_Visible_LoanPayment" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">payment</i>
         <span>Loan Payments</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="myLoanPaymentsUrl" *ngIf="Is_Visible_My_LoanPayments" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">subtitles</i>
+        <span>My Loan Payments</span>
       </a>
     </li>
     <li>
