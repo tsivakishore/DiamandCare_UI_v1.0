@@ -34,6 +34,7 @@ import { UpgradetoschoolComponent } from './upgradetoschool/upgradetoschool.comp
 import { GeneratemysecretkeysComponent } from './generatemysecretkeys/generatemysecretkeys.component';
 import { UpdateuserprofileComponent } from './updateuserprofile/updateuserprofile.component';
 import { MyloanpaymentsComponent } from './myloanpayments/myloanpayments.component';
+import { FeemasterComponent } from './feemaster/feemaster.component';
 
 @NgModule({
   imports: [
@@ -78,7 +79,8 @@ import { MyloanpaymentsComponent } from './myloanpayments/myloanpayments.compone
     UpgradetoschoolComponent,
     GeneratemysecretkeysComponent,
     UpdateuserprofileComponent,
-    MyloanpaymentsComponent
+    MyloanpaymentsComponent,
+    FeemasterComponent
   ],
   exports: [HeaderSidebarComponent]
 })

@@ -1,64 +1,73 @@
-<div class="secretkey-container" @slideUp>
-  <div class="secretkey-form">
+<div class="masterscreen-container" @slideUp>
+  <div class="masterscreen-form">
     <form [formGroup]="requestFundsForm" (submit)="requestFunds(requestFundsForm.value,requestFundsForm.valid)">
-      <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;font-weight: bold;">Request Funds</h3>
+      <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">Request Funds</h3>
       <div class="clearfix"></div>
-      <div class="col-md-12">
-        <div class="row col-md-12">
-          <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">Request From</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" formControlName="UserName" readonly required/>
             <div class="input-validation-msg">
             </div>
           </div>
-          <div class="col-md-6">
-          </div>
         </div>
-        <div class="row col-md-12">
-          <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">Requested Username or DCID</div>
             <div class="clearfix"></div>
             <input type="text" class="form-control" placeholder="Requested Username or DCID" pTooltip="Requested Username or DCID" tooltipPosition="top"
               formControlName="RequestTo" (change)="onChangeUsernameByDCIDorName(requestFundsForm.value.RequestTo)" required/>
-            <div class="input-validation-msg validationlabel">
+            <div class="input-validation-msg">
               <validation *ngIf="isRequiredField(requestFundsForm.get('RequestTo'))" [errMsg]="'requestToRqrd' | translate"></validation>
               <validation *ngIf="isValidField(requestFundsForm.get('RequestTo'))" [errMsg]="'validRequestTo' | translate"></validation>
             </div>
           </div>
         </div>
-        <div class="row col-md-12">
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="label" style="color: #fff;">Request Amount</div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">Requested Name</div>
             <div class="clearfix"></div>
-            <input type="text" class="form-control" placeholder="Request Amount" pTooltip="Request Amount" tooltipPosition="top" formControlName="RequestedAmount"
-              required/>
-            <div class="input-validation-msg validationlabel">
-              <validation *ngIf="isRequiredField(requestFundsForm.get('RequestedAmount'))" [errMsg]="'requestAmountRqrd' | translate"></validation>
-              <validation *ngIf="isValidField(requestFundsForm.get('RequestedAmount'))" [errMsg]="'validRequestAmount' | translate"></validation>
+            <input type="text" class="form-control" placeholder="Requested Name" formControlName="RequestedName" readonly/>
+            <div class="input-validation-msg">
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">Requested Amount</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="Request Amount" pTooltip="Request Amount" tooltipPosition="top" formControlName="RequestedAmount"
+              required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(requestFundsForm.get('RequestedAmount'))" [errMsg]="'requestAmountRqrd' | translate"></validation>
+              <validation *ngIf="isValidField(requestFundsForm.get('RequestedAmount'))" [errMsg]="'validRequestAmount' | translate"></validation>
+              <validation *ngIf="isMinValueField(requestFundsForm.get('RequestedAmount'))" [errMsg]="'Approved amount should not be zero' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
       </div>
       <div class="clearfix"></div>
       <div class="col-md-12 col-sm-12 col-xs-12 margin-top-15">
-        <button type="submit" class="btn btn-primary btncancel" [disabled]="!requestFundsForm.valid" pTooltip="{{'secretkey' | translate}}"
-          tooltipPosition="top">Submit</button>
+        <button type="submit" class="btn btn-primary btncancel" [disabled]="!requestFundsForm.valid">Submit</button>
       </div>
       <div class="clearfix"></div>
     </form>
-    <div class="clearfix"></div>
   </div>
-  <div class="secretkey-form">
-    <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">My Fund Request Details</h3>
-    <div class="clearfix"></div>
-    <div>
-      <div style="overflow: auto;">
+</div>
+<h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">My Fund Request Details</h3>
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="transaction-history-container">
+      <div class="transaction-history-table box-shadow">
         <p-dataTable [value]="lstUserFundsRequestDetails" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
           <p-column field="ID" header="Request Id" [sortable]="true"></p-column>
-          <!-- <p-column field="RequestedBy" header="Requested By" [sortable]="true"></p-column> -->
           <p-column field="RequestedTo" header="Requested To" [sortable]="true"></p-column>
           <p-column field="RequestedAmount" header="Requested Amount" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'140px'}" field="ApprovedAmount" header="Approved Amount" [sortable]="true"></p-column>
           <p-column field="Description" header="Requested Status" [sortable]="true"></p-column>
           <p-column field="CreatedOn" header="Requested On" [sortable]="true">
             <ng-template let-lstUserFundsRequestDetails="rowData" pTemplate="body" let-ri="rowIndex">

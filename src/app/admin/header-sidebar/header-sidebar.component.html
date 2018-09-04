@@ -83,6 +83,12 @@
       </a>
     </li>
     <li tooltipPosition="top">
+      <a [routerLink]="feeMasterUrl" *ngIf="Is_Visible_Fee_Master" routerLinkActive="active">
+        <i class="material-icons">perm_identity</i>
+        <span>Fee Master</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
       <a [routerLink]="appliedUserLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedUserLoanDetails" routerLinkActive="active">
         <i class="material-icons">dashboard</i>
         <span>My Loan Details</span>
@@ -257,6 +263,12 @@
       <a [routerLink]="upgradeToSchoolUrl" *ngIf="Is_Visible_Upgrade_School" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">school</i>
         <span>Upgrade To School</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="feeMasterUrl" *ngIf="Is_Visible_Fee_Master" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">perm_identity</i>
+        <span>Fee Master</span>
       </a>
     </li>
     <li>

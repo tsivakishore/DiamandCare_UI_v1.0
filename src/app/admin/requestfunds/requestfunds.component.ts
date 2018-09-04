@@ -69,8 +69,9 @@ export class RequestfundsComponent extends BaseComponent implements OnInit {
       UserName: [''],
       RequestTo: ['', Validators.compose([Validators.required])],
       RequestToUserID: [''],
-      RequestedAmount: new FormControl('', Validators.compose([Validators.required, <any>Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])),
-      RequestStatusID: ['']
+      RequestedAmount: ['', Validators.compose([Validators.required, Validators.min(1.00), Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
+      RequestStatusID: [''],
+      RequestedName: ['']
     })
   }
 
@@ -83,7 +84,8 @@ export class RequestfundsComponent extends BaseComponent implements OnInit {
           this.requestFundsForm.patchValue({
             RequestTo: '',
             RequestToUserID: '',
-            RequestedAmount: ''
+            RequestedAmount: '',
+            RequestedName: ''
           })
           this.getUserFundRequestDetails();
         }
@@ -105,7 +107,8 @@ export class RequestfundsComponent extends BaseComponent implements OnInit {
           this.requestFundsForm.patchValue({
             RequestTo: this.ToUserDetails.UserName,
             RequestToUserID: this.ToUserDetails.UserID,
-            RequestStatusID: 1
+            RequestStatusID: 1,
+            RequestedName: this.ToUserDetails.FirstName + ' ' + this.ToUserDetails.LastName
           })
         }
         else {

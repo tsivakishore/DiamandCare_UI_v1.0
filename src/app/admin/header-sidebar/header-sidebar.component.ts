@@ -71,6 +71,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   Is_Visible_Generate_My_SecretKeys = false;
   Is_Visible_Update_UsersProfile = false;
   Is_Visible_My_LoanPayments = false;
+  Is_Visible_Fee_Master = false;
 
   constructor(private apiManager: APIManager, private sharedService: SharedService, private commonService: CommonService,
     private router: Router, public toastr: ToastsManager, public vcr: ViewContainerRef) {
@@ -113,45 +114,46 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
       this.Is_Visible_Generate_My_SecretKeys = true;
       this.Is_Visible_Update_UsersProfile = true;
       this.Is_Visible_My_LoanPayments = true;
+      this.Is_Visible_Fee_Master = true;
     }
     else if (this.roleID === BaseUrl.UserRoleID) {
       this.isUserWallet = true;
       this.Is_Visible_Settings = true;
       this.Is_Visible_EarnLoans = true;
       this.Is_Visible_AppliedUserLoanDetails = true;
-      this.Is_Visible_Roles = false;
-      this.Is_Visible_Add_Roles = false;
+      this.Is_Visible_Wallet_Transactions = true;
+      this.Is_Visible_My_LoanPayments = true;
       this.Is_Visible_UnderUserDetails = true;
-      this.Is_Visible_Upgrade_Franchise = false;
-      this.Is_Visible_Upgrade_School = false;
       this.Is_Visible_Request_Funds = true;
       this.Is_Visible_Generate_My_SecretKeys = true;
       this.Is_Visible_My_SecretKeys = true;
       this.Is_Visible_LoanPayment = false;
-      this.Is_Visible_Wallet_Transactions = true;
-      this.Is_Visible_My_LoanPayments = true;
+      this.Is_Visible_Upgrade_Franchise = false;
+      this.Is_Visible_Upgrade_School = false;
+      this.Is_Visible_Roles = false;
+      this.Is_Visible_Add_Roles = false;
     }
     else if (this.roleID === BaseUrl.FranchiseRoleID) {
       this.isUserWallet = true;
       this.Is_Visible_Settings = true;
       this.Is_Visible_EarnLoans = true;
       this.Is_Visible_AppliedUserLoanDetails = true;
-      this.Is_Visible_Roles = false;
-      this.Is_Visible_Add_Roles = false;
       this.Is_Visible_UnderUserDetails = true;
-      this.Is_Visible_Upgrade_Franchise = false;
       this.Is_Visible_LoanPayment = true;
       this.Is_Visible_My_SecretKeys = true;
       this.Is_Visible_Apply_Userloans = true;
       this.Is_Visible_Wallet_Transactions = true;
       this.Is_Visible_Franchise_Request = true;
       this.Is_Visible_Franchise_Tree = true;
-      this.Is_Visible_Expenses = false;
-      this.Is_Visible_Upgrade_School = false;
       this.Is_Visible_Request_Funds = true;
       this.Is_Visible_Generate_My_SecretKeys = true;
-      this.Is_Visible_Update_UsersProfile = false;
       this.Is_Visible_My_LoanPayments = true;
+      this.Is_Visible_Update_UsersProfile = false;
+      this.Is_Visible_Roles = false;
+      this.Is_Visible_Add_Roles = false;
+      this.Is_Visible_Expenses = false;
+      this.Is_Visible_Upgrade_School = false;
+      this.Is_Visible_Upgrade_Franchise = false;
     }
     else if (this.roleID === BaseUrl.SchoolRoleID) {
       this.isUserWallet = true;
@@ -160,6 +162,18 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
       this.Is_Visible_AppliedUserLoanDetails = true;
       this.Is_Visible_UnderUserDetails = true;
       this.Is_Visible_My_LoanPayments = true;
+      this.Is_Visible_UnderUserDetails = true;
+      this.Is_Visible_Upgrade_School = true;
+      this.Is_Visible_Request_Funds = true;
+      this.Is_Visible_Generate_My_SecretKeys = true;
+      this.Is_Visible_My_SecretKeys = true;
+      this.Is_Visible_Wallet_Transactions = true;
+      this.Is_Visible_My_LoanPayments = true;
+      this.Is_Visible_Fee_Master = true;
+      this.Is_Visible_Roles = false;
+      this.Is_Visible_Add_Roles = false;
+      this.Is_Visible_Upgrade_Franchise = false;
+      this.Is_Visible_LoanPayment = false;
     }
     else if (this.roleID === BaseUrl.DeveloperRoleID) {
       this.isUserWallet = false;
@@ -315,6 +329,10 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   get myLoanPaymentsUrl() {
     return "/" + RouteConstants.MYLOANPAYMENTS;
+  }
+
+  get feeMasterUrl() {
+    return "/" + RouteConstants.FEEMASTER;
   }
 
   earnLoanEvent() {

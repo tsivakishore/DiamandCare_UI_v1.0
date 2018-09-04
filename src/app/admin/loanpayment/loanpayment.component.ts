@@ -75,7 +75,7 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
       LoanID: new FormControl(''),
       UserID: new FormControl(''),
       LoanAmount: new FormControl(''),
-      AmountToPay: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])]
+      AmountToPay: ['', Validators.compose([Validators.required, Validators.min(1.00), Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])]
     })
   }
 
@@ -191,6 +191,13 @@ export class LoanpaymentComponent extends BaseComponent implements OnInit {
     else {
       this.isValidAmount = false;
       this.isValidAmountError = "";
+    }
+  }
+
+  onChangeTransferAmount(searchValue: string) {
+    if (!!searchValue) {
+      this.frmLoanDetails.controls['AmountToPay'].setValidators(Validators.compose([Validators.required, Validators.min(1.00), Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)]));
+      this.frmLoanDetails.get('AmountToPay').updateValueAndValidity({ onlySelf: true, emitEvent: false });
     }
   }
 

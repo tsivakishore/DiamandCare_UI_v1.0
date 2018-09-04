@@ -8,3 +8,26 @@
     border: #e85454; 
     margin-left: 20px;
 }
+
+.padding-col-md-12{
+    padding-left: 13px !important;
+}
+
+.btnapprove{
+    width: 65px;
+    height: 20px;
+    text-align: center;
+}
+
+.divmyrequests{
+    margin-left: 5px;
+}
+
+@media only screen and (max-width: 767px) and (min-width: 320px){
+    
+    .btnapprove{
+        width: 65px !important;
+        text-align: center;
+    }
+
+}

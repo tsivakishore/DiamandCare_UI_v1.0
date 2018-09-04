@@ -21,7 +21,7 @@
       </div>
       <br/>
 
-      <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #dadae2;font-size: x-large;font-weight: bold;">Active Loans</h3>
+      <h3 class="col-md-12 col-sm-12 col-xs-12 h3top">Active Loans</h3>
       <div class="clearfix"></div>
       <!-- Show list of Pending Loans start here -->
       <div>
@@ -131,6 +131,7 @@
             <div class="input-validation-msg">
               <validation *ngIf="isRequiredField(frmLoanDetails.get('AmountToPay'))" [errMsg]="'amountToPayRqrd' | translate"></validation>
               <validation *ngIf="isValidField(frmLoanDetails.get('AmountToPay'))" [errMsg]="'validAmountToPay' | translate"></validation>
+              <validation *ngIf="isMinValueField(frmLoanDetails.get('AmountToPay'))" [errMsg]="'Payble amount should not be zero' | translate"></validation>
             </div>
             <!-- <div *ngIf="isValidAmount"><span>{{isValidAmountError}}</span></div> -->
           </div>

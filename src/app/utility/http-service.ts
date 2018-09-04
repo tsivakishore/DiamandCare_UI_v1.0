@@ -86,6 +86,20 @@ export class HttpService extends Http {
       });
   }
 
+  // postLogin(url: string, body: any, options?: RequestOptionsArgs): Observable<any> {
+  //   this.requestInterceptor();
+  //   return super.post(url, body, this.requestOptions(options))
+  //     .catch(this.onCatch)
+  //     .do((res: Response) => {
+  //       this.onSubscribeSuccess(res);
+  //     }, (error: any) => {
+  //       this.onSubscribeError(error);
+  //     })
+  //     .finally(() => {
+  //       this.onFinally();
+  //     });
+  // }
+
   getWithDownloadFile(url: string, body: any, options?: RequestOptionsArgs): Observable<any> {
     this.requestInterceptor();
     return super.get(this.getFullUrl(url), this.requestOptions1(options))

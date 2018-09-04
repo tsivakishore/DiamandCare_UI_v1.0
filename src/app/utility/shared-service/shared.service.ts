@@ -26,6 +26,7 @@ export class SharedService {
   private _walletHoldBalance: string;
   private _pass: string;
   private _refer: string;
+  private _expiredIn: any;
   private isProfileUpdated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /* Shared LoggedIn Param */
@@ -215,6 +216,18 @@ export class SharedService {
     else {
       this.logout();
     }
+  }
+
+  setSessionExpireIn(value: any): void {
+    this._expiredIn = value;
+  }
+
+  getSessionExpireIn(): any {
+    return this._expiredIn;
+  }
+
+  public getExpireTimeSeconds(): string {
+    return this.getSessionExpireIn();
   }
 
   trackMixPanelEvent(value) {

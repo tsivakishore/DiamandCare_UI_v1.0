@@ -4445,7 +4445,7 @@ login, register {
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.62), 0px 0px 14px 9px rgba(0, 0, 0, 0.09);
   background-color: #353c48;
   width: 800px;
-  position: fixed;
+  position: absolute;
   top: 15%;
   left: calc(50% - 400px);
   z-index: 9; }
@@ -4491,7 +4491,7 @@ login, register {
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.62), 0px 0px 14px 9px rgba(0, 0, 0, 0.09);
   background-color: #353c48;
   width: 800px;
-  position: fixed;
+  position: absolute;
   top: 15%;
   left: calc(50% - 400px);
   z-index: 9; }
@@ -4539,7 +4539,7 @@ login, register {
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.62), 0px 0px 14px 9px rgba(0, 0, 0, 0.09);
   background-color: #353c48;
   width: 800px;
-  position: fixed;
+  position: absolute;
   top: 15%;
   left: calc(50% - 400px);
   z-index: 9; }

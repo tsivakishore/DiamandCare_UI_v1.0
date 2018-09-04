@@ -194,6 +194,7 @@ export const LANG_EN_TRANS = {
   'chngePhnNumber': 'Change Phone Number',
   'phnNumber': 'Phone Number',
   'settings': 'User Settings',
+  'update':'Update',
 
   //Wallet
   'amount': 'Amount',

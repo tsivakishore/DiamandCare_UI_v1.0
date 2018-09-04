@@ -35,15 +35,16 @@ export class FranchiserequestComponent extends BaseComponent implements OnInit {
 
   isShowModal: number = 1;
   franchiseRequestForm: FormGroup;
-  multipleSecretkeyForm: FormGroup;
+  franchiseApprovedFrom: FormGroup;
 
-  isAddressValid: boolean = true;
-  listFranchiseRequestStaus: any;
+  listFranchiseRequestStatus: any;
   listFranchiseUserRequests: any;
+  listAllFranchiseRequests: any[];
   gridTitle: string;
   selectedRow: any;
   userID: number;
   roleID: string;
+  UserDetails: any;
   public is_Visible_Franchise: boolean = false;
   public is_Visible_Admin: boolean = false;
 
@@ -60,21 +61,32 @@ export class FranchiserequestComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.roleID = this.sharedService.getRoleID();
+    this.UserDetails = this.sharedService.getUser();
+    this.userID = this.UserDetails.UserID;
     this.GetFranchiseRequestStatus();
     this.createFranchiseRequestForm();
     if (this.roleID === BaseUrl.AdminRoleID) {
       this.is_Visible_Admin = true;
-      this.GetFranchiseRequests();
+      this.GetAllFranchiseRequests();
     }
     if (this.roleID === BaseUrl.FranchiseRoleID) {
       this.is_Visible_Franchise = true;
-      this.GetFranchiseRequests();
+      this.GetFranchiseRequestsByUserID(this.userID);
     }
   }
 
   createFranchiseRequestForm() {
     this.franchiseRequestForm = this.fb.group({
       StatusID: new FormControl('')
+    })
+  }
+
+  createViewFranchiseRequest() {
+    this.franchiseApprovedFrom = this.fb.group({
+      ID: new FormControl(''),
+      UserName: [''],//Requested By
+      UserID: [''],
+      StatusID: ['']
     })
   }
 
@@ -91,16 +103,16 @@ export class FranchiserequestComponent extends BaseComponent implements OnInit {
       this.apiManager.postAPI(API.SAVEFRANCHISEREQUEST, this.franchiseRequestForm.value).subscribe(response => {
         if (response.m_Item1) {
           this.toastr.success(response.m_Item2);
-          this.GetFranchiseRequests();
+          this.GetFranchiseRequestsByUserID(this.userID);
           this.isShowModal = 1;
         }
         else {
-          this.GetFranchiseRequests();
+          this.GetFranchiseRequestsByUserID(this.userID);
           this.toastr.error(response.m_Item2);
           this.isShowModal = 1;
         }
       }, err => {
-        this.toastr.error("Error while Franchise request. Please try again.");
+        this.toastr.error("Error while franchise request.Please try again.");
       });
     }
     else if (status == "No") {
@@ -113,7 +125,7 @@ export class FranchiserequestComponent extends BaseComponent implements OnInit {
     this.commonService._getFranchiseRequestStaus().subscribe((res: any) => {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
-        this.listFranchiseRequestStaus = res.m_Item3;
+        this.listFranchiseRequestStatus = res.m_Item3;
       }
     }, err => {
       console.log(err);
@@ -121,18 +133,65 @@ export class FranchiserequestComponent extends BaseComponent implements OnInit {
     })
   }
 
-  GetFranchiseRequests() {
+  GetFranchiseRequestsByUserID(userID) {
     this.sharedService.setLoader(true);
-    this.franchiseService._getFranchiseUserRequests().subscribe((res: any) => {
+    this.franchiseService._getFranchiseRequestsByUserID(userID).subscribe((res: any) => {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.listFranchiseUserRequests = res.m_Item3;
-        console.log(this.listFranchiseUserRequests)
       }
     }, err => {
       console.log(err);
       this.sharedService.setLoader(false);
     })
+  }
+
+  GetAllFranchiseRequests() {
+    this.sharedService.setLoader(true);
+    this.franchiseService._getAllFranchiseUserRequests().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.listAllFranchiseRequests = res.m_Item3;
+      }
+    }, err => {
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
+
+  ViewFranchiseRequest(rowIndex) {
+    this.isShowModal = 3;
+    this.createViewFranchiseRequest();
+    this.selectedRow = this.listAllFranchiseRequests[rowIndex];
+    let StatusId = this.selectedRow.StatusID;
+    this.franchiseApprovedFrom.patchValue({
+      ID: this.selectedRow.ID,
+      UserID: this.selectedRow.UserID,
+      UserName: this.selectedRow.UserName
+    })
+    this.franchiseApprovedFrom.controls['StatusID'].setValue(StatusId, { onlySelf: true })
+  }
+
+  ApproveFranchiseRequest(frmFranchiseApproved, isValidForm) {
+    if (isValidForm) {
+      this.apiManager.postAPI(API.APPROVEFRANCHISEREQUEST, frmFranchiseApproved).subscribe(response => {
+        if (response.m_Item1) {
+          this.toastr.success(response.m_Item2);
+          this.GetAllFranchiseRequests();
+          this.isShowModal = 1;
+        }
+        else {
+          this.GetAllFranchiseRequests();
+          this.toastr.error(response.m_Item2);
+          this.isShowModal = 1;
+        }
+      }, err => {
+        this.toastr.error("Error while approving franchise request.Please try again.");
+      });
+    }
+    else {
+      this.toastr.error("Form is not valid");
+    }
   }
 
   getFormattedDate(date1) {

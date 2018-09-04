@@ -50,4 +50,11 @@ export class BaseComponent implements OnInit {
     return formControlName.hasError('zero');
   }
 
+  isMinValueField(formControlName){
+    return (formControlName.hasError('min') && formControlName.touched) || (formControlName.pristine && this.isFormSubmitted);
+  }
+
+  isMaxValueField(formControlName){
+    return (formControlName.hasError('max') && formControlName.touched) || (formControlName.pristine && this.isFormSubmitted);
+  }
 }

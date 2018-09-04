@@ -27,6 +27,7 @@ import { UpgradetoschoolComponent } from './upgradetoschool/upgradetoschool.comp
 import { GeneratemysecretkeysComponent } from './generatemysecretkeys/generatemysecretkeys.component';
 import { UpdateuserprofileComponent } from './updateuserprofile/updateuserprofile.component';
 import { MyloanpaymentsComponent } from './myloanpayments/myloanpayments.component';
+import { FeemasterComponent } from './feemaster/feemaster.component';
 
 const routes: Routes = [
   {
@@ -152,6 +153,11 @@ const routes: Routes = [
   {
     path: RouteConstants.MYLOANPAYMENTS,
     component: MyloanpaymentsComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.FEEMASTER,
+    component: FeemasterComponent,
     canActivate: [AuthGaurd]
   }
 ];

@@ -74,9 +74,17 @@ export class FranchiseService {
       });
   }
 
-  _getFranchiseUserRequests() {
+  _getFranchiseRequestsByUserID(postData) {
     return this.httpService
-      .get(API.GETFRANCHISEUSERREQUESTS)
+      .get(API.GETFRANCHISEREQUESTSBYUSERID + '?UserID=' + postData)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  _getAllFranchiseUserRequests() {
+    return this.httpService
+      .get(API.GETALLFRANCHISEREQUESTS)
       .map(res => this.extractData(res, true)).catch((error: any) => {
         return Observable.throw(new Error(error.status));
       });

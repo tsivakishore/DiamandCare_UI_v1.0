@@ -67,6 +67,7 @@ export class API {
   public static GETSECRETKEYS = 'RegisterKey/GetIssuedRegisterKeys';
   public static GENERATEMULTIPLESECRETKEYS = 'RegisterKey/GenerateMultipleRegisterKeys';
   public static GETUSERNAMEWALLETMASTERCHARGESBYDCIDorNAME = 'RegisterKey/GetUsernameWalletMasterChargesByDCIDorName';
+  public static SHARESECRETKEY = 'RegisterKey/ShareRegisterKey';
   public static RESENDSECRETKEY = 'Shared/ResendSMS';
   public static VERIFY_SECRETKEY = 'Shared/VerifyKey';
   public static GETMODEOFTRANSFER = 'Shared/GetModeofTransfer';
@@ -116,7 +117,9 @@ export class API {
   public static GETWALLETTRANSACTIONS = 'wallet/GetWalletTransactions';
   public static GETFRANCHISEREQUESTSTATUS = 'Shared/GetFranchiseRequestStaus';
   public static SAVEFRANCHISEREQUEST = 'franchisedetails/SaveFranchiseRequest';
-  public static GETFRANCHISEUSERREQUESTS = 'franchisedetails/GetFranchiseUserRequests';
+  public static APPROVEFRANCHISEREQUEST = 'franchisedetails/ApproveFranchiseRequest';
+  public static GETFRANCHISEREQUESTSBYUSERID = 'franchisedetails/GetFranchiseRequestsByUserID';
+  public static GETALLFRANCHISEREQUESTS = 'franchisedetails/GetAllFranchiseRequests';
   public static GETUSERDETAILSBYDCIDOrUSERNAME = 'user/UserDetailsByDCIDOrUserName';
   public static GETUSERDETAILSBYUSERID = 'user/UserDetailsByUserID';
   public static USERADDRESSBYID = 'user/useraddressbyId';
@@ -125,6 +128,8 @@ export class API {
   public static GETUSERWALLETMASTERCHARGES = 'RegisterKey/GetUserWalletMasterCharges';
   public static REQUESTFUNDS = 'wallet/RequestFunds';
   public static USERREQUESTFUNDSDETAILS = 'wallet/GetUserFundRequestDetails';
+  public static APPROVEFUNDSREQUEST = 'wallet/ApproveFundsRequest';
+  public static TRANSFERFUNDS = 'wallet/UpdateFundsTransfer';
 
   // EXTERNAL API CALLERS
 

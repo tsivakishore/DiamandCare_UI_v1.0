@@ -37,8 +37,7 @@
     </div>
   </div>
 
-
-  <div class="phone-number-modal" style="margin-left: 15px;margin-top: 100px;" *ngIf="isShowModal == 2" @dialog>
+  <div class="phone-number-modal modelpopup" *ngIf="isShowModal == 2" @dialog>
     <form [formGroup]="fdFundRequest" (submit)="ApproveRequestFunds(fdFundRequest.value,fdFundRequest.valid)">
       <div class="modal-container" style="height: 200px !important;">
         <div class="modal-header" style="background: #797b85;">
@@ -48,13 +47,6 @@
         <div class="clearfix"></div>
         <div class="modal-body" style="height: 50px;">
           <div class="col-md-12">
-            <!-- <div class="margin-top-15 col-md-12">
-              <div>
-                <div class="label" style="color: #fff;">Request ID</div>
-                <div class="clearfix"></div>
-                <input type="text" class="form-control" formControlName="ID" readonly/>
-              </div>
-            </div> -->
             <div class="clearfix"></div>
             <div class="margin-top-15 col-md-12">
               <div>
@@ -77,7 +69,7 @@
                   <validation *ngIf="isRequiredField(fdFundRequest.get('ApprovedAmount'))" [errMsg]="'Please enter approved amount' | translate"></validation>
                   <validation *ngIf="isValidField(fdFundRequest.get('ApprovedAmount'))" [errMsg]="'Please enter valid approved amount' | translate"></validation>
                   <validation *ngIf="isMinValueField(fdFundRequest.get('ApprovedAmount'))" [errMsg]="'Approved amount should not be zero' | translate"></validation>
-                  <validation *ngIf="isMaxValueField(fdFundRequest.get('ApprovedAmount'))" [errMsg]="'Approved amount should not be exceed requested amount' | translate"></validation>
+                  <validation *ngIf="isMaxValueField(fdFundRequest.get('ApprovedAmount'))" [errMsg]="'Approved amount should not be exceeds the requested amount' | translate"></validation>
                 </div>
               </div>
             </div>
@@ -110,7 +102,7 @@
   </div>
   <div class="clearfix"></div>
 
-  <div class="phone-number-modal" style="margin-left: 15px;margin-top: 100px;" *ngIf="isShowModal == 3" @dialog>
+  <div class="phone-number-modal modelpopup" *ngIf="isShowModal == 3" @dialog>
     <form [formGroup]="frmTransferFunds" (submit)="SubmitFundsTransfer(frmTransferFunds.value,frmTransferFunds.valid)">
       <div class="modal-container" style="height: 200px !important;">
         <div class="modal-header" style="background: #797b85;">
@@ -159,11 +151,12 @@
               <div>
                 <div class="label" style="color: #fff;">Transfer Amount</div>
                 <div class="clearfix"></div>
-                <input type="text" class="form-control" formControlName="TransferAmount" required />
+                <input type="text" class="form-control" formControlName="ApprovedAmount" (change)="onChangeTransferAmount($event.target.value)" required />
                 <div class="input-validation-msg">
-                  <validation *ngIf="isRequiredField(frmTransferFunds.get('TransferAmount'))" [errMsg]="'Please enter transfer amount' | translate"></validation>
-                  <validation *ngIf="isValidField(frmTransferFunds.get('TransferAmount'))" [errMsg]="'Please enter valid transfer amount' | translate"></validation>
-                  <validation *ngIf="isMinValueField(frmTransferFunds.get('TransferAmount'))" [errMsg]="'Tansfer amount should not be zero' | translate"></validation>
+                  <validation *ngIf="isRequiredField(frmTransferFunds.get('ApprovedAmount'))" [errMsg]="'Please enter transfer amount' | translate"></validation>
+                  <validation *ngIf="isValidField(frmTransferFunds.get('ApprovedAmount'))" [errMsg]="'Please enter valid transfer amount' | translate"></validation>
+                  <validation *ngIf="isMinValueField(frmTransferFunds.get('ApprovedAmount'))" [errMsg]="'Tansfer amount should not be zero' | translate"></validation>
+                  <validation *ngIf="isMaxValueField(frmTransferFunds.get('ApprovedAmount'))" [errMsg]="'Insufficient balance in your account' | translate"></validation>
                 </div>
               </div>
             </div>
@@ -192,13 +185,11 @@
     <div class="col-md-12">
       <div style="overflow: auto;">
         <p-dataTable [value]="WalletExpensesList" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
-          <!-- <p-column field="ID" header="ID" [sortable]="true"></p-column> -->
           <p-column field="AgainstType" header="Against Type" [sortable]="true"></p-column>
           <p-column field="Against" header="Against" [sortable]="true"></p-column>
           <p-column field="TransactionType" header="Transaction Type" [sortable]="true"></p-column>
           <p-column field="TransactionAmount" header="Transaction Amount" [sortable]="true"></p-column>
           <p-column field="Purpose" header="Purpose" [sortable]="true"></p-column>
-          <!-- <p-column field="UpdatedBy" header="Updated By" [sortable]="true"></p-column> -->
           <p-column field="UpdatedOn" header="Generated On" [sortable]="true">
             <ng-template let-WalletExpensesList="rowData" pTemplate="body" let-ri="rowIndex">
               <div class="col-md-12" style="margin-left: -15px;">

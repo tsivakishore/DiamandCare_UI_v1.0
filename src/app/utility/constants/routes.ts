@@ -29,5 +29,6 @@ export class RouteConstants {
   public static GENERATEMYKEY = 'generatemysecretkeys';
   public static UPDATEUSERPROFILE = 'updateuserprofile';
   public static MYLOANPAYMENTS = 'myloanpayments';
+  public static FEEMASTER = 'feemaster';
 
 }

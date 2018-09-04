@@ -167,7 +167,7 @@ export class UpdateuserprofileComponent extends BaseComponent implements OnInit 
       Id: new FormControl(''),
       UserID: new FormControl(''),
       NomineeID: new FormControl(null),
-      NomineeName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50), <any>Validators.pattern(CommonRegexp.ALPHA_NUMERIC)])),
+      NomineeName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])),
       NomineeRelationshipID: new FormControl('', Validators.compose([Validators.required])),
       OtherRelationship: new FormControl(null),
       NomineeAddress: new FormControl('', [Validators.minLength(2), Validators.maxLength(500)]),
