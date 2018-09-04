@@ -162,7 +162,6 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
       this.Is_Visible_AppliedUserLoanDetails = true;
       this.Is_Visible_UnderUserDetails = true;
       this.Is_Visible_My_LoanPayments = true;
-      this.Is_Visible_UnderUserDetails = true;
       this.Is_Visible_Upgrade_School = true;
       this.Is_Visible_Request_Funds = true;
       this.Is_Visible_Generate_My_SecretKeys = true;
