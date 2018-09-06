@@ -34,6 +34,7 @@ export class MysecretkeysComponent extends BaseComponent implements OnInit {
 
   isShowModal: number = 1;
   listRegKeys: any;
+  listSharedRegKeys: any;
   gridTitle: string;
   selectedRow: any;
   phoneNumberForm: FormGroup;
@@ -55,6 +56,7 @@ export class MysecretkeysComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.UserDetails = this.sharedService.getUser();
     this.GetIssuedRegisterKeys();
+    this.GetSharedRegisterKeys();
     this.gridTitle = "List of My Secret Keys"
   }
 
@@ -82,6 +84,19 @@ export class MysecretkeysComponent extends BaseComponent implements OnInit {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.listRegKeys = res.m_Item3;
+      }
+    }, err => {
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
+
+  public GetSharedRegisterKeys() {
+    this.sharedService.setLoader(true);
+    this.secretKeyService._getSharedSecretKeyByUserID().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.listSharedRegKeys = res.m_Item3;
       }
     }, err => {
       console.log(err);
@@ -136,6 +151,7 @@ export class MysecretkeysComponent extends BaseComponent implements OnInit {
         if (response.m_Item1) {
           this.toastr.success(response.m_Item2);
           this.GetIssuedRegisterKeys();
+          this.GetSharedRegisterKeys();
           this.isShowModal = 1;
         }
         else {
@@ -192,6 +208,13 @@ export class MysecretkeysComponent extends BaseComponent implements OnInit {
     var day = date.getDate().toString();
     day = day.length > 1 ? day : '0' + day;
     return day + '-' + month + '-' + year;
+  }
+
+  getKeyType(KeyType: string) {
+    if (KeyType == "P")
+      return "Paid";
+    else
+      return "Free";
   }
 
   closeForm() {

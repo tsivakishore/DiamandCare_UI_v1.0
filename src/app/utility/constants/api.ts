@@ -112,6 +112,7 @@ export class API {
   public static GETPENDINGLOANSBYDCIDORUSERNAME = 'loan/getpendingloandetailsByDCIDorName';
   public static GETREJECTEDLOANSDCIDORUSERNAME = 'loan/getRejectedLoanDetailsDCIDorName';
   public static GETSECRETKEYSBYUserID = 'RegisterKey/GetIssuedRegisterKeysByUserID';
+  public static GETSHAREDSECRETKEYSBYUserID = 'RegisterKey/GetSharedRegisterKeysByUserID';
   public static GETWALLETRECENTEXPENSES = 'wallet/GetWalletRecentExpenses';
   public static INSERTWALLETEXPENSES = 'wallet/InsertWalletExpenses';
   public static GETWALLETTRANSACTIONS = 'wallet/GetWalletTransactions';

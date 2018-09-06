@@ -18,9 +18,18 @@ export class SecretKeyService {
                 return Observable.throw(new Error(error.status));
             });
     }
+
     _getSecretKeyByUserID() {
         return this.httpService
             .get(API.GETSECRETKEYSBYUserID)
+            .map(res => this.extractData(res, true)).catch((error: any) => {
+                return Observable.throw(new Error(error.status));
+            });
+    }
+
+    _getSharedSecretKeyByUserID() {
+        return this.httpService
+            .get(API.GETSHAREDSECRETKEYSBYUserID)
             .map(res => this.extractData(res, true)).catch((error: any) => {
                 return Observable.throw(new Error(error.status));
             });
