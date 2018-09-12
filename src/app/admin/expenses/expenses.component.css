@@ -2,3 +2,25 @@
     margin: 15px 0 0 0;
     width: 98px;
 }
+
+.btndelete{
+    height: 25px;
+    width: 70px;
+    background-color: red;
+    border: red;
+}
+
+.btnyes{
+    width: 90px; 
+    margin-left: 10px;
+}
+.btnno{
+    width: 90px;
+    background: #e85454;
+    border: #e85454; 
+    margin-left: 20px;
+}
+
+.popuptop{
+    margin-top: 40px;
+}

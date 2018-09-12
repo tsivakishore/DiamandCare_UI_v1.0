@@ -289,6 +289,13 @@ export class SecretkeyComponent extends BaseComponent implements OnInit {
     { KeyID: "P", KeyName: "Paid" },
   ];
 
+  getKeyType(KeyType: string) {
+    if (KeyType == "P")
+      return "Paid";
+    else
+      return "Free";
+  }
+  
   getFormattedDate(date1) {
     var date = new Date(date1);
     var year = date.getFullYear();

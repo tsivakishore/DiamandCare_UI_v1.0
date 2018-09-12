@@ -29,11 +29,13 @@ import { CommonRegexp } from "../../utility/constants/validations";
   ]
 })
 export class ExpensesComponent extends BaseComponent implements OnInit {
+  isShowModal: number = 1;
   WalletExpensesList: any[]
   OriginalWalletExpensesList: any[]
   walletExpensesForm: FormGroup;
   updateExpense: boolean = false;
   saveExpense: boolean = false;
+  selectedExpenseData: any;
 
   constructor(private fb: FormBuilder, private walletServ: WalletService, private sharedService: SharedService,
     public toastr: ToastsManager, private apiManager: APIManager,
@@ -44,14 +46,16 @@ export class ExpensesComponent extends BaseComponent implements OnInit {
     this.getWalletRecentExpenses();
     this.walletExpensesForm.get('TransactionAmount').enable();
   }
+
   createExpensesForm() {
     this.walletExpensesForm = this.fb.group({
       TransactionAmount: new FormControl('', Validators.compose([Validators.min(1), Validators.maxLength(8), <any>Validators.pattern(CommonRegexp.NUMERIC_REGEXP)])),
       //TransactionAmount: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_REGEXP), Validators.maxLength(8), Validators.minLength(1)])],
       Purpose: ['', Validators.compose([Validators.required])],
-      ID:0
+      ID: 0
     })
   }
+
   public getWalletRecentExpenses() {
     this.sharedService.setLoader(true);
     this.walletServ._getWalletRecentExpenses().subscribe((res: any) => {
@@ -85,17 +89,50 @@ export class ExpensesComponent extends BaseComponent implements OnInit {
       this.toastr.error("Invalid form data.");
     }
   }
+
   editExpenses(values) {
     this.walletExpensesForm.patchValue(values);
     this.updateExpense = true;
     this.saveExpense = true;
   }
 
+  DeleteExpenses(status: string) {
+    if (status == "Yes") {
+      this.apiManager.postAPI(API.DELETEWALLETEXPENSES, this.selectedExpenseData).subscribe(response => {
+        if (response.m_Item1) {
+          this.toastr.success(response.m_Item2);
+          this.getWalletRecentExpenses();
+          this.isShowModal = 1;
+        }
+        else {
+          this.getWalletRecentExpenses();
+          this.toastr.error(response.m_Item2);
+          this.isShowModal = 1;
+        }
+      }, err => {
+        this.toastr.error("Error while deleting expenses.Please try again.");
+      });
+    }
+    else if (status == "No") {
+      this.closeForm();
+    }
+  }
+
+  ViewExpenses(SelectedData: any) {
+    this.selectedExpenseData = SelectedData;
+    this.isShowModal = 2;
+    console.log(this.selectedExpenseData)
+  }
+
   expensesreset() {
-    this.walletExpensesForm.reset({ TransactionAmount: "", Purpose: "", ID:0 });
+    this.walletExpensesForm.reset({ TransactionAmount: "", Purpose: "", ID: 0 });
     this.updateExpense = false;
     this.saveExpense = false;
     this.walletExpensesForm.get('TransactionAmount').enable();
     this.walletExpensesForm.get('Purpose').enable();
+  }
+
+  closeForm() {
+    this.isShowModal = 1;
   }
 }

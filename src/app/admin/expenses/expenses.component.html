@@ -26,8 +26,7 @@
               tooltipPosition="top">Save </button>
             <button type="button" *ngIf="updateExpense" (click)="onSubmitExpenses(walletExpensesForm.value,walletExpensesForm.valid)"
               [disabled]="!walletExpensesForm.valid" class="btn btn-primary btnstyles" pTooltip="Update" tooltipPosition="top">Update </button>
-            <button type="button" class="btn btn-default btnstyles" (click)="expensesreset()" tooltipPosition="top"
-              pTooltip="{{'reset' | translate}}">{{'reset' | translate}}</button>
+            <button type="button" class="btn btn-default btnstyles" (click)="expensesreset()" tooltipPosition="top" pTooltip="{{'reset' | translate}}">{{'reset' | translate}}</button>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -49,9 +48,51 @@
                 label="Edit">Edit</button>
             </ng-template>
           </p-column>
+
+          <p-column [style]="{'width':'150px'}" header="Delete" field="ID">
+            <ng-template let-WalletExpensesRowdata="rowData" pTemplate="body" let-ri="rowIndex">
+              <button type="button" class="ui-button-reset-transparent btndelete" pButton (click)="ViewExpenses(WalletExpensesRowdata)"
+                label="Delete">Delete</button>
+            </ng-template>
+          </p-column>
+
         </p-dataTable>
       </div>
     </div>
   </div>
 </div>
 <admin-footer></admin-footer>
+
+<div class="phone-number-modal popuptop" *ngIf="isShowModal == 2" @dialog>
+  <div>
+    <div class="modal-container">
+      <div class="modal-header">
+        <h5>Do you want to proceed the request? </h5>
+        <i class="material-icons" (click)="isShowModal = 1">close</i>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-body">
+        <div class="margin-top-10 col-md-12">
+          <div class="col-md-9 padding-right-0">
+            <div class="col-md-12 col-md-offset-3">
+              <button type="button" (click)="DeleteExpenses('Yes')" class="btn btn-primary btnyes">Yes</button>
+              <button type="button" (click)="DeleteExpenses('No')" class="btn btn-primary btnno">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer modelfooter">
+
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div class="confirm-modal-overay" *ngIf="isShowModal == 2" (click)="closeForm()"></div>

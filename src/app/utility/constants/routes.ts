@@ -30,5 +30,6 @@ export class RouteConstants {
   public static UPDATEUSERPROFILE = 'updateuserprofile';
   public static MYLOANPAYMENTS = 'myloanpayments';
   public static FEEMASTER = 'feemaster';
+  public static ADMINREPORTS = 'areports';
 
 }
