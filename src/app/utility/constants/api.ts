@@ -133,6 +133,10 @@ export class API {
   public static APPROVEFUNDSREQUEST = 'wallet/ApproveFundsRequest';
   public static TRANSFERFUNDS = 'wallet/UpdateFundsTransfer';
   public static GETREPORTTYPES = 'reports/GetReportTypes';
+  public static GETFRANCHISEDETAILS = 'franchisedetails/GetFranchiseDetails';
+  public static GETSCHOOLDETAILS = 'schooldetails/GetSchoolDetails';
+  public static INSERTSCHOOLDETAILS = 'schooldetails/InsertSchoolDetails';
+  public static UPDATESCHOOLDETAILS = 'schooldetails/UpdateSchoolDetails';
 
   // EXTERNAL API CALLERS
 
