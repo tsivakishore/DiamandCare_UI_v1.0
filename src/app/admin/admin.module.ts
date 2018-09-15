@@ -10,7 +10,7 @@ import { LoanearnsComponent } from './loanearns/loanearns.component';
 import { AppliedloandetailsComponent } from './appliedloandetails/appliedloandetails.component';
 import { UserloandetailsComponent } from './userloandetails/userloandetails.component'
 import { UtilityModule } from "../utility/utility.module";
-import { DataTableModule, DropdownModule, InputSwitchModule, MessagesModule, SharedModule, TooltipModule } from "primeng/primeng";
+import { DataTableModule, DropdownModule, InputSwitchModule, MessagesModule, SharedModule, TooltipModule, CalendarModule } from "primeng/primeng";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SettingsComponent } from './settings/settings.component';
 import { MyAutofocusDirective } from "./focus.directive";
@@ -35,6 +35,7 @@ import { GeneratemysecretkeysComponent } from './generatemysecretkeys/generatemy
 import { UpdateuserprofileComponent } from './updateuserprofile/updateuserprofile.component';
 import { MyloanpaymentsComponent } from './myloanpayments/myloanpayments.component';
 import { FeemasterComponent } from './feemaster/feemaster.component';
+import { ReportsComponent } from './reports/reports.component';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import { FeemasterComponent } from './feemaster/feemaster.component';
     FormsModule,
     ReactiveFormsModule,
     UtilityModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    CalendarModule
   ],
   declarations: [
     HeaderSidebarComponent,
@@ -80,7 +82,8 @@ import { FeemasterComponent } from './feemaster/feemaster.component';
     GeneratemysecretkeysComponent,
     UpdateuserprofileComponent,
     MyloanpaymentsComponent,
-    FeemasterComponent
+    FeemasterComponent,
+    ReportsComponent
   ],
   exports: [HeaderSidebarComponent]
 })

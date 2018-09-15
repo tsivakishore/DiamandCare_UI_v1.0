@@ -28,6 +28,7 @@ import { GeneratemysecretkeysComponent } from './generatemysecretkeys/generatemy
 import { UpdateuserprofileComponent } from './updateuserprofile/updateuserprofile.component';
 import { MyloanpaymentsComponent } from './myloanpayments/myloanpayments.component';
 import { FeemasterComponent } from './feemaster/feemaster.component';
+import { ReportsComponent } from './reports/reports.component';
 
 const routes: Routes = [
   {
@@ -158,6 +159,11 @@ const routes: Routes = [
   {
     path: RouteConstants.FEEMASTER,
     component: FeemasterComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.REPORTS,
+    component: ReportsComponent,
     canActivate: [AuthGaurd]
   }
 ];

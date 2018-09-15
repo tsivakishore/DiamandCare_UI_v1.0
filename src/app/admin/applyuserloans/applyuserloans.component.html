@@ -3,8 +3,7 @@
     <form>
       <div>
         <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">Apply Loan for User</h3>
-        <button type="button" class="ui-button-reset-transparent" [ngClass]="colorCodeRenew()" [disabled]="checkRenewEnable()" style="width: 100px;height: 30px; float:right; padding: left 10px; "
-          pButton (click)="renew()">Renew my ID</button>
+        <button type="button" class="btn btn-primary btnrenewmyid" [ngClass]="colorCodeRenew()" [disabled]="checkRenewEnable()" (click)="renew()">Renew my ID</button>
       </div>
       <div class="clearfix"></div>
       <div class="col-md-4 col-xs-12 col-sm-12 margin-top-15">
@@ -30,9 +29,8 @@
                   </div>
                   <div class="col-md-6" style="width:100px">
                     <!-- [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" -->
-                    <button type="button" style="width: 50px;height: 20px;" class="ui-button-reset-transparent" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)"
-                      [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" *ngIf="checkHidden(listOfEarnLoans.EPLoans)"
-                      pButton (click)="ApplyPersonalLoan(ri)">Apply</button>
+                    <button type="button" class="btn btn-primary btnapply" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)" [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)"
+                      *ngIf="checkHidden(listOfEarnLoans.EPLoans)" (click)="ApplyPersonalLoan(ri)">Apply</button>
                   </div>
                 </div>
               </ng-template>
@@ -45,9 +43,8 @@
                   </div>
                   <div class="col-md-6" style="width:100px">
                     <!-- [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" -->
-                    <button type="button" style="width: 50px;height: 20px;" class="ui-button-reset-transparent" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)"
-                      [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" *ngIf="checkFeesReimbursementHidden(listOfEarnLoans.FeesReimbursement)"
-                      pButton (click)="ApplyFeesReimbursement(ri)">Apply</button>
+                    <button type="button" class="btn btn-primary btnapply" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)" [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)"
+                      *ngIf="checkFeesReimbursementHidden(listOfEarnLoans.FeesReimbursement)" (click)="ApplyFeesReimbursement(ri)">Apply</button>
                   </div>
                 </div>
               </ng-template>
@@ -60,9 +57,8 @@
                   </div>
                   <div class="col-md-6" style="width:100px">
                     <!-- [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" -->
-                    <button type="button" style="width: 50px;height: 20px;" class="ui-button-reset-transparent" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)"
-                      [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" *ngIf="checkHealthBenefitHidden(listOfEarnLoans.HealthBenefit)"
-                      pButton (click)="ApplyHealthBenefit(ri)">Apply</button>
+                    <button type="button" class="btn btn-primary btnapply" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)" [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)"
+                      *ngIf="checkHealthBenefitHidden(listOfEarnLoans.HealthBenefit)" (click)="ApplyHealthBenefit(ri)">Apply</button>
                   </div>
                 </div>
               </ng-template>
@@ -75,9 +71,8 @@
                   </div>
                   <div class="col-md-6" style="width:100px">
                     <!-- [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" -->
-                    <button type="button" style="width: 50px;height: 20px;" class="ui-button-reset-transparent" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)"
-                      [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" *ngIf="checkRiskBenefitHidden(listOfEarnLoans.RiskBenefit)"
-                      pButton (click)="ApplyRiskBenefitLoan(ri)">Apply</button>
+                    <button type="button" class="btn btn-primary btnapply" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)" [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)"
+                      *ngIf="checkRiskBenefitHidden(listOfEarnLoans.RiskBenefit)" (click)="ApplyRiskBenefitLoan(ri)">Apply</button>
                   </div>
                 </div>
               </ng-template>
@@ -88,9 +83,8 @@
                 <div class="col-md-12" style="margin-left: -15px;">
                   <div class="col-md-6" style="width:100px">
                     <!-- [disabled]="checkHomeLoanEligibility(listOfEarnLoans.LoanStatus,listOfEarnLoans.Groups)" -->
-                    <button type="button" style="width: 50px;height: 20px;" class="ui-button-reset-transparent" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)"
-                      [disabled]="checkHomeLoanEligibility(listOfEarnLoans.LoanStatus,listOfEarnLoans.Groups)" *ngIf="checkHomeLoanHidden(listOfEarnLoans.LoanStatus,listOfEarnLoans.Groups)"
-                      pButton (click)="ApplyHomeLoan(ri)">Apply</button>
+                    <button type="button" class="btn btn-primary btnapply" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)" [disabled]="checkHomeLoanEligibility(listOfEarnLoans.LoanStatus,listOfEarnLoans.Groups)"
+                      *ngIf="checkHomeLoanHidden(listOfEarnLoans.LoanStatus,listOfEarnLoans.Groups)" (click)="ApplyHomeLoan(ri)">Apply</button>
                   </div>
                 </div>
               </ng-template>
@@ -100,9 +94,8 @@
                 <div class="col-md-12" style="margin-left: -15px;">
                   <div class="col-md-6" style="width:100px">
                     <!-- [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" -->
-                    <button type="button" style="width: 50px;height: 20px;" class="ui-button-reset-transparent" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)"
-                      [disabled]="checkPrepaidLoanEligibility(listOfEarnLoans.LoanStatus,listOfEarnLoans.Groups)" *ngIf="checkPrepaidLoanHidden(listOfEarnLoans.EPLoans,listOfEarnLoans.Groups)"
-                      pButton (click)="ApplyPrepaidLoan(ri)">Apply</button>
+                    <button type="button" class="btn btn-primary btnapply" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)" [disabled]="checkPrepaidLoanEligibility(listOfEarnLoans.LoanStatus,listOfEarnLoans.Groups)"
+                      *ngIf="checkPrepaidLoanHidden(listOfEarnLoans.EPLoans,listOfEarnLoans.Groups)" (click)="ApplyPrepaidLoan(ri)">Apply</button>
                   </div>
                 </div>
               </ng-template>
@@ -145,8 +138,7 @@
           </div>
           <div class="clearfix"></div>
           <div class="margin-top-10 col-xs-12 col-md-6">
-            <select class="form-control ddlSelect" (change)="filterPLChanged($event.target.value)" formControlName="ModeofTransfer"
-              required>
+            <select class="form-control ddlSelect" (change)="filterPLChanged($event.target.value)" formControlName="ModeofTransfer" required>
               <!-- <option value="" disabled selected>Select Mode of Transfer</option> -->
               <option *ngFor="let mode of lstModeofTransfer" value="{{mode.ID}}">{{mode.Mode}}</option>
             </select>
@@ -204,8 +196,7 @@
           <div class="clearfix"></div>
 
           <div class="margin-top-10 col-xs-12 col-md-6">
-            <select class="form-control ddlSelect" (change)="filterFRChanged($event.target.value)" formControlName="ModeofTransfer"
-              required>
+            <select class="form-control ddlSelect" (change)="filterFRChanged($event.target.value)" formControlName="ModeofTransfer" required>
               <!-- <option value="" disabled selected>Select Mode of Transfer</option> -->
               <option *ngFor="let mode of lstModeofTransfer" value="{{mode.ID}}">{{mode.Mode}}</option>
             </select>
@@ -326,8 +317,7 @@
           </div>
           <div class="clearfix"></div>
           <div class="margin-top-10 col-xs-12 col-md-6">
-            <select class="form-control ddlSelect" (change)="filterHBChanged($event.target.value)" formControlName="ModeofTransfer"
-              required>
+            <select class="form-control ddlSelect" (change)="filterHBChanged($event.target.value)" formControlName="ModeofTransfer" required>
               <!-- <option value="" disabled selected>Select Mode of Transfer</option> -->
               <option *ngFor="let mode of lstModeofTransfer" value="{{mode.ID}}">{{mode.Mode}}</option>
             </select>
@@ -448,8 +438,7 @@
           </div>
           <div class="clearfix"></div>
           <div class="margin-top-10 col-xs-12 col-md-6">
-            <select class="form-control ddlSelect" (change)="filterRBChanged($event.target.value)" formControlName="ModeofTransfer"
-              required>
+            <select class="form-control ddlSelect" (change)="filterRBChanged($event.target.value)" formControlName="ModeofTransfer" required>
               <!-- <option value="" disabled selected>Select Mode of Transfer</option> -->
               <option *ngFor="let mode of lstModeofTransfer" value="{{mode.ID}}">{{mode.Mode}}</option>
             </select>

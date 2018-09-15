@@ -7,7 +7,35 @@
     border: 0px solid #00c8aa !important;
 }
 
+.ddlstyle{
+    width: 440px;margin-top: 5px;
+}
+.modeldialog{
+    margin-left: 15px;
+    margin-top: -60px;
+}
+
+.btnapply{
+    padding: 0.25em 1em 0.25em 1em;
+    border-radius: 10px;
+}
+
 .ddlSelect{
     width: 440px;
     margin-top: 5px;
+}
+
+.btnrenewmyid{
+    width: 100px;
+    float:right; 
+    margin-right: 10px !important;
+}
+
+@media only screen and (max-width: 767px) and (min-width: 320px){
+    .ddlstyle {
+        width: 330px !important;margin-top: 5px;
+    }
+    .modeldialog {
+        margin-top: 90px !important;
+    }
 }

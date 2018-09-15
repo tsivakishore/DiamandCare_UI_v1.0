@@ -260,7 +260,7 @@ p-dropdown{
 .redClr {
   color: #ff3535 !important; }
 
-  /* .ui-datepicker.ui-widget .ui-datepicker-calendar td a {
+.ui-datepicker.ui-widget .ui-datepicker-calendar td a {
     color: black !important;
 }
 
@@ -270,14 +270,14 @@ p-dropdown{
 
 .ui-calendar.ui-calendar-w-btn input {
   width: 195px !important;
-} */
+}
 
 /* .btn-primary {
   -webkit-border-radius: 16px 16px 16px 16px !important;
 } */
 
-/* @media only screen and (max-width: 767px) and (min-width: 320px){
+@media only screen and (max-width: 767px) and (min-width: 320px){
   .ui-calendar.ui-calendar-w-btn input {
     width: 300px !important;
   }
-} */
+}

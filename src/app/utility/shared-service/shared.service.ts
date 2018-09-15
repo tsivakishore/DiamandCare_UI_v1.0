@@ -20,7 +20,7 @@ export class SharedService {
   private _user: User;
   private _userName: string;
   private _userID: string;
-  private _loginType: number;
+  private _loginType: string;
   private _roleID: string;
   private _roleName: string;
   private _walletBalance: string;
@@ -182,11 +182,11 @@ export class SharedService {
     this._userID = value;
   }
 
-  getLoginType(): number {
+  getLoginType(): string {
     return this._loginType;
   }
 
-  setLoginType(value: number) {
+  setLoginType(value: string) {
     this._loginType = value;
   }
 

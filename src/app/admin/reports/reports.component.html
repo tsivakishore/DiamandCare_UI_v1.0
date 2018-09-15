@@ -1,0 +1,51 @@
+<div class="masterscreen-container" @slideUp>
+  <div class="masterscreen-form">
+    <form [formGroup]="reportsForm">
+      <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">{{Title}}</h3>
+      <div class="clearfix"></div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="label" class="lblcolor">From Date</div>
+            <div class="clearfix"></div>
+            <p-calendar formControlName="FromDate" [minDate]="minFromDate" [maxDate]="maxFromDate" [readonlyInput]="true" dateFormat="dd/mm/yy"
+              [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2090" (onSelect)="FromDateChange(reportsForm.value.FromDate)"></p-calendar>
+            <div class="input-validation-msg">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="label" class="lblcolor">To Date</div>
+            <div class="clearfix"></div>
+            <p-calendar formControlName="ToDate" [minDate]="minToDate" [maxDate]="maxToDate" [readonlyInput]="true" dateFormat="dd/mm/yy"
+              [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2090"></p-calendar>
+            <div class="input-validation-msg">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="label" class="lblcolor">Report Type</div>
+            <div class="clearfix"></div>
+            <select class="form-control dropdownstyle" formControlName="ReportTypeID">
+              <option *ngFor="let reportType of lstReportTypes" value="{{reportType.ReportTypeID}}">{{reportType.ReportDescription}}</option>
+            </select>
+            <div class="input-validation-msg">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-md-12 col-sm-12 col-xs-12 margin-top-15">
+        <button type="button" class="btn btn-primary" (click)="DownloadExcelReports(reportsForm.value,reportsForm.valid)" [disabled]="!reportsForm.valid">Download Report</button>
+        <!-- <button (click)="exportAsXLSX()"><i class="fa fa-file-excel-o" style="font-size:26px;height: 35px;color:blue"></i></button> -->
+      </div>
+      <div class="clearfix"></div>
+    </form>
+  </div>
+</div>
+
+<admin-footer></admin-footer>

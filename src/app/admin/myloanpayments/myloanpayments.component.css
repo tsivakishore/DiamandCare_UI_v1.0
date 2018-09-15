@@ -1,10 +1,11 @@
 .btnpay{
+    width: 70px !important;
+    text-align: center;
+    padding: 0.25em 1em 0.25em 1em;
+    border-radius: 15px;
     background-color: #00c8aa !important;
     border: 0px solid #00c8aa !important;
-}
-
-.btnwidth{
-    width: 70px !important;
+    color: #FFFFFF !important;
 }
 
 .margin-top-40{

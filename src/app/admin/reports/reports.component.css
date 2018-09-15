@@ -1,0 +1,13 @@
+.lblcolor{
+    color: #fff;
+}
+
+.dropdownstyle{
+    width: 225px;margin-top: 5px;
+}
+
+@media only screen and (max-width: 767px) and (min-width: 320px){
+    .dropdownstyle{
+        width: 328px !important;margin-top: 5px;
+    }
+}

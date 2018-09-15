@@ -58,7 +58,7 @@
                 <ng-template let-data="rowData" pTemplate="body" let-ri="rowIndex">
                   <div class="col-md-12" style="margin-left: -30px;">
                     <div class="col-md-6" style="width:100px">
-                      <button type="button" class="ui-button-reset-transparent btnapprove" pButton (click)="ViewFranchiseRequest(ri)">Approve</button>
+                      <button type="button" class="btn btn-primary btnapprove" (click)="ViewFranchiseRequest(ri)">Approve</button>
                     </div>
                   </div>
                 </ng-template>
@@ -121,12 +121,12 @@
               <div class="clearfix"></div>
               <input type="text" class="form-control" formControlName="UserName" readonly />
               <div class="input-validation-msg">
-                
+
               </div>
             </div>
           </div>
           <div class="clearfix"></div>
-         
+
           <div class="margin-top-15 col-md-12 col-sm-12 col-xs-12">
             <div>
               <div class="label" style="color: #fff;">Requested Status</div>

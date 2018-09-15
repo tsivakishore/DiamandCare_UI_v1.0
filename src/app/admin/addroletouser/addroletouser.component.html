@@ -9,8 +9,7 @@
         <p-column [style]="{'width':'200px'}" field="RoleName" header="Role" [sortable]="true"></p-column>
         <p-column [style]="{'width':'120px'}" header="Edit Role" field="UserID">
           <ng-template let-userRolesList="rowData" pTemplate="body" let-ri="rowIndex">
-            <button type="button" style="height: 25px;width: 70px;" class="ui-button-reset-transparent" (click)="onShowUpdateRoleModal(userRolesList)"
-              pButton>Edit</button>
+            <button type="button" class="btn btn-primary btnedit" (click)="onShowUpdateRoleModal(userRolesList)">Edit</button>
           </ng-template>
         </p-column>
 

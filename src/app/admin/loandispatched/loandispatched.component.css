@@ -29,6 +29,11 @@
     font-weight: bold !important;
 }
 
+.btntransferstatus{
+    padding: 0.25em 1em 0.25em 1em;
+    border-radius: 15px;
+}
+
 @media only screen and (max-width: 767px) and (min-width: 320px){
     .h3top{
         margin-top: -15px !important;

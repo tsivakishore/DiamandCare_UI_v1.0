@@ -72,6 +72,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   Is_Visible_Update_UsersProfile = false;
   Is_Visible_My_LoanPayments = false;
   Is_Visible_Fee_Master = false;
+  Is_Visible_Reports = false;
 
   constructor(private apiManager: APIManager, private sharedService: SharedService, private commonService: CommonService,
     private router: Router, public toastr: ToastsManager, public vcr: ViewContainerRef) {
@@ -90,6 +91,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   getMenusBasedOnRole(userID: string) {
     if (this.roleID === BaseUrl.AdminRoleID) {
+      this.sharedService.setLoginType(this.roleID);
       this.isUserWallet = true;
       this.Is_Visible_Settings = true;
       this.Is_Visible_EarnLoans = true;
@@ -115,8 +117,10 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
       this.Is_Visible_Update_UsersProfile = true;
       this.Is_Visible_My_LoanPayments = true;
       this.Is_Visible_Fee_Master = true;
+      this.Is_Visible_Reports = true;
     }
     else if (this.roleID === BaseUrl.UserRoleID) {
+      this.sharedService.setLoginType(this.roleID);
       this.isUserWallet = true;
       this.Is_Visible_Settings = true;
       this.Is_Visible_EarnLoans = true;
@@ -132,8 +136,10 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
       this.Is_Visible_Upgrade_School = false;
       this.Is_Visible_Roles = false;
       this.Is_Visible_Add_Roles = false;
+      this.Is_Visible_Reports = true;
     }
     else if (this.roleID === BaseUrl.FranchiseRoleID) {
+      this.sharedService.setLoginType(this.roleID);
       this.isUserWallet = true;
       this.Is_Visible_Settings = true;
       this.Is_Visible_EarnLoans = true;
@@ -154,8 +160,10 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
       this.Is_Visible_Expenses = false;
       this.Is_Visible_Upgrade_School = false;
       this.Is_Visible_Upgrade_Franchise = false;
+      this.Is_Visible_Reports = true;
     }
     else if (this.roleID === BaseUrl.SchoolRoleID) {
+      this.sharedService.setLoginType(this.roleID);
       this.isUserWallet = true;
       this.Is_Visible_Settings = true;
       this.Is_Visible_EarnLoans = true;
@@ -173,8 +181,10 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
       this.Is_Visible_Add_Roles = false;
       this.Is_Visible_Upgrade_Franchise = false;
       this.Is_Visible_LoanPayment = false;
+      this.Is_Visible_Reports = true;
     }
     else if (this.roleID === BaseUrl.DeveloperRoleID) {
+      this.sharedService.setLoginType(this.roleID);
       this.isUserWallet = false;
       this.Is_Visible_Settings = true;
       this.Is_Visible_EarnLoans = true;
@@ -332,6 +342,10 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   get feeMasterUrl() {
     return "/" + RouteConstants.FEEMASTER;
+  }
+
+  get reportsUrl() {
+    return "/" + RouteConstants.REPORTS;
   }
 
   earnLoanEvent() {

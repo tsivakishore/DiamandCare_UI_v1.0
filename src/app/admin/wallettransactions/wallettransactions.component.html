@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
       <h3 class="col-md-6 col-sm-6 col-xs-6" style="color: #00c8aa;margin-top: 15px;">All Fund Requests</h3>
-      <button type="button" class="ui-button-reset-transparent btntransfer" pButton (click)="OpenFundsTransferPopup()">Transfer Funds</button>
+      <button type="button" class="btn btn-primary btntransfer" (click)="OpenFundsTransferPopup()">Transfer Funds</button>
     </div>
   </div>
   <div class="clearfix"></div>
@@ -26,7 +26,7 @@
               <ng-template let-data="rowData" pTemplate="body" let-ri="rowIndex">
                 <div class="col-md-12" style="margin-left: -30px;">
                   <div class="col-md-6" style="width:100px">
-                    <button type="button" class="ui-button-reset-transparent btnapprove" pButton (click)="EditFundRequest(ri)">Approve</button>
+                    <button type="button" class="btn btn-primary btnapprove" (click)="EditFundRequest(ri)">Approve </button>
                   </div>
                 </div>
               </ng-template>
@@ -151,7 +151,8 @@
               <div>
                 <div class="label" style="color: #fff;">Transfer Amount</div>
                 <div class="clearfix"></div>
-                <input type="text" class="form-control" formControlName="ApprovedAmount" (change)="onChangeTransferAmount($event.target.value)" required />
+                <input type="text" class="form-control" formControlName="ApprovedAmount" (change)="onChangeTransferAmount($event.target.value)"
+                  required />
                 <div class="input-validation-msg">
                   <validation *ngIf="isRequiredField(frmTransferFunds.get('ApprovedAmount'))" [errMsg]="'Please enter transfer amount' | translate"></validation>
                   <validation *ngIf="isValidField(frmTransferFunds.get('ApprovedAmount'))" [errMsg]="'Please enter valid transfer amount' | translate"></validation>

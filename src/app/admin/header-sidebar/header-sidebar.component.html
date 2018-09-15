@@ -167,6 +167,12 @@
         <span>{{'Assign Role' | translate}}</span>
       </a>
     </li>
+    <li tooltipPosition="top" routerLinkActive="active">
+      <a [routerLink]="reportsUrl" *ngIf="Is_Visible_Reports" routerLinkActive="active">
+        <i class="material-icons">report</i>
+        <span>Reports</span>
+      </a>
+    </li>
     <li>
       <a routerLinkActive="active" (click)="logout()" tooltipPosition="top">
         <i class="material-icons">power_settings_new</i>
@@ -337,8 +343,8 @@
         <span>Add Bank Account</span>
       </a>
     </li>
-    <li tooltipPosition="top" *ngIf="Is_Visible_Add_Roles">
-      <a [routerLink]="rolesUrl" routerLinkActive="active" (click)="closeSidebar()">
+    <li>
+      <a [routerLink]="rolesUrl" *ngIf="Is_Visible_Add_Roles" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">group_add</i>
         <span>Roles</span>
       </a>
@@ -347,6 +353,12 @@
       <a [routerLink]="addUserToRoleUrl" *ngIf="Is_Visible_Roles" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">person_add</i>
         <span>Assign Role</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="reportsUrl" *ngIf="Is_Visible_Reports" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">report</i>
+        <span>Reports</span>
       </a>
     </li>
     <li>

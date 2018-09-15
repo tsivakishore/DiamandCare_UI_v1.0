@@ -33,3 +33,13 @@
     text-align: center;
     color: white;
 }
+
+.btnview{
+    width: 70px !important;
+    text-align: center;
+    padding: 0.25em 1em 0.25em 1em;
+    border-radius: 15px;
+    background: #2399e5 !important;
+    border: 1px solid #2399e5 !important;
+    color: #FFFFFF !important;
+}

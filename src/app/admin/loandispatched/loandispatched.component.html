@@ -23,8 +23,7 @@
             [rowsPerPageOptions]="[5,10,20]" selectionMode="single" [(selection)]="selectedRow">
             <p-column [style]="{'width':'150px'}" header="Transfer">
               <ng-template let-listOfTransferPendingLoans="rowData" pTemplate="body" let-ri="rowIndex">
-                <button type="button" class="ui-button-reset-transparent" [ngClass]="colorCodeRenew()" pButton (click)="onShowTransferModal(ri)"
-                  label="Select row">Transfer Status</button>
+                <button type="button" class="btn btn-primary btntransferstatus" [ngClass]="colorCodeRenew()" (click)="onShowTransferModal(ri)">Transfer Status</button>
               </ng-template>
             </p-column>
             <p-column [style]="{'width':'100px'}" field="LoanID" header="LoanID" [sortable]="true"></p-column>

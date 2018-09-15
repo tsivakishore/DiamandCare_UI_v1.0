@@ -30,7 +30,7 @@
             selectionMode="single" [(selection)]="selectedRow">
             <p-column [style]="{'width':'140px'}" header="Pay" field="LoanID" [sortable]="true">
               <ng-template let-listOfActiveUserLoans="rowData" pTemplate="body" let-ri="rowIndex">
-                <button type="button" [ngClass]="colorCodeRenew()" class="ui-button-reset-transparent btnwidth" pButton (click)="ViewLoanDetails(ri)">Pay</button>
+                <button type="button" [ngClass]="colorCodeRenew()" class="btn btn-primary btnpay" (click)="ViewLoanDetails(ri)">Pay</button>
               </ng-template>
             </p-column>
             <p-column [style]="{'width':'100px'}" field="LoanID" header="LoanID" [sortable]="true"></p-column>

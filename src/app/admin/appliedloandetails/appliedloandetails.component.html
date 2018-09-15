@@ -24,7 +24,7 @@
             selectionMode="single">
             <p-column [style]="{'width':'140px'}" header="Loan Details" field="LoanID" [sortable]="true">
               <ng-template let-listOfPendingLoans="rowData" pTemplate="body" let-ri="rowIndex">
-                <button type="button" style="width: 70px" class="ui-button-reset-transparent" pButton (click)="ViewLoanDetails(ri)">View</button>
+                <button type="button" class="btn btn-primary btnview" (click)="ViewLoanDetails(ri)">View</button>
               </ng-template>
             </p-column>
             <p-column [style]="{'width':'100px'}" field="LoanID" header="LoanID" [sortable]="true"></p-column>
