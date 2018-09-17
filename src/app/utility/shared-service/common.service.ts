@@ -43,7 +43,13 @@ export class CommonService {
                 return Observable.throw(new Error(error.status));
             });
     }
-
+    _getStates() {
+        return this.httpService
+            .get(API.STATE)
+            .map(res => this.extractData(res, true)).catch((error: any) => {
+                return Observable.throw(new Error(error.status));
+            });
+    }
     _getLoanTransferStatus() {
         return this.httpService
             .get(API.GETTRANSFERSTATUS)

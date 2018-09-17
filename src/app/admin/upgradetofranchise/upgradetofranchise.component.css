@@ -1,7 +1,19 @@
 .dropdownstyle{
     width: 255px;margin-top: 5px;
 }
-
+.btnstyles{
+    margin: 15px 0 0 0;
+    width: 98px;
+}
+.btnedit{
+    width: 70px !important;
+    text-align: center;
+    padding: 0.25em 1em 0.25em 1em;
+    border-radius: 15px;
+    background: #2399e5 !important;
+    border: 1px solid #2399e5 !important;
+    color: #FFFFFF !important;
+}
 @media only screen and (max-width: 767px) and (min-width: 320px){
     .dropdownstyle{
         width: 390px !important;margin-top: 5px;

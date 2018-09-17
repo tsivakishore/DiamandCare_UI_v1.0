@@ -39,7 +39,11 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
   FranchiseTypes: any;
   FranchiseTypeIDDetails: any;
   defaultUnderFranchiseID: any;
+  actiontype: any;
   userID: number;
+  lstFranchise: any;
+  isShowModal: number = 1;
+  selectedRow: any;
 
   constructor(private sharedService: SharedService,
     private franchiseService: FranchiseService,
@@ -54,10 +58,12 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
   ngOnInit() {
     this.createUpgradeFranchiseForm();
     this.getFranchiseTypes();
+    this.getFranchiseDetails();
   }
 
   createUpgradeFranchiseForm() {
     this.frmUpgradeToFranchise = this.fb.group({
+      ID: [''],
       UserID: ['', Validators.compose([Validators.required])],
       UserName: ['', Validators.compose([Validators.required])],
       FranchiseTypeID: [''],
@@ -65,7 +71,7 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
       ConditionsApplySelf: [''],
       ConditionsApplyUnderJoinees: [''],
       FranchiseJoinees: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_REGEXP)])],
-      FranchiseJoineesMinimum: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_REGEXP)])],
+      FranchiseJoineesMinimum: ['', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_REGEXP)])]
     })
   }
 
@@ -117,7 +123,7 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
           this.frmUpgradeToFranchise.controls['UnderFranchiseID'].setValidators(null);
           this.frmUpgradeToFranchise.get('UnderFranchiseID').updateValueAndValidity({ onlySelf: false, emitEvent: false });
         }
-        if (!!this.FranchiseTypeIDDetails) {
+        if (!!this.FranchiseTypeIDDetails && this.actiontype != "edit") {
           this.frmUpgradeToFranchise.patchValue({
             FranchiseJoinees: this.FranchiseTypeIDDetails.TargetJoineesPerMonth,
             FranchiseJoineesMinimum: this.FranchiseTypeIDDetails.MinimumJoineesAvg
@@ -136,16 +142,39 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
     })
   }
 
-  public getFranchiseMasterDetails() {
+  public getFranchiseDetails() {
     this.sharedService.setLoader(true);
-    this.franchiseService._getFranchiseMasterDetails().subscribe((res: any) => {
+    this.franchiseService._getFranchiseDetails().subscribe((res: any) => {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
-        this.FranchiseTypeDetails = res.m_Item3;
+        this.lstFranchise = res.m_Item3;
       }
     }, err => {
       console.log(err);
       this.sharedService.setLoader(false);
+    })
+  }
+  EditFranchise(rowIndex) {
+    this.isShowModal = 2;
+    this.actiontype = "edit";
+    this.createUpgradeFranchiseForm();
+    this.selectedRow = this.lstFranchise[rowIndex];
+    this.frmUpgradeToFranchise.patchValue({
+      ID: this.selectedRow.ID,
+      UserID: this.selectedRow.UserID,
+      UserName: this.selectedRow.UserName,
+      ConditionsApplySelf: this.selectedRow.ConditionsApplySelf,
+      ConditionsApplyUnderJoinees: this.selectedRow.ConditionsApplyUnderJoinees,
+
+    })
+    this.frmUpgradeToFranchise.controls['FranchiseTypeID'].setValue(this.selectedRow.FranchiseTypeID, { onlySelf: true });
+    this.getUnderFranchiseDetails(this.selectedRow.FranchiseTypeID)
+    this.frmUpgradeToFranchise.controls['UnderFranchiseID'].setValue(this.selectedRow.UnderFranchiseID, { onlySelf: true });
+    this.userID = this.selectedRow.UserID;
+
+    this.frmUpgradeToFranchise.patchValue({
+      FranchiseJoinees: this.selectedRow.FranchiseJoinees,
+      FranchiseJoineesMinimum: this.selectedRow.FranchiseJoineesMinimum
     })
   }
 
@@ -169,6 +198,8 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
         if (response.m_Item1) {
           this.frmUpgradeToFranchise.reset();
           this.toastr.success(response.m_Item2);
+          this.getFranchiseDetails();
+          this.actiontype = "";
         }
         else
           this.toastr.error(response.m_Item2);
@@ -178,4 +209,5 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
       });
     }
   }
+
 }

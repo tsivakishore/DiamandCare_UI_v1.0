@@ -92,7 +92,7 @@
       </div>
       <div class="clearfix"></div>
       <div class="col-md-12 col-sm-12 col-xs-12 margin-top-15">
-        <button type="submit" class="btn btn-primary" [disabled]="!frmUpgradeToFranchise.valid" pTooltip="{{'submit' | translate}}"
+        <button type="submit" class="btn btn-primary btnstyles" [disabled]="!frmUpgradeToFranchise.valid" pTooltip="{{'submit' | translate}}"
           tooltipPosition="top">{{'submit' | translate}}</button>
       </div>
       <div class="clearfix"></div>
@@ -100,6 +100,39 @@
   </div>
   <div class="clearfix"></div>
 </div>
+
+<!-- Grid start -->
+<h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">{{'franchisecommission' | translate}}</h3>
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="transaction-history-container">
+      <div class="transaction-history-table box-shadow">
+        <p-dataTable [value]="lstFranchise" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+          <p-column [style]="{'width':'80px'}" field="UserID" header="UserID" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'250px'}" field="UserName" header="User Name" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'100px'}" field="FranchiseType" header="Franchise Type" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'100px'}" field="ConditionsApplySelf" header="Conditions Apply Self" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'100px'}" field="ConditionsApplyUnderJoinees" header="Conditions Apply Under Joinees" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'130px'}" field="FranchiseJoinees" header="Franchise Joinees" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'150px'}" field="FranchiseJoineesMinimum" header="Franchise Joinees Minimum" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'100px'}" field="UnderFranchiseName" header="Under Franchise Name" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'100px'}" field="UnderFranchiseType" header="Under Franchise Type" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'100px'}" header="Edit" [sortable]="true">
+            <ng-template let-data="rowData" pTemplate="body" let-ri="rowIndex">
+              <div class="col-md-12" style="margin-left: -30px;">
+                <div class="col-md-6" style="width:100px">
+                  <button type="button" class="btn btn-primary btnedit" (click)="EditFranchise(ri)">Edit</button>
+                </div>
+              </div>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Grid End -->
 
 <!-- <div class="sucess-msg">
   <p-messages [(value)]="msgs"></p-messages>
