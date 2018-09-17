@@ -132,8 +132,8 @@
               <validation *ngIf="isRequiredField(frmLoanDetails.get('AmountToPay'))" [errMsg]="'amountToPayRqrd' | translate"></validation>
               <validation *ngIf="isValidField(frmLoanDetails.get('AmountToPay'))" [errMsg]="'validAmountToPay' | translate"></validation>
               <validation *ngIf="isMinValueField(frmLoanDetails.get('AmountToPay'))" [errMsg]="'Payble amount should not be zero' | translate"></validation>
+              <validation *ngIf="isMaxValueField(frmLoanDetails.get('AmountToPay'))" [errMsg]="'Payment amount should not be greater than the actual amount to pay' | translate"></validation>
             </div>
-            <!-- <div *ngIf="isValidAmount"><span>{{isValidAmountError}}</span></div> -->
           </div>
         </div>
       </div>

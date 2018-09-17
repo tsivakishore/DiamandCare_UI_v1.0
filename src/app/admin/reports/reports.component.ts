@@ -14,6 +14,8 @@ var jsPDF = require('jspdf');
 require('jspdf-autotable');
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
+import * as CellObject from 'xlsx'
+import { write } from 'xlsx-style';
 
 
 @Component({
@@ -41,13 +43,13 @@ export class ReportsComponent extends BaseComponent implements OnInit {
   Title: string;
   lstReportTypes: any;
   LoginType: string;
-  todayDate: string;
+  currentDate: string;
   minFromDate: Date;
   maxFromDate: Date;
   minToDate: Date;
   maxToDate: Date;
   EXCEL_EXTENSION: string = 'xlsx';
-  defaultReportTypeID: number;
+  defaultReportType: string = "";
 
   constructor(private fb: FormBuilder,
     private sharedService: SharedService,
@@ -65,10 +67,12 @@ export class ReportsComponent extends BaseComponent implements OnInit {
     this.createReportsFormGroup();
     this.getReportTypes(this.LoginType);
     let today = new Date();
-    this.todayDate = this.converDate(today);
+    this.minToDate = today;
+    this.maxToDate = today;
+    this.currentDate = this.converDate(today);
     this.reportsForm.patchValue({
-      FromDate: this.todayDate,
-      ToDate: this.todayDate
+      FromDate: this.currentDate,
+      ToDate: this.currentDate
     })
   }
 
@@ -76,7 +80,7 @@ export class ReportsComponent extends BaseComponent implements OnInit {
     this.reportsForm = this.fb.group({
       FromDate: [''],
       ToDate: [''],
-      ReportTypeID: ['']
+      ReportType: [this.defaultReportType]
     })
   }
 
@@ -85,13 +89,46 @@ export class ReportsComponent extends BaseComponent implements OnInit {
     this.reportsService._getgetReportTypes(LoginType).subscribe((res: any) => {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
-        debugger;
         this.lstReportTypes = res.m_Item3;
-        this.reportsForm.controls['ReportTypeID'].setValue(1, { onlySelf: true });
+        this.defaultReportType = this.lstReportTypes[0].ReportDescription;
+        this.reportsForm.controls['ReportType'].setValue(this.defaultReportType, { onlySelf: true });
       }
     }, err => {
       this.sharedService.setLoader(false);
     })
+  }
+
+  DownloadExcelReports(formParam, isValid) {
+    if (isValid) {
+      if (formParam.ReportType == "")
+        formParam.ReportType = this.defaultReportType;
+      this.apiManager.postAPI(API.DOWNLOADREPORTS, formParam).subscribe((response: any) => {
+        if (!!response && response.length > 0) {
+          debugger;
+          let date = new Date();
+          const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(response);
+          const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+          XLSX.writeFile(workbook, formParam.ReportType + '_' + date.getDate() + (date.getMonth() + 1) + date.getFullYear() + '_' + date.getTime() + '.' + this.EXCEL_EXTENSION, { bookType: 'xlsx', type: 'buffer' });
+        }
+        else
+          this.toastr.error('No records found');
+      }, err => {
+        console.log(err);
+        this.toastr.error("Error while downloading report.Please try again.");
+      });
+    }
+    else {
+      this.toastr.error("Form is not valid");
+    }
+  }
+
+  private wrapAndCenterCell(cell: XLSX.CellObject) {
+    const wrapAndCenterCellStyle = { font: { bold: true }, fill: { fgColor: { rgb: "ff6600" } } };
+    this.setCellStyle(cell, wrapAndCenterCellStyle);
+  }
+
+  private setCellStyle(cell, style: {}) {
+    cell.s = style;
   }
 
   public DownloadPDFReports(formParam, isValid) {
@@ -118,35 +155,18 @@ export class ReportsComponent extends BaseComponent implements OnInit {
     })
   }
 
-  DownloadExcelReports(formParam, isValid) {
-    debugger;
-    if (isValid) {
-      this.reportsService._getSharedSecretKeyByUserID().subscribe((response: any) => {
-        if (response.m_Item1) {
-          debugger;
-          const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(response.m_Item3);
-          const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-          XLSX.writeFile(workbook, 'my_file.' + this.EXCEL_EXTENSION, { bookType: 'xlsx', type: 'buffer' });
-        }
-        else
-          this.toastr.error(response.m_Item2);
-      }, err => {
-        console.log(err);
-        this.toastr.error("Error while downloading report.Please try again.");
-      });
-    }
-    else {
-      this.toastr.error("Form is not valid");
-    }
-  }
-
-  exportAsXLSX() { }
-
   FromDateChange(fromDate: Date) {
     this.minToDate = fromDate;
-    let toMindate = this.converDate(fromDate);
+    this.maxToDate = new Date();
+    this.maxFromDate = new Date();
     this.reportsForm.patchValue({
-      ToDate: toMindate
+      FromDate: this.converDate(fromDate)
+    })
+  }
+
+  ToDateChange(toDate: Date) {
+    this.reportsForm.patchValue({
+      ToDate: this.converDate(toDate)
     })
   }
 

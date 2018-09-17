@@ -272,6 +272,12 @@ p-dropdown{
   width: 195px !important;
 }
 
+.ui-datepicker.ui-widget .ui-datepicker-calendar thead th {
+  background-color: #186fc5 !important;
+  padding: 8px;
+  color: white !important;
+}
+
 /* .btn-primary {
   -webkit-border-radius: 16px 16px 16px 16px !important;
 } */

@@ -47,8 +47,8 @@ export class MyloanpaymentsComponent extends BaseComponent implements OnInit {
   OriginalLoanAmountPay: any;
   AmountToPay: any;
   UserID: number;
-  isValidAmount: boolean = false;
-  isValidAmountError: string;
+  // isValidAmount: boolean = false;
+  // isValidAmountError: string;
   walletBalance: string;
   walletHoldBalance: string = "0";
   loadBalance: boolean = false;
@@ -66,7 +66,6 @@ export class MyloanpaymentsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.createLoanDetailsForm();
     // this.GetActiveLoansByUserID();
     // this.GetAllPaidLoans();
     this.UserName = this.sharedService.getUserName();
@@ -79,7 +78,7 @@ export class MyloanpaymentsComponent extends BaseComponent implements OnInit {
       LoanID: new FormControl(''),
       UserID: new FormControl(''),
       LoanAmount: new FormControl(''),
-      AmountToPay: ['', Validators.compose([Validators.required, Validators.min(1.00), Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])]
+      AmountToPay: ['', Validators.compose([Validators.required, Validators.min(1.00), Validators.max(this.OriginalLoanAmountPay), Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])]
     })
   }
 
@@ -122,6 +121,7 @@ export class MyloanpaymentsComponent extends BaseComponent implements OnInit {
     this.LoanID = this.selectedRow.LoanID;
     this.LoanAmount = this.selectedRow.LoanAmount;
     this.OriginalLoanAmountPay = this.selectedRow.AmountToPay;
+    this.createLoanDetailsForm();
     this.frmLoanDetails.patchValue({
       AmountToPay: this.selectedRow.AmountToPay,
       UserID: this.selectedRow.UserID
@@ -185,13 +185,9 @@ export class MyloanpaymentsComponent extends BaseComponent implements OnInit {
   }
 
   onChangeAmountToPay(amount: any) {
-    if (!!amount || amount <= 0) {
-      this.isValidAmount = true;
-      this.isValidAmountError = "Payment amount should not be zero";
-    }
-    else {
-      this.isValidAmount = false;
-      this.isValidAmountError = "";
+    if (!!amount) {
+      this.frmLoanDetails.controls['AmountToPay'].setValidators(Validators.compose([Validators.required, Validators.min(1.00), Validators.max(this.OriginalLoanAmountPay), Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)]));
+      this.frmLoanDetails.get('AmountToPay').updateValueAndValidity({ onlySelf: true, emitEvent: false });
     }
   }
 

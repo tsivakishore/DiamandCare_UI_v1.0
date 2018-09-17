@@ -20,7 +20,7 @@
             <div class="label" class="lblcolor">To Date</div>
             <div class="clearfix"></div>
             <p-calendar formControlName="ToDate" [minDate]="minToDate" [maxDate]="maxToDate" [readonlyInput]="true" dateFormat="dd/mm/yy"
-              [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2090"></p-calendar>
+              [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2090" (onSelect)="ToDateChange(reportsForm.value.ToDate)"></p-calendar>
             <div class="input-validation-msg">
             </div>
           </div>
@@ -30,8 +30,8 @@
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" class="lblcolor">Report Type</div>
             <div class="clearfix"></div>
-            <select class="form-control dropdownstyle" formControlName="ReportTypeID">
-              <option *ngFor="let reportType of lstReportTypes" value="{{reportType.ReportTypeID}}">{{reportType.ReportDescription}}</option>
+            <select class="form-control dropdownstyle" formControlName="ReportType">
+              <option *ngFor="let reportType of lstReportTypes">{{reportType.ReportDescription}}</option>
             </select>
             <div class="input-validation-msg">
             </div>
