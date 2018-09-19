@@ -20,3 +20,9 @@
     text-align: center;
     color: white;
 }
+
+.h3style{
+    font-size: x-large !important;
+    font-weight: bold !important;
+    color: #dadae2 !important;
+}

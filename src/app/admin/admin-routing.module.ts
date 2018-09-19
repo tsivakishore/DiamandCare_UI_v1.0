@@ -29,6 +29,7 @@ import { UpdateuserprofileComponent } from './updateuserprofile/updateuserprofil
 import { MyloanpaymentsComponent } from './myloanpayments/myloanpayments.component';
 import { FeemasterComponent } from './feemaster/feemaster.component';
 import { ReportsComponent } from './reports/reports.component';
+import { CoursemasterComponent } from './coursemaster/coursemaster.component';
 
 const routes: Routes = [
   {
@@ -164,6 +165,11 @@ const routes: Routes = [
   {
     path: RouteConstants.REPORTS,
     component: ReportsComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.COURSEMASTER,
+    component: CoursemasterComponent,
     canActivate: [AuthGaurd]
   }
 ];

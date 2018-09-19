@@ -1,0 +1,168 @@
+<div class="coursemaster-container" @slideUp>
+  <div class="coursemaster-form">
+    <!-- Grid start -->
+    <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">Course Master Details</h3>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="transaction-history-container">
+          <div class="transaction-history-table box-shadow">
+            <p-dataTable [value]="lstCourseMaster" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
+              expandableRows="true" (onRowExpand)="getCourseDetails($event)">
+              <p-header [style]="{'width': '100%'}">
+                <div class="divstyles">
+                  <button type="button" class="btn btn-primary btnstyles" (click)="ViewCourseMasterModel()">Add Course Master</button>
+                </div>
+              </p-header>
+              <p-column [style]="{'width':'40px'}" expander="false" styleClass="col-icon" field="CourseMasterID" header="ID" [sortable]="true">
+              </p-column>
+              <ng-template let-data="rowData" pTemplate="rowexpansion">
+                <div class="divinnergrid">
+                  <p-dataTable [value]="lstCourse" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+                    <p-header [style]="{'width': '100%'}">
+                      <div class="divstyles">
+                        <button type="button" class="btn btn-primary btnstyles" (click)="ViewCourseModel()">Add Course</button>
+                      </div>
+                    </p-header>
+                    <p-column [style]="{'width':'120px'}" field="CourseName" header="Course Name"></p-column>
+                    <p-column [style]="{'width':'120px'}" field="CourseDescription" header="Course Description" styleClass="colLX-icon"> </p-column>
+                    <p-column [style]="{'width':'120px'}" field="CourseMasterName" header="Course MasterName" styleClass="colLX-icon"> </p-column>
+                    <!-- <p-column [style]="{'width':'80px'}" field="CreatedBy" header="Created By" [sortable]="true"></p-column>
+                    <p-column [style]="{'width':'100px'}" field="CreatedOn" header="Created On" [sortable]="true"></p-column> -->
+                    <p-column [style]="{'width':'80px'}" field="UpdatedBy" header="Updated By" [sortable]="true"></p-column>
+                    <p-column [style]="{'width':'100px'}" field="UpdatedOn" header="Updated On" [sortable]="true"></p-column>
+                    <p-column [style]="{'width':'100px'}" header="Edit">
+                      <ng-template let-data="rowData" pTemplate="body" let-ri="rowIndex">
+                        <div class="col-md-12" style="margin-left: -30px;">
+                          <div class="col-md-6" style="width:100px">
+                            <button type="button" class="btn btn-primary btnedit" (click)="EditCourse(data)">Edit</button>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </p-column>
+                  </p-dataTable>
+                </div>
+              </ng-template>
+              <p-column [style]="{'width':'110px'}" field="CourseMasterName" header="Course Master Name" [sortable]="true"></p-column>
+              <p-column [style]="{'width':'100px'}" field="CourseDescription" header="Course Description" [sortable]="true"></p-column>
+              <!-- <p-column [style]="{'width':'80px'}" field="CreatedBy" header="Created By" [sortable]="true"></p-column>
+              <p-column [style]="{'width':'100px'}" field="CreatedOn" header="Created On" [sortable]="true"></p-column> -->
+              <p-column [style]="{'width':'80px'}" field="UpdatedBy" header="Updated By" [sortable]="true"></p-column>
+              <p-column [style]="{'width':'100px'}" field="UpdatedOn" header="Updated On" [sortable]="true"></p-column>
+              <p-column [style]="{'width':'100px'}" header="Edit">
+                <ng-template let-data="rowData" pTemplate="body" let-ri="rowIndex">
+                  <div class="col-md-12" style="margin-left: -30px;">
+                    <div class="col-md-6" style="width:100px">
+                      <button type="button" class="btn btn-primary btnedit" (click)="EditCourseMaster(data)">Edit</button>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-column>
+            </p-dataTable>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Grid End -->
+
+    <admin-footer></admin-footer>
+
+    <div class="phone-number-modal" *ngIf="isShowModal == 2" @dialog>
+      <form [formGroup]="frmCourseMaster" (submit)="CreateCourseMaster(frmCourseMaster.value,frmCourseMaster.valid)">
+        <div class="modal-container" style="height: 200px !important;">
+          <div class="modal-header" style="background: #797b85;">
+            <h5>{{actiontype}}</h5>
+            <i class="material-icons" (click)="closeForm()">close</i>
+          </div>
+          <div class="clearfix"></div>
+          <div class="modal-body" style="height: 50px;">
+            <div class="col-md-12">
+              <div class="clearfix"></div>
+              <div class="margin-top-15 col-md-12">
+                <div>
+                  <div class="label" style="color: #fff;">Course Master Name</div>
+                  <div class="clearfix"></div>
+                  <input type="text" class="form-control" (keypress)="restrictSpace($event)" formControlName="CourseMasterName" required/>
+                  <div class="input-validation-msg">
+                    <validation *ngIf="isRequiredField(frmCourseMaster.get('CourseMasterName'))" [errMsg]="'Please enter course master name' | translate"></validation>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="margin-top-15 col-md-12">
+                <div>
+                  <div class="label" style="color: #fff;">Course Description</div>
+                  <div class="clearfix"></div>
+                  <input type="text" class="form-control" formControlName="CourseDescription" (keypress)="restrictSpace($event)" required/>
+                  <div class="input-validation-msg">
+                    <validation *ngIf="isRequiredField(frmCourseMaster.get('CourseDescription'))" [errMsg]="'Please enter course description' | translate"></validation>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="modal-footer">
+                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
+                  <button type="submit" [disabled]="!frmCourseMaster.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
+                  <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="margin-top-10"></div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="phone-number-modal" *ngIf="isShowModal == 3" @dialog>
+      <form [formGroup]="frmCourse" (submit)="CreateCourse(frmCourse.value,frmCourse.valid)">
+        <div class="modal-container" style="height: 200px !important;">
+          <div class="modal-header" style="background: #797b85;">
+            <h5>{{actiontype}}</h5>
+            <i class="material-icons" (click)="closeForm()">close</i>
+          </div>
+          <div class="clearfix"></div>
+          <div class="modal-body" style="height: 50px;">
+            <div class="col-md-12">
+              <div class="clearfix"></div>
+              <div class="margin-top-15 col-md-12">
+                <div>
+                  <div class="label" style="color: #fff;">Course Name</div>
+                  <div class="clearfix"></div>
+                  <input type="text" class="form-control" (keypress)="restrictSpace($event)" formControlName="CourseName" required/>
+                  <div class="input-validation-msg">
+                    <validation *ngIf="isRequiredField(frmCourse.get('CourseName'))" [errMsg]="'Please enter course name' | translate"></validation>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="margin-top-15 col-md-12">
+                <div>
+                  <div class="label" style="color: #fff;">Course Description</div>
+                  <div class="clearfix"></div>
+                  <input type="text" class="form-control" formControlName="CourseDescription" (keypress)="restrictSpace($event)" required/>
+                  <div class="input-validation-msg">
+                    <validation *ngIf="isRequiredField(frmCourse.get('CourseDescription'))" [errMsg]="'Please enter course description' | translate"></validation>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="modal-footer">
+                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
+                  <button type="submit" [disabled]="!frmCourse.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
+                  <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="margin-top-10"></div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="confirm-modal-overay" *ngIf="isShowModal == 2 || isShowModal == 3" (click)="closeForm()"></div>

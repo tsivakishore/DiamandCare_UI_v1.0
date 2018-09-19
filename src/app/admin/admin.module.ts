@@ -36,6 +36,7 @@ import { UpdateuserprofileComponent } from './updateuserprofile/updateuserprofil
 import { MyloanpaymentsComponent } from './myloanpayments/myloanpayments.component';
 import { FeemasterComponent } from './feemaster/feemaster.component';
 import { ReportsComponent } from './reports/reports.component';
+import { CoursemasterComponent } from './coursemaster/coursemaster.component';
 
 @NgModule({
   imports: [
@@ -83,7 +84,8 @@ import { ReportsComponent } from './reports/reports.component';
     UpdateuserprofileComponent,
     MyloanpaymentsComponent,
     FeemasterComponent,
-    ReportsComponent
+    ReportsComponent,
+    CoursemasterComponent
   ],
   exports: [HeaderSidebarComponent]
 })

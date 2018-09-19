@@ -4611,6 +4611,8 @@ login, register {
 .secretkey-container,
 .masterscreen-container,
 .upgradefranchisescreen-container,
+.coursemaster-container,
+.generatemykeys-container,
 .ether-balance-container,
 .token-balance-container,
 .address-info-container,
@@ -4626,6 +4628,27 @@ login, register {
 /*************************************************************************/
 /*************************************************************************/
 /*************************************************************************/
+.masterscreen-container {
+  margin: 10px 5px 5px 2px;
+  background-color: #353c48;
+  padding: 0px !important;
+  width: calc(100% - 10px); }
+  .masterscreen-container .refferals_status_header {
+    border-bottom: 2px solid #414354;
+    padding-bottom: 5px; }
+  .masterscreen-container .masterscreen-table {
+    margin-top: 5px;
+    padding: 0px !important;
+    box-shadow: 0 0px 0px -4px rgba(0, 0, 0, 0.2), 0 0px 1px 0px rgba(0, 0, 0, 0.14), 0 0px 1px 0px rgba(0, 0, 0, 0.12); }
+    .masterscreen-container .masterscreen-table h3 {
+      color: #00c8aa;
+      font-weight: 500;
+      padding-top: 12px;
+      padding-bottom: 5px;
+      margin-bottom: 0px;
+      padding-left: 10px; }
+    .masterscreen-container .masterscreen-table .PTB70 {
+      color: #fff !important; }
 /*************************************************************************/
 /*************************************************************************/
 .transaction-history-container {

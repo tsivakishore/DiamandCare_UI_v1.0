@@ -73,6 +73,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   Is_Visible_My_LoanPayments = false;
   Is_Visible_Fee_Master = false;
   Is_Visible_Reports = false;
+  Is_Visible_Course_Master = false;
 
   constructor(private apiManager: APIManager, private sharedService: SharedService, private commonService: CommonService,
     private router: Router, public toastr: ToastsManager, public vcr: ViewContainerRef) {
@@ -118,6 +119,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
       this.Is_Visible_My_LoanPayments = true;
       this.Is_Visible_Fee_Master = true;
       this.Is_Visible_Reports = true;
+      this.Is_Visible_Course_Master = true;
     }
     else if (this.roleID === BaseUrl.UserRoleID) {
       this.sharedService.setLoginType(this.roleID);
@@ -170,7 +172,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
       this.Is_Visible_AppliedUserLoanDetails = true;
       this.Is_Visible_UnderUserDetails = true;
       this.Is_Visible_My_LoanPayments = true;
-      this.Is_Visible_Upgrade_School = true;
+      this.Is_Visible_Reports = true;
       this.Is_Visible_Request_Funds = true;
       this.Is_Visible_Generate_My_SecretKeys = true;
       this.Is_Visible_My_SecretKeys = true;
@@ -181,7 +183,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
       this.Is_Visible_Add_Roles = false;
       this.Is_Visible_Upgrade_Franchise = false;
       this.Is_Visible_LoanPayment = false;
-      this.Is_Visible_Reports = true;
+      this.Is_Visible_Upgrade_School = false;
     }
     else if (this.roleID === BaseUrl.DeveloperRoleID) {
       this.sharedService.setLoginType(this.roleID);
@@ -346,6 +348,10 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   get reportsUrl() {
     return "/" + RouteConstants.REPORTS;
+  }
+
+  get courseMasterUrl() {
+    return "/" + RouteConstants.COURSEMASTER;
   }
 
   earnLoanEvent() {

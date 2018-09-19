@@ -235,11 +235,14 @@ export class SecretkeyComponent extends BaseComponent implements OnInit {
   onSelectionChange(isRadiobuttionClicked) {
     if (isRadiobuttionClicked == "InActive") {
       this.IsMultipleChecked = true;
+      this.secretkeyForm.reset();
       this.IsSingleChecked = false;
       this.is_Visible_Single = false;
       this.is_Visible_Multiple = true;
     }
     else {
+      this.multipleSecretkeyForm.reset();
+      this.multipleSecretkeyForm.controls['KeyType'].setValue("P", { onlySelf: true })
       this.IsMultipleChecked = false;
       this.IsSingleChecked = true;
       this.is_Visible_Single = true;
@@ -295,7 +298,7 @@ export class SecretkeyComponent extends BaseComponent implements OnInit {
     else
       return "Free";
   }
-  
+
   getFormattedDate(date1) {
     var date = new Date(date1);
     var year = date.getFullYear();
@@ -305,5 +308,5 @@ export class SecretkeyComponent extends BaseComponent implements OnInit {
     day = day.length > 1 ? day : '0' + day;
     return day + '-' + month + '-' + year;
   }
-  
+
 }

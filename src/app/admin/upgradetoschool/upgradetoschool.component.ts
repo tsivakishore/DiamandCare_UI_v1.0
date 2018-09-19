@@ -221,6 +221,7 @@ export class UpgradetoschoolComponent extends BaseComponent implements OnInit {
             this.frmUpgradeToSchool.reset();
             this.toastr.success(response.m_Item2);
             this.getSchoolDetails();
+            this.frmUpgradeToSchool.controls['StateID'].setValue("", { onlySelf: true });
           }
           else
             this.toastr.error(response.m_Item2);

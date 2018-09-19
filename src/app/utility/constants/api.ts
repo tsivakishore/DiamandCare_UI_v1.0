@@ -138,7 +138,10 @@ export class API {
   public static GETSCHOOLDETAILS = 'schooldetails/GetSchoolDetails';
   public static INSERTSCHOOLDETAILS = 'schooldetails/InsertSchoolDetails';
   public static UPDATESCHOOLDETAILS = 'schooldetails/UpdateSchoolDetails';
-
+  public static GETCOURSEMASTERDETAILS = 'coursemaster/GetCourseMasterDetails';
+  public static CREATECOURSEMASTER = 'coursemaster/CreateCourseMaster';
+  public static GETCOURSEDETAILSBYCOURSEMASTERID = 'coursemaster/GetCourseDetailsByCourseMasterID';
+  public static CREATECOURSE = 'coursemaster/CreateCourse';
   // EXTERNAL API CALLERS
 
   public static DASHBOARD = "";

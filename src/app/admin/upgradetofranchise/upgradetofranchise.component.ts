@@ -200,6 +200,7 @@ export class UpgradetofranchiseComponent extends BaseComponent implements OnInit
           this.toastr.success(response.m_Item2);
           this.getFranchiseDetails();
           this.actiontype = "";
+          this.frmUpgradeToFranchise.controls['FranchiseTypeID'].setValue("", { onlySelf: true });
         }
         else
           this.toastr.error(response.m_Item2);

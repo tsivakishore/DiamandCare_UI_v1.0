@@ -28,6 +28,12 @@
     font-weight: bold !important;
 }
 
+.h3style{
+    font-size: x-large !important;
+    font-weight: bold !important;
+    color: #dadae2 !important;
+}
+
 @media only screen and (max-width: 767px) and (min-width: 320px){
     .h3top{
         margin-top: -35px !important;
