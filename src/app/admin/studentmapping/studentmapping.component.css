@@ -1,0 +1,22 @@
+.h3styles{
+    font-weight: bolder !important;
+    font-size: x-large !important;
+}
+
+.divsearchstyle {
+    border-style: solid;
+    border-width: thin;
+    width: 99% !important;
+    padding: 5% !important;
+    border-color: #dadae2;
+}
+
+@media only screen and (max-width: 767px) and (min-width: 320px){
+    .divsearchstyle {
+        border-style: solid;
+        border-width: thin;
+        width: 99% !important;
+        padding: 5% !important;
+        border-color: #dadae2;
+    }
+}

@@ -91,6 +91,17 @@ $mobile: "(max-width: 767px)";
       }
     }
   }
+
+  .registerbyinstitution-container{
+    .col-md-12.col-xs-6.margin-top-10{
+      text-align: left !important;
+      padding-left: 0px !important;
+      img{
+        width: 80px;
+      }
+    }
+  }
+
   .left-menu-fixed{
     top: 55px !important;
     ul{
@@ -170,6 +181,17 @@ $mobile: "(max-width: 767px)";
       width: 100% !important;
     }
   }
+
+  .registerbyinstitution-container{
+    .registerbyinstitution-form{
+      width: 100% !important;
+      padding: 5px 10px 5px 10px !important;
+    }
+    .main-logo{
+      width: 100% !important;
+    }
+  }
+
   .xs-right{
     float: right;
     padding-right: 0px !important;

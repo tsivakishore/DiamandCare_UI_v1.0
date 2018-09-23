@@ -57,4 +57,10 @@ export class BaseComponent implements OnInit {
   isMaxValueField(formControlName){
     return (formControlName.hasError('max') && formControlName.touched) || (formControlName.pristine && this.isFormSubmitted);
   }
+
+  getOTP(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
 }

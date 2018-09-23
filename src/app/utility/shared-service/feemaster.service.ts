@@ -4,40 +4,29 @@ import { Observable } from "rxjs";
 import { API } from "../../utility/constants/api";
 import { Response } from "@angular/http";
 import { ToastsManager } from "ng2-toastr/ng2-toastr";
+import { SharedService } from '../../utility/shared-service/shared.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
-export class UserService {
+export class FeemasterService {
 
-    constructor(private httpService: HttpService, private toastManager: ToastsManager) {
+    constructor(private httpService: HttpService,
+        private http: HttpClient,
+        private sharedService: SharedService,
+        private toastManager: ToastsManager) {
     }
 
-    _getUserDetailsByDCIDorName(DCIDorName) {
+    _getFeeMasterDetails(postData) {
         return this.httpService
-            .get(API.GETUSERDETAILSBYDCIDOrUSERNAME + '?DCIDorName=' + DCIDorName)
+            .get(API.GETFEEMASTERDETAILS + '?UserID=' + postData)
             .map(res => this.extractData(res, true)).catch((error: any) => {
                 return Observable.throw(new Error(error.status));
             });
     }
 
-    _getUserDetailsByUserID(UserID) {
+    _getFeeDetailsByID(postData) {
         return this.httpService
-            .get(API.GETUSERDETAILSBYUSERID + '?UserID=' + UserID)
-            .map(res => this.extractData(res, true)).catch((error: any) => {
-                return Observable.throw(new Error(error.status));
-            });
-    }
-
-    _getUserAddressById(Id) {
-        return this.httpService
-            .get(API.USERADDRESSBYID + '?Id=' + Id)
-            .map(res => this.extractData(res, true)).catch((error: any) => {
-                return Observable.throw(new Error(error.status));
-            });
-    }
-
-    _getUsersByInstitution(UserID) {
-        return this.httpService
-            .get(API.GETUSERSBYINSTITUTION + '?UserID=' + UserID)
+            .get(API.GETCOURSEDETAILSBYCOURSEMASTERID + '?CourseMasterID=' + postData)
             .map(res => this.extractData(res, true)).catch((error: any) => {
                 return Observable.throw(new Error(error.status));
             });

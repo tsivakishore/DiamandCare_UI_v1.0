@@ -95,6 +95,24 @@
       </a>
     </li>
     <li tooltipPosition="top">
+      <a [routerLink]="registrationByInstitutionUrl" *ngIf="Is_Visible_Registration_By_Institution" routerLinkActive="active">
+        <i class="material-icons">how_to_reg</i>
+        <span>Registration By Institution</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
+      <a [routerLink]="usersByInstitutionUrl" *ngIf="Is_Visible_Users_By_Institution" routerLinkActive="active">
+        <i class="material-icons">sentiment_very_satisfied</i>
+        <span>Users</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
+      <a [routerLink]="studentMappingUrl" *ngIf="Is_Visible_Student_Mapping" routerLinkActive="active">
+        <i class="material-icons">insert_link</i>
+        <span>Student Mapping</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
       <a [routerLink]="appliedUserLoanDetailsScreenUrl" *ngIf="Is_Visible_AppliedUserLoanDetails" routerLinkActive="active">
         <i class="material-icons">dashboard</i>
         <span>My Loan Details</span>
@@ -287,6 +305,24 @@
       <a [routerLink]="feeMasterUrl" *ngIf="Is_Visible_Fee_Master" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">perm_identity</i>
         <span>Fee Master</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="registrationByInstitutionUrl" *ngIf="Is_Visible_Registration_By_Institution" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">how_to_reg</i>
+        <span>Registration By Institution</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="usersByInstitutionUrl" *ngIf="Is_Visible_Users_By_Institution" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">sentiment_very_satisfied</i>
+        <span>Users</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="studentMappingUrl" *ngIf="Is_Visible_Student_Mapping" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">insert_link</i>
+        <span>Student Mapping</span>
       </a>
     </li>
     <li>

@@ -141,7 +141,13 @@ export class API {
   public static GETCOURSEMASTERDETAILS = 'coursemaster/GetCourseMasterDetails';
   public static CREATECOURSEMASTER = 'coursemaster/CreateCourseMaster';
   public static GETCOURSEDETAILSBYCOURSEMASTERID = 'coursemaster/GetCourseDetailsByCourseMasterID';
+  public static GETCOURSES = 'coursemaster/GetCourses';
   public static CREATECOURSE = 'coursemaster/CreateCourse';
+  public static GETFEEMASTERDETAILS = 'feemaster/GetFeeMasterDetails';
+  public static CREATEFEEMASTER = 'feemaster/CreateFeeMaster';
+  public static GETUSERSBYINSTITUTION = 'userbyinstitution/getusersbyuserid';
+  public static REGISTERUSERSBYINSTITUTION = 'userbyinstitution/registeruserbyinstitution';
+  
   // EXTERNAL API CALLERS
 
   public static DASHBOARD = "";

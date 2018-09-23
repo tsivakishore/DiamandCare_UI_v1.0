@@ -1,0 +1,198 @@
+<div class="registerbyinstitution-container" @dialog>
+  <div class="registerbyinstitution-form">
+    <!--Register Form Start-->
+    <div class="" *ngIf="activeForm == 2">
+      <form [formGroup]="registerByInstitutionForm" (submit)="onRegister(registerByInstitutionForm.value,registerByInstitutionForm.valid)">
+        <div class="field" style="text-align: center;">
+          <h3>{{'registration' | translate}}</h3>
+        </div>
+
+        <div class="margin-top-10 col-xs-12 col-md-6">
+          <input type="text" placeholder="{{'firstName' | translate}}" pTooltip="{{'firstName' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="FirstName" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(registerByInstitutionForm.get('FirstName'))" [errMsg]="'frstNameRqrd' | translate"></validation>
+            <validation *ngIf="isValidLength(registerByInstitutionForm.get('FirstName'))" [errMsg]="'frstNameLnth' | translate"></validation>
+          </div>
+        </div>
+
+        <div class="margin-top-10 col-xs-12 col-md-6">
+          <input type="text" placeholder="{{'lastName' | translate}}" pTooltip="{{'lastName' | translate}}" tooltipPosition="top" class="form-control"
+            formControlName="LastName" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(registerByInstitutionForm.get('LastName'))" [errMsg]="'lastNameRqrd' | translate"></validation>
+            <validation *ngIf="isValidLength(registerByInstitutionForm.get('LastName'))" [errMsg]="'lastNameLnth' | translate"></validation>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="margin-top-10 col-xs-12 col-md-6">
+          <input type="text" placeholder="{{'userName' | translate}}" pTooltip="{{'userName' | translate}}" tooltipPosition="top" class="form-control"
+            formControlName="UserName" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(registerByInstitutionForm.get('UserName'))" [errMsg]="'userNameRqrd' | translate"></validation>
+            <validation *ngIf="isValidLength(registerByInstitutionForm.get('UserName'))" [errMsg]="'userNameLnth' | translate"></validation>
+          </div>
+        </div>
+
+        <div class="margin-top-10 col-xs-12 col-md-6">
+          <input type="text" placeholder="{{'fatherName' | translate}}" pTooltip="{{'fatherName' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="FatherName" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(registerByInstitutionForm.get('FatherName'))" [errMsg]="'fatherNameRqrd' | translate"></validation>
+            <validation *ngIf="isValidLength(registerByInstitutionForm.get('FatherName'))" [errMsg]="'fatherNameLnth' | translate"></validation>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="margin-top-10 col-xs-12 col-md-12">
+          <input type="text" placeholder="{{'email' | translate}}" (focus)="trackEvent()" pTooltip="{{'email' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="Email" />
+          <div class="input-validation-msg">
+            <validation *ngIf="isValidField(registerByInstitutionForm.get('Email'))" [errMsg]="'validEmail' | translate"></validation>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="margin-top-10 col-xs-12 col-md-6">
+          <input type="password" placeholder="{{'password' | translate}}" pTooltip="{{'password' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="Password" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(registerByInstitutionForm.get('Password'))" [errMsg]="'pwdRqrd' | translate"></validation>
+            <validation *ngIf="isValidField(registerByInstitutionForm.get('Password'))" [errMsg]="'validPwd' | translate"></validation>
+            <validation *ngIf="isValidLength(registerByInstitutionForm.get('Password'))" [errMsg]="'pwdLenth' | translate"></validation>
+          </div>
+        </div>
+
+        <div class="margin-top-10 col-xs-12 col-md-6">
+          <input type="password" placeholder="{{'confirmPassword' | translate}}" pTooltip="{{'confirmPassword' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="ConfirmPassword" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(registerByInstitutionForm.get('ConfirmPassword'))" [errMsg]="'cnfrmPwdRqrd' | translate"></validation>
+            <validation *ngIf="hasError('repeatPassword',registerByInstitutionForm,registerByInstitutionForm.get('ConfirmPassword'))"
+              [errMsg]="'cnfrmPwdNtMatched' | translate"></validation>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="margin-top-10 col-xs-12 col-md-6">
+          <input type="text" placeholder="{{'aadharNumber' | translate}}" pTooltip="{{'aadharNumber' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="AadharNumber" />
+          <div class="input-validation-msg">
+            <validation *ngIf="isValidField(registerByInstitutionForm.get('AadharNumber'))" [errMsg]="'validAadharNumber' | translate"></validation>
+            <validation *ngIf="isValidLength(registerByInstitutionForm.get('AadharNumber'))" [errMsg]="'aadharNumberLenth' | translate"></validation>
+          </div>
+        </div>
+        <div class="margin-top-10 col-xs-12 col-md-6">
+          <input type="text" placeholder="{{'mobileNumber' | translate}}" pTooltip="{{'mobileNumber' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="PhoneNumber" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(registerByInstitutionForm.get('PhoneNumber'))" [errMsg]="'phoneNumberRqrd' | translate"></validation>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- <div class="margin-top-10 col-xs-12 col-md-6">
+          <input type="text" placeholder="{{'sponserID' | translate}}" pTooltip="{{'sponserID' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="SponserID" (change)="onChangeSponserId(registerByInstitutionForm.value.SponserID)" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(registerByInstitutionForm.get('SponserID'))" [errMsg]="'sponserIDRqrd' | translate"></validation>
+          </div>
+        </div>
+        <div class="margin-top-10 col-xs-12 col-md-6">
+          <input type="text" placeholder="{{'sponserName' | translate}}" pTooltip="{{'sponserName' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="SponserName" readonly="readonly" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(registerByInstitutionForm.get('SponserName'))" [errMsg]="'sponserNameRqrd' | translate"></validation>
+          </div>
+        </div> -->
+
+        <!-- <div class="clearfix"></div>
+
+        <div class="margin-top-10 col-xs-12 col-md-6">
+          <select class="form-control" pTooltip="{{'underID' | translate}}" tooltipPosition="top" formControlName="UnderID" required
+            (change)="onUnderIDChange($event.target.value)">
+            <option *ngFor="let under of underDetails" value={{under.UnderID}}>
+              {{under.UserName}}
+            </option>
+          </select>
+        </div>
+        <div class="margin-top-10 col-xs-12 col-md-6">
+          <input type="text" placeholder="{{'underName' | translate}}" pTooltip="{{'underName' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="UnderName" readonly="readonly" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(registerByInstitutionForm.get('UnderName'))" [errMsg]="'underNameRqrd' | translate"></validation>
+          </div>
+        </div> -->
+
+        <div class="clearfix"></div>
+
+        <div class="margin-top-10 col-xs-12 col-md-6">
+          <input type="text" placeholder="{{'secretCode' | translate}}" pTooltip="{{'secretCode' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="SecretCode" readonly="readonly" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(registerByInstitutionForm.get('SecretCode'))" [errMsg]="'secretCodeRqrd' | translate"></validation>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="margin-top-10 col-md-12">
+          <button type="submit" class="btn-primary btn btn-block" [disabled]="!registerByInstitutionForm.valid" pTooltip="{{'createAccount' | translate}}"
+            tooltipPosition="top">{{'createAccount' | translate}}</button>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="lightClr col-md-12 padding-left-0 margin-top-5">
+          <small pTooltip="{{sendInfoNote}}" tooltipPosition="top">{{sendInfoNote}}</small>
+        </div>
+
+        <div class="clearfix"></div>
+      </form>
+    </div>
+    <!-- End Register Form -->
+
+    <div class="" *ngIf="activeForm == 1">
+      <form [formGroup]="secretKeyForm" (submit)="onVerifySecretKey(secretKeyForm.value,secretKeyForm.valid)">
+        <div class="field" style="text-align: center;">
+          <h3>{{'verifySecretKey' | translate}}</h3>
+        </div>
+
+        <div class="margin-top-10 col-xs-12 col-md-6">
+          <input type="text" placeholder="{{'secretCode' | translate}}" pTooltip="{{'secretCode' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="RegKey" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(secretKeyForm.get('RegKey'))" [errMsg]="'secretCodeRqrd' | translate"></validation>
+            <validation *ngIf="isValidLength(secretKeyForm.get('RegKey'))" [errMsg]="'secretKeyLength' | translate"></validation>
+          </div>
+        </div>
+
+        <div class="margin-top-10 col-xs-12 col-md-6">
+          <input type="text" placeholder="{{'mobileNumber' | translate}}" pTooltip="{{'mobileNumber' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="PhoneNumber" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(secretKeyForm.get('PhoneNumber'))" [errMsg]="'phoneNumberRqrd' | translate"></validation>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="input-validation-msg customMsg">
+          <div class="label" *ngIf="isValidKey">
+            <p style="color:red;font-size: 15px;text-align: center;">{{verifykeyError}}</p>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="two fields margin-top-10">
+          <div class="field">
+            <button type="submit" class="btn-primary btn btn-block" pTooltip="{{'verifySecretKey' | translate}}" tooltipPosition="top"
+              [disabled]="!secretKeyForm.valid">{{'verifySecretKey' | translate}}</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<admin-footer></admin-footer>

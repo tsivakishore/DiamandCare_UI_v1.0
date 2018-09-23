@@ -104,7 +104,6 @@ export class ReportsComponent extends BaseComponent implements OnInit {
         formParam.ReportType = this.defaultReportType;
       this.apiManager.postAPI(API.DOWNLOADREPORTS, formParam).subscribe((response: any) => {
         if (!!response && response.length > 0) {
-          debugger;
           let date = new Date();
           const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(response);
           const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
@@ -139,7 +138,6 @@ export class ReportsComponent extends BaseComponent implements OnInit {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         res.m_Item3.forEach(element => {
-          debugger;
           var temp = [element.CreatedBy, element.RegKey, element.KeyCost, element.KeyType, element.PhoneNumber,
           element.CreateDate, element.RegKeyStatus, element.ToUserID, element.SharedUserID,];
           rows.push(temp);
@@ -175,7 +173,6 @@ export class ReportsComponent extends BaseComponent implements OnInit {
   }
 
   fileDownloader(documentContent, documentName, contentType) {
-    debugger;
     var ieEDGE = navigator.userAgent.match(/Edge/g);
     var ie = navigator.userAgent.match(/.NET/g); // IE 11+
     var oldIE = navigator.userAgent.match(/MSIE/g);

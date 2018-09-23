@@ -1,3 +1,94 @@
-<p>
-  feemaster works!
-</p>
+<div class="feemaster-container" @slideUp>
+  <div class="feemaster-form">
+    <!-- Grid start -->
+    <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">Fee Master Details</h3>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="transaction-history-container">
+          <div class="transaction-history-table box-shadow">
+            <p-dataTable [value]="lstFeeMaster" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+              <p-header [style]="{'width': '100%'}">
+                <div class="divstyles">
+                  <button type="button" class="btn btn-primary btnstyles" (click)="ViewFeeMasterModel()">Add Fees</button>
+                </div>
+              </p-header>
+              <p-column [style]="{'width':'110px'}" field="UserName" header="UserName" [sortable]="true"></p-column>
+              <p-column [style]="{'width':'100px'}" field="CourseName" header="Course Name" [sortable]="true"></p-column>
+              <p-column [style]="{'width':'100px'}" field="CourseFee" header="Course Fee" [sortable]="true"></p-column>
+              <p-column [style]="{'width':'80px'}" field="UpdatedBy" header="Updated By" [sortable]="true"></p-column>
+              <p-column [style]="{'width':'100px'}" field="UpdatedOn" header="Updated On" [sortable]="true"></p-column>
+              <p-column [style]="{'width':'100px'}" header="Edit">
+                <ng-template let-data="rowData" pTemplate="body" let-ri="rowIndex">
+                  <div class="col-md-12" style="margin-left: -30px;">
+                    <div class="col-md-6" style="width:100px">
+                      <button type="button" class="btn btn-primary btnedit" (click)="EditFeeMaster(data)">Edit</button>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-column>
+            </p-dataTable>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Grid End -->
+  </div>
+</div>
+<admin-footer></admin-footer>
+<!-- Fee Reimbursement Popup code start -->
+<div class="phone-number-modal modeldialog" *ngIf="isShowModal == 2" @dialog>
+  <form [formGroup]="frmFeeMaster" (submit)="CreateFeeMaster(frmFeeMaster.value,frmFeeMaster.valid)">
+    <div class="modal-container" style="width: 100%; height: auto !important;">
+      <div class="modal-header" style="background: #797b85;">
+        <h5>{{actiontype}}</h5>
+        <i class="material-icons" (click)="closeForm()">close</i>
+      </div>
+      <div class="clearfix"></div>
+      <div class="modal-body">
+        <div class="col-md-12">
+          <div class="margin-top-10 col-xs-12 col-md-6">
+            <div class="label" style="color: #fff;">Course</div>
+            <div class="clearfix"></div>
+            <select class="form-control ddlstyle" (change)="filterCourse($event.target.value)" formControlName="CourseID" required>
+              <option value="" disabled selected>--Select Course--</option>
+              <option *ngFor="let Course of lstCourses" value="{{Course.CourseID}}">{{Course.CourseName}}</option>
+            </select>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmFeeMaster.get('CourseID'))" [errMsg]="'Please select course' | translate"></validation>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div>
+              <div class="label" style="color: #fff;">Course Fee</div>
+              <div class="clearfix"></div>
+              <input type="text" pTooltip="Course Fee" tooltipPosition="top" class="form-control" (keypress)="restrictSpace($event)" formControlName="CourseFee"
+                required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(frmFeeMaster.get('CourseFee'))" [errMsg]="'Please enter fee' | translate"></validation>
+                <validation *ngIf="isValidField(frmFeeMaster.get('CourseFee'))" [errMsg]="'Please enter valid fee' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-8 col-md-offset-3">
+          <button type="submit" [disabled]="!frmFeeMaster.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
+          <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+<!-- Fee Reimbursement Popup code end -->
+<div class="clearfix"></div>
+<div class="confirm-modal-overay" *ngIf="isShowModal == 2" (click)="closeForm()"></div>

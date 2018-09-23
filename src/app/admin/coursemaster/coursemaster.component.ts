@@ -166,7 +166,6 @@ export class CoursemasterComponent extends BaseComponent implements OnInit {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.lstCourse = res.m_Item3;
-        console.log(this.lstCourse)
       }
     }, err => {
       console.log(err);

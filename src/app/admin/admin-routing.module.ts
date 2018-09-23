@@ -30,6 +30,9 @@ import { MyloanpaymentsComponent } from './myloanpayments/myloanpayments.compone
 import { FeemasterComponent } from './feemaster/feemaster.component';
 import { ReportsComponent } from './reports/reports.component';
 import { CoursemasterComponent } from './coursemaster/coursemaster.component';
+import { StudentmappingComponent } from './studentmapping/studentmapping.component';
+import { RegisterbyinstitutionComponent } from './registerbyinstitution/registerbyinstitution.component';
+import { UsersbyinstitutionComponent } from './usersbyinstitution/usersbyinstitution.component';
 
 const routes: Routes = [
   {
@@ -170,6 +173,21 @@ const routes: Routes = [
   {
     path: RouteConstants.COURSEMASTER,
     component: CoursemasterComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.STUDENTMAPPING,
+    component: StudentmappingComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.REGISTRATIONBYINSTITUTION,
+    component: RegisterbyinstitutionComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.USERSBYINSTITUTION,
+    component: UsersbyinstitutionComponent,
     canActivate: [AuthGaurd]
   }
 ];

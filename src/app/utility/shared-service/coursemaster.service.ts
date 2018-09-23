@@ -5,8 +5,7 @@ import { API } from "../../utility/constants/api";
 import { Response } from "@angular/http";
 import { ToastsManager } from "ng2-toastr/ng2-toastr";
 import { SharedService } from '../../utility/shared-service/shared.service';
-import { AppConstant, BaseUrl } from '../../utility/constants/base-constants';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class CoursemasterService {
@@ -28,6 +27,14 @@ export class CoursemasterService {
   _getCourseDetailsByID(postData) {
     return this.httpService
       .get(API.GETCOURSEDETAILSBYCOURSEMASTERID + '?CourseMasterID=' + postData)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  _getCourses() {
+    return this.httpService
+      .get(API.GETCOURSES)
       .map(res => this.extractData(res, true)).catch((error: any) => {
         return Observable.throw(new Error(error.status));
       });

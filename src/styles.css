@@ -286,8 +286,21 @@ p-dropdown{
   -webkit-border-radius: 16px 16px 16px 16px !important;
 } */
 
+.imglanding{
+  max-width: 200% !important;;
+  width: 120% !important;
+  margin-left: 45% !important;
+}
+
 @media only screen and (max-width: 767px) and (min-width: 320px){
   .ui-calendar.ui-calendar-w-btn input {
     width: 300px !important;
   }
+
+  .imglanding {
+    max-width: 200% !important;
+    width: 111% !important;
+    margin-left: -4% !important;
+  }
+
 }

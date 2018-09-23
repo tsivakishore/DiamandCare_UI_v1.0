@@ -37,6 +37,9 @@ import { MyloanpaymentsComponent } from './myloanpayments/myloanpayments.compone
 import { FeemasterComponent } from './feemaster/feemaster.component';
 import { ReportsComponent } from './reports/reports.component';
 import { CoursemasterComponent } from './coursemaster/coursemaster.component';
+import { StudentmappingComponent } from './studentmapping/studentmapping.component';
+import { RegisterbyinstitutionComponent } from './registerbyinstitution/registerbyinstitution.component';
+import { UsersbyinstitutionComponent } from './usersbyinstitution/usersbyinstitution.component';
 
 @NgModule({
   imports: [
@@ -85,7 +88,10 @@ import { CoursemasterComponent } from './coursemaster/coursemaster.component';
     MyloanpaymentsComponent,
     FeemasterComponent,
     ReportsComponent,
-    CoursemasterComponent
+    CoursemasterComponent,
+    StudentmappingComponent,
+    RegisterbyinstitutionComponent,
+    UsersbyinstitutionComponent
   ],
   exports: [HeaderSidebarComponent]
 })

@@ -32,5 +32,8 @@ export class RouteConstants {
   public static FEEMASTER = 'feemaster';
   public static REPORTS = 'reports';
   public static COURSEMASTER = 'coursemaster';
+  public static STUDENTMAPPING = 'studentmapping';
+  public static REGISTRATIONBYINSTITUTION = 'registerbyinstitution';
+  public static USERSBYINSTITUTION = 'users';
 
 }

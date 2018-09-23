@@ -64,105 +64,106 @@
       </div>
     </div>
     <!-- Grid End -->
+  </div>
+</div>
+<admin-footer></admin-footer>
 
-    <admin-footer></admin-footer>
-
-    <div class="phone-number-modal" *ngIf="isShowModal == 2" @dialog>
-      <form [formGroup]="frmCourseMaster" (submit)="CreateCourseMaster(frmCourseMaster.value,frmCourseMaster.valid)">
-        <div class="modal-container" style="height: 200px !important;">
-          <div class="modal-header" style="background: #797b85;">
-            <h5>{{actiontype}}</h5>
-            <i class="material-icons" (click)="closeForm()">close</i>
-          </div>
+<div class="phone-number-modal" *ngIf="isShowModal == 2" @dialog>
+  <form [formGroup]="frmCourseMaster" (submit)="CreateCourseMaster(frmCourseMaster.value,frmCourseMaster.valid)">
+    <div class="modal-container" style="height: 200px !important;">
+      <div class="modal-header" style="background: #797b85;">
+        <h5>{{actiontype}}</h5>
+        <i class="material-icons" (click)="closeForm()">close</i>
+      </div>
+      <div class="clearfix"></div>
+      <div class="modal-body" style="height: 50px;">
+        <div class="col-md-12">
           <div class="clearfix"></div>
-          <div class="modal-body" style="height: 50px;">
-            <div class="col-md-12">
+          <div class="margin-top-15 col-md-12">
+            <div>
+              <div class="label" style="color: #fff;">Course Master Name</div>
               <div class="clearfix"></div>
-              <div class="margin-top-15 col-md-12">
-                <div>
-                  <div class="label" style="color: #fff;">Course Master Name</div>
-                  <div class="clearfix"></div>
-                  <input type="text" class="form-control" (keypress)="restrictSpace($event)" formControlName="CourseMasterName" required/>
-                  <div class="input-validation-msg">
-                    <validation *ngIf="isRequiredField(frmCourseMaster.get('CourseMasterName'))" [errMsg]="'Please enter course master name' | translate"></validation>
-                  </div>
-                </div>
+              <input type="text" class="form-control" (keypress)="restrictSpace($event)" formControlName="CourseMasterName" required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(frmCourseMaster.get('CourseMasterName'))" [errMsg]="'Please enter course master name' | translate"></validation>
               </div>
-              <div class="clearfix"></div>
-              <div class="margin-top-15 col-md-12">
-                <div>
-                  <div class="label" style="color: #fff;">Course Description</div>
-                  <div class="clearfix"></div>
-                  <input type="text" class="form-control" formControlName="CourseDescription" (keypress)="restrictSpace($event)" required/>
-                  <div class="input-validation-msg">
-                    <validation *ngIf="isRequiredField(frmCourseMaster.get('CourseDescription'))" [errMsg]="'Please enter course description' | translate"></validation>
-                  </div>
-                </div>
-              </div>
-              <div class="clearfix"></div>
-              <div class="modal-footer">
-                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
-                  <button type="submit" [disabled]="!frmCourseMaster.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
-                  <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-              <div class="margin-top-10"></div>
-              <div class="clearfix"></div>
             </div>
           </div>
-        </div>
-      </form>
-    </div>
-    <div class="clearfix"></div>
-
-    <div class="phone-number-modal" *ngIf="isShowModal == 3" @dialog>
-      <form [formGroup]="frmCourse" (submit)="CreateCourse(frmCourse.value,frmCourse.valid)">
-        <div class="modal-container" style="height: 200px !important;">
-          <div class="modal-header" style="background: #797b85;">
-            <h5>{{actiontype}}</h5>
-            <i class="material-icons" (click)="closeForm()">close</i>
-          </div>
           <div class="clearfix"></div>
-          <div class="modal-body" style="height: 50px;">
-            <div class="col-md-12">
+          <div class="margin-top-15 col-md-12">
+            <div>
+              <div class="label" style="color: #fff;">Course Description</div>
               <div class="clearfix"></div>
-              <div class="margin-top-15 col-md-12">
-                <div>
-                  <div class="label" style="color: #fff;">Course Name</div>
-                  <div class="clearfix"></div>
-                  <input type="text" class="form-control" (keypress)="restrictSpace($event)" formControlName="CourseName" required/>
-                  <div class="input-validation-msg">
-                    <validation *ngIf="isRequiredField(frmCourse.get('CourseName'))" [errMsg]="'Please enter course name' | translate"></validation>
-                  </div>
-                </div>
+              <input type="text" class="form-control" formControlName="CourseDescription" (keypress)="restrictSpace($event)" required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(frmCourseMaster.get('CourseDescription'))" [errMsg]="'Please enter course description' | translate"></validation>
               </div>
-              <div class="clearfix"></div>
-              <div class="margin-top-15 col-md-12">
-                <div>
-                  <div class="label" style="color: #fff;">Course Description</div>
-                  <div class="clearfix"></div>
-                  <input type="text" class="form-control" formControlName="CourseDescription" (keypress)="restrictSpace($event)" required/>
-                  <div class="input-validation-msg">
-                    <validation *ngIf="isRequiredField(frmCourse.get('CourseDescription'))" [errMsg]="'Please enter course description' | translate"></validation>
-                  </div>
-                </div>
-              </div>
-              <div class="clearfix"></div>
-              <div class="modal-footer">
-                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
-                  <button type="submit" [disabled]="!frmCourse.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
-                  <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-              <div class="margin-top-10"></div>
-              <div class="clearfix"></div>
             </div>
           </div>
+          <div class="clearfix"></div>
+          <div class="modal-footer">
+            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
+              <button type="submit" [disabled]="!frmCourseMaster.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
+              <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="margin-top-10"></div>
+          <div class="clearfix"></div>
         </div>
-      </form>
+      </div>
     </div>
-    <div class="clearfix"></div>
+  </form>
+</div>
+<div class="clearfix"></div>
 
-    <div class="confirm-modal-overay" *ngIf="isShowModal == 2 || isShowModal == 3" (click)="closeForm()"></div>
+<div class="phone-number-modal" *ngIf="isShowModal == 3" @dialog>
+  <form [formGroup]="frmCourse" (submit)="CreateCourse(frmCourse.value,frmCourse.valid)">
+    <div class="modal-container" style="height: 200px !important;">
+      <div class="modal-header" style="background: #797b85;">
+        <h5>{{actiontype}}</h5>
+        <i class="material-icons" (click)="closeForm()">close</i>
+      </div>
+      <div class="clearfix"></div>
+      <div class="modal-body" style="height: 50px;">
+        <div class="col-md-12">
+          <div class="clearfix"></div>
+          <div class="margin-top-15 col-md-12">
+            <div>
+              <div class="label" style="color: #fff;">Course Name</div>
+              <div class="clearfix"></div>
+              <input type="text" class="form-control" (keypress)="restrictSpace($event)" formControlName="CourseName" required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(frmCourse.get('CourseName'))" [errMsg]="'Please enter course name' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="margin-top-15 col-md-12">
+            <div>
+              <div class="label" style="color: #fff;">Course Description</div>
+              <div class="clearfix"></div>
+              <input type="text" class="form-control" formControlName="CourseDescription" (keypress)="restrictSpace($event)" required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(frmCourse.get('CourseDescription'))" [errMsg]="'Please enter course description' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="modal-footer">
+            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
+              <button type="submit" [disabled]="!frmCourse.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
+              <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="margin-top-10"></div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="clearfix"></div>
+
+<div class="confirm-modal-overay" *ngIf="isShowModal == 2 || isShowModal == 3" (click)="closeForm()"></div>
