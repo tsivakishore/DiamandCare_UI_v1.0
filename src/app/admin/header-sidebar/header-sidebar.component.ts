@@ -11,12 +11,13 @@ import { APIManager } from "../../utility/shared-service/apimanager.service";
 import { BaseUrl } from '../../utility/constants/base-constants';
 import { ToastsManager } from "ng2-toastr";
 import { CommonService } from "../../utility/shared-service/common.service";
+import { UserService } from "../../utility/shared-service/user.service";
 
 @Component({
   selector: 'header-sidebar',
   templateUrl: './header-sidebar.component.html',
   styleUrls: ['./header-sidebar.component.css'],
-  providers: [CommonService],
+  providers: [CommonService, UserService],
   animations: [
     trigger('sideAmination', [
       transition('void => *', [
@@ -47,6 +48,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   userID: string;
   roleID: string;
   roleName: string;
+  lstUserMenus: any[];
 
   Is_Visible_EarnLoans: boolean = false;
   Is_Visible_AppliedLoanDetails: boolean = false;
@@ -78,7 +80,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   Is_Visible_Registration_By_Institution = false;
   Is_Visible_Users_By_Institution = false;
 
-  constructor(private apiManager: APIManager, private sharedService: SharedService, private commonService: CommonService,
+  constructor(private apiManager: APIManager, private sharedService: SharedService, private commonService: CommonService, private userService: UserService,
     private router: Router, public toastr: ToastsManager, public vcr: ViewContainerRef) {
     super(toastr, vcr);
   }
@@ -86,135 +88,137 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.userID = this.sharedService.getUserID();
     this.roleID = this.sharedService.getRoleID();
-    this.getMenusBasedOnRole(this.userID);
+    //this.getMenusBasedOnRole(this.userID);
+    debugger;
+    this.getMenuByUserID(this.userID);
     this.UserDetails = this.sharedService.getUser();
     this.userName = this.sharedService.getUserName().toUpperCase();
     this.roleName = this.sharedService.getRoleName();
     this.getWalletBalance();
   }
 
-  getMenusBasedOnRole(userID: string) {
-    if (this.roleID === BaseUrl.AdminRoleID) {
-      this.sharedService.setLoginType(this.roleID);
-      this.isUserWallet = true;
-      this.Is_Visible_Settings = true;
-      this.Is_Visible_EarnLoans = true;
-      this.Is_Visible_AppliedLoanDetails = true;
-      this.Is_Visible_AppliedUserLoanDetails = true;
-      this.Is_Visible_SecretKey = true;
-      this.Is_Visible_MasterScreen = true;
-      this.Is_Visible_Roles = true;
-      this.Is_Visible_UnderUserDetails = true;
-      this.Is_Visible_Add_Roles = true;
-      this.Is_Visible_Upgrade_Franchise = true;
-      this.Is_Visible_Loans_Dispatched = true;
-      this.Is_Visible_LoanPayment = true;
-      this.Is_Visible_My_SecretKeys = true;
-      this.Is_Visible_Apply_Userloans = true;
-      this.Is_Visible_Wallet_Transactions = true;
-      this.Is_Visible_Franchise_Request = true;
-      this.Is_Visible_Franchise_Tree = true;
-      this.Is_Visible_Expenses = true;
-      this.Is_Visible_Upgrade_School = true;
-      this.Is_Visible_Request_Funds = true;
-      this.Is_Visible_Generate_My_SecretKeys = true;
-      this.Is_Visible_Update_UsersProfile = true;
-      this.Is_Visible_My_LoanPayments = true;
-      this.Is_Visible_Fee_Master = false;
-      this.Is_Visible_Reports = true;
-      this.Is_Visible_Course_Master = true;
-      this.Is_Visible_Student_Mapping = false;
-      this.Is_Visible_Registration_By_Institution = false;
-      this.Is_Visible_Users_By_Institution = false;
-    }
-    else if (this.roleID === BaseUrl.UserRoleID) {
-      this.sharedService.setLoginType(this.roleID);
-      this.isUserWallet = true;
-      this.Is_Visible_Settings = true;
-      this.Is_Visible_EarnLoans = true;
-      this.Is_Visible_AppliedUserLoanDetails = true;
-      this.Is_Visible_Wallet_Transactions = true;
-      this.Is_Visible_My_LoanPayments = true;
-      this.Is_Visible_UnderUserDetails = true;
-      this.Is_Visible_Request_Funds = true;
-      this.Is_Visible_Generate_My_SecretKeys = true;
-      this.Is_Visible_My_SecretKeys = true;
-      this.Is_Visible_Reports = true;
-      this.Is_Visible_LoanPayment = false;
-      this.Is_Visible_Upgrade_Franchise = false;
-      this.Is_Visible_Upgrade_School = false;
-      this.Is_Visible_Roles = false;
-      this.Is_Visible_Add_Roles = false;
-      this.Is_Visible_Student_Mapping = false;
-      this.Is_Visible_Registration_By_Institution = false;
-      this.Is_Visible_Users_By_Institution = false;
-    }
-    else if (this.roleID === BaseUrl.FranchiseRoleID) {
-      this.sharedService.setLoginType(this.roleID);
-      this.isUserWallet = true;
-      this.Is_Visible_Settings = true;
-      this.Is_Visible_EarnLoans = true;
-      this.Is_Visible_AppliedUserLoanDetails = true;
-      this.Is_Visible_UnderUserDetails = true;
-      this.Is_Visible_LoanPayment = true;
-      this.Is_Visible_My_SecretKeys = true;
-      this.Is_Visible_Apply_Userloans = true;
-      this.Is_Visible_Wallet_Transactions = true;
-      this.Is_Visible_Franchise_Request = true;
-      this.Is_Visible_Franchise_Tree = true;
-      this.Is_Visible_Request_Funds = true;
-      this.Is_Visible_Generate_My_SecretKeys = true;
-      this.Is_Visible_My_LoanPayments = true;
-      this.Is_Visible_Reports = true;
-      this.Is_Visible_Update_UsersProfile = false;
-      this.Is_Visible_Roles = false;
-      this.Is_Visible_Add_Roles = false;
-      this.Is_Visible_Expenses = false;
-      this.Is_Visible_Upgrade_School = false;
-      this.Is_Visible_Upgrade_Franchise = false;
-      this.Is_Visible_Student_Mapping = false;
-      this.Is_Visible_Registration_By_Institution = false;
-      this.Is_Visible_Users_By_Institution = false;
-    }
-    else if (this.roleID === BaseUrl.SchoolRoleID) {
-      this.sharedService.setLoginType(this.roleID);
-      this.isUserWallet = true;
-      this.Is_Visible_Settings = true;
-      this.Is_Visible_EarnLoans = true;
-      this.Is_Visible_AppliedUserLoanDetails = true;
-      this.Is_Visible_UnderUserDetails = true;
-      this.Is_Visible_My_LoanPayments = true;
-      this.Is_Visible_Reports = true;
-      this.Is_Visible_Request_Funds = true;
-      this.Is_Visible_Generate_My_SecretKeys = true;
-      this.Is_Visible_My_SecretKeys = true;
-      this.Is_Visible_Wallet_Transactions = true;
-      this.Is_Visible_My_LoanPayments = true;
-      this.Is_Visible_Fee_Master = true;
-      this.Is_Visible_Student_Mapping = true;
-      this.Is_Visible_Registration_By_Institution = true;
-      this.Is_Visible_Users_By_Institution = true;
-      this.Is_Visible_Roles = false;
-      this.Is_Visible_Add_Roles = false;
-      this.Is_Visible_Upgrade_Franchise = false;
-      this.Is_Visible_LoanPayment = false;
-      this.Is_Visible_Upgrade_School = false;
-    }
-    else if (this.roleID === BaseUrl.DeveloperRoleID) {
-      this.sharedService.setLoginType(this.roleID);
-      this.isUserWallet = false;
-      this.Is_Visible_Settings = true;
-      this.Is_Visible_EarnLoans = true;
-      this.Is_Visible_AppliedUserLoanDetails = true;
-      this.Is_Visible_Roles = false;
-      this.Is_Visible_Add_Roles = false;
-      this.Is_Visible_UnderUserDetails = true;
-      this.Is_Visible_Upgrade_Franchise = false;
-      this.Is_Visible_My_LoanPayments = true;
-    }
-    else
-      this.logout();
-  }
+  // getMenusBasedOnRole(userID: string) {
+  //   if (this.roleID === BaseUrl.AdminRoleID) {
+  //     this.sharedService.setLoginType(this.roleID);
+  //     this.isUserWallet = true;
+  //     this.Is_Visible_Settings = true;
+  //     this.Is_Visible_EarnLoans = true;
+  //     this.Is_Visible_AppliedLoanDetails = true;
+  //     this.Is_Visible_AppliedUserLoanDetails = true;
+  //     this.Is_Visible_SecretKey = true;
+  //     this.Is_Visible_MasterScreen = true;
+  //     this.Is_Visible_Roles = true;
+  //     this.Is_Visible_UnderUserDetails = true;
+  //     this.Is_Visible_Add_Roles = true;
+  //     this.Is_Visible_Upgrade_Franchise = true;
+  //     this.Is_Visible_Loans_Dispatched = true;
+  //     this.Is_Visible_LoanPayment = true;
+  //     this.Is_Visible_My_SecretKeys = true;
+  //     this.Is_Visible_Apply_Userloans = true;
+  //     this.Is_Visible_Wallet_Transactions = true;
+  //     this.Is_Visible_Franchise_Request = true;
+  //     this.Is_Visible_Franchise_Tree = true;
+  //     this.Is_Visible_Expenses = true;
+  //     this.Is_Visible_Upgrade_School = true;
+  //     this.Is_Visible_Request_Funds = true;
+  //     this.Is_Visible_Generate_My_SecretKeys = true;
+  //     this.Is_Visible_Update_UsersProfile = true;
+  //     this.Is_Visible_My_LoanPayments = true;
+  //     this.Is_Visible_Fee_Master = false;
+  //     this.Is_Visible_Reports = true;
+  //     this.Is_Visible_Course_Master = true;
+  //     this.Is_Visible_Student_Mapping = false;
+  //     this.Is_Visible_Registration_By_Institution = false;
+  //     this.Is_Visible_Users_By_Institution = false;
+  //   }
+  //   else if (this.roleID === BaseUrl.UserRoleID) {
+  //     this.sharedService.setLoginType(this.roleID);
+  //     this.isUserWallet = true;
+  //     this.Is_Visible_Settings = true;
+  //     this.Is_Visible_EarnLoans = true;
+  //     this.Is_Visible_AppliedUserLoanDetails = true;
+  //     this.Is_Visible_Wallet_Transactions = true;
+  //     this.Is_Visible_My_LoanPayments = true;
+  //     this.Is_Visible_UnderUserDetails = true;
+  //     this.Is_Visible_Request_Funds = true;
+  //     this.Is_Visible_Generate_My_SecretKeys = true;
+  //     this.Is_Visible_My_SecretKeys = true;
+  //     this.Is_Visible_Reports = true;
+  //     this.Is_Visible_LoanPayment = false;
+  //     this.Is_Visible_Upgrade_Franchise = false;
+  //     this.Is_Visible_Upgrade_School = false;
+  //     this.Is_Visible_Roles = false;
+  //     this.Is_Visible_Add_Roles = false;
+  //     this.Is_Visible_Student_Mapping = false;
+  //     this.Is_Visible_Registration_By_Institution = false;
+  //     this.Is_Visible_Users_By_Institution = false;
+  //   }
+  //   else if (this.roleID === BaseUrl.FranchiseRoleID) {
+  //     this.sharedService.setLoginType(this.roleID);
+  //     this.isUserWallet = true;
+  //     this.Is_Visible_Settings = true;
+  //     this.Is_Visible_EarnLoans = true;
+  //     this.Is_Visible_AppliedUserLoanDetails = true;
+  //     this.Is_Visible_UnderUserDetails = true;
+  //     this.Is_Visible_LoanPayment = true;
+  //     this.Is_Visible_My_SecretKeys = true;
+  //     this.Is_Visible_Apply_Userloans = true;
+  //     this.Is_Visible_Wallet_Transactions = true;
+  //     this.Is_Visible_Franchise_Request = true;
+  //     this.Is_Visible_Franchise_Tree = true;
+  //     this.Is_Visible_Request_Funds = true;
+  //     this.Is_Visible_Generate_My_SecretKeys = true;
+  //     this.Is_Visible_My_LoanPayments = true;
+  //     this.Is_Visible_Reports = true;
+  //     this.Is_Visible_Update_UsersProfile = false;
+  //     this.Is_Visible_Roles = false;
+  //     this.Is_Visible_Add_Roles = false;
+  //     this.Is_Visible_Expenses = false;
+  //     this.Is_Visible_Upgrade_School = false;
+  //     this.Is_Visible_Upgrade_Franchise = false;
+  //     this.Is_Visible_Student_Mapping = false;
+  //     this.Is_Visible_Registration_By_Institution = false;
+  //     this.Is_Visible_Users_By_Institution = false;
+  //   }
+  //   else if (this.roleID === BaseUrl.SchoolRoleID) {
+  //     this.sharedService.setLoginType(this.roleID);
+  //     this.isUserWallet = true;
+  //     this.Is_Visible_Settings = true;
+  //     this.Is_Visible_EarnLoans = true;
+  //     this.Is_Visible_AppliedUserLoanDetails = true;
+  //     this.Is_Visible_UnderUserDetails = true;
+  //     this.Is_Visible_My_LoanPayments = true;
+  //     this.Is_Visible_Reports = true;
+  //     this.Is_Visible_Request_Funds = true;
+  //     this.Is_Visible_Generate_My_SecretKeys = true;
+  //     this.Is_Visible_My_SecretKeys = true;
+  //     this.Is_Visible_Wallet_Transactions = true;
+  //     this.Is_Visible_My_LoanPayments = true;
+  //     this.Is_Visible_Fee_Master = true;
+  //     this.Is_Visible_Student_Mapping = true;
+  //     this.Is_Visible_Registration_By_Institution = true;
+  //     this.Is_Visible_Users_By_Institution = true;
+  //     this.Is_Visible_Roles = false;
+  //     this.Is_Visible_Add_Roles = false;
+  //     this.Is_Visible_Upgrade_Franchise = false;
+  //     this.Is_Visible_LoanPayment = false;
+  //     this.Is_Visible_Upgrade_School = false;
+  //   }
+  //   else if (this.roleID === BaseUrl.DeveloperRoleID) {
+  //     this.sharedService.setLoginType(this.roleID);
+  //     this.isUserWallet = false;
+  //     this.Is_Visible_Settings = true;
+  //     this.Is_Visible_EarnLoans = true;
+  //     this.Is_Visible_AppliedUserLoanDetails = true;
+  //     this.Is_Visible_Roles = false;
+  //     this.Is_Visible_Add_Roles = false;
+  //     this.Is_Visible_UnderUserDetails = true;
+  //     this.Is_Visible_Upgrade_Franchise = false;
+  //     this.Is_Visible_My_LoanPayments = true;
+  //   }
+  //   else
+  //     this.logout();
+  // }
 
   currentRoute() {
     let currentRoute = window.location.pathname;
@@ -243,6 +247,151 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
       this.loadBalance = response.m_Item1;
     }, err => {
     })
+  }
+
+
+
+  getMenuByUserID(userID: string) {
+    this.userService._getMenuDetailsByUserID(userID).subscribe((res: any) => {
+      if (res.m_Item1) {
+        this.lstUserMenus = res.m_Item3;
+        this.setMenusByItems();
+      }
+      else {
+        this.toastr.error(res.m_Item2);
+      }
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  setMenusByItems() {
+    if (!!this.lstUserMenus) {
+      this.lstUserMenus.forEach(element => {
+        switch (element.MenuName) {
+          case "loanearns": {
+            this.Is_Visible_EarnLoans = element.Checked;
+            break;
+          }
+          case "appliedloandetails": {
+            this.Is_Visible_AppliedLoanDetails = element.Checked;
+            break;
+          }
+          case "settings": {
+            this.Is_Visible_Settings = element.Checked;
+            break;
+          }
+          case "secretkey": {
+            this.Is_Visible_SecretKey = element.Checked;
+            break;
+          }
+          case "masterscreen": {
+            this.Is_Visible_MasterScreen = element.Checked;
+            break;
+          }
+          case "userloandetails": {
+            this.Is_Visible_AppliedUserLoanDetails = element.Checked;
+            break;
+          }
+          case "addroletouser": {
+            this.Is_Visible_Roles = element.Checked;
+            break;
+          }
+          case "underuserdetails": {
+            this.Is_Visible_UnderUserDetails = element.Checked;
+            break;
+          }
+          case "roles": {
+            this.Is_Visible_Add_Roles = element.Checked;
+            break;
+          }
+          case "upgradetofranchise": {
+            this.Is_Visible_Upgrade_Franchise = element.Checked;
+            break;
+          }
+          case "loandispatched": {
+            this.Is_Visible_Loans_Dispatched = element.Checked;
+            break;
+          }
+          case "loanpayment": {
+            this.Is_Visible_LoanPayment = element.Checked;
+            break;
+          }
+          case "mysecretkeys": {
+            this.Is_Visible_My_SecretKeys = element.Checked;
+            break;
+          }
+          case "applyuserloans": {
+            this.Is_Visible_Apply_Userloans = element.Checked;
+            break;
+          }
+          case "wallettransactions": {
+            this.Is_Visible_Wallet_Transactions = element.Checked;
+            break;
+          }
+          case "franchiserequest": {
+            this.Is_Visible_Franchise_Request = element.Checked;
+            break;
+          }
+          case "franchisetree": {
+            this.Is_Visible_Franchise_Tree = element.Checked;
+            break;
+          }
+          case "expenses": {
+            this.Is_Visible_Expenses = element.Checked;
+            break;
+          }
+          case "upgradetoschool": {
+            this.Is_Visible_Upgrade_School = element.Checked;
+            break;
+          }
+          case "requestfunds": {
+            this.Is_Visible_Request_Funds = element.Checked;
+            break;
+          }
+          case "generatemysecretkeys": {
+            this.Is_Visible_Generate_My_SecretKeys = element.Checked;
+            break;
+          }
+          case "updateuserprofile": {
+            this.Is_Visible_Update_UsersProfile = element.Checked;
+            break;
+          }
+          case "myloanpayments": {
+            this.Is_Visible_My_LoanPayments = element.Checked;
+            break;
+          }
+          case "feemaster": {
+            this.Is_Visible_Fee_Master = element.Checked;
+            break;
+          }
+          case "reports": {
+            this.Is_Visible_Reports = element.Checked;
+            break;
+          }
+          case "coursemaster": {
+            this.Is_Visible_Course_Master = element.Checked;
+            break;
+          }
+          case "studentmapping": {
+            this.Is_Visible_Student_Mapping = element.Checked;
+            break;
+          }
+          case "registerbyinstitution": {
+            this.Is_Visible_Registration_By_Institution = element.Checked;
+            break;
+          }
+          case "users": {
+            this.Is_Visible_Users_By_Institution = element.Checked;
+            break;
+          }
+          default: {
+            //this.logout();
+            break;
+          }
+        }
+      });
+    }
   }
 
   closeSidebar() {

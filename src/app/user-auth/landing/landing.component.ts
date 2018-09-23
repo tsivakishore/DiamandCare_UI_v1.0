@@ -18,7 +18,7 @@ import { LoanEarnsService } from "../../utility/shared-service/loanEarns.service
 export class LandingComponent extends BaseComponent implements OnInit, OnDestroy {
 
   // countdown timer variables
-  landingTitle2 = ' Digital India Awareness Market Analysis National research & Development ';
+  landingTitle2 = ' Digital India Awareness Monitoring Analysis National research & Development ';
   lstLoanEarns: any;
 
   constructor(private sharedService: SharedService,

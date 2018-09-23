@@ -27,6 +27,14 @@ export class UserService {
             });
     }
 
+    _getMenuDetailsByUserID(UserID) {
+        return this.httpService
+            .get(API.GETMENU + '?userID=' + UserID)
+            .map(res => this.extractData(res, true)).catch((error: any) => {
+                return Observable.throw(new Error(error.status));
+            });
+    }
+
     _getUserAddressById(Id) {
         return this.httpService
             .get(API.USERADDRESSBYID + '?Id=' + Id)
