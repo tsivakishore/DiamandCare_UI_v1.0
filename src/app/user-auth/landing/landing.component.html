@@ -35,7 +35,7 @@
             <div *ngIf="loanEarnsLength!=0">
               <p-dataTable [value]="lstLoanEarns" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
                 <p-column [style]="{'width':'80px'}" field="Groups" header="Groups" [sortable]="true"></p-column>
-                <p-column [style]="{'width':'100px'}" field="Persons" header="Persons" [sortable]="true"></p-column>
+                <p-column [style]="{'width':'350px'}" field="PersonsDesc" header="Persons" [sortable]="true"></p-column>
                 <p-column [style]="{'width':'120px'}" field="EPLoans" header="EPLoans" [sortable]="true"></p-column>
                 <p-column [style]="{'width':'200px'}" field="EPLoanTypes" header="EPLoanTypes" [sortable]="true"></p-column>
                 <p-column [style]="{'width':'150px'}" field="FeesReimbursement" header="Fee Reimbursement" [sortable]="true"></p-column>
