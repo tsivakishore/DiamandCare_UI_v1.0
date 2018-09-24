@@ -92,6 +92,16 @@ $mobile: "(max-width: 767px)";
     }
   }
 
+  .studentmapping-container{
+    .col-md-12.col-xs-6.margin-top-10{
+      text-align: left !important;
+      padding-left: 0px !important;
+      img{
+        width: 80px;
+      }
+    }
+  }
+
   .registerbyinstitution-container{
     .col-md-12.col-xs-6.margin-top-10{
       text-align: left !important;
@@ -183,6 +193,16 @@ $mobile: "(max-width: 767px)";
   }
 
   .registerbyinstitution-container{
+    .registerbyinstitution-form{
+      width: 100% !important;
+      padding: 5px 10px 5px 10px !important;
+    }
+    .main-logo{
+      width: 100% !important;
+    }
+  }
+
+  .studentmapping-container{
     .registerbyinstitution-form{
       width: 100% !important;
       padding: 5px 10px 5px 10px !important;

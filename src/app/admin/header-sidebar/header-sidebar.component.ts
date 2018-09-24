@@ -89,7 +89,6 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
     this.userID = this.sharedService.getUserID();
     this.roleID = this.sharedService.getRoleID();
     //this.getMenusBasedOnRole(this.userID);
-    debugger;
     this.getMenuByUserID(this.userID);
     this.UserDetails = this.sharedService.getUser();
     this.userName = this.sharedService.getUserName().toUpperCase();

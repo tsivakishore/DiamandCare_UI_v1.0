@@ -147,6 +147,7 @@ export class API {
   public static CREATEFEEMASTER = 'feemaster/CreateFeeMaster';
   public static GETUSERSBYINSTITUTION = 'userbyinstitution/getusersbyuserid';
   public static REGISTERUSERSBYINSTITUTION = 'userbyinstitution/registeruserbyinstitution';
+  public static GENERATEOTP = 'studentmapping/UpdateUserOTP';
   
   // EXTERNAL API CALLERS
 

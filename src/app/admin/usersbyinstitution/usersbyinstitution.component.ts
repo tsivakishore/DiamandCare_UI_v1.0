@@ -53,7 +53,6 @@ export class UsersbyinstitutionComponent extends BaseComponent implements OnInit
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.lstUsers = res.m_Item3;
-        console.log(this.lstUsers)
       }
     }, err => {
       this.sharedService.setLoader(false);
