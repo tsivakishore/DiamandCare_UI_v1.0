@@ -7,3 +7,9 @@
     border: 1px solid #2399e5 !important;
     color: #FFFFFF !important;
 }
+
+.btnapply{
+    padding: 0.25em 1em 0.25em 1em;
+    border-radius: 10px;
+    margin-top: -18px;
+}
