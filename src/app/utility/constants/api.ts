@@ -148,6 +148,7 @@ export class API {
   public static GETUSERSBYINSTITUTION = 'userbyinstitution/getusersbyuserid';
   public static REGISTERUSERSBYINSTITUTION = 'userbyinstitution/registeruserbyinstitution';
   public static GENERATEOTP = 'studentmapping/UpdateUserOTP';
+  public static VERIFYOTP = 'studentmapping/VerifyOTP';
   
   // EXTERNAL API CALLERS
 

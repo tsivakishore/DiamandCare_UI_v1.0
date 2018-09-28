@@ -87,6 +87,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.userID = this.sharedService.getUserID();
+    this.sharedService.setLoginType(this.userID);
     this.roleID = this.sharedService.getRoleID();
     //this.getMenusBasedOnRole(this.userID);
     this.getMenuByUserID(this.userID);
@@ -254,6 +255,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
     this.userService._getMenuDetailsByUserID(userID).subscribe((res: any) => {
       if (res.m_Item1) {
         this.lstUserMenus = res.m_Item3;
+        console.log(this.lstUserMenus)
         this.setMenusByItems();
       }
       else {
