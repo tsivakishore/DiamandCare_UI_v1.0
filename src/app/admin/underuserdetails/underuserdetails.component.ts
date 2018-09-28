@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { SharedService } from "../../utility/shared-service/shared.service";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ToastsManager } from "ng2-toastr";
@@ -11,13 +11,16 @@ import { TreeViewDataService } from "../../utility/shared-service/treeviewdata.s
   selector: 'app-underuserdetails',
   templateUrl: './underuserdetails.component.html',
   styleUrls: ['./underuserdetails.component.css'],
-  providers: [TreeViewDataService]
+  providers: [TreeViewDataService],
+  encapsulation: ViewEncapsulation.None
 })
 export class UnderuserdetailsComponent extends BaseComponent implements OnInit {
 
-  lstTreeData: any;
+  lstTreeData: any[];
+  lstTreeChildData: any[];
   userID: number;
   UserDetails: any;
+  selectedNode: any
 
   constructor(private sharedService: SharedService,
     private treeViewDataService: TreeViewDataService,
@@ -41,10 +44,51 @@ export class UnderuserdetailsComponent extends BaseComponent implements OnInit {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.lstTreeData = res.m_Item3;
+        console.log(this.lstTreeData);
+      }
+      else {
+        this.lstTreeData = [];
       }
     }, err => {
       console.log(err);
       this.sharedService.setLoader(false);
     })
   }
+
+  onNodeSelect(event) {
+    //console.log(event); 
+    this.lstTreeChildData = [];
+    this.sharedService.setLoader(true);
+    this.treeViewDataService._getTreeViewData(event.node.UserID).then((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.lstTreeChildData = res.m_Item3;
+      }
+      else {
+        this.lstTreeChildData = [];
+      }
+    }, err => {
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+
+  }
+
+  onNodeChildSelect(event) {  
+    this.lstTreeChildData = [];
+    this.sharedService.setLoader(true);
+    this.treeViewDataService._getTreeViewData(event.node.UserID).then((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.lstTreeChildData = res.m_Item3;
+      }
+      else {
+        this.lstTreeChildData = [];
+      }
+    }, err => {
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
+
 }

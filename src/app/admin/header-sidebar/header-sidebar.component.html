@@ -197,6 +197,12 @@
         <span>Reports</span>
       </a>
     </li>
+    <li tooltipPosition="top" routerLinkActive="active">
+      <a [routerLink]="displayscreensUrl" *ngIf="Is_Visible_Displayscreens" routerLinkActive="active">
+        <i class="material-icons">security</i>
+        <span>Security</span>
+      </a>
+    </li>
     <li>
       <a routerLinkActive="active" (click)="logout()" tooltipPosition="top">
         <i class="material-icons">power_settings_new</i>
@@ -401,6 +407,12 @@
       <a [routerLink]="addUserToRoleUrl" *ngIf="Is_Visible_Roles" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">person_add</i>
         <span>Assign Role</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="displayscreensUrl" *ngIf="Is_Visible_Displayscreens" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">security</i>
+        <span>Security</span>
       </a>
     </li>
     <li>

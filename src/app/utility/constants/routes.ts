@@ -16,7 +16,7 @@ export class RouteConstants {
   public static ROLES = 'roles';
   public static UPGRADETOFRANCHISE = 'upgradetofranchise';
   public static LOANDISPATCHED = 'loandispatched';
-  public static SCREENPERMISSIONS = 'screenpermissions';
+  // public static SCREENPERMISSIONS = 'screenpermissions';
   public static LOANPAYMENT = 'loanpayment';
   public static MYSECRETKEYS = 'mysecretkeys';
   public static APPLYUSERLOANS = 'applyuserloans';
@@ -31,6 +31,7 @@ export class RouteConstants {
   public static MYLOANPAYMENTS = 'myloanpayments';
   public static FEEMASTER = 'feemaster';
   public static REPORTS = 'reports';
+  public static DISPLAYSCREENS = 'displayscreens';
   public static COURSEMASTER = 'coursemaster';
   public static STUDENTMAPPING = 'studentmapping';
   public static REGISTRATIONBYINSTITUTION = 'registerbyinstitution';
