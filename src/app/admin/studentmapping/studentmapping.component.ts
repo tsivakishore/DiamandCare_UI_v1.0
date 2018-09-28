@@ -37,8 +37,12 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
   activeForm: number = 1;
   activeModal: number = 1;
   UserDetails: any;
-  frmStudentForm: FormGroup;
+  frmGenerateOTPForm: FormGroup;
+  registerStudentMappingForm: FormGroup;
+  frmVerifyOTPForm: FormGroup;
   commonFunctions = new CommonFunctions();
+  resultOTP: number;
+  resultUserID: number;
 
   constructor(public fb: FormBuilder,
     private apiManager: APIManager,
@@ -51,16 +55,46 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.createStudentForm();
+    this.createGenerateOTPForm();
   }
 
-  createStudentForm() {
-    this.frmStudentForm = this.fb.group({
+  createGenerateOTPForm() {
+    this.frmGenerateOTPForm = this.fb.group({
       UserID: [0],
       UserName: [''],
+      FirstName: [''],
+      LastName: [''],
       OneTimePassword: [''],
       PhoneNumber: [''],
       Email: ['']
+    })
+  }
+
+  createVerifyOTPForm() {
+    this.frmVerifyOTPForm = this.fb.group({
+      UserID: [0],
+      OneTimePassword: new FormControl('', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_REGEXP)])),
+    })
+  }
+
+  createStudentForm() {
+    this.registerStudentMappingForm = this.fb.group({
+      UserID: [0],
+      StudentName: new FormControl('', Validators.compose([Validators.required, Validators.min(3), Validators.pattern(CommonRegexp.ALPHA_NUMERIC)])),
+      Gender: new FormControl('', Validators.compose([Validators.required])),
+      Address1: new FormControl('', Validators.compose([Validators.min(3)])),
+      Address2: new FormControl('', Validators.compose([Validators.min(3)])),
+      City: new FormControl('', Validators.compose([Validators.min(2)])),
+      District: new FormControl('', Validators.compose([Validators.min(2)])),
+      State: new FormControl('', Validators.compose([Validators.min(2)])),
+      Country: new FormControl('', Validators.compose([Validators.min(2)])),
+      Zipcode: new FormControl('', Validators.compose([Validators.min(6), Validators.max(6), Validators.pattern(CommonRegexp.NUMERIC_REGEXP)])),
+      CourseMasterID: new FormControl('', Validators.compose([Validators.required])),
+      CourseID: new FormControl('', Validators.compose([Validators.required])),
+      GroupID: new FormControl('', Validators.compose([Validators.required])),
+      Fees: new FormControl('', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])),
+      ApprovalStatusID: [''],
+      TransferStatusID: ['']
     })
   }
 
@@ -70,49 +104,61 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
       this.userService._getUserDetailsByDCIDorName(searchValue).subscribe((res: any) => {
         this.sharedService.setLoader(false);
         if (res.m_Item1) {
-          debugger;
           this.UserDetails = res.m_Item3;
-          this.frmStudentForm.patchValue({
+          this.frmGenerateOTPForm.patchValue({
             UserID: this.UserDetails.UserID,
             UserName: this.UserDetails.UserName,
+            FirstName: this.UserDetails.FirstName,
+            LastName: this.UserDetails.LastName,
             PhoneNumber: this.UserDetails.PhoneNumber,
             Email: this.UserDetails.Email,
             OneTimePassword: this.getOTP(100000, 999999)
           })
         }
-        else
+        else {
+          this.frmGenerateOTPForm.reset();
           this.toastr.error("Please provide valid user name or DCID");
+        }
       }, err => {
+        this.frmGenerateOTPForm.reset();
         this.sharedService.setLoader(false);
+        this.toastr.error("Oops! There has been an error from server. Please try again.");
       })
     }
   }
 
   // Generate OTP form submit method
-  onGenerateOTP(formStudent, isValidForm) {
+  onGenerateOTP(formGenerateOTP, isValidForm) {
     if (isValidForm) {
-      this.apiManager.postAPI(API.GENERATEOTP, formStudent).subscribe(response => {
+      this.apiManager.postAPI(API.GENERATEOTP, formGenerateOTP).subscribe(response => {
         if (response.m_Item1) {
-          // this.validSecretKey = formValue.RegKey;
-          // this.validPhoneNumber = formValue.PhoneNumber;
-          // this.keyType = response.m_Item3;
-          // this.createRegisterForm();
-          // this.registerByInstitutionForm.patchValue({
-          //   SecretCode: this.validSecretKey,
-          //   PhoneNumber: this.validPhoneNumber,
-          //   UserStatusID: (this.keyType == 'P') ? 1 : 2
-          // })
+          this.createVerifyOTPForm();
+          this.resultUserID = response.m_Item3.UserID
+          this.resultOTP = response.m_Item3.OneTimePassword;
           this.activeModal = 2;
           this.activeForm = 2;
         }
         else {
-          // this.isValidKey = true;
-          // this.verifykeyError = response.m_Item2;
+          this.toastr.error(response.m_Item2);
         }
       }, err => {
-        // this.isValidKey = true;
-        // this.verifykeyError = "Oops! There has been an error from server. Please try again.";
+        this.toastr.error("Oops! There has been an error from server. Please try again.");
       })
+    }
+  }
+
+  // Verify OTP form submit method
+  VerifyOTP(OTP, isValidForm) {
+    debugger;
+    if (isValidForm) {
+      if (parseInt(OTP) === this.resultOTP) {
+        this.createStudentForm();
+        this.activeModal = 3;
+        this.activeForm = 3;
+      }
+      else {
+        this.toastr.error("Your OTP is incorrect.Please enter correct OTP.");
+      }
     }
   }
 
@@ -120,5 +166,10 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
     if (e.which === 32)
       e.preventDefault();
   }
+
+  Gender = [
+    { GenderID: "M", Gender: "Male" },
+    { GenderID: "F", Gender: "Female" }
+  ];
 
 }

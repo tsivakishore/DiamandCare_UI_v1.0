@@ -1,62 +1,202 @@
 <div class="studentmapping-container" @slideUp>
   <div class="studentmapping-form">
-    
+    <div>
       <h3 class="col-md-12 col-sm-12 col-xs-12 h3styles">Student Mapping</h3>
-    <div class="clearfix"></div>
-    <div class="">
-      <div class="" *ngIf="activeForm == 1">
-        <form [formGroup]="frmStudentForm" (submit)="onGenerateOTP(frmStudentForm.value,frmStudentForm.valid)">
-          <div class="col-md-12 col-xs-12 col-sm-12 margin-top-10">
-            <div class="label" style="color: white;">Search by Username or DCID</div>
-            <input type="text" #txtSearcByLoanId id="txtSearcByLoanId" class="form-control" placeholder="Search by Username or DCID"
-              (change)="onSearchChange($event.target.value)" (keypress)="restrictSpace($event)" />
-          </div>
-          <div class="clearfix"></div>
-          <div class="margin-top-10 col-xs-12 col-md-12">
-            <div class="label" style="color: white;">UserName</div>
-            <div class="clearfix"></div>
-            <input type="text" placeholder="{{'User Name' | translate}}" pTooltip="{{'User Name' | translate}}" tooltipPosition="top"
-              class="form-control" formControlName="UserName" readonly/>
-            <div class="input-validation-msg">
-            </div>
-          </div>
-          <div class="clearfix"></div>
-          <div class="margin-top-10 col-xs-12 col-md-12">
-            <div class="label" style="color: white;">PhoneNumber</div>
-            <div class="clearfix"></div>
-            <input type="text" placeholder="{{'PhoneNumber' | translate}}" pTooltip="{{'PhoneNumber' | translate}}" tooltipPosition="top"
-              class="form-control" formControlName="PhoneNumber" required readonly/>
-            <div class="input-validation-msg">
-            </div>
-          </div>
-          <div class="clearfix"></div>
-          <!-- <div class="margin-top-10 col-xs-12 col-md-6">
-            <div class="label" style="color: white;">One Time Password</div>
-            <div class="clearfix"></div>
-            <input type="text" placeholder="{{'One Time Password' | translate}}" pTooltip="{{'One Time Password' | translate}}" tooltipPosition="top"
-              class="form-control" formControlName="OneTimePassword" required/>
-            <div class="input-validation-msg">
-            </div>
-          </div> -->
-          <div class="clearfix"></div>
-
-          <div class="input-validation-msg customMsg">
-            <div class="label" *ngIf="isValidKey">
-              <p style="color:red;font-size: 15px;text-align: center;">{{verifykeyError}}</p>
-            </div>
-          </div>
-          <div class="clearfix"></div>
-
-          <div class="two fields margin-top-10">
-            <div class="field">
-              <button type="submit" class="btn-primary btn btn-block" pTooltip="{{'verifySecretKey' | translate}}" tooltipPosition="top"
-                [disabled]="!frmStudentForm.valid">{{'Generate OTP' | translate}}</button>
-            </div>
-          </div>
-
-        </form>
-      </div>
     </div>
+    <div class="clearfix"></div>
+
+    <div class="" *ngIf="activeForm == 1">
+      <form [formGroup]="frmGenerateOTPForm" (submit)="onGenerateOTP(frmGenerateOTPForm.value,frmGenerateOTPForm.valid)">
+        <div class="col-md-12 col-xs-12 col-sm-12 margin-top-10">
+          <div class="label" style="color: white;">Search by Username or DCID</div>
+          <input type="text" #txtSearcByLoanId id="txtSearcByLoanId" class="form-control" placeholder="Search by Username or DCID"
+            (change)="onSearchChange($event.target.value)" (keypress)="restrictSpace($event)" />
+        </div>
+        <div class="clearfix"></div>
+        <div class="margin-top-10 col-xs-12 col-md-12">
+          <div class="label" style="color: white;">UserName</div>
+          <div class="clearfix"></div>
+          <input type="text" placeholder="{{'User Name' | translate}}" pTooltip="{{'User Name' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="UserName" readonly/>
+          <div class="input-validation-msg">
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="margin-top-10 col-xs-12 col-md-12">
+          <div class="label" style="color: white;">PhoneNumber</div>
+          <div class="clearfix"></div>
+          <input type="text" placeholder="{{'PhoneNumber' | translate}}" pTooltip="{{'PhoneNumber' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="PhoneNumber" required readonly/>
+          <div class="input-validation-msg">
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="two fields margin-top-10">
+          <div class="field">
+            <button type="submit" class="btn-primary btn btn-block" pTooltip="{{'verifySecretKey' | translate}}" tooltipPosition="top"
+              [disabled]="!frmGenerateOTPForm.valid">{{'Generate OTP' | translate}}</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="" *ngIf="activeForm == 2">
+      <form [formGroup]="frmVerifyOTPForm" (submit)="VerifyOTP(frmVerifyOTPForm.value.OneTimePassword,frmVerifyOTPForm.valid)">
+        <div class="margin-top-10 col-xs-12 col-md-12">
+          <div class="label" style="color: white;">One Time Password</div>
+          <div class="clearfix"></div>
+          <input type="text" placeholder="{{'One Time Password' | translate}}" pTooltip="{{'One Time Password' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="OneTimePassword" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(frmVerifyOTPForm.get('OneTimePassword'))" [errMsg]="'Please enter OTP' | translate"></validation>
+            <validation *ngIf="isValidField(frmVerifyOTPForm.get('OneTimePassword'))" [errMsg]="'Please enter valid OTP' | translate"></validation>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="two fields margin-top-10">
+          <div class="field">
+            <button type="submit" class="btn-primary btn btn-block" pTooltip="{{'verifySecretKey' | translate}}" tooltipPosition="top"
+              [disabled]="!frmVerifyOTPForm.valid">{{'Verify OTP' | translate}}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div *ngIf="activeForm == 3">
+      <form [formGroup]="registerStudentMappingForm" (submit)="onRegister(registerStudentMappingForm.value,registerStudentMappingForm.valid)">
+        <div class="col-xs-12 col-md-6">
+          <div class="label" style="color: #fff;">StudentName</div>
+          <div class="clearfix"></div>
+          <input type="text" placeholder="{{'StudentName' | translate}}" pTooltip="{{'StudentName' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="StudentName" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(registerStudentMappingForm.get('StudentName'))" [errMsg]="'Please enter student name' | translate"></validation>
+            <validation *ngIf="isValidLength(registerStudentMappingForm.get('StudentName'))" [errMsg]="'Student name should be min of 3 chars' | translate"></validation>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+          <div class="label" style="color: #fff;">Gender</div>
+          <div class="clearfix"></div>
+          <select class="form-control" formControlName="Gender" required>
+            <option *ngFor="let gender of Gender" value="{{gender.GenderID}}">{{gender.Gender}}</option>
+          </select>
+          <div class="input-validation-msg">
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="col-xs-12 col-md-6">
+          <div class="label" style="color: #fff;">Address</div>
+          <div class="clearfix"></div>
+          <input type="text" placeholder="{{'Address' | translate}}" pTooltip="{{'Address' | translate}}" tooltipPosition="top" class="form-control"
+            formControlName="Address1" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isValidLength(registerStudentMappingForm.get('Address1'))" [errMsg]="'Please enter min of 3 chars' | translate"></validation>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+          <div class="label" style="color: #fff;">Address1</div>
+          <div class="clearfix"></div>
+          <input type="text" placeholder="{{'Address2' | translate}}" pTooltip="{{'Address2' | translate}}" tooltipPosition="top" class="form-control"
+            formControlName="Address2" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isValidLength(registerStudentMappingForm.get('Address2'))" [errMsg]="'Please enter min of 3 chars' | translate"></validation>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="col-xs-12 col-md-6">
+          <div class="label" style="color: #fff;">City</div>
+          <div class="clearfix"></div>
+          <input type="text" placeholder="{{'City' | translate}}" pTooltip="{{'City' | translate}}" tooltipPosition="top" class="form-control"
+            formControlName="City" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isValidLength(registerStudentMappingForm.get('City'))" [errMsg]="'Please enter min of 2 chars' | translate"></validation>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <div class="label" style="color: #fff;">District</div>
+          <div class="clearfix"></div>
+          <input type="text" placeholder="{{'District' | translate}}" pTooltip="{{'District' | translate}}" tooltipPosition="top" class="form-control"
+            formControlName="District" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isValidLength(registerStudentMappingForm.get('District'))" [errMsg]="'Please enter min of 2 chars' | translate"></validation>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-xs-12 col-md-6">
+          <div class="label" style="color: #fff;">State</div>
+          <div class="clearfix"></div>
+          <input type="text" placeholder="{{'State' | translate}}" pTooltip="{{'State' | translate}}" tooltipPosition="top" class="form-control"
+            formControlName="State" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isValidLength(registerStudentMappingForm.get('State'))" [errMsg]="'Please enter min of 2 chars' | translate"></validation>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <div class="label" style="color: #fff;">Country</div>
+          <div class="clearfix"></div>
+          <input type="text" placeholder="{{'Country' | translate}}" pTooltip="{{'Country' | translate}}" tooltipPosition="top" class="form-control"
+            formControlName="Country" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isValidLength(registerStudentMappingForm.get('Country'))" [errMsg]="'Please enter min of 2 chars' | translate"></validation>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-xs-12 col-md-6">
+          <div class="label" style="color: #fff;">Zipcode</div>
+          <div class="clearfix"></div>
+          <input type="text" placeholder="{{'Zipcode' | translate}}" pTooltip="{{'Zipcode' | translate}}" tooltipPosition="top" class="form-control"
+            formControlName="Zipcode" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isValidLength(registerStudentMappingForm.get('Zipcode'))" [errMsg]="'Please enter 6 digit zipcode' | translate"></validation>
+            <validation *ngIf="isValidField(registerStudentMappingForm.get('Zipcode'))" [errMsg]="'Please enter valid zipcode' | translate"></validation>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <div class="label" style="color: #fff;">Course Master</div>
+          <div class="clearfix"></div>
+          <select class="form-control" pTooltip="{{'CourseMasterID' | translate}}" tooltipPosition="top" formControlName="CourseMasterID"
+            required (change)="onUnderIDChange($event.target.value)">
+            <!-- <option *ngFor="let under of underDetails" value={{under.UnderID}}>
+              {{under.UserName}}
+            </option> -->
+          </select>
+          <div class="input-validation-msg">
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="col-xs-12 col-md-6">
+          <div class="label" style="color: #fff;">Fees</div>
+          <div class="clearfix"></div>
+          <input type="text" placeholder="{{'Fees' | translate}}" pTooltip="{{'Fees' | translate}}" tooltipPosition="top" class="form-control"
+            formControlName="Fees" required/>
+          <div class="input-validation-msg">
+            <validation *ngIf="isRequiredField(registerStudentMappingForm.get('Fees'))" [errMsg]="'Please enter fee' | translate"></validation>
+            <validation *ngIf="isValidField(registerStudentMappingForm.get('Fees'))" [errMsg]="'Please enter valid fee' | translate"></validation>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="margin-top-10 col-md-12">
+          <button type="submit" class="btn-primary btn btn-block" [disabled]="!registerStudentMappingForm.valid" pTooltip="{{'createAccount' | translate}}"
+            tooltipPosition="top">{{'createAccount' | translate}}</button>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="lightClr col-md-12 padding-left-0 margin-top-5">
+          <small pTooltip="{{sendInfoNote}}" tooltipPosition="top">{{sendInfoNote}}</small>
+        </div>
+
+        <div class="clearfix"></div>
+      </form>
+    </div>
+
   </div>
 </div>
 
