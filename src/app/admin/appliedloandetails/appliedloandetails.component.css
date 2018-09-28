@@ -43,3 +43,10 @@
     border: 1px solid #2399e5 !important;
     color: #FFFFFF !important;
 }
+
+/* ::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: #4c5463;
+} */
