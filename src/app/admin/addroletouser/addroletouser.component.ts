@@ -11,6 +11,20 @@ import { Role } from './role-model';
 import { UserAuthService } from "../../user-auth/user-auth.service";
 import { ToastsManager } from 'ng2-toastr';
 
+export class UserRoleMapping {
+  UserId: string
+  RoleId: string
+  RoleName: string
+}
+export class UserRolesModel {
+  Id: string
+  FirstName: string
+  LastName: string
+  UserName: string
+  Roles: UserRoleMapping[]
+}
+
+
 @Component({
   selector: 'app-addroletouser',
   templateUrl: './addroletouser.component.html',
@@ -30,19 +44,19 @@ import { ToastsManager } from 'ng2-toastr';
 })
 
 export class AddroletouserComponent extends BaseComponent implements OnInit {
-  userRolesList: any;
+  userRolesList: UserRolesModel[] = [];
   originalallRolesList: any;
   allRolesList: SelectItem[] = [];;
   fgRoles: FormGroup;
   isShowModal: number = 1;
-  selectedRole: Role;
+  selectedRole: Role[] = [];
 
   constructor(private userAuthService: UserAuthService, public fb: FormBuilder,
     private apiManager: APIManager,
     public translateService: TranslateService,
     public vcr: ViewContainerRef,
     public toastr: ToastsManager) {
-      super(toastr, vcr);
+    super(toastr, vcr);
   }
 
   ngOnInit() {
@@ -62,8 +76,9 @@ export class AddroletouserComponent extends BaseComponent implements OnInit {
     this.userAuthService._getUsersAndRoles().subscribe((res: any) => {
       if (res.m_Item1) {
         this.userRolesList = res.m_Item3;
+        console.log(this.userRolesList);
       }
-      else{
+      else {
         this.toastr.error(res.m_Item2);
       }
     })
@@ -90,10 +105,11 @@ export class AddroletouserComponent extends BaseComponent implements OnInit {
     }
   }
 
-  UpdateRole(value) {
-    if (this.fgRoles.valid) {
-      this.fgRoles.value.RoleID = value.RoleID.RoleID;
-      this.apiManager.postAPI(API.UPDATEUSERROLE, this.fgRoles.value).subscribe(response => {
+  UpdateRole(value, valid) {
+    debugger;
+    if (valid) {
+      //this.fgRoles.value.RoleID = value.RoleID.RoleID;
+      this.apiManager.postAPI(API.UPDATEUSERROLE, { Id: this.fgRoles.value.Id, Roles: this.fgRoles.value.RoleID }).subscribe(response => {
         if (response.m_Item1) {
           this.toastr.success(response.m_Item2);
           this.fgRoles.reset();
@@ -112,7 +128,12 @@ export class AddroletouserComponent extends BaseComponent implements OnInit {
 
   //Change roles
   onShowUpdateRoleModal(rowData) {
-    this.fgRoles.patchValue({ Id: rowData.UserID })
+    this.selectedRole = [];
+    rowData.Roles.forEach(o => {
+      this.selectedRole.push({ RoleID: o.RoleId, label: o.RoleName });
+    });
+
+    this.fgRoles.patchValue({ Id: rowData.Id, RoleID: this.selectedRole })
     this.isShowModal = 2;
   }
 

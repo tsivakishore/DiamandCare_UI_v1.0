@@ -292,6 +292,10 @@ p-dropdown{
   margin-left: 45% !important;
 }
 
+.ui-multiselect-panel .ui-multiselect-item{
+  color:#d6d6d6!important;
+}
+
 @media only screen and (max-width: 767px) and (min-width: 320px){
   .ui-calendar.ui-calendar-w-btn input {
     width: 300px !important;
