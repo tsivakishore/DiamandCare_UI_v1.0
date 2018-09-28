@@ -96,7 +96,7 @@ const routes: Routes = [
     canActivate: [AuthGaurd]
   },
   {
-    path: RouteConstants.SCREENPERMISSIONS,
+    path: RouteConstants.DISPLAYSCREENS,
     component: DisplayscreensComponent,
     canActivate: [AuthGaurd]
   },
