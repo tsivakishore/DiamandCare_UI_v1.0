@@ -65,7 +65,7 @@
     </div>
 
     <div *ngIf="activeForm == 3">
-      <form [formGroup]="registerStudentMappingForm" (submit)="onRegister(registerStudentMappingForm.value,registerStudentMappingForm.valid)">
+      <form [formGroup]="registerStudentMappingForm" (submit)="onSubmitStudentingMapping(registerStudentMappingForm.value,registerStudentMappingForm.valid)">
         <div class="col-xs-12 col-md-6">
           <div class="label" style="color: #fff;">StudentName</div>
           <div class="clearfix"></div>
@@ -92,7 +92,7 @@
           <div class="label" style="color: #fff;">Address</div>
           <div class="clearfix"></div>
           <input type="text" placeholder="{{'Address' | translate}}" pTooltip="{{'Address' | translate}}" tooltipPosition="top" class="form-control"
-            formControlName="Address1" required/>
+            formControlName="Address1" />
           <div class="input-validation-msg">
             <validation *ngIf="isValidLength(registerStudentMappingForm.get('Address1'))" [errMsg]="'Please enter min of 3 chars' | translate"></validation>
           </div>
@@ -102,7 +102,7 @@
           <div class="label" style="color: #fff;">Address1</div>
           <div class="clearfix"></div>
           <input type="text" placeholder="{{'Address2' | translate}}" pTooltip="{{'Address2' | translate}}" tooltipPosition="top" class="form-control"
-            formControlName="Address2" required/>
+            formControlName="Address2" />
           <div class="input-validation-msg">
             <validation *ngIf="isValidLength(registerStudentMappingForm.get('Address2'))" [errMsg]="'Please enter min of 3 chars' | translate"></validation>
           </div>
@@ -113,7 +113,7 @@
           <div class="label" style="color: #fff;">City</div>
           <div class="clearfix"></div>
           <input type="text" placeholder="{{'City' | translate}}" pTooltip="{{'City' | translate}}" tooltipPosition="top" class="form-control"
-            formControlName="City" required/>
+            formControlName="City" />
           <div class="input-validation-msg">
             <validation *ngIf="isValidLength(registerStudentMappingForm.get('City'))" [errMsg]="'Please enter min of 2 chars' | translate"></validation>
           </div>
@@ -122,7 +122,7 @@
           <div class="label" style="color: #fff;">District</div>
           <div class="clearfix"></div>
           <input type="text" placeholder="{{'District' | translate}}" pTooltip="{{'District' | translate}}" tooltipPosition="top" class="form-control"
-            formControlName="District" required/>
+            formControlName="District" />
           <div class="input-validation-msg">
             <validation *ngIf="isValidLength(registerStudentMappingForm.get('District'))" [errMsg]="'Please enter min of 2 chars' | translate"></validation>
           </div>
@@ -132,7 +132,7 @@
           <div class="label" style="color: #fff;">State</div>
           <div class="clearfix"></div>
           <input type="text" placeholder="{{'State' | translate}}" pTooltip="{{'State' | translate}}" tooltipPosition="top" class="form-control"
-            formControlName="State" required/>
+            formControlName="State" />
           <div class="input-validation-msg">
             <validation *ngIf="isValidLength(registerStudentMappingForm.get('State'))" [errMsg]="'Please enter min of 2 chars' | translate"></validation>
           </div>
@@ -141,7 +141,7 @@
           <div class="label" style="color: #fff;">Country</div>
           <div class="clearfix"></div>
           <input type="text" placeholder="{{'Country' | translate}}" pTooltip="{{'Country' | translate}}" tooltipPosition="top" class="form-control"
-            formControlName="Country" required/>
+            formControlName="Country" />
           <div class="input-validation-msg">
             <validation *ngIf="isValidLength(registerStudentMappingForm.get('Country'))" [errMsg]="'Please enter min of 2 chars' | translate"></validation>
           </div>
@@ -151,20 +151,20 @@
           <div class="label" style="color: #fff;">Zipcode</div>
           <div class="clearfix"></div>
           <input type="text" placeholder="{{'Zipcode' | translate}}" pTooltip="{{'Zipcode' | translate}}" tooltipPosition="top" class="form-control"
-            formControlName="Zipcode" required/>
+            formControlName="Zipcode" />
           <div class="input-validation-msg">
-            <validation *ngIf="isValidLength(registerStudentMappingForm.get('Zipcode'))" [errMsg]="'Please enter 6 digit zipcode' | translate"></validation>
+            <!-- <validation *ngIf="isValidLength(registerStudentMappingForm.get('Zipcode'))" [errMsg]="'Please enter 6 digit zipcode' | translate"></validation> -->
             <validation *ngIf="isValidField(registerStudentMappingForm.get('Zipcode'))" [errMsg]="'Please enter valid zipcode' | translate"></validation>
           </div>
         </div>
         <div class="col-xs-12 col-md-6">
-          <div class="label" style="color: #fff;">Course Master</div>
+          <div class="label" style="color: #fff;">Fee Master</div>
           <div class="clearfix"></div>
-          <select class="form-control" pTooltip="{{'CourseMasterID' | translate}}" tooltipPosition="top" formControlName="CourseMasterID"
-            required (change)="onUnderIDChange($event.target.value)">
-            <!-- <option *ngFor="let under of underDetails" value={{under.UnderID}}>
-              {{under.UserName}}
-            </option> -->
+          <select class="form-control" pTooltip="{{'FeeMaster' | translate}}" tooltipPosition="top" formControlName="FeeMasterID" required
+            (change)="onFeeMasterChange($event.target.value)">
+            <option *ngFor="let feeMaster of lstFeeMasters" value={{feeMaster.FeeMasterID}}>
+              {{feeMaster.CourseName}}
+            </option>
           </select>
           <div class="input-validation-msg">
           </div>
@@ -172,20 +172,31 @@
         <div class="clearfix"></div>
 
         <div class="col-xs-12 col-md-6">
-          <div class="label" style="color: #fff;">Fees</div>
+          <div class="label" style="color: #fff;">Course Fee</div>
           <div class="clearfix"></div>
-          <input type="text" placeholder="{{'Fees' | translate}}" pTooltip="{{'Fees' | translate}}" tooltipPosition="top" class="form-control"
-            formControlName="Fees" required/>
+          <input type="text" placeholder="{{'CourseFee' | translate}}" pTooltip="{{'CourseFee' | translate}}" tooltipPosition="top"
+            class="form-control" formControlName="CourseFee" readonly required/>
           <div class="input-validation-msg">
-            <validation *ngIf="isRequiredField(registerStudentMappingForm.get('Fees'))" [errMsg]="'Please enter fee' | translate"></validation>
-            <validation *ngIf="isValidField(registerStudentMappingForm.get('Fees'))" [errMsg]="'Please enter valid fee' | translate"></validation>
+            <validation *ngIf="isRequiredField(registerStudentMappingForm.get('CourseFee'))" [errMsg]="'Please enter fee' | translate"></validation>
+            <validation *ngIf="isValidField(registerStudentMappingForm.get('CourseFee'))" [errMsg]="'Please enter valid fee' | translate"></validation>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <div class="label" style="color: #fff;">Group</div>
+          <div class="clearfix"></div>
+          <select class="form-control" pTooltip="{{'Group' | translate}}" tooltipPosition="top" formControlName="GroupID" required>
+            <option *ngFor="let earnLoan of listOfEarnLoans" value={{earnLoan.Groups}}>
+              {{earnLoan.EPLoans}}
+            </option>
+          </select>
+          <div class="input-validation-msg">
           </div>
         </div>
         <div class="clearfix"></div>
 
         <div class="margin-top-10 col-md-12">
           <button type="submit" class="btn-primary btn btn-block" [disabled]="!registerStudentMappingForm.valid" pTooltip="{{'createAccount' | translate}}"
-            tooltipPosition="top">{{'createAccount' | translate}}</button>
+            tooltipPosition="top">{{'Student Mapping' | translate}}</button>
         </div>
         <div class="clearfix"></div>
 

@@ -35,6 +35,12 @@
       </a>
     </li>
     <li tooltipPosition="top">
+      <a [routerLink]="userWithdrawsUrl" *ngIf="Is_Visible_User_Withdraws" routerLinkActive="active">
+        <i class="material-icons">atm</i>
+        <span>User Withdraws</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
       <a [routerLink]="earnLoansUrl" routerLinkActive="active">
         <i class="material-icons">money</i>
         <span>Loans</span>
@@ -110,6 +116,12 @@
       <a [routerLink]="studentMappingUrl" *ngIf="Is_Visible_Student_Mapping" routerLinkActive="active">
         <i class="material-icons">insert_link</i>
         <span>Student Mapping</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
+      <a [routerLink]="studentMappingDetailsUrl" *ngIf="Is_Visible_Student_Mapping_Details" routerLinkActive="active">
+        <i class="material-icons">view_module</i>
+        <span>Student Mapping Details</span>
       </a>
     </li>
     <li tooltipPosition="top">
@@ -192,6 +204,12 @@
       </a>
     </li>
     <li tooltipPosition="top" routerLinkActive="active">
+      <a [routerLink]="adminReportsUrl" *ngIf="Is_Visible_Admin_Reports" routerLinkActive="active">
+        <i class="material-icons">brightness_auto</i>
+        <span>Admin Reports</span>
+      </a>
+    </li>
+    <li tooltipPosition="top" routerLinkActive="active">
       <a [routerLink]="reportsUrl" *ngIf="Is_Visible_Reports" routerLinkActive="active">
         <i class="material-icons">report</i>
         <span>Reports</span>
@@ -251,6 +269,12 @@
       <a [routerLink]="walletTransactionsUrl" *ngIf="Is_Visible_Wallet_Transactions" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">apps</i>
         <span>Wallet Transactions</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="userWithdrawsUrl" *ngIf="Is_Visible_User_Withdraws" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">atm</i>
+        <span>User Withdraws</span>
       </a>
     </li>
     <li>
@@ -329,6 +353,12 @@
       <a [routerLink]="studentMappingUrl" *ngIf="Is_Visible_Student_Mapping" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">insert_link</i>
         <span>Student Mapping</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="studentMappingDetailsUrl" *ngIf="Is_Visible_Student_Mapping_Details" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">view_module</i>
+        <span>Student Mapping Details</span>
       </a>
     </li>
     <li>
@@ -413,6 +443,12 @@
       <a [routerLink]="displayscreensUrl" *ngIf="Is_Visible_Displayscreens" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">security</i>
         <span>Security</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="adminReportsUrl" *ngIf="Is_Visible_Admin_Reports" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">brightness_auto</i>
+        <span>Admin Reports</span>
       </a>
     </li>
     <li>

@@ -34,7 +34,10 @@ export class RouteConstants {
   public static DISPLAYSCREENS = 'displayscreens';
   public static COURSEMASTER = 'coursemaster';
   public static STUDENTMAPPING = 'studentmapping';
+  public static STUDENTMAPPINGDETAILS = 'studentmappingdetails';
   public static REGISTRATIONBYINSTITUTION = 'registerbyinstitution';
   public static USERSBYINSTITUTION = 'users';
+  public static ADMINREPORTS = 'adminreports';
+  public static USERWITHDRAWS = 'userwithdraws';
 
 }

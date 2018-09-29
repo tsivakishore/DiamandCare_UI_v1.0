@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewContainerRef, ViewChild, ElementRef } from '@angular/core';
 import { SharedService } from "../../utility/shared-service/shared.service";
+import { Router } from "@angular/router";
+import { RouteConstants } from "../../utility/constants/routes";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ToastsManager } from "ng2-toastr";
 import { BaseComponent } from "../../utility/base-component/base.component";
@@ -11,13 +13,15 @@ import { TranslateService } from "../../utility/translate/translate.service";
 import { style, transition, animate, trigger } from "@angular/animations";
 import { UserService } from "../../utility/shared-service/user.service";
 import { CommonService } from '../../utility/shared-service/common.service';
+import { CoursemasterService } from '../../utility/shared-service/coursemaster.service';
+import { LoanEarnsService } from '../../utility/shared-service/loanEarns.service';
 import { CommonFunctions } from "../../utility/common-functions";
 
 @Component({
   selector: 'app-studentmapping',
   templateUrl: './studentmapping.component.html',
   styleUrls: ['./studentmapping.component.css'],
-  providers: [CommonService, UserService],
+  providers: [CommonService, UserService, CoursemasterService, LoanEarnsService],
   animations: [
     trigger('dialog', [
       transition('void => *', [
@@ -37,24 +41,36 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
   activeForm: number = 1;
   activeModal: number = 1;
   UserDetails: any;
+  LoginUserDetails: any;
   frmGenerateOTPForm: FormGroup;
   registerStudentMappingForm: FormGroup;
   frmVerifyOTPForm: FormGroup;
   commonFunctions = new CommonFunctions();
   resultOTP: number;
   resultUserID: number;
+  lstFeeMasters: any;
+  listOfEarnLoans: any;
+  loginUserID: number;
+  defaultCourseID: number;
+  defaultFee: any;
+  defaultGroup: any;
 
   constructor(public fb: FormBuilder,
     private apiManager: APIManager,
     public toastr: ToastsManager,
     private sharedService: SharedService,
     private userService: UserService,
+    private coursemasterService: CoursemasterService,
+    private loanEarnsService: LoanEarnsService,
     public vcr: ViewContainerRef,
+    private router: Router,
     private commonService: CommonService) {
     super(toastr, vcr);
   }
 
   ngOnInit() {
+    this.LoginUserDetails = this.sharedService.getUser();
+    this.loginUserID = this.LoginUserDetails.UserID;
     this.createGenerateOTPForm();
   }
 
@@ -88,11 +104,11 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
       District: new FormControl('', Validators.compose([Validators.min(2)])),
       State: new FormControl('', Validators.compose([Validators.min(2)])),
       Country: new FormControl('', Validators.compose([Validators.min(2)])),
-      Zipcode: new FormControl('', Validators.compose([Validators.min(6), Validators.max(6), Validators.pattern(CommonRegexp.NUMERIC_REGEXP)])),
-      CourseMasterID: new FormControl('', Validators.compose([Validators.required])),
-      CourseID: new FormControl('', Validators.compose([Validators.required])),
+      // Zipcode: new FormControl('', Validators.compose([Validators.min(6), Validators.max(6), Validators.pattern(CommonRegexp.NUMERIC_REGEXP)])),
+      Zipcode: new FormControl('', Validators.compose([Validators.pattern(CommonRegexp.NUMERIC_REGEXP)])),
+      FeeMasterID: new FormControl('', Validators.compose([Validators.required])),
       GroupID: new FormControl('', Validators.compose([Validators.required])),
-      Fees: new FormControl('', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])),
+      CourseFee: new FormControl('', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])),
       ApprovalStatusID: [''],
       TransferStatusID: ['']
     })
@@ -149,10 +165,12 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
 
   // Verify OTP form submit method
   VerifyOTP(OTP, isValidForm) {
-    debugger;
     if (isValidForm) {
       if (parseInt(OTP) === this.resultOTP) {
         this.createStudentForm();
+        this.registerStudentMappingForm.controls['UserID'].setValue(this.UserDetails.UserID, { onlySelf: true });
+        this.getFeeMasters(this.loginUserID);
+        this.GetLoans();
         this.activeModal = 3;
         this.activeForm = 3;
       }
@@ -160,6 +178,69 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
         this.toastr.error("Your OTP is incorrect.Please enter correct OTP.");
       }
     }
+  }
+
+  onSubmitStudentingMapping(formStudentMapping, isValidForm) {
+    if (isValidForm) {
+      debugger;
+      this.apiManager.postAPI(API.STUDENTMAPPING, formStudentMapping).subscribe(response => {
+        debugger;
+        if (response.m_Item1) {
+          this.viewStudentMappingDetailsForm();
+        }
+        else {
+          this.toastr.error(response.m_Item2);
+        }
+      }, err => {
+        this.toastr.error("Oops! There has been an error from server. Please try again.");
+      })
+    }
+    else {
+      this.toastr.error("Form is not valid");
+    }
+  }
+
+  getFeeMasters(UserID: number) {
+    this.sharedService.setLoader(true);
+    this.lstFeeMasters = [];
+    this.coursemasterService._getFeeMastersByUserID(UserID).subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.lstFeeMasters = res.m_Item3;
+        this.defaultCourseID = this.lstFeeMasters[0].FeeMasterID;
+        this.defaultFee = this.lstFeeMasters[0].CourseFee;
+        this.registerStudentMappingForm.controls['FeeMasterID'].setValue(this.defaultCourseID, { onlySelf: true });
+        this.registerStudentMappingForm.controls['Gender'].setValue('M', { onlySelf: true });
+        this.registerStudentMappingForm.controls['CourseFee'].setValue(this.defaultFee, { onlySelf: true })
+      }
+    }, err => {
+      this.sharedService.setLoader(false);
+    })
+  }
+
+  public GetLoans() {
+    this.sharedService.setLoader(true);
+    this.loanEarnsService._getLoans().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.listOfEarnLoans = res.m_Item3;
+        this.defaultGroup = this.listOfEarnLoans[0].Groups;
+        this.registerStudentMappingForm.controls['GroupID'].setValue(this.defaultGroup, { onlySelf: true });
+      }
+    }, err => {
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
+
+  onFeeMasterChange(selectedValue: any) {
+    this.defaultFee = '';
+    this.defaultFee = this.lstFeeMasters.find(x => x.FeeMasterID == selectedValue).CourseFee;
+    this.registerStudentMappingForm.controls['CourseFee'].setValue(this.defaultFee, { onlySelf: true })
+  }
+
+  viewStudentMappingDetailsForm() {
+    this.router.navigate(["/" + RouteConstants.STUDENTMAPPING]);
   }
 
   restrictSpace(e) {
