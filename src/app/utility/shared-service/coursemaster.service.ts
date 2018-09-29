@@ -40,6 +40,22 @@ export class CoursemasterService {
       });
   }
 
+  _getFeeMastersByUserID(postData) {
+    return this.httpService
+      .get(API.GETFEEMASTERSBYUSERID + '?UserID=' + postData)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  _getStudentMappingDetails(postData) {
+    return this.httpService
+      .get(API.STUDENTMAPPINGDETAILS + '?UserID=' + postData)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
   private extractData(res: Response, show?: boolean) {
     let data = res.json();
     let msg = data.message;

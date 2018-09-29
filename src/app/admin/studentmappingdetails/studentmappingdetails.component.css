@@ -1,0 +1,22 @@
+.btnstyles{
+    margin: 15px 0 0 0;
+    padding: 0.25em 1em 0.25em 1em;
+    border-radius: 15px;
+}
+
+.btnapply{
+    padding: 0.25em 1em 0.25em 1em;
+    border-radius: 10px;
+}
+.divstyles{
+    text-align: -webkit-right;
+    margin-top: -15px;
+}
+.btnnoteligible{
+    background-color: #e85454 !important;
+    border: 0px solid #e85454 !important;
+}
+.btneligible{
+    background-color: #00c8aa !important;
+    border: 0px solid #00c8aa !important;
+}

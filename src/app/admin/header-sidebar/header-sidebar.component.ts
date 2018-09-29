@@ -77,9 +77,12 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   Is_Visible_Reports = false;
   Is_Visible_Course_Master = false;
   Is_Visible_Student_Mapping = false;
+  Is_Visible_Student_Mapping_Details = false;
   Is_Visible_Registration_By_Institution = false;
   Is_Visible_Users_By_Institution = false;
   Is_Visible_Displayscreens = false;
+  Is_Visible_Admin_Reports = false;
+  Is_Visible_User_Withdraws = false;
 
   constructor(private apiManager: APIManager, private sharedService: SharedService, private commonService: CommonService, private userService: UserService,
     private router: Router, public toastr: ToastsManager, public vcr: ViewContainerRef) {
@@ -97,7 +100,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
     this.roleName = this.sharedService.getRoleName();
     this.getWalletBalance();
   }
-  
+
 
   currentRoute() {
     let currentRoute = window.location.pathname;
@@ -134,7 +137,6 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
     this.userService._getMenuDetailsByUserID(userID).subscribe((res: any) => {
       if (res.m_Item1) {
         this.lstUserMenus = res.m_Item3;
-        console.log(this.lstUserMenus)
         this.setMenusByItems();
       }
       else {
@@ -257,6 +259,10 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
             this.Is_Visible_Student_Mapping = element.Checked;
             break;
           }
+          case "studentmappingdetails": {
+            this.Is_Visible_Student_Mapping_Details = element.Checked;
+            break;
+          }
           case "registerbyinstitution": {
             this.Is_Visible_Registration_By_Institution = element.Checked;
             break;
@@ -268,7 +274,15 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
           case "displayscreens": {
             this.Is_Visible_Displayscreens = element.Checked;
             break;
-          }          
+          }
+          case "adminreports": {
+            this.Is_Visible_Admin_Reports = element.Checked;
+            break;
+          }
+          case "userwithdraws": {
+            this.Is_Visible_User_Withdraws = element.Checked;
+            break;
+          }
           default: {
             //this.logout();
             break;
@@ -400,7 +414,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   get displayscreensUrl() {
     return "/" + RouteConstants.DISPLAYSCREENS;
-  }  
+  }
 
   get courseMasterUrl() {
     return "/" + RouteConstants.COURSEMASTER;
@@ -416,6 +430,18 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   get usersByInstitutionUrl() {
     return "/" + RouteConstants.USERSBYINSTITUTION;
+  }
+
+  get studentMappingDetailsUrl() {
+    return "/" + RouteConstants.STUDENTMAPPINGDETAILS;
+  }
+
+  get adminReportsUrl() {
+    return "/" + RouteConstants.ADMINREPORTS;
+  }
+
+  get userWithdrawsUrl() {
+    return "/" + RouteConstants.USERWITHDRAWS;
   }
 
   earnLoanEvent() {

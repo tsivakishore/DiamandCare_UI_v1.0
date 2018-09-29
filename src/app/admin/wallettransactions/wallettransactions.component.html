@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
       <h3 class="col-md-6 col-sm-6 col-xs-6" style="color: #00c8aa;margin-top: 15px;">All Fund Requests</h3>
+      <button type="button" class="btn btn-primary" (click)="OpenWithdrawFundsPopup()">Withdraw Funds</button>
       <button type="button" class="btn btn-primary btntransfer" (click)="OpenFundsTransferPopup()">Transfer Funds</button>
     </div>
   </div>
@@ -128,7 +129,7 @@
               <div>
                 <div class="label" style="color: #fff;">Transfer To</div>
                 <div class="clearfix"></div>
-                <input type="text" class="form-control" formControlName="TransferTo" (change)="onChangeUsernameByDCIDorName(frmTransferFunds.value.TransferTo)"
+                <input type="text" class="form-control" formControlName="TransferTo" (change)="onChangeUsernameByDCIDorName(frmTransferFunds.value.TransferTo,'Transfer')"
                   required />
                 <div class="input-validation-msg">
                   <validation *ngIf="isRequiredField(frmTransferFunds.get('TransferTo'))" [errMsg]="'Please enter transfer username or DCID' | translate"></validation>
@@ -177,6 +178,119 @@
       </div>
     </form>
   </div>
+  <!-- Withdraw Form start -->
+  <div class="phone-number-modal modelpopup" *ngIf="isShowModal == 4" @dialog>
+    <form [formGroup]="frmWithdrawFunds" (submit)="SubmitWithdrawFunds(frmWithdrawFunds.value,frmWithdrawFunds.valid)">
+      <div class="modal-container" style="height: 200px !important;">
+        <div class="modal-header" style="background: #797b85;">
+          <h5>Withdraw Funds</h5>
+          <i class="material-icons" (click)="closeForm()">close</i>
+        </div>
+        <div class="clearfix"></div>
+        <div class="modal-body" style="height: 50px;">
+          <div class="col-md-12">
+            <div class="clearfix"></div>
+            <div class="margin-top-15 col-md-12">
+              <div>
+                <div class="label" style="color: #fff;">Available Balance</div>
+                <div class="clearfix"></div>
+                <input type="text" class="form-control" formControlName="AvlBalance" readonly />
+                <div class="input-validation-msg">
+
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="margin-top-15 col-md-12">
+              <div>
+                <div class="label" style="color: #fff;">Withdraw To</div>
+                <div class="clearfix"></div>
+                <input type="text" class="form-control" formControlName="WithdrawTo" (change)="onChangeUsernameByDCIDorName(frmWithdrawFunds.value.WithdrawTo, 'Withdraw')"
+                  required />
+                <div class="input-validation-msg">
+                  <validation *ngIf="isRequiredField(frmWithdrawFunds.get('WithdrawTo'))" [errMsg]="'Please enter transfer username or DCID' | translate"></validation>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="margin-top-15 col-md-12">
+              <div>
+                <div class="label" style="color: #fff;">Withdrawee Name</div>
+                <div class="clearfix"></div>
+                <input type="text" class="form-control" formControlName="WithdraweeName" readonly />
+                <div class="input-validation-msg">
+
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="margin-top-15 col-md-12">
+              <div>
+                <div class="label" style="color: #fff;">Withdraw Amount</div>
+                <div class="clearfix"></div>
+                <input type="text" class="form-control" formControlName="WithdrawAmount" (change)="onChangeWithdrawAmount($event.target.value)"
+                  required />
+                <div class="input-validation-msg">
+                  <validation *ngIf="isRequiredField(frmWithdrawFunds.get('WithdrawAmount'))" [errMsg]="'Please enter transfer amount' | translate"></validation>
+                  <validation *ngIf="isValidField(frmWithdrawFunds.get('WithdrawAmount'))" [errMsg]="'Please enter valid transfer amount' | translate"></validation>
+                  <validation *ngIf="isMinValueField(frmWithdrawFunds.get('WithdrawAmount'))" [errMsg]="'Tansfer amount should not be zero' | translate"></validation>
+                  <validation *ngIf="isMaxValueField(frmWithdrawFunds.get('WithdrawAmount'))" [errMsg]="'Insufficient balance in your account' | translate"></validation>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="margin-top-15 col-md-12">
+              <div>
+                <div class="label" style="color: #fff;">Purpose</div>
+                <div class="clearfix"></div>
+                <input type="text" class="form-control" formControlName="Purpose" />
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="modal-footer">
+              <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
+                <button type="submit" [disabled]="!frmWithdrawFunds.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
+                <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="margin-top-10"></div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="clearfix"></div>
+  <div class="confirm-modal-overay" *ngIf="isShowModal == 2 || isShowModal == 3" (click)="closeForm()"></div>
+  <div class="clearfix"></div>
+  <div class="transaction-history-table box-shadow"></div>
+  <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">{{'withdrawals' | translate}}</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <div style="overflow: auto;">
+        <p-dataTable [value]="WalletWithdrawals" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+          <p-column field="UserID" header="UserID" [sortable]="true"></p-column>
+          <p-column field="WithdrawAmount" header="Withdraw Amount" [sortable]="true"></p-column>
+          <p-column field="TransferBy" header="Transfer By" [sortable]="true"></p-column>
+          <p-column field="TransferOn" header="Transfer Date" [sortable]="true"></p-column>
+          <p-column field="TransferStatusID" header="Transfer Status ID" [sortable]="true">
+            <p-column field="Purpose" header="Purpose" [sortable]="true">
+              <ng-template let-WalletWithdrawals="rowData" pTemplate="body" let-ri="rowIndex">
+                <div class="col-md-12" style="margin-left: -15px;">
+                  {{getFormattedDate(WalletWithdrawals.UpdatedOn)}}
+                </div>
+              </ng-template>
+            </p-column>
+        </p-dataTable>
+      </div>
+    </div>
+  </div>
+  <!-- Withdraw Form end -->
+
   <div class="clearfix"></div>
   <div class="confirm-modal-overay" *ngIf="isShowModal == 2 || isShowModal == 3" (click)="closeForm()"></div>
   <div class="clearfix"></div>

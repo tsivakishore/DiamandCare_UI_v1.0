@@ -207,5 +207,6 @@ export const LANG_EN_TRANS = {
   'validRequestTo': 'Valid request to username',
   'requestAmountRqrd': 'Amount required',
   'validRequestAmount': 'Please enter valid amount',
+  'withdrawals': 'Wallet Withrdawals',
 };
 

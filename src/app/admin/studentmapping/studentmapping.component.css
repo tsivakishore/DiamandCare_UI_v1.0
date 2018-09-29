@@ -12,6 +12,10 @@
     border-color: #dadae2;
 }
 
+.dropdownstyle{
+    width: 225px;
+}
+
 @media only screen and (max-width: 767px) and (min-width: 320px){
     .divsearchstyle {
         border-style: solid;
@@ -19,5 +23,10 @@
         width: 99% !important;
         padding: 5% !important;
         border-color: #dadae2;
+    }
+
+    .dropdownstyle{
+        width: 328px !important;
+        margin-top: 5px;
     }
 }

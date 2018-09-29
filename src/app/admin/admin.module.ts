@@ -43,6 +43,9 @@ import { CoursemasterComponent } from './coursemaster/coursemaster.component';
 import { StudentmappingComponent } from './studentmapping/studentmapping.component';
 import { RegisterbyinstitutionComponent } from './registerbyinstitution/registerbyinstitution.component';
 import { UsersbyinstitutionComponent } from './usersbyinstitution/usersbyinstitution.component';
+import { StudentmappingdetailsComponent } from './studentmappingdetails/studentmappingdetails.component';
+import { AdminreportsComponent } from './adminreports/adminreports.component';
+import { UserwithdrawsComponent } from './userwithdraws/userwithdraws.component';
 
 @NgModule({
   imports: [
@@ -97,7 +100,10 @@ import { UsersbyinstitutionComponent } from './usersbyinstitution/usersbyinstitu
     CoursemasterComponent,
     StudentmappingComponent,
     RegisterbyinstitutionComponent,
-    UsersbyinstitutionComponent
+    UsersbyinstitutionComponent,
+    StudentmappingdetailsComponent,
+    AdminreportsComponent,
+    UserwithdrawsComponent
   ],
   exports: [HeaderSidebarComponent]
 })

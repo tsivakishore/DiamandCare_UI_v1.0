@@ -34,9 +34,11 @@ import { CommonService } from "../../utility/shared-service/common.service";
 export class WallettransactionsComponent extends BaseComponent implements OnInit {
   WalletExpensesList: any[]
   FundsRequestList: any[]
+  WalletWithdrawals: any[]
   isShowModal: number = 1;
   fdFundRequest: FormGroup;
   frmTransferFunds: FormGroup;
+  frmWithdrawFunds: FormGroup;
   selectedRow: any;
   lstFranchise: any;
   lstFndRqstStatus: any;
@@ -78,6 +80,18 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
     })
   }
 
+  public getWithdrawalTransactions() {
+    this.sharedService.setLoader(true);
+    this.walletServ._getWalletTransactions().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.WalletWithdrawals = res.m_Item3;
+      }
+    }, err => {
+      this.sharedService.setLoader(false);
+    })
+  }
+
   createFundsRequestForm() {
     this.fdFundRequest = this.fb.group({
       ID: new FormControl(''),
@@ -94,7 +108,19 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
       TransferTo: ['', Validators.compose([Validators.required])],
       RequestToUserID: new FormControl(''),
       TransferToName: new FormControl(''),
-      ApprovedAmount: ['', Validators.compose([Validators.required, Validators.min(1.00),Validators.max(this.walletBalance), Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
+      ApprovedAmount: ['', Validators.compose([Validators.required, Validators.min(1.00), Validators.max(this.walletBalance), Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
+    })
+  }
+
+  createWithdrawFundsForm() {
+    this.frmWithdrawFunds = this.fb.group({
+      AvlBalance: this.walletBalance,
+      WithdrawTo: ['', Validators.compose([Validators.required])],
+      RequestToUserID: new FormControl(''),
+      WithdraweeName: new FormControl(''),
+      WithdrawAmount: ['', Validators.compose([Validators.required, Validators.min(1.00), Validators.max(this.walletBalance), Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
+      Purpose: new FormControl(''),
+      UserID: new FormControl('')
     })
   }
 
@@ -122,6 +148,12 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
     if (!!searchValue) {
       this.frmTransferFunds.controls['ApprovedAmount'].setValidators(Validators.compose([Validators.required, Validators.min(1.00), Validators.max(this.walletBalance), Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)]));
       this.frmTransferFunds.get('ApprovedAmount').updateValueAndValidity({ onlySelf: true, emitEvent: false });
+    }
+  }
+  onChangeWithdrawAmount(searchValue: string) {
+    if (!!searchValue) {
+      this.frmWithdrawFunds.controls['AvlBalance'].setValidators(Validators.compose([Validators.required, Validators.min(1.00), Validators.max(this.walletBalance), Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)]));
+      this.frmWithdrawFunds.get('AvlBalance').updateValueAndValidity({ onlySelf: true, emitEvent: false });
     }
   }
 
@@ -196,25 +228,43 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
     })
   }
 
-  public onChangeUsernameByDCIDorName(DCIDorName) {
+  public onChangeUsernameByDCIDorName(DCIDorName, name) {
     this.sharedService.setLoader(true);
     if (DCIDorName != "") {
       this.userService._getUserDetailsByDCIDorName(DCIDorName).subscribe((res: any) => {
         this.sharedService.setLoader(false);
         if (res.m_Item1) {
           this.ToUserDetails = res.m_Item3;
-          this.frmTransferFunds.patchValue({
-            TransferFrom: this.UserDetails.UserName,
-            TransferTo: this.ToUserDetails.UserName,
-            RequestToUserID: this.ToUserDetails.UserID,
-            TransferToName: this.ToUserDetails.FirstName + ' ' + this.ToUserDetails.LastName
-          })
+          if (name == 'Transfer') {
+            this.frmTransferFunds.patchValue({
+              TransferFrom: this.UserDetails.UserName,
+              TransferTo: this.ToUserDetails.UserName,
+              RequestToUserID: this.ToUserDetails.UserID,
+              TransferToName: this.ToUserDetails.FirstName + ' ' + this.ToUserDetails.LastName
+            })
+          }
+          if (name == 'Withdraw') {
+            this.frmWithdrawFunds.patchValue({
+              UserID: this.ToUserDetails.UserID,
+              WithdrawTo: this.ToUserDetails.UserName,
+              WithdraweeName: this.ToUserDetails.FirstName + ' ' + this.ToUserDetails.LastName
+            })
+          }
+
         }
         else {
-          this.frmTransferFunds.patchValue({
-            TransferTo: '',
-            TransferToName: ''
-          })
+          if (name == 'Transfer') {
+            this.frmTransferFunds.patchValue({
+              TransferTo: '',
+              TransferToName: ''
+            })
+          }
+          if (name == 'Withdraw') {
+            this.frmWithdrawFunds.patchValue({
+              WithdrawTo: '',
+              WithdraweeName: ''
+            })
+          }
           this.toastr.error("Please provide valid user name or DCID");
         }
       }, err => {
@@ -222,10 +272,18 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
       })
     }
     else {
-      this.frmTransferFunds.patchValue({
-        TransferTo: '',
-        TransferToName: ''
-      })
+      if (name == 'Transfer') {
+        this.frmTransferFunds.patchValue({
+          TransferTo: '',
+          TransferToName: ''
+        })
+      }
+      if (name == 'Withdraw') {
+        this.frmWithdrawFunds.patchValue({
+          WithdrawTo: '',
+          WithdraweeName: ''
+        })
+      }
     }
   }
 
@@ -236,7 +294,14 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
       TransferFrom: this.UserDetails.UserName
     })
   }
-
+  OpenWithdrawFundsPopup() {
+    this.isShowModal = 4;
+    this.createWithdrawFundsForm();
+    this.frmWithdrawFunds.patchValue({
+      AvlBalance: this.walletBalance,
+      WithdrawAmount: this.walletBalance
+    })
+  }
   SubmitFundsTransfer(frmTransferFunds, isValidForm) {
     if (isValidForm) {
       this.apiManager.postAPI(API.TRANSFERFUNDS, frmTransferFunds).subscribe(response => {
@@ -260,7 +325,29 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
       this.toastr.error("Form is not valid");
     }
   }
-
+  SubmitWithdrawFunds(frmWithdrawFunds, isValidForm) {
+    if (isValidForm) {
+      this.apiManager.postAPI(API.WITHDRAWFUNDS, frmWithdrawFunds).subscribe(response => {
+        if (response.m_Item1) {
+          this.isShowModal = 1;
+          this.toastr.success(response.m_Item2);
+          this.frmWithdrawFunds.reset();
+          //this.getWalletTransactions();
+          //this.getWalletBalance();
+        }
+        else {
+          this.toastr.error(response.m_Item2);
+          this.isShowModal = 1;
+        }
+      }, err => {
+        this.isShowModal = 1;
+        this.toastr.error("Oops! There has been an error while transfer funds.Please try again.");
+      });
+    }
+    else {
+      this.toastr.error("Form is not valid");
+    }
+  }
   public getWalletBalance() {
     this.commonService._getWalletBalance().then((response: any) => {
       if (response.m_Item1) {
