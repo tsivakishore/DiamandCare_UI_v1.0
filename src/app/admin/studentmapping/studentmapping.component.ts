@@ -182,9 +182,9 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
 
   onSubmitStudentingMapping(formStudentMapping, isValidForm) {
     if (isValidForm) {
-      debugger;
+      formStudentMapping.ApprovalStatusID = 3;
+      formStudentMapping.TransferStatusID = 1;
       this.apiManager.postAPI(API.STUDENTMAPPING, formStudentMapping).subscribe(response => {
-        debugger;
         if (response.m_Item1) {
           this.viewStudentMappingDetailsForm();
         }
@@ -240,7 +240,7 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
   }
 
   viewStudentMappingDetailsForm() {
-    this.router.navigate(["/" + RouteConstants.STUDENTMAPPING]);
+    this.router.navigate(["/" + RouteConstants.STUDENTMAPPINGDETAILS]);
   }
 
   restrictSpace(e) {

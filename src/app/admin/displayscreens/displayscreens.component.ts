@@ -60,6 +60,7 @@ export class DisplayscreensComponent extends BaseComponent implements OnInit {
   }
 
   EditScreenMaster(rowData: any) {
+    debugger;
     console.log(rowData);
     this.isShowModal = 2;
     this.createScreenMasterForm();
@@ -69,6 +70,7 @@ export class DisplayscreensComponent extends BaseComponent implements OnInit {
       MenuName: rowData.MenuName,
       MenuDescription: rowData.MenuDescription
     })
+    debugger;
   }
 
   ViewScreenMasterModel() {

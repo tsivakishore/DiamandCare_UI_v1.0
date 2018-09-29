@@ -277,14 +277,14 @@
           <p-column field="WithdrawAmount" header="Withdraw Amount" [sortable]="true"></p-column>
           <p-column field="TransferBy" header="Transfer By" [sortable]="true"></p-column>
           <p-column field="TransferOn" header="Transfer Date" [sortable]="true"></p-column>
-          <p-column field="TransferStatusID" header="Transfer Status ID" [sortable]="true">
-            <p-column field="Purpose" header="Purpose" [sortable]="true">
-              <ng-template let-WalletWithdrawals="rowData" pTemplate="body" let-ri="rowIndex">
-                <div class="col-md-12" style="margin-left: -15px;">
-                  {{getFormattedDate(WalletWithdrawals.UpdatedOn)}}
-                </div>
-              </ng-template>
-            </p-column>
+          <p-column field="TransferStatusID" header="Transfer Status ID" [sortable]="true"></p-column>
+          <p-column field="Purpose" header="Purpose" [sortable]="true">
+            <ng-template let-WalletWithdrawals="rowData" pTemplate="body" let-ri="rowIndex">
+              <div class="col-md-12" style="margin-left: -15px;">
+                {{getFormattedDate(WalletWithdrawals.UpdatedOn)}}
+              </div>
+            </ng-template>
+          </p-column>
         </p-dataTable>
       </div>
     </div>

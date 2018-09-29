@@ -65,7 +65,7 @@
 <admin-footer></admin-footer>
 
 <div class="phone-number-modal" *ngIf="isShowModal == 2" @dialog>
-  <form [formGroup]="frmScreenMaster" (submit)="CreateScreenMaster(formScreenMaster.value,formScreenMaster.valid)">
+  <form [formGroup]="frmScreenMaster" (submit)="CreateScreenMaster(frmScreenMaster.value,frmScreenMaster.valid)">
     <div class="modal-container" style="height: 200px !important;">
       <div class="modal-header" style="background: #797b85;">
         <h5>{{actiontype}}</h5>
@@ -81,7 +81,7 @@
               <div class="clearfix"></div>
               <input type="text" class="form-control" (keypress)="restrictSpace($event)" formControlName="MenuName" required/>
               <div class="input-validation-msg">
-                <validation *ngIf="isRequiredField(formScreenMaster.get('MenuName'))" [errMsg]="'Please enter Screen code' | translate"></validation>
+                <validation *ngIf="isRequiredField(frmScreenMaster.get('MenuName'))" [errMsg]="'Please enter Screen code' | translate"></validation>
               </div>
             </div>
           </div>
@@ -92,14 +92,14 @@
               <div class="clearfix"></div>
               <input type="text" class="form-control" formControlName="MenuDescription" (keypress)="restrictSpace($event)" required/>
               <div class="input-validation-msg">
-                <validation *ngIf="isRequiredField(formScreenMaster.get('MenuDescription'))" [errMsg]="'Please enter screen description' | translate"></validation>
+                <validation *ngIf="isRequiredField(frmScreenMaster.get('MenuDescription'))" [errMsg]="'Please enter screen description' | translate"></validation>
               </div>
             </div>
           </div>
           <div class="clearfix"></div>
           <div class="modal-footer">
             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
-              <button type="submit" [disabled]="!formScreenMaster.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
+              <button type="submit" [disabled]="!frmScreenMaster.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
               <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
             </div>
             <div class="clearfix"></div>
