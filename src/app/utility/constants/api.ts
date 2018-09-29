@@ -117,6 +117,7 @@ export class API {
   public static INSERTWALLETEXPENSES = 'wallet/InsertWalletExpenses';
   public static DELETEWALLETEXPENSES = 'wallet/DeleteWalletExpenses';
   public static GETWALLETTRANSACTIONS = 'wallet/GetWalletTransactions';
+  public static GETWITHDRAWALTRANSACTIONS = 'wallet/GetWithdrawalTransactions';
   public static GETFRANCHISEREQUESTSTATUS = 'Shared/GetFranchiseRequestStaus';
   public static SAVEFRANCHISEREQUEST = 'franchisedetails/SaveFranchiseRequest';
   public static APPROVEFRANCHISEREQUEST = 'franchisedetails/ApproveFranchiseRequest';
@@ -132,6 +133,7 @@ export class API {
   public static USERREQUESTFUNDSDETAILS = 'wallet/GetUserFundRequestDetails';
   public static APPROVEFUNDSREQUEST = 'wallet/ApproveFundsRequest';
   public static TRANSFERFUNDS = 'wallet/UpdateFundsTransfer';
+  public static WITHDRAWFUNDS = 'wallet/WithdrawFunds';
   public static GETREPORTTYPES = 'reports/GetReportTypes';
   public static DOWNLOADREPORTS = 'reports/DownloadReport';
   public static GETFRANCHISEDETAILS = 'franchisedetails/GetFranchiseDetails';
