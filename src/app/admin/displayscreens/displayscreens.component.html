@@ -1,3 +1,115 @@
-<p>
-  displayscreens works!
-</p>
+<div class="coursemaster-container" @slideUp>
+  <div class="coursemaster-form">
+    <!-- Grid start -->
+    <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">Screen Master Details</h3>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="transaction-history-container">
+          <div class="transaction-history-table box-shadow">
+            <p-dataTable [value]="lstScreenMaster" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
+              expandableRows="true" >
+              <p-header [style]="{'width': '100%'}">
+                <div class="divstyles">
+                  <button type="button" class="btn btn-primary btnstyles" (click)="ViewScreenMasterModel()">Add Screen</button>
+                </div>
+              </p-header>
+              <p-column [style]="{'width':'40px'}" expander="false" styleClass="col-icon" field="MenuID" header="ID" [sortable]="true">
+              </p-column>
+              <!-- <ng-template let-data="rowData" pTemplate="rowexpansion">
+                <div class="divinnergrid">
+                   <p-dataTable [value]="lstCourse" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+                    <p-header [style]="{'width': '100%'}">
+                      <div class="divstyles">
+                        <button type="button" class="btn btn-primary btnstyles" (click)="ViewCourseModel()">Add Course</button>
+                      </div>
+                    </p-header>
+                    <p-column [style]="{'width':'120px'}" field="CourseName" header="Course Name"></p-column>
+                    <p-column [style]="{'width':'120px'}" field="CourseDescription" header="Course Description" styleClass="colLX-icon"> </p-column>
+                    <p-column [style]="{'width':'120px'}" field="CourseMasterName" header="Course MasterName" styleClass="colLX-icon"> </p-column>
+                    
+                    <p-column [style]="{'width':'80px'}" field="UpdatedBy" header="Updated By" [sortable]="true"></p-column>
+                    <p-column [style]="{'width':'100px'}" field="UpdatedOn" header="Updated On" [sortable]="true"></p-column>
+                    <p-column [style]="{'width':'100px'}" header="Edit">
+                      <ng-template let-data="rowData" pTemplate="body" let-ri="rowIndex">
+                        <div class="col-md-12" style="margin-left: -30px;">
+                          <div class="col-md-6" style="width:100px">
+                            <button type="button" class="btn btn-primary btnedit" (click)="EditCourse(data)">Edit</button>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </p-column>
+                  </p-dataTable> 
+                </div>
+              </ng-template> -->
+              <p-column [style]="{'width':'110px'}" field="MenuName" header="Screen Code" [sortable]="true"></p-column>
+              <p-column [style]="{'width':'100px'}" field="MenuDescription" header="Screen Description" [sortable]="true"></p-column>
+              
+              <p-column [style]="{'width':'100px'}" header="Edit">
+                <ng-template let-data="rowData" pTemplate="body" let-ri="rowIndex">
+                  <div class="col-md-12" style="margin-left: -30px;">
+                    <div class="col-md-6" style="width:100px">
+                      <button type="button" class="btn btn-primary btnedit" (click)="EditScreenMaster(data)">Edit</button>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-column>
+            </p-dataTable>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Grid End -->
+  </div>
+</div>
+<admin-footer></admin-footer>
+
+<div class="phone-number-modal" *ngIf="isShowModal == 2" @dialog>
+  <form [formGroup]="frmScreenMaster" (submit)="CreateScreenMaster(formScreenMaster.value,formScreenMaster.valid)">
+    <div class="modal-container" style="height: 200px !important;">
+      <div class="modal-header" style="background: #797b85;">
+        <h5>{{actiontype}}</h5>
+        <i class="material-icons" (click)="closeForm()">close</i>
+      </div>
+      <div class="clearfix"></div>
+      <div class="modal-body" style="height: 50px;">
+        <div class="col-md-12">
+          <div class="clearfix"></div>
+          <div class="margin-top-15 col-md-12">
+            <div>
+              <div class="label" style="color: #fff;">Screen Code</div>
+              <div class="clearfix"></div>
+              <input type="text" class="form-control" (keypress)="restrictSpace($event)" formControlName="MenuName" required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(formScreenMaster.get('MenuName'))" [errMsg]="'Please enter Screen code' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="margin-top-15 col-md-12">
+            <div>
+              <div class="label" style="color: #fff;">Screen Description</div>
+              <div class="clearfix"></div>
+              <input type="text" class="form-control" formControlName="MenuDescription" (keypress)="restrictSpace($event)" required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(formScreenMaster.get('MenuDescription'))" [errMsg]="'Please enter screen description' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="modal-footer">
+            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
+              <button type="submit" [disabled]="!formScreenMaster.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
+              <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="margin-top-10"></div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="clearfix"></div>
+<div class="confirm-modal-overay" *ngIf="isShowModal == 2 || isShowModal == 3" (click)="closeForm()"></div>

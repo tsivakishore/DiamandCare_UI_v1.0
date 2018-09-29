@@ -149,6 +149,10 @@ export class API {
   public static REGISTERUSERSBYINSTITUTION = 'userbyinstitution/registeruserbyinstitution';
   public static GENERATEOTP = 'studentmapping/UpdateUserOTP';
   public static VERIFYOTP = 'studentmapping/VerifyOTP';
+
+  //Display Screens
+  public static GETSCREENMASTERDETAILS = 'displayscreens/GetScreenMasterDetails';
+  public static CREATESCREENMASTER = 'displayscreens/CreateScreenMaster';
   
   // EXTERNAL API CALLERS
 
