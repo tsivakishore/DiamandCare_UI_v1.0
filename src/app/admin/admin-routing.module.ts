@@ -33,6 +33,9 @@ import { CoursemasterComponent } from './coursemaster/coursemaster.component';
 import { StudentmappingComponent } from './studentmapping/studentmapping.component';
 import { RegisterbyinstitutionComponent } from './registerbyinstitution/registerbyinstitution.component';
 import { UsersbyinstitutionComponent } from './usersbyinstitution/usersbyinstitution.component';
+import { StudentmappingdetailsComponent } from './studentmappingdetails/studentmappingdetails.component';
+import { AdminreportsComponent } from './adminreports/adminreports.component';
+import { UserwithdrawsComponent } from './userwithdraws/userwithdraws.component';
 
 const routes: Routes = [
   {
@@ -188,6 +191,21 @@ const routes: Routes = [
   {
     path: RouteConstants.USERSBYINSTITUTION,
     component: UsersbyinstitutionComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.STUDENTMAPPINGDETAILS,
+    component: StudentmappingdetailsComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.ADMINREPORTS,
+    component: AdminreportsComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.USERWITHDRAWS,
+    component: UserwithdrawsComponent,
     canActivate: [AuthGaurd]
   }
 ];
