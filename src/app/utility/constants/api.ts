@@ -157,7 +157,9 @@ export class API {
   public static GETSCREENMASTERDETAILS = 'displayscreens/GetScreenMasterDetails';
   public static CREATESCREENMASTER = 'displayscreens/CreateScreenMaster';
   public static GETROLEMENUDETAILSBYSCREENID = 'displayscreens/GetRoleMenuDetailsByScreenID';
-  
+  public static CREATEROLEMENU = 'displayscreens/CreateRoleMenu';
+  public static DELETEROLEMENU = 'displayscreens/DeleteRoleMenu';
+
   public static GETFEEMASTERSBYUSERID = 'studentmapping/GetFeeMastersByUserID';
   public static STUDENTMAPPING = 'studentmapping/InsertStudentMapping';
   public static STUDENTMAPPINGDETAILS = 'studentmapping/GetStudentMappingDetails';

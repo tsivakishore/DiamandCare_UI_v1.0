@@ -32,6 +32,14 @@ export class DisplayScreensService {
       });
   }
 
+  _deleteRoleMenuMap(postData) {
+    return this.httpService
+      .get(API.DELETEROLEMENU + '?ID=' + postData)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
   private extractData(res: Response, show?: boolean) {
     let data = res.json();
     let msg = data.message;
