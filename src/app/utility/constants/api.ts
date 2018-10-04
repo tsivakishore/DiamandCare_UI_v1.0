@@ -156,6 +156,7 @@ export class API {
   //Display Screens
   public static GETSCREENMASTERDETAILS = 'displayscreens/GetScreenMasterDetails';
   public static CREATESCREENMASTER = 'displayscreens/CreateScreenMaster';
+  public static GETROLEMENUDETAILSBYSCREENID = 'displayscreens/GetRoleMenuDetailsByScreenID';
   
   public static GETFEEMASTERSBYUSERID = 'studentmapping/GetFeeMastersByUserID';
   public static STUDENTMAPPING = 'studentmapping/InsertStudentMapping';

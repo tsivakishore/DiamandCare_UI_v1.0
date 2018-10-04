@@ -16,12 +16,12 @@
               </p-header>
               <p-column [style]="{'width':'40px'}" expander="false" styleClass="col-icon" field="MenuID" header="ID" [sortable]="true">
               </p-column>
-              <!-- <ng-template let-data="rowData" pTemplate="rowexpansion">
+              <ng-template let-data="rowData" pTemplate="rowexpansion">
                 <div class="divinnergrid">
-                   <p-dataTable [value]="lstCourse" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+                   <p-dataTable [value]="lstRoleMenus" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
                     <p-header [style]="{'width': '100%'}">
                       <div class="divstyles">
-                        <button type="button" class="btn btn-primary btnstyles" (click)="ViewCourseModel()">Add Course</button>
+                        <button type="button" class="btn btn-primary btnstyles" (click)="ViewScreenRoleModel()">Add Role to Screen</button>
                       </div>
                     </p-header>
                     <p-column [style]="{'width':'120px'}" field="CourseName" header="Course Name"></p-column>
@@ -41,7 +41,7 @@
                     </p-column>
                   </p-dataTable> 
                 </div>
-              </ng-template> -->
+              </ng-template>
               <p-column [style]="{'width':'110px'}" field="MenuName" header="Screen Code" [sortable]="true"></p-column>
               <p-column [style]="{'width':'100px'}" field="MenuDescription" header="Screen Description" [sortable]="true"></p-column>
               

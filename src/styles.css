@@ -308,3 +308,59 @@ p-dropdown{
   }
 
 }
+
+.node {
+  font: 10px sans-serif;
+}
+
+.node circle {
+  fill: #999;
+}
+
+.node text {
+  font: 10px sans-serif;
+  fill:  #f5f5f5;
+}
+
+/* .node tooltip {
+  font: 10px sans-serif;
+  fill:  #f5f5f5;
+} */
+
+.node:hover .tooltiptext {
+  visibility: visible;
+}
+
+nodediv.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 100px;
+  height: 10px;
+  padding: 8px;
+  font: 10px sans-serif;
+  background: #ffff99;
+  border: solid 1px #aaa;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.node--internal circle {
+  fill: #555;
+}
+
+/* .node--internal text {
+  text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+} */
+
+.link {
+  fill: none;
+  stroke: #555;
+  stroke-opacity: 0.4;
+  stroke-width: 1.5px;
+}
+
+.link_continuous {
+  fill: none;
+  stroke: #00c8aa;
+  stroke-width: 1.5px;
+}

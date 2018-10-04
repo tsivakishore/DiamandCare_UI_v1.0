@@ -32,9 +32,12 @@ import { DisplayScreensService } from "../../utility/shared-service/displayscree
 export class DisplayscreensComponent extends BaseComponent implements OnInit {
 
   frmScreenMaster: FormGroup;
+  fgRoleMenu: FormGroup;
   lstScreenMaster: any;
+  lstRoleMenus: any;
   isShowModal: number = 1;
   actiontype: string;
+  screenID:any;
 
   constructor(private sharedService: SharedService,
     private displayScreensService: DisplayScreensService,
@@ -56,6 +59,15 @@ export class DisplayscreensComponent extends BaseComponent implements OnInit {
       MenuID: [''],
       MenuName: ['', Validators.compose([Validators.required])],
       MenuDescription: ['', Validators.compose([Validators.required])],
+    })
+  }
+  createRoleMenuForm(){
+    this.fgRoleMenu = this.fb.group({
+      ID:[''],
+      MenuID: ['', Validators.compose([Validators.required])],
+      MenuName: [''],
+      RoleID: ['', Validators.compose([Validators.required])],
+      RoleName:['']
     })
   }
 
@@ -112,6 +124,29 @@ export class DisplayscreensComponent extends BaseComponent implements OnInit {
     }, err => {
       console.log(err);
       this.sharedService.setLoader(false);
+    })
+  }
+
+  getRoleMenusByScreenID(screenID: number) {
+    this.sharedService.setLoader(true);
+    this.lstRoleMenus = [];    
+    this.displayScreensService._getRoleMenusByScreenID(screenID).subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.lstRoleMenus = res.m_Item3;
+      }
+    }, err => {
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
+
+  ViewScreenRolesModel() {
+    this.isShowModal = 3;
+    this.actiontype = "Add Course";
+    this.createRoleMenuForm();
+    this.fgRoleMenu.patchValue({
+      //CourseMasterID: this.courseMasterID
     })
   }
 
