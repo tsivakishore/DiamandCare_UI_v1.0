@@ -10,12 +10,13 @@ import { dialog, slideUp } from "../animation";
 import { TranslateService } from "../../utility/translate/translate.service";
 import { style, transition, animate, trigger } from "@angular/animations";
 import { DisplayScreensService } from "../../utility/shared-service/displayscreens.service";
+import { RoleService } from "../../utility/shared-service/role.service";
 
 @Component({
   selector: 'app-displayscreens',
   templateUrl: './displayscreens.component.html',
   styleUrls: ['./displayscreens.component.css'],
-  providers: [DisplayScreensService],
+  providers: [DisplayScreensService, RoleService],
   animations: [
     trigger('dialog', [
       transition('void => *', [
@@ -32,12 +33,17 @@ import { DisplayScreensService } from "../../utility/shared-service/displayscree
 export class DisplayscreensComponent extends BaseComponent implements OnInit {
 
   frmScreenMaster: FormGroup;
+  fgRoleMenu: FormGroup;
   lstScreenMaster: any;
+  lstRoleMenus: any;
   isShowModal: number = 1;
   actiontype: string;
+  screenID: any;
+  lstRoles: any;
 
   constructor(private sharedService: SharedService,
     private displayScreensService: DisplayScreensService,
+    private roleService: RoleService,
     private fb: FormBuilder,
     private apiManager: APIManager,
     public toastr: ToastsManager,
@@ -58,6 +64,21 @@ export class DisplayscreensComponent extends BaseComponent implements OnInit {
       MenuDescription: ['', Validators.compose([Validators.required])],
     })
   }
+  createRoleMenuForm() {
+    this.fgRoleMenu = this.fb.group({
+      ID: [''],
+      MenuID: ['', Validators.compose([Validators.required])],
+      RoleID: ['', Validators.compose([Validators.required])]
+    })
+  }
+
+  public getAllRoles() {
+    this.roleService._getAllRoles().subscribe((res: any) => {
+      if (res.m_Item1) {
+        this.lstRoles = res.m_Item3;
+      }
+    })
+  }
 
   EditScreenMaster(rowData: any) {
     console.log(rowData);
@@ -75,6 +96,17 @@ export class DisplayscreensComponent extends BaseComponent implements OnInit {
     this.isShowModal = 2;
     this.actiontype = "Add Screen";
     this.createScreenMasterForm();
+  }
+
+  ViewScreenRoleModel(rowData) {
+    console.log(rowData);
+    this.isShowModal = 3;
+    this.actiontype = "Add Screen to Role";
+    this.createRoleMenuForm();
+    this.screenID = rowData.MenuID;
+    this.fgRoleMenu.patchValue({
+      MenuID: rowData.MenuID
+    });
   }
 
   CreateScreenMaster(formScreenMaster, isValidForm) {
@@ -100,6 +132,30 @@ export class DisplayscreensComponent extends BaseComponent implements OnInit {
     }
   }
 
+  CreateRoleMenu(data, isvalid) {
+    if (isvalid) {
+      this.apiManager.postAPI(API.CREATEROLEMENU, data).subscribe(response => {
+        if (response.m_Item1) {
+          this.isShowModal = 1;
+          this.toastr.success(response.m_Item2);
+          this.fgRoleMenu.reset();
+          this.getRoleMenusByScreenID(this.screenID);          
+        }
+        else {
+          this.toastr.error(response.m_Item2);
+          this.isShowModal = 1;
+        }
+
+      }, err => {
+        this.isShowModal = 1;
+        this.toastr.error("Oops! There has been an error while mapping. Please try again.");
+      });
+    }
+    else {
+      this.toastr.error("Form is not valid");
+    }
+  }
+
   public getScreenMaster() {
     this.sharedService.setLoader(true);
     this.displayScreensService._getScreenMasterDetails().subscribe((res: any) => {
@@ -112,6 +168,45 @@ export class DisplayscreensComponent extends BaseComponent implements OnInit {
       this.sharedService.setLoader(false);
     })
   }
+
+  getRoleMenusByScreenID(screenID: number) {
+    //console.log(screenID);
+    this.sharedService.setLoader(true);
+    this.lstRoleMenus = [];
+    this.displayScreensService._getRoleMenusByScreenID(screenID).subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.lstRoleMenus = res.m_Item3;
+      }
+    }, err => {
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
+
+  deleteMap(data){
+    console.log(data);
+    this.screenID=data.MenuID;
+    this.sharedService.setLoader(true);    
+    this.displayScreensService._deleteRoleMenuMap(data.ID).subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.getRoleMenusByScreenID(this.screenID);
+      }
+    }, err => {
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
+
+  // ViewScreenRolesModel() {
+  //   this.isShowModal = 3;
+  //   this.actiontype = "Add To Role";
+  //   this.createRoleMenuForm();
+  //   this.fgRoleMenu.patchValue({
+  //     //CourseMasterID: this.courseMasterID
+  //   })
+  // }
 
   restrictSpace(e) {
     //restrict Space

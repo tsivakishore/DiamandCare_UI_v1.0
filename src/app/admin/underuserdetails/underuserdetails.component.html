@@ -1,13 +1,9 @@
 <!-- <app-treeview [lstTreeData]="lstTreeData"></app-treeview> -->
-<div style="overflow:auto !important">
+<!-- <div style="overflow:auto !important">
     <p-organizationChart [value]="lstTreeData" selectionMode="single" [(selection)]="selectedNode" (onNodeSelect)="onNodeSelect($event)"
         styleClass="company">
         <ng-template let-node pTemplate="person">
-            <div class="node-header ui-corner-top">{{node.label}}</div>
-            <!-- <div class="node-content">
-            <img src="assets/showcase/images/demo/organization/{node.data.avatar}" width="32">
-            <div>{node.data.name}</div>
-        </div> -->
+            <div class="node-header ui-corner-top">{{node.label}}</div>           
         </ng-template>
         <ng-template let-node pTemplate="department">
             {{node.label}}
@@ -19,18 +15,16 @@
     <p-organizationChart [value]="lstTreeChildData" selectionMode="single" [(selection)]="selectedNode" (onNodeSelect)="onNodeChildSelect($event)"
         styleClass="company">
         <ng-template let-node pTemplate="person">
-            <div class="node-header ui-corner-top">{{node.label}}</div>
-            <!-- <div class="node-content">
-            <img src="assets/showcase/images/demo/organization/{node.data.avatar}" width="32">
-            <div>{node.data.name}</div>
-        </div> -->
+            <div class="node-header ui-corner-top">{{node.label}}</div>          
         </ng-template>
         <ng-template let-node pTemplate="department">
             {{node.label}}
         </ng-template>
     </p-organizationChart>
-</div>
+</div> -->
 
+<svg width="1200" height="1300"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
 
-
+<app-treeview [userIDInt]="userIDInt"></app-treeview>
 <admin-footer></admin-footer>
