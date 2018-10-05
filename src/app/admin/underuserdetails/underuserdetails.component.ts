@@ -39,7 +39,6 @@ export class UnderuserdetailsComponent extends BaseComponent implements OnInit {
     this.UserDetails = this.sharedService.getUser();
     this.userID = this.UserDetails.UserID;
     this.getTreeViewData(this.userID);
-
   }
 
   public getTreeViewData(userID: number) {
@@ -50,7 +49,7 @@ export class UnderuserdetailsComponent extends BaseComponent implements OnInit {
         this.lstTreeData = res.m_Item3;
         //this.generateTree(this.lstTreeData); 
         this.generateTree();
-        console.log(this.lstTreeData);
+        //console.log(this.lstTreeData);
       }
       else {
         this.lstTreeData = [];
@@ -65,12 +64,15 @@ export class UnderuserdetailsComponent extends BaseComponent implements OnInit {
 
 
   generateTree() {
-
+    var me = this;
     var svg = d3.select("svg"),
       width = +svg.attr("width"),
       height = +svg.attr("height"),
       g = svg.append("g").attr("transform", "translate(" + (width / 2 + 40) + "," + (height / 2 + 90) + ")");
 
+    var tooltip = d3.select("body")
+      .append("div")
+      .attr("class", "my-tooltip")//add the tooltip class
 
     var tree = d3.tree()
       .size([2 * Math.PI, 500])
@@ -94,18 +96,20 @@ export class UnderuserdetailsComponent extends BaseComponent implements OnInit {
       .attr("class", function (d) { return "node" + (d.children ? " node--internal" : " node--leaf"); })
       .attr("transform", function (d) { return "translate(" + radialPoint(d.x, d.y) + ")"; })
       .on("click", click)														//added mouseover function
-      .on("mouseover", function (d) {
-        var g = d3.select(this); // The node
-        // The class is used to remove the additional text later
-        var info = g.append('text')
-          .classed('info', true)
-          .attr('x', 20)
-          .attr('y', 10)
-          .text('More info');
+      .on('mouseover', function (d) {
+        tooltip.style("visibility", "visible")
+          //.text(d.data.name)
+          .html(d.data.name + "<br/>" + d.data.name)
+      })
+      .on("mousemove", function () {
+        return tooltip
+          // .style("top", (d3.event.pageY - 40) + "px")
+          // .style("left", (d3.event.pageX - 130) + "px");
+          .style("left", (d3.event.pageX) + "px")
+          .style("top", (d3.event.pageY) + "px");
       })
       .on("mouseout", function () {
-        // Remove the info text on mouse out.
-        d3.select(this).select('text.info').remove()
+        return tooltip.style("visibility", "hidden");
       });
 
     node.append("circle")
@@ -131,12 +135,18 @@ export class UnderuserdetailsComponent extends BaseComponent implements OnInit {
     }
     // Toggle children on click.
     function click(d) {
-      this.userIDInt = d.data.UserID;
+      //this.userIDInt = d.data.UserID;
       //this.getChildTreeViewData();
-      console.log(this.userIDInt);
-      this.flag = true;
+      //console.log(this.userIDInt);
+
+      me.loadchild(d.data.UserID);
     }
   }
+  public loadchild(id: number): void {
+    this.userIDInt = id;
+    this.flag = true;
+  }
+
 
   public getChildTreeViewData() {
     console.log(this.userIDInt);
