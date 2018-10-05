@@ -129,7 +129,7 @@
               <div>
                 <div class="label" style="color: #fff;">Transfer To</div>
                 <div class="clearfix"></div>
-                <input type="text" class="form-control" formControlName="TransferTo" (change)="onChangeUsernameByDCIDorName(frmTransferFunds.value.TransferTo,'Transfer')"
+                <input type="text" class="form-control" formControlName="TransferTo" (change)="onChangeUsernameByDCIDorName(frmTransferFunds.value.TransferTo)"
                   required />
                 <div class="input-validation-msg">
                   <validation *ngIf="isRequiredField(frmTransferFunds.get('TransferTo'))" [errMsg]="'Please enter transfer username or DCID' | translate"></validation>
@@ -203,29 +203,6 @@
             <div class="clearfix"></div>
             <div class="margin-top-15 col-md-12">
               <div>
-                <div class="label" style="color: #fff;">Withdraw To</div>
-                <div class="clearfix"></div>
-                <input type="text" class="form-control" formControlName="WithdrawTo" (change)="onChangeUsernameByDCIDorName(frmWithdrawFunds.value.WithdrawTo, 'Withdraw')"
-                  required />
-                <div class="input-validation-msg">
-                  <validation *ngIf="isRequiredField(frmWithdrawFunds.get('WithdrawTo'))" [errMsg]="'Please enter transfer username or DCID' | translate"></validation>
-                </div>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="margin-top-15 col-md-12">
-              <div>
-                <div class="label" style="color: #fff;">Withdrawee Name</div>
-                <div class="clearfix"></div>
-                <input type="text" class="form-control" formControlName="WithdraweeName" readonly />
-                <div class="input-validation-msg">
-
-                </div>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="margin-top-15 col-md-12">
-              <div>
                 <div class="label" style="color: #fff;">Withdraw Amount</div>
                 <div class="clearfix"></div>
                 <input type="text" class="form-control" formControlName="WithdrawAmount" (change)="onChangeWithdrawAmount($event.target.value)"
@@ -273,18 +250,12 @@
     <div class="col-md-12">
       <div style="overflow: auto;">
         <p-dataTable [value]="WalletWithdrawals" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
-          <p-column field="UserID" header="UserID" [sortable]="true"></p-column>
+          <p-column field="UserName" header="UserName" [sortable]="true"></p-column>
           <p-column field="WithdrawAmount" header="Withdraw Amount" [sortable]="true"></p-column>
           <p-column field="TransferBy" header="Transfer By" [sortable]="true"></p-column>
           <p-column field="TransferOn" header="Transfer Date" [sortable]="true"></p-column>
-          <p-column field="TransferStatusID" header="Transfer Status ID" [sortable]="true">
-            <p-column field="Purpose" header="Purpose" [sortable]="true">
-              <ng-template let-WalletWithdrawals="rowData" pTemplate="body" let-ri="rowIndex">
-                <div class="col-md-12" style="margin-left: -15px;">
-                  {{getFormattedDate(WalletWithdrawals.UpdatedOn)}}
-                </div>
-              </ng-template>
-            </p-column>
+          <p-column field="TransferStatusID" header="Transfer Status ID" [sortable]="true"></p-column>
+            <p-column field="Purpose" header="Purpose" [sortable]="true"></p-column>
         </p-dataTable>
       </div>
     </div>

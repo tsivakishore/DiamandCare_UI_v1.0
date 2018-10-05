@@ -64,6 +64,7 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
     this.walletBalance = this.sharedService.getWalletBalance();
     this.walletHoldBalance = this.sharedService.getWalletHoldBalance();
     this.getWalletTransactions();
+    this.getWithdrawalTransactions();
     this.getFundsRequestByOthersDetails();
     this.getFundRequestStatus();
   }
@@ -82,7 +83,7 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
 
   public getWithdrawalTransactions() {
     this.sharedService.setLoader(true);
-    this.walletServ._getWalletTransactions().subscribe((res: any) => {
+    this.walletServ._getWithdrawalTransactions().subscribe((res: any) => {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.WalletWithdrawals = res.m_Item3;
@@ -115,12 +116,8 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
   createWithdrawFundsForm() {
     this.frmWithdrawFunds = this.fb.group({
       AvlBalance: this.walletBalance,
-      WithdrawTo: ['', Validators.compose([Validators.required])],
-      RequestToUserID: new FormControl(''),
-      WithdraweeName: new FormControl(''),
       WithdrawAmount: ['', Validators.compose([Validators.required, Validators.min(1.00), Validators.max(this.walletBalance), Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
       Purpose: new FormControl(''),
-      UserID: new FormControl('')
     })
   }
 
@@ -228,43 +225,26 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
     })
   }
 
-  public onChangeUsernameByDCIDorName(DCIDorName, name) {
+  public onChangeUsernameByDCIDorName(DCIDorName) {
     this.sharedService.setLoader(true);
     if (DCIDorName != "") {
       this.userService._getUserDetailsByDCIDorName(DCIDorName).subscribe((res: any) => {
         this.sharedService.setLoader(false);
         if (res.m_Item1) {
           this.ToUserDetails = res.m_Item3;
-          if (name == 'Transfer') {
+          
             this.frmTransferFunds.patchValue({
               TransferFrom: this.UserDetails.UserName,
               TransferTo: this.ToUserDetails.UserName,
               RequestToUserID: this.ToUserDetails.UserID,
               TransferToName: this.ToUserDetails.FirstName + ' ' + this.ToUserDetails.LastName
             })
-          }
-          if (name == 'Withdraw') {
-            this.frmWithdrawFunds.patchValue({
-              UserID: this.ToUserDetails.UserID,
-              WithdrawTo: this.ToUserDetails.UserName,
-              WithdraweeName: this.ToUserDetails.FirstName + ' ' + this.ToUserDetails.LastName
-            })
-          }
-
         }
         else {
-          if (name == 'Transfer') {
             this.frmTransferFunds.patchValue({
               TransferTo: '',
               TransferToName: ''
             })
-          }
-          if (name == 'Withdraw') {
-            this.frmWithdrawFunds.patchValue({
-              WithdrawTo: '',
-              WithdraweeName: ''
-            })
-          }
           this.toastr.error("Please provide valid user name or DCID");
         }
       }, err => {
@@ -272,18 +252,10 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
       })
     }
     else {
-      if (name == 'Transfer') {
         this.frmTransferFunds.patchValue({
           TransferTo: '',
           TransferToName: ''
         })
-      }
-      if (name == 'Withdraw') {
-        this.frmWithdrawFunds.patchValue({
-          WithdrawTo: '',
-          WithdraweeName: ''
-        })
-      }
     }
   }
 
@@ -332,7 +304,7 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
           this.isShowModal = 1;
           this.toastr.success(response.m_Item2);
           this.frmWithdrawFunds.reset();
-          //this.getWalletTransactions();
+          this.getWithdrawalTransactions();
           //this.getWalletBalance();
         }
         else {

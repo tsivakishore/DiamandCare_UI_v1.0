@@ -118,6 +118,9 @@ export class API {
   public static DELETEWALLETEXPENSES = 'wallet/DeleteWalletExpenses';
   public static GETWALLETTRANSACTIONS = 'wallet/GetWalletTransactions';
   public static GETWITHDRAWALTRANSACTIONS = 'wallet/GetWithdrawalTransactions';
+  public static GETPENDINGWITHDRAWALTRANSACTIONS = 'wallet/GetPendingWithdrawalTransactions';
+  public static GETREJECTEDWITHDRAWALTRANSACTIONS = 'wallet/GetRejectedWithdrawalTransactions';
+  public static GETAPPROVEDWITHDRAWALTRANSACTIONS = 'wallet/GetApprovedWithdrawalTransactions';
   public static GETFRANCHISEREQUESTSTATUS = 'Shared/GetFranchiseRequestStaus';
   public static SAVEFRANCHISEREQUEST = 'franchisedetails/SaveFranchiseRequest';
   public static APPROVEFRANCHISEREQUEST = 'franchisedetails/ApproveFranchiseRequest';
