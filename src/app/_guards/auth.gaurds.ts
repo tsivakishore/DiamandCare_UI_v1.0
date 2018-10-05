@@ -23,6 +23,11 @@ export class AuthGaurd implements CanActivate {
       }
     } else if (rawUrl !== '/' + RouteConstants.LOGIN &&
       rawUrl !== '/' + RouteConstants.REGISTERATION &&
+      rawUrl !== '/' + RouteConstants.INSTITUTIONSGALLERY &&
+      rawUrl !== '/' + RouteConstants.CONTACTUS &&
+      rawUrl !== '/' + RouteConstants.EMPLOYEESGALLERY &&
+      rawUrl !== '/' + RouteConstants.HOME &&
+      rawUrl !== '/' + RouteConstants.LOANS &&
       rawUrl !== '/' ) {
       this.router.navigate(['/' + RouteConstants.LOGIN]);
       activateRoute = false;

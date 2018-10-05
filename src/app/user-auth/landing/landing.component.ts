@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { RouteConstants } from "../../utility/constants/routes";
 import { slideUp } from "../../admin/animation";
-
+declare var particlesJS: any;
 import { APIManager } from "../../utility/shared-service/apimanager.service";
 import { BaseComponent } from "../../utility/base-component/base.component";
 import { ToastsManager } from "ng2-toastr";
@@ -17,7 +17,6 @@ import { LoanEarnsService } from "../../utility/shared-service/loanEarns.service
 })
 export class LandingComponent extends BaseComponent implements OnInit, OnDestroy {
 
-  // countdown timer variables
   landingTitle2 = ' Digital India Awareness Monitoring Analysis for National Development';
   lstLoanEarns: any;
 
@@ -32,35 +31,16 @@ export class LandingComponent extends BaseComponent implements OnInit, OnDestroy
   }
 
   ngOnInit() {
-    // particlesJS.load('landing-particles-js', 'assets/js/particles.json', function () { });
-    // let param1 = this.route.snapshot.queryParams["ref"];
-    // if (param1 && param1.length <= 8 && param1.length >= 8) {
-    //   this.sharedService.setRefer(param1);
-    // } else {
-    //   this.sharedService.setRefer('');
-    // }
-    this.getLoanEarns();
+    particlesJS.load('landing-particles-js', 'assets/js/particles.json', function () { });
+    this.viewHomeForm();
   }
 
   ngOnDestroy() {
 
   }
 
-  public getLoanEarns() {
-    this.sharedService.setLoader(true);
-    this.leService._getLoanEarns().subscribe((res: any) => {
-      this.sharedService.setLoader(false);
-      if (res.m_Item1) {
-        this.lstLoanEarns = res.m_Item3;
-      }
-    }, err => {
-      console.log(err);
-      this.sharedService.setLoader(false);
-    })
-  }
-
-  get loanEarnsLength() {
-    return this.lstLoanEarns ? this.lstLoanEarns.length : 0
+  viewHomeForm() {
+    this.router.navigate(["/" + RouteConstants.HOME]);
   }
 
   viewRegisterForm() {

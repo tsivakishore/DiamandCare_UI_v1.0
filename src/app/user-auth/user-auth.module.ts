@@ -8,11 +8,17 @@ import { LoginComponent } from "./login/login.component";
 import { ToastModule } from "ng2-toastr";
 import { RegisterComponent } from './register/register.component';
 import { FooterComponent } from './footer/footer.component';
-import { DataTableModule, ChartModule, DialogModule, DropdownModule, TooltipModule } from 'primeng/primeng';
+import { HeaderComponent } from './header/header.component';
+import { DataTableModule, ChartModule, DialogModule, DropdownModule, TooltipModule, TabMenuModule, BreadcrumbModule } from 'primeng/primeng';
 import { LandingComponent } from './landing/landing.component';
 import { CompleteIcoComponent } from './complete-ico/complete-ico.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HomeComponent } from './home/home.component';
+import { ContactusComponent } from './contactus/contactus.component';
+import { SphotogalleryComponent } from './sphotogallery/sphotogallery.component';
+import { EphotogalleryComponent } from './ephotogallery/ephotogallery.component';
+import { LoansflowComponent } from './loansflow/loansflow.component';
 
 @NgModule({
   imports: [
@@ -28,16 +34,25 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     ReactiveFormsModule,
     ToastModule.forRoot(),
     UserAuthRoutingModule,
+    TabMenuModule,
+    BreadcrumbModule
   ],
   declarations: [
     LoginComponent,
     RegisterComponent,
+    HomeComponent,
     FooterComponent,
+    HeaderComponent,
     LandingComponent,
     CompleteIcoComponent,
+    ContactusComponent,
+    SphotogalleryComponent,
+    EphotogalleryComponent,
+    LoansflowComponent,
     ImageUploadComponent],
   providers: [UserAuthService],
   exports: [
+    LandingComponent,
     LoginComponent,
     RegisterComponent]
 })

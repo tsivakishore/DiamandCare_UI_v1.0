@@ -4781,6 +4781,7 @@ padding: 17px 20px 20px 20px; }
 .masterscreen-container,
 .upgradefranchisescreen-container,
 .coursemaster-container,
+/* .home-container, */
 .feemaster-container,
 .usersbyinstitution-container,
 .studentmapping-container,
@@ -5384,7 +5385,7 @@ padding: 17px 20px 20px 20px; }
       color: #00c8aa; }
 
 .login-section-landing {
-  position: relative;
+  /* position: relative; */
   margin-top: 0px;
   padding-right: 13px; }
   .login-section-landing .right-section {

@@ -34,6 +34,37 @@ export class WalletService {
                 return Observable.throw(new Error(error.status));
             });
     }
+
+    _getWithdrawalTransactions() {
+        return this.httpService
+            .get(API.GETWITHDRAWALTRANSACTIONS)
+            .map(res => this.extractData(res, true)).catch((error: any) => {
+                return Observable.throw(new Error(error.status));
+            });
+    }
+    _getPendingWithdrawalTransactions() {
+        return this.httpService
+            .get(API.GETPENDINGWITHDRAWALTRANSACTIONS)
+            .map(res => this.extractData(res, true)).catch((error: any) => {
+                return Observable.throw(new Error(error.status));
+            });
+    }
+    _getRejectedWithdrawalTransactions() {
+        return this.httpService
+            .get(API.GETREJECTEDWITHDRAWALTRANSACTIONS)
+            .map(res => this.extractData(res, true)).catch((error: any) => {
+                return Observable.throw(new Error(error.status));
+            });
+    }
+
+    _getApprovedWithdrawalTransactions() {
+        return this.httpService
+            .get(API.GETAPPROVEDWITHDRAWALTRANSACTIONS)
+            .map(res => this.extractData(res, true)).catch((error: any) => {
+                return Observable.throw(new Error(error.status));
+            });
+    }
+
     _getFundrequest() {
         return this.httpService
             .get(API.GETFUNDREQUEST)
