@@ -296,6 +296,23 @@ p-dropdown{
   color:#d6d6d6!important;
 }
 
+.ui-tabmenu .ui-tabmenu-nav > li {
+  background: #00cdad !important;
+}
+
+/* .ui-tabmenu .ui-tabmenu-nav {
+  background: #343a43 !important;
+} */
+
+.ui-widget-header {
+  text-align: left;
+}
+
+.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active {
+  background-color: #007ad9 !important;
+  border: 1px solid #007ad9 !important;
+}
+
 @media only screen and (max-width: 767px) and (min-width: 320px){
   .ui-calendar.ui-calendar-w-btn input {
     width: 300px !important;

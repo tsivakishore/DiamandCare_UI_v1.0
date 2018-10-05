@@ -1,6 +1,11 @@
 export class RouteConstants {
   public static LOGIN = 'login';
   public static REGISTERATION = 'register';
+  public static HOME = 'home';
+  public static CONTACTUS = 'contactus';
+  public static INSTITUTIONSGALLERY = 'sphotogallery';
+  public static EMPLOYEESGALLERY = 'ephotogallery';
+  public static LOANS = 'loansflow';
   public static DASHBOARD = 'dashboard';
   public static SECRETKEY = 'secretkey';
   public static MASTERSCREEN = 'masterscreen';

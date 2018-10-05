@@ -90,9 +90,7 @@ export class StudentmappingdetailsComponent extends BaseComponent implements OnI
       PhoneNumber: selectedRow.PhoneNumber,
       LoanOTP: this.getOTP(100000, 999999)
     })
-    debugger;
     this.apiManager.postAPI(API.GENERATELOANOTP, this.oTPForm.value).subscribe(response => {
-      debugger;
       if (response.m_Item1) {
         this.createOTPForm();
         this.isShowModal = 2;

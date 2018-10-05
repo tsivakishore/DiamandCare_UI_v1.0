@@ -34,7 +34,7 @@ export class FooterComponent implements OnInit {
   }
 
   home(){
-    this.router.navigate(["/"]);
+    this.router.navigate(["/home"]);
   }
 
   showtermDialog() {

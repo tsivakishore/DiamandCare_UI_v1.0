@@ -106,7 +106,6 @@ export class AddroletouserComponent extends BaseComponent implements OnInit {
   }
 
   UpdateRole(value, valid) {
-    debugger;
     if (valid) {
       //this.fgRoles.value.RoleID = value.RoleID.RoleID;
       this.apiManager.postAPI(API.UPDATEUSERROLE, { Id: this.fgRoles.value.Id, Roles: this.fgRoles.value.RoleID }).subscribe(response => {

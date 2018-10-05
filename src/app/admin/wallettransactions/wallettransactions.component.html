@@ -1,9 +1,17 @@
 <div class="transaction-history-container" @slideUp>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-      <h3 class="col-md-6 col-sm-6 col-xs-6" style="color: #00c8aa;margin-top: 15px;">All Fund Requests</h3>
-      <button type="button" class="btn btn-primary" (click)="OpenWithdrawFundsPopup()">Withdraw Funds</button>
-      <button type="button" class="btn btn-primary btntransfer" (click)="OpenFundsTransferPopup()">Transfer Funds</button>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <h3 class="col-md-6 col-sm-12 col-xs-12" style="color: #00c8aa;margin-top: 15px;font-size: large;">All Fund Requests</h3>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <div class="col-md-3 col-sm-3 col-xs-3">
+          <button type="button" class="btn btn-primary btnwithdraw" (click)="OpenWithdrawFundsPopup()">Withdraw Funds</button>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-3">
+          <button type="button" class="btn btn-primary btntransfer" (click)="OpenFundsTransferPopup()">Transfer Funds</button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="clearfix"></div>
