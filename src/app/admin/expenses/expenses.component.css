@@ -5,8 +5,8 @@
 
 .btndelete{
     width: 70px !important;
-    background-color: red !important;
-    border: red !important;
+    background-color: #e85454 !important;
+    border: 0px solid #e85454 !important;
     padding: 0.25em 1em 0.25em 1em;
     border-radius: 15px;
 }

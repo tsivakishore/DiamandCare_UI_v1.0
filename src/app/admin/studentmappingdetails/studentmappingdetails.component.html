@@ -15,22 +15,23 @@
               </p-header>
               <p-column [style]="{'width':'110px'}" field="UserID" header="UserID" [hidden]="isController"></p-column>
               <p-column [style]="{'width':'110px'}" field="StudentName" header="Student Name" [sortable]="true"></p-column>
-              <p-column [style]="{'width':'70px'}" field="Gender" header="Gender" [sortable]="true"></p-column>
-              <p-column [style]="{'width':'600px'}" field="GroupID" header="Group" [sortable]="true"></p-column>
+              <p-column [style]="{'width':'60px'}" field="Gender" header="Gender" [sortable]="true"></p-column>
+              <p-column [style]="{'width':'50px'}" field="GroupID" header="Group" [sortable]="true"></p-column>
               <p-column [style]="{'width':'70px'}" field="CourseFee" header="Fees" [sortable]="true"></p-column>
+              <p-column field="PhoneNumber" [hidden]="isController"></p-column>
               <p-column [style]="{'width':'100px'}" field="ApprovalStatus" header="Approval Status" [sortable]="true"></p-column>
               <p-column [style]="{'width':'100px'}" field="TransferStatus" header="Transfer Status" [sortable]="true"></p-column>
               <p-column [style]="{'width':'80px'}" field="UpdatedBy" header="Updated By" [sortable]="true"></p-column>
-              <p-column [style]="{'width':'100px'}" field="UpdatedOn" header="Updated On" [sortable]="true"></p-column>
+              <p-column [style]="{'width':'110px'}" field="UpdatedOn" header="Updated On" [sortable]="true"></p-column>
               <p-column [style]="{'width':'100px'}" header="Apply Loan">
-                <!-- <ng-template let-data="rowData" pTemplate="body" let-ri="rowIndex">
+                <ng-template let-data="rowData" pTemplate="body" let-ri="rowIndex">
                   <div class="col-md-12" style="margin-left: -30px;">
                     <div class="col-md-6" style="width:100px">
-                      <button type="button" class="btn btn-primary btnedit" (click)="EditFeeMaster(data)" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)"
-                        [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)">Apply</button>
+                      <button type="button" class="btn btn-primary btnapply" (click)="GenerateLoanOTP(data)" [ngClass]="colorCode(data.ApprovalStatus)"
+                        [disabled]="checkLoanEligibility(data.ApprovalStatus)">Apply</button>
                     </div>
                   </div>
-                </ng-template> -->
+                </ng-template>
               </p-column>
             </p-dataTable>
           </div>
@@ -40,4 +41,44 @@
     <!-- Grid End -->
   </div>
 </div>
+
+<!-- Phone number modal -->
+<div class="phone-number-modal" *ngIf="isShowModal == 2" @dialog>
+  <form [formGroup]="oTPForm" (submit)="SubmitOTP(oTPForm.value,oTPForm.valid)">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h5>{{'One Time Password' | translate}}</h5>
+        <i class="material-icons" (click)="isShowModal = 1">close</i>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-body">
+        <div class="margin-top-10 col-md-12">
+          <div class="col-md-9 padding-right-0">
+            <input type="text" placeholder="{{'One Time Password' | translate}}" pTooltip="{{'One Time Password' | translate}}" tooltipPosition="top"
+              class="form-control" formControlName="LoanOTP" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(oTPForm.get('LoanOTP'))" [errMsg]="'Please enter One time password' | translate"></validation>
+              <validation *ngIf="isValidField(oTPForm.get('LoanOTP'))" [errMsg]="'Please enter valid One time password' | translate"></validation>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer modelfooter">
+        <div class="col-md-12">
+          <button type="submit" class="btn btn-primary btnupdate" [disabled]="!oTPForm.valid">Sumbit OTP</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+
+<div class="confirm-modal-overay" *ngIf="isShowModal == 2" (click)="closeForm()"></div>
+
 <admin-footer></admin-footer>

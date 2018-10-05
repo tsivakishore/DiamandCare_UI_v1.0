@@ -14,6 +14,7 @@ import { UserService } from "../../utility/shared-service/user.service";
 import { CommonService } from '../../utility/shared-service/common.service';
 import { CoursemasterService } from '../../utility/shared-service/coursemaster.service';
 import { CommonFunctions } from "../../utility/common-functions";
+import { API } from "../../utility/constants/api";
 
 @Component({
   selector: 'app-studentmappingdetails',
@@ -35,11 +36,12 @@ import { CommonFunctions } from "../../utility/common-functions";
 })
 
 export class StudentmappingdetailsComponent extends BaseComponent implements OnInit {
-
+  isShowModal: number = 1;
   LoginUserDetails: any;
   loginUserID: number;
   lstStudentMappingDetails: any;
-  isController= true; 
+  isController = true;
+  oTPForm: FormGroup;
 
   constructor(public fb: FormBuilder,
     private apiManager: APIManager,
@@ -58,6 +60,15 @@ export class StudentmappingdetailsComponent extends BaseComponent implements OnI
     this.getStudentMappingDetails(this.loginUserID);
   }
 
+  createOTPForm() {
+    this.oTPForm = this.fb.group({
+      UserID: [0],
+      PhoneNumber: [''],
+      LoanOTP: new FormControl('', Validators.compose([Validators.required, <any>Validators.pattern(CommonRegexp.NUMERIC_REGEXP)]))
+    })
+  }
+
+
   getStudentMappingDetails(UserID: number) {
     this.sharedService.setLoader(true);
     this.lstStudentMappingDetails = [];
@@ -65,26 +76,53 @@ export class StudentmappingdetailsComponent extends BaseComponent implements OnI
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.lstStudentMappingDetails = res.m_Item3;
+        console.log(this.lstStudentMappingDetails);
       }
     }, err => {
       this.sharedService.setLoader(false);
     })
   }
 
-  checkLoanEligibility(LoanStatus: string, Groups: number) {
-    if (LoanStatus == "NotEligible") {
+  GenerateLoanOTP(selectedRow: any) {
+    this.createOTPForm();
+    this.oTPForm.patchValue({
+      UserID: selectedRow.UserID,
+      PhoneNumber: selectedRow.PhoneNumber,
+      LoanOTP: this.getOTP(100000, 999999)
+    })
+    debugger;
+    this.apiManager.postAPI(API.GENERATELOANOTP, this.oTPForm.value).subscribe(response => {
+      debugger;
+      if (response.m_Item1) {
+        this.createOTPForm();
+        this.isShowModal = 2;
+      }
+      else {
+        this.toastr.error(response.m_Item2);
+      }
+    }, err => {
+      this.toastr.error("Oops! There has been an error from server. Please try again.");
+    })
+  }
+
+  SubmitOTP(formApplyLoan: any, isValid) {
+
+  }
+
+  checkLoanEligibility(ApprovalStatus: string, Groups: number) {
+    if (ApprovalStatus == "Approval Pending") {
       return true;
     }
-    else if (LoanStatus == "Eligible") {
+    else if (ApprovalStatus == "Approved") {
       return false;
     }
   }
 
-  colorCode(LoanStatus: string) {
-    if (LoanStatus == "NotEligible") {
+  colorCode(ApprovalStatus: string) {
+    if (ApprovalStatus == "Approval Pending") {
       return "btnnoteligible";
     }
-    else if (LoanStatus == "Eligible") {
+    else if (ApprovalStatus == "Approved") {
       return "btneligible";
     }
   }
