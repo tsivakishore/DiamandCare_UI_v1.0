@@ -41,7 +41,7 @@
       </a>
     </li>
     <li tooltipPosition="top">
-      <a [routerLink]="earnLoansUrl" routerLinkActive="active">
+      <a [routerLink]="earnLoansUrl" *ngIf="Is_Visible_EarnLoans" routerLinkActive="active">
         <i class="material-icons">money</i>
         <span>Loans</span>
       </a>

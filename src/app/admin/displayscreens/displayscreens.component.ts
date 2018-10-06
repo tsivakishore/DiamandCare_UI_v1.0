@@ -40,6 +40,7 @@ export class DisplayscreensComponent extends BaseComponent implements OnInit {
   actiontype: string;
   screenID: any;
   lstRoles: any;
+  deletingData: any;
 
   constructor(private sharedService: SharedService,
     private displayScreensService: DisplayScreensService,
@@ -55,6 +56,7 @@ export class DisplayscreensComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.getScreenMaster();
     this.createScreenMasterForm();
+    this.getAllRoles();
   }
 
   createScreenMasterForm() {
@@ -81,8 +83,7 @@ export class DisplayscreensComponent extends BaseComponent implements OnInit {
   }
 
   EditScreenMaster(rowData: any) {
-    debugger;
-    console.log(rowData);
+    //console.log(rowData);
     this.isShowModal = 2;
     this.createScreenMasterForm();
     this.actiontype = "Edit Screen";
@@ -91,7 +92,6 @@ export class DisplayscreensComponent extends BaseComponent implements OnInit {
       MenuName: rowData.MenuName,
       MenuDescription: rowData.MenuDescription
     })
-    debugger;
   }
 
   ViewScreenMasterModel() {
@@ -100,14 +100,14 @@ export class DisplayscreensComponent extends BaseComponent implements OnInit {
     this.createScreenMasterForm();
   }
 
-  ViewScreenRoleModel(rowData) {
-    console.log(rowData);
+  ViewScreenRoleModel() {
+    //console.log(rowData);
     this.isShowModal = 3;
     this.actiontype = "Add Screen to Role";
     this.createRoleMenuForm();
-    this.screenID = rowData.MenuID;
+    //this.screenID = rowData.MenuID;
     this.fgRoleMenu.patchValue({
-      MenuID: rowData.MenuID
+      MenuID: this.screenID
     });
   }
 
@@ -141,7 +141,7 @@ export class DisplayscreensComponent extends BaseComponent implements OnInit {
           this.isShowModal = 1;
           this.toastr.success(response.m_Item2);
           this.fgRoleMenu.reset();
-          this.getRoleMenusByScreenID(this.screenID);          
+          this.getRoleMenusByScreenID(this.screenID);
         }
         else {
           this.toastr.error(response.m_Item2);
@@ -174,6 +174,7 @@ export class DisplayscreensComponent extends BaseComponent implements OnInit {
   getRoleMenusByScreenID(screenID: number) {
     //console.log(screenID);
     this.sharedService.setLoader(true);
+    this.screenID = screenID;
     this.lstRoleMenus = [];
     this.displayScreensService._getRoleMenusByScreenID(screenID).subscribe((res: any) => {
       this.sharedService.setLoader(false);
@@ -186,29 +187,35 @@ export class DisplayscreensComponent extends BaseComponent implements OnInit {
     })
   }
 
-  deleteMap(data){
-    console.log(data);
-    this.screenID=data.MenuID;
-    this.sharedService.setLoader(true);    
-    this.displayScreensService._deleteRoleMenuMap(data.ID).subscribe((res: any) => {
-      this.sharedService.setLoader(false);
-      if (res.m_Item1) {
-        this.getRoleMenusByScreenID(this.screenID);
-      }
-    }, err => {
-      console.log(err);
-      this.sharedService.setLoader(false);
-    })
+  deleteMapModel(deletingData: any) {
+    this.deletingData = deletingData;
+    this.isShowModal = 4;    
   }
 
-  // ViewScreenRolesModel() {
-  //   this.isShowModal = 3;
-  //   this.actiontype = "Add To Role";
-  //   this.createRoleMenuForm();
-  //   this.fgRoleMenu.patchValue({
-  //     //CourseMasterID: this.courseMasterID
-  //   })
-  // }
+  DeleteRoleMenu(status: string) {
+    if (status == "Yes") {      
+      this.sharedService.setLoader(true);
+      this.displayScreensService._deleteRoleMenuMap(this.deletingData.ID).subscribe((res: any) => {
+        this.sharedService.setLoader(false);
+        if (res.m_Item1) {
+          this.toastr.success(res.m_Item2);
+          this.getRoleMenusByScreenID(this.screenID);
+          this.isShowModal = 1;          
+        }
+        else {
+          this.toastr.success(res.m_Item2);
+          this.isShowModal = 1;
+        }
+      }, err => {        
+        this.sharedService.setLoader(false);
+        this.toastr.success(err);
+      })
+    }
+    else if (status == "No") {
+      this.closeForm();
+    }
+    this.deletingData = null;
+  }
 
   restrictSpace(e) {
     //restrict Space
