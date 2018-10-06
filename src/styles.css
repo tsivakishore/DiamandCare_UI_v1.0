@@ -296,6 +296,23 @@ p-dropdown{
   color:#d6d6d6!important;
 }
 
+.ui-tabmenu .ui-tabmenu-nav > li {
+  background: #00cdad !important;
+}
+
+/* .ui-tabmenu .ui-tabmenu-nav {
+  background: #343a43 !important;
+} */
+
+.ui-widget-header {
+  text-align: left;
+}
+
+.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active {
+  background-color: #007ad9 !important;
+  border: 1px solid #007ad9 !important;
+}
+
 @media only screen and (max-width: 767px) and (min-width: 320px){
   .ui-calendar.ui-calendar-w-btn input {
     width: 300px !important;
@@ -327,9 +344,9 @@ p-dropdown{
   fill:  #f5f5f5;
 } */
 
-.node:hover .tooltiptext {
+/* .node:hover .tooltiptext {
   visibility: visible;
-}
+} */
 
 nodediv.tooltip {
   position: absolute;
@@ -363,4 +380,35 @@ nodediv.tooltip {
   fill: none;
   stroke: #00c8aa;
   stroke-width: 1.5px;
+}
+/*sudha code here*/
+
+.my-tooltip {
+  /* position: absolute;
+  text-align: center;
+  width: 150px;
+  height: auto;
+  padding: 10px;
+  font: 10px sans-serif;
+  background: #00c8aa;
+  border: solid 1px #aaa;
+  border-radius: 10px;
+  pointer-events: none; */
+
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  background-color: #00c8aa;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  /* -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4); */
+
+  -webkit-box-shadow: white;
+  -moz-box-shadow:white;
+  box-shadow: white;
+  pointer-events: none;
 }

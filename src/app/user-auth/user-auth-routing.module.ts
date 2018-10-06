@@ -5,7 +5,11 @@ import { RouteConstants } from "../utility/constants/routes";
 import { AuthGaurd } from "../_guards/auth.gaurds";
 import { RegisterComponent } from "./register/register.component";
 import { LandingComponent } from "./landing/landing.component";
-import { CompleteIcoComponent } from "./complete-ico/complete-ico.component";
+import { ContactusComponent } from './contactus/contactus.component';
+import { SphotogalleryComponent } from './sphotogallery/sphotogallery.component';
+import { EphotogalleryComponent } from './ephotogallery/ephotogallery.component';
+import { HomeComponent } from "./home/home.component";
+import { LoansflowComponent } from './loansflow/loansflow.component';
 
 const routes: Routes = [
   {
@@ -19,10 +23,41 @@ const routes: Routes = [
     canActivate: [AuthGaurd]
   },
   {
-    path: "",
-    component: LandingComponent,
+    path: '',
+    component: LandingComponent, children: [
+      {
+        path: RouteConstants.HOME,
+        component: HomeComponent,
+        canActivate: [AuthGaurd]
+      },
+      {
+        path: RouteConstants.CONTACTUS,
+        component: ContactusComponent,
+        canActivate: [AuthGaurd]
+      },
+      {
+        path: RouteConstants.INSTITUTIONSGALLERY,
+        component: SphotogalleryComponent,
+        canActivate: [AuthGaurd]
+      },
+      {
+        path: RouteConstants.EMPLOYEESGALLERY,
+        component: EphotogalleryComponent,
+        canActivate: [AuthGaurd]
+      },
+      {
+        path: RouteConstants.LOANS,
+        component: LoansflowComponent,
+        canActivate: [AuthGaurd]
+      }
+    ],
     canActivate: [AuthGaurd]
-  }
+  },
+  {
+    path: '**',
+    component: HomeComponent,
+    canActivate: [AuthGaurd]
+  },
 ];
 
 @NgModule({

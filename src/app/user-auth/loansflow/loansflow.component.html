@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-12 margin-top-30 logo-section-mobile">
+    <h2 class="margin-0">{{landingTitle2}}</h2>
+    <div class="clearfix"></div>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="transaction-history-container">
+      <div class="transaction-history-table box-shadow">
+
+        <div *ngIf="loanEarnsLength!=0">
+          <p-dataTable [value]="lstLoanEarns" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+            <p-column [style]="{'width':'80px'}" field="Groups" header="Groups" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'350px'}" field="PersonsDesc" header="Persons" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'120px'}" field="EPLoans" header="EPLoans" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'200px'}" field="EPLoanTypes" header="EPLoanTypes" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'150px'}" field="FeesReimbursement" header="Fee Reimbursement" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'150px'}" field="HealthBenefit" header="HealthBenefit" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'150px'}" field="RiskBenefit" header="RiskBenefit" [sortable]="true"></p-column>
+          </p-dataTable>
+        </div>
+
+        <div class="PTB70" *ngIf="loanEarnsLength==0">
+          <div class="col-md-12 text-center">
+            <h1>{{'dataLoading' | translate}}</h1>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -83,7 +83,11 @@ export class DisplayscreensComponent extends BaseComponent implements OnInit {
   }
 
   EditScreenMaster(rowData: any) {
+<<<<<<< HEAD
     //console.log(rowData);
+=======
+    console.log(rowData);
+>>>>>>> eff5f69d53b6370af1a56a7a463caeb3c8c52bea
     this.isShowModal = 2;
     this.createScreenMasterForm();
     this.actiontype = "Edit Screen";
