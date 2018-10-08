@@ -4,11 +4,12 @@
     <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">Screen Master Details</h3>
     <div class="clearfix"></div>
     <div class="row">
+      <!-- <div class="col-md-3"></div> -->
       <div class="col-md-12">
         <div class="transaction-history-container">
           <div class="transaction-history-table box-shadow">
             <p-dataTable [value]="lstScreenMaster" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
-              expandableRows="true" (onRowExpand)="getRoleMenusByScreenID($event.data.MenuID)">
+              rowExpandMode="single" expandableRows="true" (onRowExpand)="getRoleMenusByScreenID($event.data.MenuID)">
               <p-header [style]="{'width': '100%'}">
                 <div class="divstyles">
                   <button type="button" class="btn btn-primary btnstyles" (click)="ViewScreenMasterModel()">Add Screen</button>
@@ -18,29 +19,29 @@
               </p-column>
               <ng-template let-parentdata="rowData" pTemplate="rowexpansion">
                 <div class="divinnergrid">
-                   <p-dataTable [value]="lstRoleMenus" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+                  <p-dataTable [value]="lstRoleMenus" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
                     <p-header [style]="{'width': '100%'}">
                       <div class="divstyles">
-                        <button type="button" class="btn btn-primary btnstyles" (click)="ViewScreenRoleModel(parentdata)">Add Role to Screen</button>
+                        <button type="button" class="btn btn-primary btnstyles" (click)="ViewScreenRoleModel()">Add Role to Screen</button>
                       </div>
                     </p-header>
                     <p-column [style]="{'width':'120px'}" field="RoleName" header="Role" [sortable]="true"></p-column>
                     <p-column [style]="{'width':'100px'}" header="Edit">
                       <ng-template let-data="rowData" pTemplate="body" let-ri="rowIndex">
                         <div class="col-md-12" style="margin-left: -30px;">
-                          <div class="col-md-6" style="width:100px">                            
-                            <button type="button" class="btn btn-primary btnedit" (click)="deleteMap(data)">Delete</button>
+                          <div class="col-md-6" style="width:100px">
+                            <button type="button" class="btn btn-primary btndelete" (click)="deleteMapModel(data)">Delete</button>
                           </div>
                         </div>
                       </ng-template>
                     </p-column>
-                  </p-dataTable> 
+                  </p-dataTable>
                 </div>
               </ng-template>
               <p-column [style]="{'width':'110px'}" field="MenuName" header="Screen Code" [sortable]="true"></p-column>
               <p-column [style]="{'width':'100px'}" field="MenuDescription" header="Screen Description" [sortable]="true"></p-column>
-              
-              <p-column [style]="{'width':'100px'}" header="Edit">
+
+              <p-column [style]="{'width':'50px'}" header="Edit">
                 <ng-template let-data="rowData" pTemplate="body" let-ri="rowIndex">
                   <div class="col-md-12" style="margin-left: -30px;">
                     <div class="col-md-6" style="width:100px">
@@ -53,6 +54,7 @@
           </div>
         </div>
       </div>
+      <!-- <div class="col-md-3"></div> -->
     </div>
     <!-- Grid End -->
   </div>
@@ -137,7 +139,7 @@
 
             </div>
           </div>
-          
+
           <div class="clearfix"></div>
           <div class="modal-footer">
             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
@@ -154,5 +156,37 @@
   </form>
 </div>
 <div class="clearfix"></div>
+<div class="phone-number-modal popuptop" *ngIf="isShowModal == 4" @dialog>
+  <div>
+    <div class="modal-container">
+      <div class="modal-header">
+        <h5>Do you want to delete? </h5>
+        <i class="material-icons" (click)="isShowModal = 1">close</i>
+      </div>
+      <div class="clearfix"></div>
 
-<div class="confirm-modal-overay" *ngIf="isShowModal == 2 || isShowModal == 3" (click)="closeForm()"></div>
+      <div class="modal-body">
+        <div class="margin-top-10 col-md-12">
+          <div class="col-md-9 padding-right-0">
+            <div class="col-md-12 col-md-offset-3">
+              <button type="button" (click)="DeleteRoleMenu('Yes')" class="btn btn-primary btnyes">Yes</button>
+              <button type="button" (click)="DeleteRoleMenu('No')" class="btn btn-primary btnno">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer modelfooter">
+
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="confirm-modal-overay" *ngIf="isShowModal == 2 || isShowModal == 3 || isShowModal == 4" (click)="closeForm()"></div>

@@ -52,7 +52,7 @@ export class DateFormatters {
 export class AppConstant {
   public static MaxImageSize = 2097152;
   public DefaultRecordsCount = 0;
-  public DefaultPageSize = 10;
+  public DefaultPageSize = 7;
   public DefaultPageSizeArray: number[] = [5, 10, 20, 30];
   public Loading = "Loading....";
   public NoRecordsMsg = this.Loading;

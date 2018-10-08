@@ -76,6 +76,7 @@ export class StudentmappingdetailsComponent extends BaseComponent implements OnI
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.lstStudentMappingDetails = res.m_Item3;
+        //console.log(this.lstStudentMappingDetails);
       }
     }, err => {
       this.sharedService.setLoader(false);

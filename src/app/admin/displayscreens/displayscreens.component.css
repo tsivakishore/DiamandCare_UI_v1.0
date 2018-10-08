@@ -26,6 +26,13 @@
     border: 1px solid #2399e5 !important;
     color: #FFFFFF !important;
   }
+  .btndelete{
+    width: 70px !important;
+    background-color: #e85454 !important;
+    border: 0px solid #e85454 !important;
+    padding: 0.25em 1em 0.25em 1em;
+    border-radius: 15px;
+  }
   
 @media only screen and (max-width: 767px) and (min-width: 320px){
     .dropdownstyle{

@@ -29,11 +29,10 @@ export class TreeviewComponent extends BaseComponent implements OnInit {
     super(toastr, vcr);
   }
   ngOnInit() {
-    
+    // this.getChildTreeViewData(this.userIDInt);
   }
 
   ngOnChanges() {
-    console.log(this.userIDInt);
     if (!!this.userIDInt)
       this.getChildTreeViewData(this.userIDInt);
   }
@@ -56,14 +55,19 @@ export class TreeviewComponent extends BaseComponent implements OnInit {
     })
   }
 
-
-
   generateTree() {
 
-    var svg = d3.select("svg"),
-      width = +svg.attr("width"),
-      height = +svg.attr("height"),
-      g = svg.append("g").attr("transform", "translate(" + (width / 2 + 40) + "," + (height / 2 + 90) + ")");
+    var me = this
+
+    d3.select("#viz").select("svg").remove();
+    var svg = d3.select("#viz").append("svg:svg")
+      .attr("width", 1200)
+      .attr("height", 1300),
+      g = svg.append("g").attr("transform", "translate(" + (1200 / 2 + 40) + "," + (1300 / 2 + 90) + ")");
+
+    var tooltip = d3.select("body")
+      .append("div")
+      .attr("class", "my-tooltip")//add the tooltip class
 
 
     var tree = d3.tree()
@@ -72,7 +76,6 @@ export class TreeviewComponent extends BaseComponent implements OnInit {
 
     var root = tree(d3.hierarchy(this.lstChildTreeData[0]));
     //var root = tree(d3.hierarchy(jsonObj));
-
 
     var link = g.selectAll(".link")
       .data(root.links())
@@ -88,18 +91,20 @@ export class TreeviewComponent extends BaseComponent implements OnInit {
       .attr("class", function (d) { return "node" + (d.children ? " node--internal" : " node--leaf"); })
       .attr("transform", function (d) { return "translate(" + radialPoint(d.x, d.y) + ")"; })
       .on("click", click)														//added mouseover function
-      .on("mouseover", function (d) {
-        var g = d3.select(this); // The node
-        // The class is used to remove the additional text later
-        var info = g.append('text')
-          .classed('info', true)
-          .attr('x', 20)
-          .attr('y', 10)
-          .text('More info');
+      .on('mouseover', function (d) {
+
+        tooltip.style("visibility", "visible")
+          .text(d.data.name)
+      })
+      .on("mousemove", function () {
+        return tooltip
+          // .style("top", (d3.event.pageY - 40) + "px")
+          // .style("left", (d3.event.pageX - 130) + "px");
+          .style("left", (d3.event.pageX) + "px")
+          .style("top", (d3.event.pageY) + "px");
       })
       .on("mouseout", function () {
-        // Remove the info text on mouse out.
-        d3.select(this).select('text.info').remove()
+        return tooltip.style("visibility", "hidden");
       });
 
     node.append("circle")
@@ -125,7 +130,23 @@ export class TreeviewComponent extends BaseComponent implements OnInit {
     }
     // Toggle children on click.
     function click(d) {
-      //this.userIDInt = d.data.UserID;
+      me.loadchildtochild(d.data.UserID);
     }
+
+    function mouseover(d) {
+      //debugger;
+      d3.select(this).append("text")
+        .attr("class", "hover")
+        .text(d.data.name);
+    }
+
+    // Toggle children on click.
+    function mouseout(d) {
+      d3.select(this).select("text.hover").remove();
+    }
+  }
+
+  public loadchildtochild(id: number): void {
+    this.getChildTreeViewData(id);
   }
 }
