@@ -1,6 +1,81 @@
-<div class="row">
-  <div class="col-md-12 margin-top-30 logo-section-mobile">
-    <h2 class="margin-0">This is page is under construction....</h2>
-    <div class="clearfix"></div>
+<div class="contactus-container divstyle" @slideUp>
+  <div class="contactus-form">
+    <form [formGroup]="frmContactUs" (submit)="ContactUSRequest(frmContactUs.value,frmContactUs.valid)">
+      <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">Contact Us</h3>
+      <div class="clearfix"></div>
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">Request From</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" (keypress)="restrictSpace($event)" placeholder="First Name" pTooltip="First Name"
+              tooltipPosition="top" formControlName="FirstName" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmContactUs.get('FirstName'))" [errMsg]="'Please enter first name' | translate"></validation>
+              <validation *ngIf="isValidLength(frmContactUs.get('FirstName'))" [errMsg]="'Name length should be in between 3 to 25 chars' | translate"></validation>
+              <validation *ngIf="isValidField(frmContactUs.get('FirstName'))" [errMsg]="'Please enter valid name' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">LastName</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" (keypress)="restrictSpace($event)" placeholder="Last Name" pTooltip="Last Name" tooltipPosition="top"
+              formControlName="LastName" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmContactUs.get('LastName'))" [errMsg]="'Please enter last name' | translate"></validation>
+              <validation *ngIf="isValidLength(frmContactUs.get('LastName'))" [errMsg]="'Name length should be in between 1 to 25 chars' | translate"></validation>
+              <validation *ngIf="isValidField(frmContactUs.get('LastName'))" [errMsg]="'Please enter valid name' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">PhoneNumber</div>
+            <div class="clearfix"></div>
+            <input type="text" (keypress)="restrictSpace($event)" placeholder="{{'Phone Number' | translate}}" pTooltip="{{'Phone Number' | translate}}"
+              tooltipPosition="top" class="form-control" formControlName="PhoneNumber" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmContactUs.get('PhoneNumber'))" [errMsg]="'Please enter phone number' | translate"></validation>
+              <validation *ngIf="isValidField(frmContactUs.get('PhoneNumber'))" [errMsg]="'Please enter valid phonenumber' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">Email</div>
+            <div class="clearfix"></div>
+            <input type="text" (keypress)="restrictSpace($event)" placeholder="{{'Email' | translate}}" pTooltip="{{'Email' | translate}}"
+              tooltipPosition="top" class="form-control" formControlName="Email" />
+            <div class="input-validation-msg">
+              <validation *ngIf="isValidField(frmContactUs.get('Email'))" [errMsg]="'Please enter valid email' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">Comment</div>
+            <div class="clearfix"></div>
+            <textarea [rows]="5" [cols]="30" class="form-control txtarea" (keypress)="restrictSpace($event)" pInputTextarea autoResize="autoResize"
+              formControlName="Comment"></textarea>
+            <div class="input-validation-msg">
+              <validation *ngIf="isValidLength(frmContactUs.get('Comment'))" [errMsg]="'Comment length should be in between 5 to 250 chars' | translate"></validation>
+              <validation *ngIf="isValidField(frmContactUs.get('Comment'))" [errMsg]="'Please enter valid comment' | translate"></validation>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-md-12 col-sm-12 col-xs-12 margin-top-15">
+        <button type="submit" class="btn btn-primary" [disabled]="!frmContactUs.valid">Submit</button>
+      </div>
+      <div class="clearfix"></div>
+    </form>
   </div>
 </div>

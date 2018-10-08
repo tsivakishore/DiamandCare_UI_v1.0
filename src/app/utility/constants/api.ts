@@ -154,7 +154,7 @@ export class API {
   public static REGISTERUSERSBYINSTITUTION = 'userbyinstitution/registeruserbyinstitution';
   public static GENERATEOTP = 'studentmapping/UpdateUserOTP';
   public static GENERATELOANOTP = 'studentmapping/GenerateLoanOTP';
-  public static VERIFYOTP = 'studentmapping/VerifyOTP';
+  public static VERIFYSTUDENTOTP = 'studentmapping/VerifyStudentOTP';
 
   //Display Screens
   public static GETSCREENMASTERDETAILS = 'displayscreens/GetScreenMasterDetails';

@@ -326,6 +326,12 @@ p-dropdown{
 
 }
 
+@media screen  and (min-width: 320px) and (max-width: 767px) {
+  .ui-tabmenu .ui-tabmenu-top > .ui-tabmenu-nav li {
+      width: 100% !important;
+  }
+}
+
 .node {
   font: 10px sans-serif;
 }
