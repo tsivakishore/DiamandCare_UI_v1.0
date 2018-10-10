@@ -399,6 +399,8 @@ nodediv.tooltip {
   width: auto;
   height: auto;
   padding: 10px;
+  color: white;
+  font-size: 12px;
   background-color: #00c8aa;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
