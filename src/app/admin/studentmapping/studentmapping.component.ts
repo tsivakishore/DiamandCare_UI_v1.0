@@ -46,7 +46,6 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
   registerStudentMappingForm: FormGroup;
   frmVerifyOTPForm: FormGroup;
   commonFunctions = new CommonFunctions();
-  resultOTP: number;
   resultUserID: number;
   lstFeeMasters: any;
   listOfEarnLoans: any;
@@ -54,6 +53,9 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
   defaultCourseID: number;
   defaultFee: any;
   defaultGroup: any;
+  isChecked: boolean = false;
+  errorMessage: string;
+  isValidChecked: boolean = false;
 
   constructor(public fb: FormBuilder,
     private apiManager: APIManager,
@@ -82,7 +84,8 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
       LastName: [''],
       OneTimePassword: [''],
       PhoneNumber: [''],
-      Email: ['']
+      Email: [''],
+      HaveOTP: false
     })
   }
 
@@ -117,6 +120,7 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
   public onSearchChange(searchValue: string) {
     if (!!searchValue && searchValue.trim().length >= 5) {
       this.sharedService.setLoader(true);
+      this.isValidChecked = false;
       this.userService._getUserDetailsByDCIDorName(searchValue).subscribe((res: any) => {
         this.sharedService.setLoader(false);
         if (res.m_Item1) {
@@ -127,8 +131,7 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
             FirstName: this.UserDetails.FirstName,
             LastName: this.UserDetails.LastName,
             PhoneNumber: this.UserDetails.PhoneNumber,
-            Email: this.UserDetails.Email,
-            OneTimePassword: this.getOTP(100000, 999999)
+            Email: this.UserDetails.Email
           })
         }
         else {
@@ -146,11 +149,11 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
   // Generate OTP form submit method
   onGenerateOTP(formGenerateOTP, isValidForm) {
     if (isValidForm) {
+      formGenerateOTP.OneTimePassword = this.getOTP(100000, 999999);
       this.apiManager.postAPI(API.GENERATEOTP, formGenerateOTP).subscribe(response => {
         if (response.m_Item1) {
           this.createVerifyOTPForm();
           this.resultUserID = response.m_Item3.UserID
-          this.resultOTP = response.m_Item3.OneTimePassword;
           this.activeModal = 2;
           this.activeForm = 2;
         }
@@ -164,19 +167,29 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
   }
 
   // Verify OTP form submit method
-  VerifyOTP(OTP, isValidForm) {
+  VerifyStudentOTP(formVerifyOTPForm, isValidForm) {
     if (isValidForm) {
-      if (parseInt(OTP) === this.resultOTP) {
-        this.createStudentForm();
-        this.registerStudentMappingForm.controls['UserID'].setValue(this.UserDetails.UserID, { onlySelf: true });
-        this.getFeeMasters(this.loginUserID);
-        this.GetLoans();
-        this.activeModal = 3;
-        this.activeForm = 3;
-      }
-      else {
-        this.toastr.error("Your OTP is incorrect.Please enter correct OTP.");
-      }
+      debugger;
+      formVerifyOTPForm.UserID = this.resultUserID;
+      this.apiManager.postAPI(API.VERIFYSTUDENTOTP, formVerifyOTPForm).subscribe(response => {
+        if (response.m_Item1) {
+          this.createStudentForm();
+          debugger;
+          this.registerStudentMappingForm.controls['UserID'].setValue(this.UserDetails.UserID, { onlySelf: true });
+          this.getFeeMasters(this.loginUserID);
+          this.GetLoans();
+          this.activeModal = 3;
+          this.activeForm = 3;
+        }
+        else {
+          this.toastr.error(response.m_Item2);
+        }
+      }, err => {
+        this.toastr.error("Oops! There has been an error from server. Please try again.");
+      })
+    }
+    else {
+      this.toastr.error("Form is invalid");
     }
   }
 
@@ -237,6 +250,33 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
     this.defaultFee = '';
     this.defaultFee = this.lstFeeMasters.find(x => x.FeeMasterID == selectedValue).CourseFee;
     this.registerStudentMappingForm.controls['CourseFee'].setValue(this.defaultFee, { onlySelf: true })
+  }
+
+  onCheckedChange(isCheckboxClicked, formGenerateOTP, isValidForm) {
+    debugger;
+    if (isCheckboxClicked == "on" && isValidForm) {
+      this.apiManager.postAPI(API.GENERATEOTP, formGenerateOTP).subscribe(response => {
+        if (response.m_Item1) {
+          this.createVerifyOTPForm();
+          this.resultUserID = response.m_Item3.UserID
+          this.activeModal = 2;
+          this.activeForm = 2;
+        }
+        else {
+          this.toastr.error(response.m_Item2);
+        }
+      }, err => {
+        this.toastr.error("Oops! There has been an error from server. Please try again.");
+      })
+    }
+    else {
+      this.isChecked = false;
+      this.isValidChecked = true;
+      this.frmGenerateOTPForm.patchValue({
+        HaveOTP: false
+      })
+      this.errorMessage = "Please provide the user name or DCID"
+    }
   }
 
   viewStudentMappingDetailsForm() {

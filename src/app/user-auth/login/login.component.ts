@@ -39,6 +39,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   loginError: string;
   isValidLogin: boolean = false;
+  roleNameMultiple: string;
 
   isShowModal: number = 1;
   activeForm: number = 1;
@@ -116,9 +117,19 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   public getUserDetaildByLoginID() {
     this.userAuthService._getUserProfile().then((res: any) => {
-      if (res.m_Item1) {
+      if (res.m_Item1) {        
         this.userDetails = res.m_Item3;
         this.sharedService.setUser(this.userDetails);
+
+        if (this.roleNameMultiple.search('Admin') !== -1) {
+          this.router.navigate(["/" + RouteConstants.APPLIEDLOANDETAILS]);
+        }
+        else if (this.roleNameMultiple.search('School') !== -1) {
+          this.router.navigate(["/" + RouteConstants.STUDENTMAPPINGDETAILS]);
+        }
+        else {
+          this.router.navigate(["/" + RouteConstants.EARNLOANS]);
+        }
       }
     }, err => {
       console.log(err);
@@ -143,6 +154,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
   private extractData(res: Response) {
     let body = res.json();
 
+    this.roleNameMultiple = body.roleName;
     this.sharedService.setToken(body.access_token);
     this.sharedService.setUserID(body.userId);
     this.sharedService.setRoleID(body.roleId);
@@ -150,21 +162,21 @@ export class LoginComponent extends BaseComponent implements OnInit {
     this.getUserDetaildByLoginID();
     this.sharedService.setLoader(false);
 
-    if (body.roleId === BaseUrl.AdminRoleID) {
-      this.router.navigate(["/" + RouteConstants.APPLIEDLOANDETAILS]);
-    }
-    if (body.roleId === BaseUrl.UserRoleID) {
-      this.router.navigate(["/" + RouteConstants.EARNLOANS]);
-    }
-    if (body.roleId === BaseUrl.FranchiseRoleID) {
-      this.router.navigate(["/" + RouteConstants.EARNLOANS]);
-    }
-    if (body.roleId === BaseUrl.SchoolRoleID) {
-      this.router.navigate(["/" + RouteConstants.EARNLOANS]);
-    }
-    if (body.roleId === BaseUrl.DeveloperRoleID) {
-      this.router.navigate(["/" + RouteConstants.EARNLOANS]);
-    }
+    // if (body.roleId === BaseUrl.AdminRoleID) {
+    //   this.router.navigate(["/" + RouteConstants.APPLIEDLOANDETAILS]);
+    // }
+    // if (body.roleId === BaseUrl.UserRoleID) {
+    //   this.router.navigate(["/" + RouteConstants.EARNLOANS]);
+    // }
+    // if (body.roleId === BaseUrl.FranchiseRoleID) {
+    //   this.router.navigate(["/" + RouteConstants.EARNLOANS]);
+    // }
+    // if (body.roleId === BaseUrl.SchoolRoleID) {
+    //   this.router.navigate(["/" + RouteConstants.EARNLOANS]);
+    // }
+    // if (body.roleId === BaseUrl.DeveloperRoleID) {
+    //   this.router.navigate(["/" + RouteConstants.EARNLOANS]);
+    // }
 
     return body || {};
   }

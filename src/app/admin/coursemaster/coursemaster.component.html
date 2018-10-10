@@ -8,7 +8,7 @@
         <div class="transaction-history-container">
           <div class="transaction-history-table box-shadow">
             <p-dataTable [value]="lstCourseMaster" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
-              expandableRows="true" (onRowExpand)="getCourseDetails($event)">
+              expandableRows="true" rowExpandMode="single" (onRowExpand)="getCourseDetails($event)">
               <p-header [style]="{'width': '100%'}">
                 <div class="divstyles">
                   <button type="button" class="btn btn-primary btnstyles" (click)="ViewCourseMasterModel()">Add Course Master</button>

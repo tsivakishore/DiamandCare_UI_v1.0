@@ -469,6 +469,15 @@ login,register{
   position: relative;
   z-index:1;
 }
+
+.contactus-container {
+  width: 100%;
+  padding: 0px;
+  box-sizing: border-box;
+  position: relative;
+  z-index:1;
+}
+
 /*************************************************************************/
 //                        User profile page css                          //
 /*************************************************************************/
@@ -815,6 +824,39 @@ login,register{
   padding: 0px!important;
   width: calc(100% - 10px);
   .secretkey-form{
+    margin-top: 5px;
+    box-shadow: 0 0px 0px -4px rgba(0, 0, 0, 0.2), 0 0px 1px 0px rgba(0, 0, 0, 0.14), 0 0px 1px 0px rgba(0, 0, 0, 0.12);
+    padding-bottom: 10px;
+    h3{
+      font-weight: 500;
+      padding-top: 12px;
+      border-bottom: 2px solid $borderColor;
+      padding-bottom: 5px;
+      color:$green;
+      padding-left: 10px;
+    }
+    .label{
+      font-weight: normal;
+      color: $white;
+    }
+    .col-md-12{
+      padding-left:20px!important;
+    }
+  }
+  .PTB70{
+    color: $white;
+  }
+}
+
+/*************************************************************************/
+//                             Contact us page css                             //
+/*************************************************************************/
+.contactus-container {
+  margin: 10px 5px 5px 2px;
+  background-color:$darkColor;
+  padding: 0px!important;
+  width: calc(100% - 10px);
+  .contactus-form{
     margin-top: 5px;
     box-shadow: 0 0px 0px -4px rgba(0, 0, 0, 0.2), 0 0px 1px 0px rgba(0, 0, 0, 0.14), 0 0px 1px 0px rgba(0, 0, 0, 0.12);
     padding-bottom: 10px;
