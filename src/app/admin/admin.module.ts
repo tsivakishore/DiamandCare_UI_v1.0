@@ -46,6 +46,7 @@ import { UsersbyinstitutionComponent } from './usersbyinstitution/usersbyinstitu
 import { StudentmappingdetailsComponent } from './studentmappingdetails/studentmappingdetails.component';
 import { AdminreportsComponent } from './adminreports/adminreports.component';
 import { UserwithdrawsComponent } from './userwithdraws/userwithdraws.component';
+import { RenewloanaccountComponent } from './renewloanaccount/renewloanaccount.component';
 
 @NgModule({
   imports: [
@@ -103,7 +104,8 @@ import { UserwithdrawsComponent } from './userwithdraws/userwithdraws.component'
     UsersbyinstitutionComponent,
     StudentmappingdetailsComponent,
     AdminreportsComponent,
-    UserwithdrawsComponent
+    UserwithdrawsComponent,
+    RenewloanaccountComponent
   ],
   exports: [HeaderSidebarComponent]
 })

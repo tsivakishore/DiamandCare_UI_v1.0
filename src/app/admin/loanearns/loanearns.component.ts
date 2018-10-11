@@ -12,6 +12,8 @@ import { style, transition, animate, trigger } from "@angular/animations";
 import { LoanEarnsService } from "../../utility/shared-service/loanEarns.service";
 import { CommonService } from "../../utility/shared-service/common.service";
 import { BaseUrl } from '../../utility/constants/base-constants';
+import { RouteConstants } from "../../utility/constants/routes";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-loanearns',
@@ -41,6 +43,8 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
   frmApplyHomeLoan: FormGroup;
   frmApplyPrepaidLoan: FormGroup;
   NumberOfLevels: number;
+  loginUserDetails: any;
+  loginUserID: number;
 
   isAddressValid: boolean = true;
   renewalStatus: boolean = false;
@@ -85,6 +89,7 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
     private loanEarnsService: LoanEarnsService,
     private commonService: CommonService,
     private fb: FormBuilder,
+    private router: Router,
     private apiManager: APIManager,
     public toastr: ToastsManager,
     public vcr: ViewContainerRef,
@@ -101,6 +106,8 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
     this.createApplyHealthBenefitsForm();
     this.createApplyRiskBenefitForm();
     this.NumberOfLevels = BaseUrl.NumberOfLevels;
+    this.loginUserDetails = this.sharedService.getUser();
+    this.loginUserID = this.loginUserDetails.UserID;
   }
 
   createApplyPLLoanForm() {
@@ -783,7 +790,10 @@ export class LoanearnsComponent extends BaseComponent implements OnInit {
     }
   }
 
-  renew() { }
+  renewLoanAccount(startpoint, parentUserID) {
+    const ev = startpoint + '/' + btoa(parentUserID)
+    return ev;
+  }
 
   closeForm() {
     this.isShowModal = 1;

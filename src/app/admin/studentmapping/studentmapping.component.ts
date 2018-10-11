@@ -169,12 +169,10 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
   // Verify OTP form submit method
   VerifyStudentOTP(formVerifyOTPForm, isValidForm) {
     if (isValidForm) {
-      debugger;
       formVerifyOTPForm.UserID = this.resultUserID;
       this.apiManager.postAPI(API.VERIFYSTUDENTOTP, formVerifyOTPForm).subscribe(response => {
         if (response.m_Item1) {
           this.createStudentForm();
-          debugger;
           this.registerStudentMappingForm.controls['UserID'].setValue(this.UserDetails.UserID, { onlySelf: true });
           this.getFeeMasters(this.loginUserID);
           this.GetLoans();
@@ -253,7 +251,6 @@ export class StudentmappingComponent extends BaseComponent implements OnInit {
   }
 
   onCheckedChange(isCheckboxClicked, formGenerateOTP, isValidForm) {
-    debugger;
     if (isCheckboxClicked == "on" && isValidForm) {
       this.apiManager.postAPI(API.GENERATEOTP, formGenerateOTP).subscribe(response => {
         if (response.m_Item1) {

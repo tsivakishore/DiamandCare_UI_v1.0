@@ -78,6 +78,7 @@ export const LANG_EN_TRANS = {
   'verifySecretKey': 'Verify Secret Key',
   'registerSuccessStatus': 'User Registered successfully!',
   'registerFailedStatus': 'Oops! There has benn an error from server side, your registeration failed.Please try again.',
+  'renewLoanAccountFailedStatus': 'Oops! There has benn an error from server side, your renew loan account failed.Please try again.',
 
   //Earn Loans
   'earnLoansTitle': 'Earn Loans',

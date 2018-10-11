@@ -33,10 +33,12 @@ import { CoursemasterService } from "../../utility/shared-service/coursemaster.s
 
 export class FeemasterComponent extends BaseComponent implements OnInit {
 
+  isController = true;
   frmFeeMaster: FormGroup;
   UserDetails: any;
   lstFeeMaster: any;
   lstCourses: any;
+  lstCourseMaster: any;
   isShowModal: number = 1;
   selectedRow: any;
   actiontype: string;
@@ -56,7 +58,6 @@ export class FeemasterComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.UserDetails = this.sharedService.getUser();
     this.UserID = this.UserDetails.UserID;
-    console.log(this.UserID)
     this.getFeeMasterDetails(this.UserID);
   }
 
@@ -64,25 +65,46 @@ export class FeemasterComponent extends BaseComponent implements OnInit {
     this.frmFeeMaster = this.fb.group({
       FeeMasterID: new FormControl(''),
       UserID: new FormControl(''),
-      CourseID: new FormControl(''),
+      CourseMasterID: new FormControl(null, Validators.compose([Validators.required])),
+      CourseID: new FormControl(null, Validators.compose([Validators.required])),
       CourseFee: new FormControl('', Validators.compose([Validators.required, Validators.pattern(CommonRegexp.NUMERIC_REGEXP)]))
     })
   }
 
   ViewFeeMasterModel() {
+    this.lstCourses = [];
+    this.lstCourseMaster = [];
     this.isShowModal = 2;
     this.actiontype = "Add Fee Master";
     this.createFeeMasterForm();
-    this.getCourses();
+    this.getCourseMstaers();
+    this.frmFeeMaster.controls["CourseMasterID"].setValue(null, { onlySelf: true })
   }
 
-  getCourses() {
+  getCourses(courseMasterID: number) {
     this.sharedService.setLoader(true);
     this.lstCourses = [];
-    this.coursemasterService._getCourses().subscribe((res: any) => {
+    this.coursemasterService._getCourseDetailsByID(courseMasterID).subscribe((res: any) => {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.lstCourses = res.m_Item3;
+      }
+      else {
+        this.toastr.error("Oops! " + res.m_Item2 + " for this course master");
+      }
+    }, err => {
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
+
+  getCourseMstaers() {
+    this.sharedService.setLoader(true);
+    this.lstCourseMaster = [];
+    this.coursemasterService._getCourseMasterDetails().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.lstCourseMaster = res.m_Item3;
       }
     }, err => {
       console.log(err);
@@ -129,19 +151,33 @@ export class FeemasterComponent extends BaseComponent implements OnInit {
   EditFeeMaster(rowData: any) {
     this.isShowModal = 2;
     this.createFeeMasterForm();
-    this.getCourses();
+    this.getCourseMstaers();
+    this.getCourses(rowData.CourseMasterID);
     this.actiontype = "Edit Course";
     this.frmFeeMaster.patchValue({
       FeeMasterID: rowData.FeeMasterID,
       UserID: rowData.UserID,
-      CourseFee: rowData.CourseFee,
+      CourseFee: rowData.CourseFee
     })
-    this.frmFeeMaster.controls["CourseID"].setValue(rowData.CourseID, { onlySelf: true })
+    
+    this.frmFeeMaster.controls["CourseMasterID"].setValue(rowData.CourseMasterID, { onlySelf: true });
+    this.frmFeeMaster.controls["CourseID"].setValue(rowData.CourseID, { onlySelf: true });
+  }
+
+  filterCourseMaster(courseMasterID: any) {
+    if (courseMasterID != null) {
+      this.getCourses(parseInt(courseMasterID));
+      this.frmFeeMaster.controls["CourseID"].setValue(null, { onlySelf: true })
+    }
   }
 
   filterCourse(selectedValue: any) {
-    if (selectedValue != 0) {
+    if (selectedValue != null) {
       this.frmFeeMaster.get('CourseID').clearValidators();
+    }
+    else {
+      this.frmFeeMaster.controls['CourseID'].setValidators(Validators.compose([Validators.required]));
+      this.frmFeeMaster.get('CourseID').updateValueAndValidity({ onlySelf: true, emitEvent: false });
     }
   }
 

@@ -50,7 +50,7 @@ export class FranchiseService {
 
   _getFranchiseUsernameWalletByIDorName(postData) {
     return this.httpService
-      .get(API.GETFRANCHISEUSERNAMEWALLETBYIDORNAME+ '?DcIDorName=' + postData)
+      .get(API.GETFRANCHISEUSERNAMEWALLETBYIDORNAME + '?DcIDorName=' + postData)
       .map(res => this.extractData(res, true)).catch((error: any) => {
         return Observable.throw(new Error(error.status));
       });
@@ -58,7 +58,7 @@ export class FranchiseService {
 
   _getUsernameByDCIDorName(postData) {
     return this.httpService
-      .get(API.GETUSERNAMEBYDCIDorNAME+ '?DcIDorName=' + postData)
+      .get(API.GETUSERNAMEBYDCIDorNAME + '?DcIDorName=' + postData)
       .map(res => this.extractData(res, true)).catch((error: any) => {
         return Observable.throw(new Error(error.status));
       });
@@ -66,7 +66,15 @@ export class FranchiseService {
 
   _getUserNameWithFreeKey(postData) {
     return this.httpService
-      .get(API.GETFREETOPAIDUSERDETAILS+ '?DcIDorName=' + postData)
+      .get(API.GETFREETOPAIDUSERDETAILS + '?DcIDorName=' + postData)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  _getUserNameWithSponserJoinees(postData) {
+    return this.httpService
+      .get(API.GETUSERSPONSERJOINEES + '?DcIDorName=' + postData)
       .map(res => this.extractData(res, true)).catch((error: any) => {
         return Observable.throw(new Error(error.status));
       });
