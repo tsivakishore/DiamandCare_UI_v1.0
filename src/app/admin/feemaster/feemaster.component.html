@@ -16,6 +16,7 @@
               <p-column [style]="{'width':'110px'}" field="UserName" header="UserName" [sortable]="true"></p-column>
               <p-column [style]="{'width':'100px'}" field="CourseName" header="Course Name" [sortable]="true"></p-column>
               <p-column [style]="{'width':'100px'}" field="CourseFee" header="Course Fee" [sortable]="true"></p-column>
+              <p-column [style]="{'width':'110px'}" field="CourseMasterID" [hidden]="isController"></p-column>
               <p-column [style]="{'width':'80px'}" field="UpdatedBy" header="Updated By" [sortable]="true"></p-column>
               <p-column [style]="{'width':'100px'}" field="UpdatedOn" header="Updated On" [sortable]="true"></p-column>
               <p-column [style]="{'width':'100px'}" header="Edit">
@@ -48,10 +49,22 @@
       <div class="modal-body">
         <div class="col-md-12">
           <div class="margin-top-10 col-xs-12 col-md-6">
+            <div class="label" style="color: #fff;">Course Master</div>
+            <div class="clearfix"></div>
+            <select class="form-control ddlstyle" (change)="filterCourseMaster($event.target.value)" formControlName="CourseMasterID" required>
+              <option [ngValue]="null" disabled selected>--Select Course Master--</option>
+              <option *ngFor="let courseMaster of lstCourseMaster" value="{{courseMaster.CourseMasterID}}">{{courseMaster.CourseMasterName}}</option>
+            </select>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmFeeMaster.get('CourseMasterID'))" [errMsg]="'Please select course master' | translate"></validation>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="margin-top-10 col-xs-12 col-md-6">
             <div class="label" style="color: #fff;">Course</div>
             <div class="clearfix"></div>
             <select class="form-control ddlstyle" (change)="filterCourse($event.target.value)" formControlName="CourseID" required>
-              <option value="" disabled selected>--Select Course--</option>
+              <option [ngValue]="null" disabled selected>--Select Course--</option>
               <option *ngFor="let Course of lstCourses" value="{{Course.CourseID}}">{{Course.CourseName}}</option>
             </select>
             <div class="input-validation-msg">

@@ -191,8 +191,8 @@
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="label" style="color: #fff;">Fund Transfer Charges</div>
             <div class="clearfix"></div>
-            <input type="text" class="form-control" placeholder="Fund Transfer Charges" pTooltip="Fund Transfer Charges" tooltipPosition="top" formControlName="FundTransferCharges"
-              required/>
+            <input type="text" class="form-control" placeholder="Fund Transfer Charges" pTooltip="Fund Transfer Charges" tooltipPosition="top"
+              formControlName="FundTransferCharges" required/>
             <div class="input-validation-msg">
               <validation *ngIf="isRequiredField(masterScreenForm.get('FundTransferCharges'))" [errMsg]="'FNDTRNSCHRGRqrd' | translate"></validation>
               <validation *ngIf="isValidField(masterScreenForm.get('FundTransferCharges'))" [errMsg]="'validFNDTRNSCHRG' | translate"></validation>
@@ -220,6 +220,9 @@
         </li>
         <li class="padding-top-15" (click)="onFreeToPaidKey()">
           <div>Upgrade Free To Paid Key</div>
+        </li>
+        <li class="padding-top-15" (click)="onUserSponserJoineesReq()">
+          <div>User Sponser Joinees Required</div>
         </li>
       </ul>
     </div>
@@ -254,11 +257,6 @@
 <!-- <div class="sucess-msg">
   <p-messages [(value)]="msgs"></p-messages>
 </div> -->
-
-<admin-footer></admin-footer>
-
-<div class="confirm-modal-overay" *ngIf="isShowModal == 2" (click)="closeForm()"></div>
-
 <div class="phone-number-modal divstyles" *ngIf="isShowModal == 2" @dialog>
   <form [formGroup]="fgFranchise" (submit)="onEditFranchise(fgFranchise.value,fgFranchise.valid)">
     <div class="modal-container" style="height: 300px !important;">
@@ -497,3 +495,69 @@
     </div>
   </form>
 </div>
+
+<div class="phone-number-modal divstyles" *ngIf="isShowModal == 6" @dialog>
+  <form [formGroup]="fgUserSponserJoineesReq" (submit)="onUpdateUserSponserJoineeReq(fgUserSponserJoineesReq.value,fgUserSponserJoineesReq.valid)">
+    <div class="modal-container" style="height: 350px !important;">
+      <div class="modal-header" style="background: #797b85;">
+        <h5>User Sponser Joinees Required</h5>
+        <i class="material-icons" (click)="closeForm()">close</i>
+      </div>
+      <div class="clearfix"></div>
+      <div class="clearfix"></div>
+      <div class="modal-body" style="height: 50px;">
+        <div class="col-md-12">
+          <div class="margin-top-15 col-md-12">
+            <div class="label" style="color: #fff;">DCID or User Name</div>
+            <div class="clearfix"></div>
+            <div>
+              <input type="text" class="form-control" placeholder="DCID or UserName" pTooltip="DCID or UserName" tooltipPosition="top"
+                formControlName="UserID" (change)="getUserNameWithSponserJoinees(fgUserSponserJoineesReq.value.UserID)" required/>
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(fgUserSponserJoineesReq.get('UserID'))" [errMsg]="'userIDUserNameRqrd' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div class="label" style="color: #fff;">User Name</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="User Name" pTooltip="User Name" tooltipPosition="top" formControlName="UserName"
+              readonly />
+            <div class="input-validation-msg">
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div class="label" style="color: #fff;">User Sponser Joinees Required</div>
+            <div class="clearfix"></div>
+            <div>
+              <span class="-addon checkbox check-primary bg-transparent">
+                <input type="checkbox" formControlName="IsSponserJoineesReq">
+              </span>
+              <div class="input-validation-msg">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-8 col-md-offset-3">
+          <button type="submit" [disabled]="!fgUserSponserJoineesReq.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
+          <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+
+<div class="confirm-modal-overay" *ngIf="isShowModal == 2 || isShowModal == 3 || isShowModal == 4|| isShowModal == 5|| isShowModal == 6"
+  (click)="closeForm()"></div>
+<admin-footer></admin-footer>

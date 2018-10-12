@@ -47,6 +47,7 @@ import { StudentmappingdetailsComponent } from './studentmappingdetails/studentm
 import { AdminreportsComponent } from './adminreports/adminreports.component';
 import { UserwithdrawsComponent } from './userwithdraws/userwithdraws.component';
 import { UploadInstImagesComponent } from './uploadInstImages/uploadInstImages.component';
+import { RenewloanaccountComponent } from './renewloanaccount/renewloanaccount.component';
 
 @NgModule({
   imports: [
@@ -105,8 +106,11 @@ import { UploadInstImagesComponent } from './uploadInstImages/uploadInstImages.c
     StudentmappingdetailsComponent,
     AdminreportsComponent,
     UserwithdrawsComponent,
-    UploadInstImagesComponent
-],
+    UploadInstImagesComponent,
+    RenewloanaccountComponent
+  ],
+
+
   exports: [HeaderSidebarComponent]
 })
 export class AdminModule { }

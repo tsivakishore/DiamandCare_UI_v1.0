@@ -2,7 +2,7 @@
   <div class="secretkey-form">
     <form>
       <h3 class="col-md-6 col-sm-6 col-xs-6" style="color: #00c8aa;">{{'earnLoansTitle' | translate}}</h3>
-      <button type="button" class="btn btn-primary btnrenewmyid" [ngClass]="colorCodeRenew()" [disabled]="checkRenewEnable()" (click)="renew()">Renew my ID</button>
+      <button type="button" class="btn btn-primary btnrenewmyid" [ngClass]="colorCodeRenew()" [disabled]="checkRenewEnable()" [routerLink]=" renewLoanAccount('/renewloanaccount',loginUserID) ">Renew my ID</button>
       <div class="clearfix"></div>
 
       <!-- Show list of register keys start here -->
@@ -591,9 +591,5 @@
 
 <div class="confirm-modal-overay" *ngIf="isShowModal == 2 || isShowModal == 3 || isShowModal == 4 || isShowModal == 5 || isShowModal == 6 || isShowModal == 7"
   (click)="closeForm()"></div>
-
-<!-- <div class="sucess-msg">
-  <p-messages [(value)]="msgs"></p-messages>
-</div> -->
 
 <admin-footer></admin-footer>

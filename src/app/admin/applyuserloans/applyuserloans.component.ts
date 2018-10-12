@@ -11,6 +11,8 @@ import { TranslateService } from "../../utility/translate/translate.service";
 import { style, transition, animate, trigger } from "@angular/animations";
 import { LoanEarnsService } from "../../utility/shared-service/loanEarns.service";
 import { CommonService } from "../../utility/shared-service/common.service";
+import { RouteConstants } from "../../utility/constants/routes";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-applyuserloans',
@@ -86,6 +88,7 @@ export class ApplyuserloansComponent extends BaseComponent implements OnInit {
     private loanEarnsService: LoanEarnsService,
     private commonService: CommonService,
     private fb: FormBuilder,
+    private router: Router,
     private apiManager: APIManager,
     public toastr: ToastsManager,
     public vcr: ViewContainerRef,
@@ -248,7 +251,7 @@ export class ApplyuserloansComponent extends BaseComponent implements OnInit {
             LoanAmount: this.selectedRow.EPLoans,
             LoanTypeCode: 'PL'
           })
-          this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, {onlySelf: true});
+          this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, { onlySelf: true });
         }
         else {
           this.frmApplyPLLoan.reset();
@@ -300,7 +303,7 @@ export class ApplyuserloansComponent extends BaseComponent implements OnInit {
             LoanAmount: this.selectedRow.FeesReimbursement,
             LoanTypeCode: 'FR'
           })
-          this.frmApplyFeeReimbursement.controls['ModeofTransfer'].setValue(1, {onlySelf: true});
+          this.frmApplyFeeReimbursement.controls['ModeofTransfer'].setValue(1, { onlySelf: true });
         }
         else {
           this.toastr.error(res.m_Item2);
@@ -351,7 +354,7 @@ export class ApplyuserloansComponent extends BaseComponent implements OnInit {
             LoanAmount: this.selectedRow.EPLoans,
             LoanTypeCode: 'HB'
           })
-          this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, {onlySelf: true});
+          this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, { onlySelf: true });
         }
         else {
           this.toastr.error(res.m_Item2);
@@ -402,7 +405,7 @@ export class ApplyuserloansComponent extends BaseComponent implements OnInit {
             LoanAmount: this.selectedRow.EPLoans,
             LoanTypeCode: 'RB'
           })
-          this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, {onlySelf: true});
+          this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, { onlySelf: true });
         }
         else {
           this.toastr.error(res.m_Item2);
@@ -452,7 +455,7 @@ export class ApplyuserloansComponent extends BaseComponent implements OnInit {
         LoanAmount: this.selectedRow.EPLoans,
         LoanTypeCode: 'HL'
       })
-      this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, {onlySelf: true});
+      this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, { onlySelf: true });
     }
     finally {
       //this.sharedService.setLoader(false);
@@ -497,7 +500,7 @@ export class ApplyuserloansComponent extends BaseComponent implements OnInit {
             LoanTypeCode: 'PL',
             PrePaidLoan: true
           })
-          this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, {onlySelf: true});
+          this.frmApplyPLLoan.controls['ModeofTransfer'].setValue(4, { onlySelf: true });
         }
         else {
           this.toastr.error(res.m_Item2);
@@ -804,12 +807,15 @@ export class ApplyuserloansComponent extends BaseComponent implements OnInit {
     }
   }
 
-  renew() { }
+  renewLoanAccount(startpoint, userid) {
+    const ev = startpoint + '/' + btoa(userid)
+    return ev;
+  }
 
   closeForm() {
     this.isShowModal = 1;
   }
-  
+
   // public getWalletTransactions() {
   //   this.sharedService.setLoader(true);
   //   this.walletServ._getWalletTransactions().subscribe((res: any) => {
