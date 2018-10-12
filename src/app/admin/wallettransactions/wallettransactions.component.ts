@@ -11,6 +11,9 @@ import { WalletService } from '../../utility/shared-service/wallet.service';
 import { CommonRegexp } from "../../utility/constants/validations";
 import { UserService } from "../../utility/shared-service/user.service";
 import { CommonService } from "../../utility/shared-service/common.service";
+import { AgainstTypeModel } from './againstType.model';
+
+
 
 @Component({
   selector: 'app-wallettransactions',
@@ -51,6 +54,10 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
   OriginalLoanAmountPay: any;
   requestedAmount: any;
   approvedAmount: any;
+  againstType: any;
+  againstTypevalues: AgainstTypeModel[] = [];
+
+
 
   constructor(private fb: FormBuilder, private walletServ: WalletService,
     private sharedService: SharedService,
@@ -67,6 +74,7 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
     this.getWithdrawalTransactions();
     this.getFundsRequestByOthersDetails();
     this.getFundRequestStatus();
+    this.getAgainstType();
   }
 
   public getWalletTransactions() {
@@ -127,6 +135,9 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.FundsRequestList = res.m_Item3;
+        if (!!this.FundsRequestList) {
+          this.FundsRequestList.forEach(e => e.CreatedOn = this.getFormattedDate(e.CreatedOn))
+        }
       }
     }, err => {
       console.log(err);
@@ -232,19 +243,19 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
         this.sharedService.setLoader(false);
         if (res.m_Item1) {
           this.ToUserDetails = res.m_Item3;
-          
-            this.frmTransferFunds.patchValue({
-              TransferFrom: this.UserDetails.UserName,
-              TransferTo: this.ToUserDetails.UserName,
-              RequestToUserID: this.ToUserDetails.UserID,
-              TransferToName: this.ToUserDetails.FirstName + ' ' + this.ToUserDetails.LastName
-            })
+
+          this.frmTransferFunds.patchValue({
+            TransferFrom: this.UserDetails.UserName,
+            TransferTo: this.ToUserDetails.UserName,
+            RequestToUserID: this.ToUserDetails.UserID,
+            TransferToName: this.ToUserDetails.FirstName + ' ' + this.ToUserDetails.LastName
+          })
         }
         else {
-            this.frmTransferFunds.patchValue({
-              TransferTo: '',
-              TransferToName: ''
-            })
+          this.frmTransferFunds.patchValue({
+            TransferTo: '',
+            TransferToName: ''
+          })
           this.toastr.error("Please provide valid user name or DCID");
         }
       }, err => {
@@ -252,10 +263,10 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
       })
     }
     else {
-        this.frmTransferFunds.patchValue({
-          TransferTo: '',
-          TransferToName: ''
-        })
+      this.frmTransferFunds.patchValue({
+        TransferTo: '',
+        TransferToName: ''
+      })
     }
   }
 
@@ -332,6 +343,22 @@ export class WallettransactionsComponent extends BaseComponent implements OnInit
     }, err => {
     })
   }
+
+  public getAgainstType() {
+    this.commonService._getGetAgainstType().then((response: any) => {
+      if (response.m_Item1) {
+        this.againstType = response.m_Item3;
+        //this.againstTypevalues.push({ label: this.againstType.AgainstType, value: this.againstType.ID });
+
+        this.againstType.forEach(item => {
+          this.againstTypevalues.push({ label: item.AgainstType, value: item.AgainstType })
+
+        })
+      }
+    });
+  }
+
+
 
   getFormattedDate(date1) {
     var date = new Date(date1);

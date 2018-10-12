@@ -109,6 +109,13 @@ export class CommonService {
             });
     }
 
+    _getGetAgainstType() {
+        return this.apiManager.getAPI(API.GETAGAINSTTYPE)
+            .toPromise()
+            .then(this.extractDataDownload.bind(this))
+            .catch(this.handleError.bind(this));
+    }
+
     private extractDataDownload(res: Response) {
         let body = res;
         return body || {};

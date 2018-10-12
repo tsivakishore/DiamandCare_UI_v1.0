@@ -155,6 +155,7 @@ export class API {
   public static GENERATEOTP = 'studentmapping/UpdateUserOTP';
   public static GENERATELOANOTP = 'studentmapping/GenerateLoanOTP';
   public static VERIFYSTUDENTOTP = 'studentmapping/VerifyStudentOTP';
+  public static GETAGAINSTTYPE='Shared/GetAgainstType';
 
   //Display Screens
   public static GETSCREENMASTERDETAILS = 'displayscreens/GetScreenMasterDetails';
