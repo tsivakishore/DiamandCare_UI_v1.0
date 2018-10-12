@@ -36,6 +36,7 @@ import { UsersbyinstitutionComponent } from './usersbyinstitution/usersbyinstitu
 import { StudentmappingdetailsComponent } from './studentmappingdetails/studentmappingdetails.component';
 import { AdminreportsComponent } from './adminreports/adminreports.component';
 import { UserwithdrawsComponent } from './userwithdraws/userwithdraws.component';
+import { UploadInstImagesComponent } from './uploadInstImages/uploadInstImages.component';
 
 const routes: Routes = [
   {
@@ -206,6 +207,11 @@ const routes: Routes = [
   {
     path: RouteConstants.USERWITHDRAWS,
     component: UserwithdrawsComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.UPLOADINSTIMAGES,
+    component: UploadInstImagesComponent,
     canActivate: [AuthGaurd]
   }
 ];

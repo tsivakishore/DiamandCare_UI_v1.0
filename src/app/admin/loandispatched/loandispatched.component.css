@@ -34,6 +34,10 @@
     border-radius: 15px;
 }
 
+.btntransferPending{   
+    margin-left: 82% !important;
+}
+
 @media only screen and (max-width: 767px) and (min-width: 320px){
     .h3top{
         margin-top: -15px !important;

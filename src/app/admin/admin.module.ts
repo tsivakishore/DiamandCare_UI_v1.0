@@ -46,6 +46,7 @@ import { UsersbyinstitutionComponent } from './usersbyinstitution/usersbyinstitu
 import { StudentmappingdetailsComponent } from './studentmappingdetails/studentmappingdetails.component';
 import { AdminreportsComponent } from './adminreports/adminreports.component';
 import { UserwithdrawsComponent } from './userwithdraws/userwithdraws.component';
+import { UploadInstImagesComponent } from './uploadInstImages/uploadInstImages.component';
 
 @NgModule({
   imports: [
@@ -103,8 +104,9 @@ import { UserwithdrawsComponent } from './userwithdraws/userwithdraws.component'
     UsersbyinstitutionComponent,
     StudentmappingdetailsComponent,
     AdminreportsComponent,
-    UserwithdrawsComponent
-  ],
+    UserwithdrawsComponent,
+    UploadInstImagesComponent
+],
   exports: [HeaderSidebarComponent]
 })
 export class AdminModule { }

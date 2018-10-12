@@ -44,5 +44,5 @@ export class RouteConstants {
   public static USERSBYINSTITUTION = 'users';
   public static ADMINREPORTS = 'adminreports';
   public static USERWITHDRAWS = 'userwithdraws';
-
+  public static UPLOADINSTIMAGES = 'uploadInstImages';
 }
