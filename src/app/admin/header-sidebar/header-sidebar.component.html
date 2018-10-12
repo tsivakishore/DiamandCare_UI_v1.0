@@ -108,8 +108,8 @@
     </li>
     <li tooltipPosition="top">
       <a [routerLink]="usersByInstitutionUrl" *ngIf="Is_Visible_Users_By_Institution" routerLinkActive="active">
-        <i class="material-icons">sentiment_very_satisfied</i>
-        <span>Users</span>
+        <i class="material-icons">account_circle</i>
+        <span>My Registered Users</span>
       </a>
     </li>
     <li tooltipPosition="top">
@@ -201,6 +201,12 @@
       <a [routerLink]="addUserToRoleUrl" *ngIf="Is_Visible_Roles" routerLinkActive="active">
         <i class="material-icons">person_add</i>
         <span>{{'Assign Role' | translate}}</span>
+      </a>
+    </li>
+    <li tooltipPosition="top" routerLinkActive="active">
+      <a [routerLink]="uploadInstImagesUrl" *ngIf="Is_Visible_UploadInstImages" routerLinkActive="active">
+        <i class="material-icons">image</i>
+        <span>Upload Inst Images</span>
       </a>
     </li>
     <li tooltipPosition="top" routerLinkActive="active">
@@ -345,8 +351,8 @@
     </li>
     <li>
       <a [routerLink]="usersByInstitutionUrl" *ngIf="Is_Visible_Users_By_Institution" routerLinkActive="active" (click)="closeSidebar()">
-        <i class="material-icons">sentiment_very_satisfied</i>
-        <span>Users</span>
+        <i class="material-icons">account_circle</i>
+        <span>My Registered Users</span>
       </a>
     </li>
     <li>
@@ -443,6 +449,12 @@
       <a [routerLink]="displayscreensUrl" *ngIf="Is_Visible_Displayscreens" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">security</i>
         <span>Security</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="uploadInstImagesUrl" *ngIf="Is_Visible_UploadInstImages" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">image</i>
+        <span>Upload Inst Images</span>
       </a>
     </li>
     <li>

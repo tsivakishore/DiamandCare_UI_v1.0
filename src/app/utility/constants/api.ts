@@ -99,6 +99,8 @@ export class API {
   public static UPDATEFRANCHISEWALLETBALANCE = 'franchisedetails/UpdateFranchiseWalletBalance';
   public static UPDATELOANWAIVEOFF = 'user/updateloanwaiveoff';
   public static GETFREETOPAIDUSERDETAILS = 'user/getfreetopaiduserdetails';
+  public static GETUSERSPONSERJOINEES = 'user/getUserSponserJoineeRequired';
+  public static UPDATEUSERSPONSERJOINEESReq = 'user/UpdateUserSponserJoineeRequired';
   public static UPDATEFREETOPAIDKEYDETAILS = 'user/updatefreetopaidkeydetails';
   public static GETPAIDLOANS = 'loan/GetPaidLoanDetails';
   public static GETPAIDLOANSBYUSERNAMEorDCID = 'loan/GetPaidLoanDetailsByUserNameorDCID';
@@ -168,6 +170,8 @@ export class API {
   public static STUDENTMAPPING = 'studentmapping/InsertStudentMapping';
   public static STUDENTMAPPINGDETAILS = 'studentmapping/GetStudentMappingDetails';
   
+  public static RENEWLOANACCOUNT = 'renewloanaccount/RenewLoanAccount';
+
   // EXTERNAL API CALLERS
 
   public static DASHBOARD = "";

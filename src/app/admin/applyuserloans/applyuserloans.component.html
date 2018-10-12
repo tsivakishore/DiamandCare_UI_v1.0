@@ -3,13 +3,13 @@
     <form>
       <div>
         <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">Apply Loan for User</h3>
-        <button type="button" class="btn btn-primary btnrenewmyid" [ngClass]="colorCodeRenew()" [disabled]="checkRenewEnable()" (click)="renew()">Renew my ID</button>
+        <button type="button" class="btn btn-primary btnrenewmyid" [ngClass]="colorCodeRenew()" [disabled]="checkRenewEnable()" [routerLink]=" renewLoanAccount('/renewloanaccount',appliedUserID) ">Renew my ID</button>
       </div>
       <div class="clearfix"></div>
       <div class="col-md-4 col-xs-12 col-sm-12 margin-top-15">
         <div class="label" style="color: white;">Search by Username or DCID</div>
         <input type="text" #txtSearcByLoanId id="txtSearcByLoanId" class="form-control" placeholder="Search by Username or DCID"
-          (input)="onSearchChange($event.target.value)" />
+          (change)="onSearchChange($event.target.value)" />
       </div>
       <div class="clearfix"></div>
 
@@ -599,9 +599,5 @@
 
 <div class="confirm-modal-overay" *ngIf="isShowModal == 2 || isShowModal == 3 || isShowModal == 4 || isShowModal == 5 || isShowModal == 6 || isShowModal == 7"
   (click)="closeForm()"></div>
-
-<!-- <div class="sucess-msg">
-  <p-messages [(value)]="msgs"></p-messages>
-</div> -->
 
 <admin-footer></admin-footer>

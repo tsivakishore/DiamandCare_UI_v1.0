@@ -26,6 +26,7 @@ export class MasterChargesService {
                 return Observable.throw(new Error(error.status));
             });
     }
+
     _updateFreetoPaidKey(UserID, KeyCost) {
         return this.httpService
             .get(API.UPDATEFREETOPAIDKEYDETAILS + '?UserID=' + UserID + '&KeyCost=' + KeyCost)
@@ -33,6 +34,15 @@ export class MasterChargesService {
                 return Observable.throw(new Error(error.status));
             });
     }
+
+    _updateUserSponserJoineeRequired(UserID, IsSponserJoineesReq) {
+        return this.httpService
+            .get(API.UPDATEUSERSPONSERJOINEESReq + '?UserID=' + UserID + '&isSponserJoineesReq=' + IsSponserJoineesReq)
+            .map(res => this.extractData(res, true)).catch((error: any) => {
+                return Observable.throw(new Error(error.status));
+            });
+    }
+
     private extractData(res: Response, show?: boolean) {
         let data = res.json();
         let msg = data.message;

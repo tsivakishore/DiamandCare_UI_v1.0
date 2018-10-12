@@ -27,7 +27,7 @@ import { FranchiseService } from "../../utility/shared-service/franchise.service
         animate(200, style({ transform: 'scale3d(.0, .0, .0)' }))
       ])
     ]),
-    slideUp
+    slideUp, dialog
   ]
 })
 
@@ -42,9 +42,9 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
   fgFranchise: FormGroup;
   fgWallet: FormGroup;
   fgLoanWaive: FormGroup;
+  fgUserSponserJoineesReq: FormGroup;
   fgFreeToPaid: FormGroup;
   userID: number;
-
 
   constructor(private sharedService: SharedService,
     private masterChargesService: MasterChargesService,
@@ -72,6 +72,7 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       MinimumJoineesAvg: new FormControl(''),
     })
   }
+
   createWalletForm() {
     this.fgWallet = this.fb.group({
       UserID: ['', Validators.compose([Validators.required])],
@@ -80,6 +81,7 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       AddBalance: ['', Validators.compose([Validators.required])]
     })
   }
+
   createLoanWaiveForm() {
     this.fgLoanWaive = this.fb.group({
       UserID: ['', Validators.compose([Validators.required])],
@@ -87,6 +89,7 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       LoanWaiveoff: []
     })
   }
+
   createFreeToPaidKeyForm() {
     this.fgFreeToPaid = this.fb.group({
       UserID: ['', Validators.compose([Validators.required])],
@@ -94,18 +97,35 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       KeyCost: []
     })
   }
+
+  createUserSponserJoineesReqForm() {
+    this.fgUserSponserJoineesReq = this.fb.group({
+      UserID: ['', Validators.compose([Validators.required])],
+      UserName: ['', Validators.compose([Validators.required])],
+      IsSponserJoineesReq: []
+    })
+  }
+
   onAddBalanceToWallet() {
     this.createWalletForm();
     this.isShowModal = 3;
   }
+
   onLoanWaiveOff() {
     this.createLoanWaiveForm();
     this.isShowModal = 4;
   }
+
   onFreeToPaidKey() {
     this.createFreeToPaidKeyForm();
     this.isShowModal = 5;
   }
+
+  onUserSponserJoineesReq() {
+    this.createUserSponserJoineesReqForm();
+    this.isShowModal = 6;
+  }
+
   getFranchiseUsernameWalletByIDorName(DcIDorName: any) {
     DcIDorName = DcIDorName.UserID;
     if (DcIDorName != "") {
@@ -128,6 +148,7 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       })
     }
   }
+
   public onSaveBalance(FgWallet, isValidForm) {
     if (isValidForm) {
       FgWallet.UserID = this.userID;
@@ -146,6 +167,7 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       });
     }
   }
+
   onUsernameByDCIDorName(DcIDorName: any) {
     DcIDorName = DcIDorName.UserID;
     if (DcIDorName != "") {
@@ -167,6 +189,7 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       })
     }
   }
+
   getUserNameWithFreeKey(IDorName: any) {
     IDorName = IDorName.UserID;
     if (IDorName != "") {
@@ -189,6 +212,48 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       })
     }
   }
+
+  getUserNameWithSponserJoinees(DCIDorName: any) {
+    if (DCIDorName != "") {
+      this.franchiseService._getUserNameWithSponserJoinees(DCIDorName).subscribe(response => {
+        if (response.m_Item1) {
+          this.userID = response.m_Item3.UserID
+          this.fgUserSponserJoineesReq.patchValue({
+            UserName: response.m_Item3.UserName,
+            IsSponserJoineesReq: response.m_Item3.IsSponserJoineesReq
+          })
+        }
+        else {
+          this.fgUserSponserJoineesReq.patchValue({
+            UserName: ''
+          })
+          this.toastr.error(response.m_Item2);
+        }
+      }, err => {
+        this.toastr.error("Oops! There has been an error from server. Please try again.");
+      })
+    }
+  }
+
+  public onUpdateUserSponserJoineeReq(formUserSponserJoineesReq, isValidForm) {
+    if (isValidForm) {
+      formUserSponserJoineesReq.UserID = this.userID;
+      this.masterChargesService._updateUserSponserJoineeRequired(formUserSponserJoineesReq.UserID, formUserSponserJoineesReq.IsSponserJoineesReq).subscribe(response => {
+        if (response.m_Item1) {
+          this.isShowModal = 1;
+          this.fgUserSponserJoineesReq.reset();
+          this.toastr.success(response.m_Item2);
+        }
+        else {
+          this.toastr.error(response.m_Item2);
+        }
+      }, err => {
+        console.log(err);
+        this.toastr.error("Error while updating sponser joinees required status. Please try again.");
+      });
+    }
+  }
+
   public onSaveLoanWaiveOff(fgLoanWaive, isValidForm) {
     if (isValidForm) {
       fgLoanWaive.UserID = this.userID;
@@ -207,6 +272,7 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       });
     }
   }
+
   public onSaveFreeToPaidKey(fgFreeToPaid, isValidForm) {
     if (isValidForm) {
       fgFreeToPaid.UserID = this.userID;
@@ -225,6 +291,7 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       });
     }
   }
+
   createmasterScreenForm() {
     this.masterScreenForm = this.fb.group({
       MasterID: [''],
@@ -339,6 +406,7 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
     })
 
   }
+
   onEditFranchise(frmdata: any, isValidForm) {
     if (isValidForm) {
       this.apiManager.postAPI(API.EDITFRANCHISE, frmdata).subscribe(response => {
