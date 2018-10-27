@@ -171,6 +171,8 @@ export class API {
   public static STUDENTMAPPINGDETAILS = 'studentmapping/GetStudentMappingDetails';
   
   public static RENEWLOANACCOUNT = 'renewloanaccount/RenewLoanAccount';
+  public static UPLOADIMAGES = 'uploadimages/SaveImages';
+  public static GETIMAGESTODIAPLAY = 'uploadimages/GetImagesByInstitute';
 
   // EXTERNAL API CALLERS
 

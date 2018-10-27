@@ -11,29 +11,38 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class SchoolService {
 
-    constructor(private httpService: HttpService,
-      private http: HttpClient,
-      private sharedService: SharedService,
-      private toastManager: ToastsManager) {
-    }
+  constructor(private httpService: HttpService,
+    private http: HttpClient,
+    private sharedService: SharedService,
+    private toastManager: ToastsManager) {
+  }
 
-    _getSchoolDetails() {
-        return this.httpService
-          .get(API.GETSCHOOLDETAILS)
-          .map(res => this.extractData(res, true)).catch((error: any) => {
-            return Observable.throw(new Error(error.status));
-          });
-      }
-      private extractData(res: Response, show?: boolean) {
-        let data = res.json();
-        let msg = data.message;
-        if (show && msg) {
-          this.toastManager.success(msg);
-        }
-        return data || {};
-      }
-    
-      private handleError(error: any): Promise<any> {
-        return Promise.reject(error.message || error);
-      }
+  _getSchoolDetails() {
+    return this.httpService
+      .get(API.GETSCHOOLDETAILS)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  _getImagesDisplay(postData) {
+    return this.httpService
+      .get(API.GETIMAGESTODIAPLAY + '?InstituteName=' + postData)
+      .map(res => this.extractData(res, true)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
+  private extractData(res: Response, show?: boolean) {
+    let data = res.json();
+    let msg = data.message;
+    if (show && msg) {
+      this.toastManager.success(msg);
+    }
+    return data || {};
+  }
+
+  private handleError(error: any): Promise<any> {
+    return Promise.reject(error.message || error);
+  }
 }

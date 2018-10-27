@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import { Injectable } from "@angular/core";
 import {
   Http,
   ConnectionBackend,
@@ -9,11 +9,11 @@ import {
   ResponseContentType,
   Request
 } from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import {ToastsManager} from "ng2-toastr";
+import { Observable } from "rxjs/Observable";
+import { ToastsManager } from "ng2-toastr";
 import "rxjs/Rx";
-import {SharedService} from "./shared-service/shared.service";
-import {AppConstant, BaseUrl, Logger, Status} from "./constants/base-constants";
+import { SharedService } from "./shared-service/shared.service";
+import { AppConstant, BaseUrl, Logger, Status } from "./constants/base-constants";
 
 @Injectable()
 export class HttpService extends Http {
@@ -156,6 +156,34 @@ export class HttpService extends Http {
       });
   }
 
+  postWithFileModified(url: string, postData: any, filesObj: any[], options?: RequestOptionsArgs): Observable<any> {
+    this.requestInterceptor();
+    let formData: FormData = new FormData();
+    for (var obj of filesObj) {
+      let imgFilesObjs = obj;
+      formData.append("file", imgFilesObjs, imgFilesObjs.name);
+    }
+
+    if (postData !== "" && postData !== undefined && postData !== null) {
+      for (var property in postData) {
+        if (postData.hasOwnProperty(property)) {
+          formData.append(property, postData[property]);
+        }
+      }
+    }
+
+    return super.post(this.getFullUrl(url), formData, this.requestOptions(options))
+      .catch(this.onCatch)
+      .do((res: Response) => {
+        this.onSubscribeSuccess(res);
+      }, (error: any) => {
+        this.onSubscribeError(error);
+      })
+      .finally(() => {
+        this.onFinally();
+      });
+  }
+
   /**
    * Performs a request with `put` http method.
    * @param url
@@ -260,7 +288,7 @@ export class HttpService extends Http {
 
   createHeaders() {
     const token = this.sharedService.isLoggedIn() ? this.sharedService.getToken() : AppConstant.staticToken;
-    let headers = new Headers(token ? {'Authorization': `bearer ${token}`} : null);
+    let headers = new Headers(token ? { 'Authorization': `bearer ${token}` } : null);
     headers.append("Accept", 'application/json');
     return headers
   }

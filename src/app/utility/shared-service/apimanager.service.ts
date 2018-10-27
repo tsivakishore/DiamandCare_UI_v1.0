@@ -30,6 +30,15 @@ export class APIManager {
     }
   }
 
+  postAPIModified(endPoint, params = {}, files?: any[], showToast?): Observable<any> {
+    let canShowToast = (showToast != null ? showToast : true)
+    if (files == null) {
+      return this.httpService.post(endPoint, params).map(res => this.extractData(res, canShowToast));
+    } else {
+      return this.httpService.postWithFileModified(endPoint, params, files).map(res => this.extractData(res, canShowToast));
+    }
+  }
+
   putAPI(endPoint, params, files?: any[], showToast?): Observable<any> {
     if (files == null) {
       return this.httpService.put(endPoint, params).map(res => this.extractData(res, true));
