@@ -158,6 +158,7 @@ export class API {
   public static GENERATELOANOTP = 'studentmapping/GenerateLoanOTP';
   public static VERIFYSTUDENTOTP = 'studentmapping/VerifyStudentOTP';
   public static GETAGAINSTTYPE='Shared/GetAgainstType';
+  public static UPDATEWITHDRAWFUNDS = 'wallet/UpdateWithdrawFunds';
 
   //Display Screens
   public static GETSCREENMASTERDETAILS = 'displayscreens/GetScreenMasterDetails';

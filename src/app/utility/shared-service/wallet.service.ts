@@ -48,7 +48,7 @@ export class WalletService {
             .map(res => this.extractData(res, true)).catch((error: any) => {
                 return Observable.throw(new Error(error.status));
             });
-    }
+    }    
     _getRejectedWithdrawalTransactions() {
         return this.httpService
             .get(API.GETREJECTEDWITHDRAWALTRANSACTIONS)

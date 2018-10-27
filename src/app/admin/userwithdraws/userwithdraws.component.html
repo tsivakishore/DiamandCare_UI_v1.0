@@ -10,6 +10,17 @@
         <div class="clearfix"></div>
         <div class="modal-body" style="height: 50px;">
           <div class="col-md-12">
+              <div class="margin-top-10 col-xs-12 col-md-6">
+                  <div class="label" style="color: #fff;">Transfer Status</div>
+                  <div class="clearfix"></div>
+                  <select class="form-control ddlstyle" formControlName="TransferStatusID" required>
+                    <option [ngValue]="null" disabled selected>--Select Transfer Status--</option>
+                    <option *ngFor="let walletWithdrawal of listOfTransferStatus" value="{{walletWithdrawal.ID}}">{{walletWithdrawal.Status}}</option>
+                  </select>
+                  <div class="input-validation-msg">
+                    <!-- <validation *ngIf="isRequiredField(frmFeeMaster.get('TransferStatusID'))" [errMsg]="'Please select course master' | translate"></validation> -->
+                  </div>
+                </div>
             <div class="clearfix"></div>
             <div class="margin-top-15 col-md-12">
               <div>
@@ -72,10 +83,9 @@
         <p-dataTable [value]="WalletWithdrawals" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
           <p-column field="UserName" header="UserName" [sortable]="true"></p-column>
           <p-column field="WithdrawAmount" header="Withdraw Amount" [sortable]="true"></p-column>
-          <p-column field="TransferBy" header="Transfer By" [sortable]="true"></p-column>
+          <p-column field="TransferByName" header="Transfer By" [sortable]="true"></p-column>
           <p-column field="TransferOn" header="Transfer Date" [sortable]="true"></p-column>
-          <p-column field="TransferStatusID" header="Transfer Status ID" [sortable]="true"></p-column>
-          <p-column field="Purpose" header="Purpose" [sortable]="true"></p-column>
+          <p-column field="TransferStatus" header="Transfer Status" [sortable]="true"></p-column>
           <p-column [style]="{'width':'100px'}" header="Edit" [sortable]="true">
             <ng-template let-data="rowData" pTemplate="body" let-ri="rowIndex">
               <div class="col-md-12" style="margin-left: -30px;">
@@ -102,10 +112,9 @@
         <p-dataTable [value]="ApprovedList" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
           <p-column field="UserName" header="UserName" [sortable]="true"></p-column>
           <p-column field="WithdrawAmount" header="Withdraw Amount" [sortable]="true"></p-column>
-          <p-column field="TransferBy" header="Transfer By" [sortable]="true"></p-column>
+          <p-column field="TransferByName" header="Transfer By" [sortable]="true"></p-column>
           <p-column field="TransferOn" header="Transfer Date" [sortable]="true"></p-column>
-          <p-column field="TransferStatusID" header="Transfer Status ID" [sortable]="true"></p-column>
-          <p-column field="Purpose" header="Purpose" [sortable]="true"></p-column>
+          <p-column field="TransferStatus" header="Transfer Status" [sortable]="true"></p-column>
         </p-dataTable>
       </div>
     </div>
@@ -116,17 +125,16 @@
   <div class="confirm-modal-overay" *ngIf="isShowModal == 2 || isShowModal == 3" (click)="closeForm()"></div>
   <div class="clearfix"></div>
   <div class="transaction-history-table box-shadow"></div>
-  <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">Rected Withdrawals</h3>
+  <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">Rejcted Withdrawals</h3>
   <div class="row">
     <div class="col-md-12">
       <div style="overflow: auto;">
         <p-dataTable [value]="RejectedList" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
           <p-column field="UserName" header="UserName" [sortable]="true"></p-column>
           <p-column field="WithdrawAmount" header="Withdraw Amount" [sortable]="true"></p-column>
-          <p-column field="TransferBy" header="Transfer By" [sortable]="true"></p-column>
+          <p-column field="TransferByName" header="Transfer By" [sortable]="true"></p-column>
           <p-column field="TransferOn" header="Transfer Date" [sortable]="true"></p-column>
-          <p-column field="TransferStatusID" header="Transfer Status ID" [sortable]="true"></p-column>
-          <p-column field="Purpose" header="Purpose" [sortable]="true"></p-column>
+          <p-column field="TransferStatus" header="Transfer Status" [sortable]="true"></p-column>
         </p-dataTable>
       </div>
     </div>
