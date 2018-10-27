@@ -217,6 +217,13 @@ export class MysecretkeysComponent extends BaseComponent implements OnInit {
       return "Free";
   }
 
+  checkUsedKeyHidden(status: string) {
+    if (status === "Used")
+      return false;
+    else if (status === "Issued")
+      return true;
+  }
+
   closeForm() {
     this.isShowModal = 1;
   }

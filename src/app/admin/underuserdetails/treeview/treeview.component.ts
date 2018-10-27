@@ -95,7 +95,7 @@ export class TreeviewComponent extends BaseComponent implements OnInit {
 
         tooltip.style("visibility", "visible")
           //.text(d.data.name)
-          .html(d.data.DcID + "<br/>" + d.data.FirstName + " " + d.data.LastName + "<br/>" + "Level: " + d.data.Level + "<br/>" + "Phone: " + d.data.PhoneNumber)
+          .html(d.data.DcID + "<br/>" + d.data.FirstName + " " + d.data.LastName + "<br/>" + "GROUP: " + d.data.Level)
       })
       .on("mousemove", function () {
         return tooltip

@@ -50,6 +50,8 @@ export class ReportsComponent extends BaseComponent implements OnInit {
   maxToDate: Date;
   EXCEL_EXTENSION: string = 'xlsx';
   defaultReportType: string = "";
+  data: any[];
+  cols: any[];
 
   constructor(private fb: FormBuilder,
     private sharedService: SharedService,
@@ -102,8 +104,10 @@ export class ReportsComponent extends BaseComponent implements OnInit {
     if (isValid) {
       if (formParam.ReportType == "")
         formParam.ReportType = this.defaultReportType;
+      this.buildColumns(formParam.ReportType);
       this.apiManager.postAPI(API.DOWNLOADREPORTS, formParam).subscribe((response: any) => {
         if (!!response && response.length > 0) {
+          this.data = response;
           let date = new Date();
           const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(response);
           const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
@@ -118,6 +122,53 @@ export class ReportsComponent extends BaseComponent implements OnInit {
     }
     else {
       this.toastr.error("Form is not valid");
+    }
+  }
+
+  buildColumns(reportType: string) {
+    if (reportType === "All Loan Payments") {
+      this.cols = [
+        { field: 'vin', header: 'Vin' },
+        { field: 'year', header: 'Year' },
+        { field: 'brand', header: 'Brand' },
+        { field: 'color', header: 'Color' }
+      ];
+    }
+    else if (reportType === "Loan Payments") {
+
+    }
+    else if (reportType === "All Loan Details") {
+
+    }
+    else if (reportType === "Loan Details") {
+
+    }
+    else if (reportType === "All Used Secret Keys") {
+
+    }
+    else if (reportType === "Used Secret Keys") {
+
+    }
+    else if (reportType === "All Issued Secret Keys") {
+
+    }
+    else if (reportType === "Issued Secret Keys") {
+
+    }
+    else if (reportType === "All Wallet Transactions") {
+
+    }
+    else if (reportType === "Wallet Transactions") {
+
+    }
+    else if (reportType === "Transfer Payments") {
+
+    }
+    else if (reportType === "All Commissions Log") {
+
+    }
+    else if (reportType === "Commissions Log") {
+
     }
   }
 
