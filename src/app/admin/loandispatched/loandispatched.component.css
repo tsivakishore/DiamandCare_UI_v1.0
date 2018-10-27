@@ -22,6 +22,14 @@
     color: white;
 }
 
+.i-styles1{
+    background-color: #00c8aa;
+    border: 2px solid #00c8aa;
+    width: 30px;
+    text-align: center;    
+    color: white;
+}
+
 .h3top{
     margin-top: 0px !important;
     color: #dadae2 !important;

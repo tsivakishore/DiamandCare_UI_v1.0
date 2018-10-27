@@ -107,6 +107,7 @@ export class API {
   public static GETACTIVELOANSBYUSERNAMEorDCID = 'loan/GetActiveLoanDetailsByUserNameorDCID';
   public static GETTRANSFERPEDNIGLOANSBYDCIDORUSERNAME = 'loan/GetLoansAmountTransferPendingByDCIDorName';
   public static GETTRANSFEREDLOANS = 'loan/GetLoansAmountTransfered';
+  public static GETLOANSAMOUNTTRANSFERPENDINGDOWNLOAD = 'loan/GetLoansAmountTransferPendingDownload';
   public static GETTRANSFERREJECTEDLOANS = 'loan/GetLoansAmountTransferRejected';
   public static GETTRANSFERREJECTEDLOANSBYDCIDORUSERNAME = 'loan/GetLoansAmountTransferRejectedByDCIDorName';
   public static GETTRANSFEREDLOANSBYDCIDORUSERNAME = 'loan/GetLoansAmountTransferedByDCIDorName';

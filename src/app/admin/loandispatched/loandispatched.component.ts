@@ -10,6 +10,10 @@ import { TranslateService } from "../../utility/translate/translate.service";
 import { style, transition, animate, trigger } from "@angular/animations";
 import { LoanEarnsService } from "../../utility/shared-service/loanEarns.service";
 import { CommonService } from "../../utility/shared-service/common.service";
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+import * as CellObject from 'xlsx'
+import { write } from 'xlsx-style';
 
 @Component({
   selector: 'app-loandispatched',
@@ -35,6 +39,7 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
   isShowModal: number = 1;
 
   listOfTransferPendingLoans: any[];
+  listOfTransferPendingLoansDownload: any[];
   listOfTransferedLoans: any[];
   listOfTransferRejectedLoans: any[];
   listOfTransferStatus: any[];
@@ -44,6 +49,7 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
   OriginalTransferPendingLoans: any[];
   OriginalTransferedLoans: any[];
   OriginalTransferRejectedLoans: any[];
+  EXCEL_EXTENSION: string = 'xlsx';
 
   constructor(private sharedService: SharedService,
     private loanEarnsService: LoanEarnsService,
@@ -100,6 +106,29 @@ export class LoandispatchedComponent extends BaseComponent implements OnInit {
       }
       else {
         this.listOfTransferedLoans = [];
+      }
+    }, err => {
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
+
+  public downloadTransferPendingLoans() {
+    this.sharedService.setLoader(true);
+    this.loanEarnsService._getLoansAmountTransferedDownload().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.listOfTransferPendingLoansDownload = [];
+        this.listOfTransferPendingLoansDownload = res.m_Item3;
+
+        let date = new Date();
+        const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.listOfTransferPendingLoansDownload);
+        const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+        XLSX.writeFile(workbook, 'TransferPendingLoans_' + date.getDate() + (date.getMonth() + 1) + date.getFullYear() + '_' + date.getTime() + '.' + this.EXCEL_EXTENSION, { bookType: 'xlsx', type: 'buffer' });
+
+      }
+      else {
+        this.listOfTransferPendingLoansDownload = [];
       }
     }, err => {
       console.log(err);

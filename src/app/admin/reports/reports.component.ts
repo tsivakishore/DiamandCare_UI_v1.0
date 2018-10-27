@@ -108,10 +108,10 @@ export class ReportsComponent extends BaseComponent implements OnInit {
       this.apiManager.postAPI(API.DOWNLOADREPORTS, formParam).subscribe((response: any) => {
         if (!!response && response.length > 0) {
           this.data = response;
-          let date = new Date();
-          const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(response);
-          const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-          XLSX.writeFile(workbook, formParam.ReportType + '_' + date.getDate() + (date.getMonth() + 1) + date.getFullYear() + '_' + date.getTime() + '.' + this.EXCEL_EXTENSION, { bookType: 'xlsx', type: 'buffer' });
+          // let date = new Date();
+          // const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(response);
+          // const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+          // XLSX.writeFile(workbook, formParam.ReportType + '_' + date.getDate() + (date.getMonth() + 1) + date.getFullYear() + '_' + date.getTime() + '.' + this.EXCEL_EXTENSION, { bookType: 'xlsx', type: 'buffer' });
         }
         else
           this.toastr.error('No records found');
@@ -128,23 +128,78 @@ export class ReportsComponent extends BaseComponent implements OnInit {
   buildColumns(reportType: string) {
     if (reportType === "All Loan Payments") {
       this.cols = [
-        { field: 'vin', header: 'Vin' },
-        { field: 'year', header: 'Year' },
-        { field: 'brand', header: 'Brand' },
-        { field: 'color', header: 'Color' }
+        { field: 'LoanID', header: 'Loan ID' },
+        { field: 'UserName', header: 'User Name' },
+        { field: 'LoanAmount', header: 'Loan Amount' },
+        { field: 'IssuedAmount', header: 'Issued Amount' },
+        { field: 'AmountToPay', header: 'Amount To Pay' },
+        { field: 'AmountPaid', header: 'Amount Paid' },
+        { field: 'AdminCharges', header: 'Admin Charges' },
+        { field: 'PrePaidLoanCharges', header: 'Prepaid Loan Charges' },
+        { field: 'LoanType', header: 'Loan Type' },
+        { field: 'LoanApprovalStatus', header: 'Approval Status' },
+        { field: 'TransferStatus', header: 'Transfer Status' },
+        { field: 'LoanStatus', header: 'Loan Status' }
       ];
     }
     else if (reportType === "Loan Payments") {
-
+      this.cols = [
+        { field: 'LoanID', header: 'Loan ID' },
+        { field: 'UserName', header: 'User Name' },
+        { field: 'LoanAmount', header: 'Loan Amount' },
+        { field: 'IssuedAmount', header: 'Issued Amount' },
+        { field: 'AmountToPay', header: 'Amount To Pay' },
+        { field: 'AmountPaid', header: 'Amount Paid' },
+        { field: 'AdminCharges', header: 'Admin Charges' },
+        { field: 'PrePaidLoanCharges', header: 'Prepaid Loan Charges' },
+        { field: 'LoanType', header: 'Loan Type' },
+        { field: 'LoanApprovalStatus', header: 'Approval Status' },
+        { field: 'TransferStatus', header: 'Transfer Status' },
+        { field: 'LoanStatus', header: 'Loan Status' }
+      ];
     }
     else if (reportType === "All Loan Details") {
-
+      this.cols = [
+        { field: 'LoanID', header: 'Loan ID' },
+        { field: 'UserName', header: 'User Name' },
+        { field: 'LoanAmount', header: 'Loan Amount' },
+        { field: 'IssuedAmount', header: 'Issued Amount' },
+        { field: 'AmountToPay', header: 'Amount To Pay' },
+        { field: 'AmountPaid', header: 'Amount Paid' },
+        { field: 'AdminCharges', header: 'Admin Charges' },
+        { field: 'PrePaidLoanCharges', header: 'Prepaid Loan Charges' },
+        { field: 'LoanType', header: 'Loan Type' },
+        { field: 'LoanApprovalStatus', header: 'Approval Status' },
+        { field: 'TransferStatus', header: 'Transfer Status' },
+        { field: 'LoanStatus', header: 'Loan Status' }
+      ];
     }
     else if (reportType === "Loan Details") {
-
+      this.cols = [
+        { field: 'LoanID', header: 'Loan ID' },
+        { field: 'UserName', header: 'User Name' },
+        { field: 'LoanAmount', header: 'Loan Amount' },
+        { field: 'IssuedAmount', header: 'Issued Amount' },
+        { field: 'AmountToPay', header: 'Amount To Pay' },
+        { field: 'AmountPaid', header: 'Amount Paid' },
+        { field: 'AdminCharges', header: 'Admin Charges' },
+        { field: 'PrePaidLoanCharges', header: 'Prepaid Loan Charges' },
+        { field: 'LoanType', header: 'Loan Type' },
+        { field: 'LoanApprovalStatus', header: 'Approval Status' },
+        { field: 'TransferStatus', header: 'Transfer Status' },
+        { field: 'LoanStatus', header: 'Loan Status' }
+      ];
     }
     else if (reportType === "All Used Secret Keys") {
-
+      this.cols = [
+        { field: 'UserName', header: 'User Name' },
+        { field: 'RegKey', header: 'Reg Key' },
+        { field: 'PhoneNumber', header: 'Phone Number' },
+        { field: 'RegKeyStatus', header: 'Reg Key Status' },
+        { field: 'CreateDate', header: 'Create Date' },
+        { field: 'KeyType', header: 'Key Type' },
+        { field: 'KeyCost', header: 'Key Cost' }
+      ];
     }
     else if (reportType === "Used Secret Keys") {
 
