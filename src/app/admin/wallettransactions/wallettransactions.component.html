@@ -1,10 +1,10 @@
 <div class="transaction-history-container" @slideUp>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="col-md-6 col-sm-6 col-xs-6">
+      <div class="col-md-6 col-sm-12 col-xs-12">
         <h3 class="col-md-6 col-sm-12 col-xs-12" style="color: #00c8aa;margin-top: 15px;font-size: large;">All Fund Requests</h3>
       </div>
-      <div class="col-md-6 col-sm-6 col-xs-6">
+      <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="col-md-3 col-sm-3 col-xs-3">
           <button type="button" class="btn btn-primary btnwithdraw" (click)="OpenWithdrawFundsPopup()">Withdraw Funds</button>
         </div>
@@ -260,20 +260,9 @@
         <p-dataTable [value]="WalletWithdrawals" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
           <p-column field="UserName" header="UserName" [sortable]="true"></p-column>
           <p-column field="WithdrawAmount" header="Withdraw Amount" [sortable]="true"></p-column>
-          <p-column field="TransferBy" header="Transfer By" [sortable]="true"></p-column>
+          <p-column field="TransferByName" header="Transfer By" [sortable]="true"></p-column>
           <p-column field="TransferOn" header="Transfer Date" [sortable]="true"></p-column>
-          <p-column field="TransferStatusID" header="Transfer Status ID" [sortable]="true"></p-column>
-          <<<<<<< HEAD <p-column field="Purpose" header="Purpose" [sortable]="true">
-            </p-column>
-            =======
-            <p-column field="Purpose" header="Purpose" [sortable]="true">
-              <ng-template let-WalletWithdrawals="rowData" pTemplate="body" let-ri="rowIndex">
-                <div class="col-md-12" style="margin-left: -15px;">
-                  {{getFormattedDate(WalletWithdrawals.UpdatedOn)}}
-                </div>
-              </ng-template>
-            </p-column>
-            >>>>>>> ab283a8d4101659f7eaad8837cf18cfcea353b9c
+          <p-column field="TransferStatus" header="Transfer Status" [sortable]="true"></p-column>
         </p-dataTable>
       </div>
     </div>
@@ -291,10 +280,10 @@
         <p-dataTable [value]="WalletExpensesList" [loading]="false" [rows]="10" [style]="{'height':'500px'}" [paginator]="true" [pageLinks]="3"
           [rowsPerPageOptions]="[5,10,20]" #dt>
           <p-column field="AgainstType" header="Against Type" [sortable]="true" [filter]="true" filterMatchMode="equals">
-            <template pTemplate="filter" let-col>
+            <ng-template pTemplate="filter" let-col>
               <p-dropdown [options]="againstTypevalues" [style]="{'width':'100%','height':'100%'}" placeholder="Select Against Type" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
                 styleClass="ui-column-filter"></p-dropdown>
-            </template>
+            </ng-template>
           </p-column>
           <p-column field="Against" header="Against" [sortable]="true" [filter]="true"></p-column>
           <p-column field="TransactionType" header="Transaction Type" [sortable]="true" [filter]="true"></p-column>

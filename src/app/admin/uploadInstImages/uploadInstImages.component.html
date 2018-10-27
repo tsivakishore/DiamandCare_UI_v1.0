@@ -1,3 +1,9 @@
-<p>
-  uploadInstImages works!
-</p>
+<h3 class="first">Upload Images</h3>
+<p-fileUpload name="myFile[]" maxFileSize="1000000000" customUpload="true" (uploadHandler)="myUploader($event)" (onUpload)="onUpload($event)"
+  multiple="multiple" accept="image/*">
+  <ng-template pTemplate="content">
+    <ul *ngIf="uploadedFiles.length">
+      <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+    </ul>
+  </ng-template>
+</p-fileUpload>

@@ -25,13 +25,13 @@
 
 @media only screen and (max-width: 767px) and (min-width: 320px){
     .btntransfer{
-        margin-top: 35% !important;
-        margin-left: 15% !important;
+        /* margin-top: 35% !important; */
+        margin-left: 220% !important;
     }
 
     .btnwithdraw{
-        margin-top: 325% !important;
-        margin-left: 250% !important;
+        /* margin-top: 325% !important; */
+        margin-left: 25% !important;
     }
 
     .btnapprove{

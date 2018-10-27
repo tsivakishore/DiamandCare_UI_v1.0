@@ -9,7 +9,10 @@ import { ToastModule } from "ng2-toastr";
 import { RegisterComponent } from './register/register.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { DataTableModule, ChartModule, DialogModule, DropdownModule, TooltipModule, TabMenuModule, BreadcrumbModule } from 'primeng/primeng';
+import {
+  DataTableModule, ChartModule, DialogModule, DropdownModule, TooltipModule, TabMenuModule,
+  BreadcrumbModule, GalleriaModule, CarouselModule
+} from 'primeng/primeng';
 import { LandingComponent } from './landing/landing.component';
 import { CompleteIcoComponent } from './complete-ico/complete-ico.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
@@ -35,7 +38,9 @@ import { LoansflowComponent } from './loansflow/loansflow.component';
     ToastModule.forRoot(),
     UserAuthRoutingModule,
     TabMenuModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    GalleriaModule,
+    CarouselModule
   ],
   declarations: [
     LoginComponent,

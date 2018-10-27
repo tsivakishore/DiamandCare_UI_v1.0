@@ -12,7 +12,8 @@ import { UserloandetailsComponent } from './userloandetails/userloandetails.comp
 import { UtilityModule } from "../utility/utility.module";
 import {
   DataTableModule, DropdownModule, InputSwitchModule, MessagesModule,
-  SharedModule, TooltipModule, CalendarModule, DataListModule, MultiSelectModule, OrganizationChartModule
+  SharedModule, TooltipModule, CalendarModule, DataListModule, MultiSelectModule, OrganizationChartModule,
+  FileUploadModule
 } from "primeng/primeng";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SettingsComponent } from './settings/settings.component';
@@ -66,7 +67,8 @@ import { RenewloanaccountComponent } from './renewloanaccount/renewloanaccount.c
     CalendarModule,
     DataListModule,
     MultiSelectModule,
-    OrganizationChartModule
+    OrganizationChartModule,
+    FileUploadModule
   ],
   declarations: [
     HeaderSidebarComponent,

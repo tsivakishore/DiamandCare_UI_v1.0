@@ -34,6 +34,7 @@ export class UserwithdrawsComponent extends BaseComponent implements OnInit {
   WalletWithdrawals: any[]
   ApprovedList: any[]
   RejectedList: any[]
+  listOfTransferStatus: any[]
   isShowModal: number = 1;
   fdFundRequest: FormGroup;
   frmTransferFunds: FormGroup;
@@ -62,6 +63,7 @@ export class UserwithdrawsComponent extends BaseComponent implements OnInit {
     this.UserDetails = this.sharedService.getUser();
     this.walletBalance = this.sharedService.getWalletBalance();
     this.walletHoldBalance = this.sharedService.getWalletHoldBalance();
+    this.GetLoanTransferStatus();
     this.getWithdrawalTransactions();
     this.getRejectedWithdrawalTransactions();
     this.getApprovedWithdrawalTransactions();
@@ -69,8 +71,10 @@ export class UserwithdrawsComponent extends BaseComponent implements OnInit {
 
   createWithdrawFundsForm() {
     this.frmWithdrawFunds = this.fb.group({
+      ID:new FormControl(''),
       AvlBalance: this.walletBalance,
       WithdrawAmount: ['', Validators.compose([Validators.required, Validators.min(1.00), Validators.max(this.walletBalance), Validators.pattern(CommonRegexp.NUMERIC_FLOAT_REGEXP)])],
+      TransferStatusID: new FormControl(null, Validators.compose([Validators.required])),
       Purpose: new FormControl(''),
     })
   }
@@ -82,10 +86,11 @@ export class UserwithdrawsComponent extends BaseComponent implements OnInit {
     this.frmWithdrawFunds.patchValue({
       ID: this.selectedRow.ID,
       AvlBalance: this.walletBalance,
-      WithdrawAmount: this.selectedRow.WithdrawAmount,
+      WithdrawAmount: this.selectedRow.WithdrawAmount,      
       Purpose: this.selectedRow.Purpose
     })
-
+    debugger;
+    this.frmWithdrawFunds.controls["TransferStatusID"].setValue(this.selectedRow.TransferStatusID, { onlySelf: true })
   }
 
   public getWithdrawalTransactions() {
@@ -110,7 +115,29 @@ export class UserwithdrawsComponent extends BaseComponent implements OnInit {
       this.sharedService.setLoader(false);
     })
   }
-
+   SubmitWithdrawFunds(frmWithdrawFunds, isValidForm) {
+    if (isValidForm) {
+      this.apiManager.postAPI(API.UPDATEWITHDRAWFUNDS, frmWithdrawFunds).subscribe(response => {
+        if (response.m_Item1) {
+          this.isShowModal = 1;
+          this.toastr.success(response.m_Item2);
+          this.frmWithdrawFunds.reset();
+          this.ngOnInit();
+          //this.getWalletBalance();
+        }
+        else {
+          this.toastr.error(response.m_Item2);
+          this.isShowModal = 1;
+        }
+      }, err => {
+        this.isShowModal = 1;
+        this.toastr.error("Oops! There has been an error while transfer funds.Please try again.");
+      });
+    }
+    else {
+      this.toastr.error("Form is not valid");
+    }
+  }
   public getApprovedWithdrawalTransactions() {
     this.sharedService.setLoader(true);
     this.walletServ._getApprovedWithdrawalTransactions().subscribe((res: any) => {
@@ -127,7 +154,16 @@ export class UserwithdrawsComponent extends BaseComponent implements OnInit {
     this.isShowModal = 1;
   }
 
-   
+  public GetLoanTransferStatus() {
+    this.commonService._getLoanTransferStatus().subscribe((res: any) => {
+      if (res.m_Item1) {
+        this.listOfTransferStatus = res.m_Item3;
+      }
+    }, err => {
+      console.log(err);
+    })
+  }
+
   public getWalletBalance() {
     this.commonService._getWalletBalance().then((response: any) => {
       if (response.m_Item1) {

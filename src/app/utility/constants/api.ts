@@ -159,6 +159,7 @@ export class API {
   public static GENERATELOANOTP = 'studentmapping/GenerateLoanOTP';
   public static VERIFYSTUDENTOTP = 'studentmapping/VerifyStudentOTP';
   public static GETAGAINSTTYPE='Shared/GetAgainstType';
+  public static UPDATEWITHDRAWFUNDS = 'wallet/UpdateWithdrawFunds';
 
   //Display Screens
   public static GETSCREENMASTERDETAILS = 'displayscreens/GetScreenMasterDetails';
@@ -172,6 +173,8 @@ export class API {
   public static STUDENTMAPPINGDETAILS = 'studentmapping/GetStudentMappingDetails';
   
   public static RENEWLOANACCOUNT = 'renewloanaccount/RenewLoanAccount';
+  public static UPLOADIMAGES = 'uploadimages/SaveImages';
+  public static GETIMAGESTODIAPLAY = 'uploadimages/GetImagesByInstitute';
 
   // EXTERNAL API CALLERS
 

@@ -295,8 +295,7 @@ export class ReportsComponent extends BaseComponent implements OnInit {
       var file = new Blob([documentContent], {
         type: contentType
       });
-      var fileURL = URL.createObjectURL(file);
-
+     
       var fileURL = URL.createObjectURL(file);
       var a = document.createElement('a');
       a.href = fileURL;
