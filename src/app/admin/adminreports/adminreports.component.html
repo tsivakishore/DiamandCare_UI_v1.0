@@ -1,3 +1,58 @@
-<p>
-  adminreports works!
-</p>
+<div class="adminreports-container" @slideUp>
+  <div class="adminreports-form">
+    <form [formGroup]="adminReportsForm">
+      <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">Admin Reports</h3>
+      <div class="clearfix"></div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="label" class="lblcolor">From Date</div>
+            <div class="clearfix"></div>
+            <p-calendar formControlName="FromDate" [minDate]="minFromDate" [maxDate]="maxFromDate" [readonlyInput]="true" dateFormat="dd/mm/yy"
+              [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2090" (onSelect)="FromDateChange(reportsForm.value.FromDate)"></p-calendar>
+            <div class="input-validation-msg">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="label" class="lblcolor">To Date</div>
+            <div class="clearfix"></div>
+            <p-calendar formControlName="ToDate" [minDate]="minToDate" [maxDate]="maxToDate" [readonlyInput]="true" dateFormat="dd/mm/yy"
+              [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2090" (onSelect)="ToDateChange(reportsForm.value.ToDate)"></p-calendar>
+            <div class="input-validation-msg">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="label" class="lblcolor">User Status</div>
+            <div class="clearfix"></div>
+            <select class="form-control dropdownstyle" formControlName="UserStatus">
+              <option *ngFor="let userStatus of lstUserStatus">{{userStatus.Description}}</option>
+            </select>
+            <div class="input-validation-msg">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-md-12 col-sm-12 col-xs-12 margin-top-15">
+        <button type="button" class="btn btn-primary" (click)="DownloadExcelReports(adminReportsForm.value,adminReportsForm.valid)" [disabled]="!adminReportsForm.valid">Show Details</button>
+      </div>
+      <div class="clearfix"></div>
+
+      <p-dataTable #dataTable [value]="data" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+        <p-header>
+          <div class="ui-helper-clearfix">
+            <button type="button" pButton icon="fa-file-o" iconPos="right" label="CSV Download" (click)="dataTable.exportCSV()" style="float:right">
+            </button>
+          </div>
+        </p-header>
+        <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header"></p-column>
+      </p-dataTable>
+    </form>
+  </div>
+</div>
+<div class="clearfix"></div>
+<admin-footer></admin-footer>

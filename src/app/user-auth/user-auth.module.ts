@@ -22,6 +22,7 @@ import { ContactusComponent } from './contactus/contactus.component';
 import { SphotogalleryComponent } from './sphotogallery/sphotogallery.component';
 import { EphotogalleryComponent } from './ephotogallery/ephotogallery.component';
 import { LoansflowComponent } from './loansflow/loansflow.component';
+import { LegalDocumentsComponent } from './legal-documents/legal-documents.component';
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import { LoansflowComponent } from './loansflow/loansflow.component';
     SphotogalleryComponent,
     EphotogalleryComponent,
     LoansflowComponent,
+    LegalDocumentsComponent,
     ImageUploadComponent],
   providers: [UserAuthService],
   exports: [

@@ -14,9 +14,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.items = [
       { label: 'Home', icon: 'fa fa-home fa-fw', routerLink: ['/home'] },
-      { label: 'Institutions Gallery', icon: 'fa fa-home fa-fw', routerLink: ['/sphotogallery'] },
-      { label: 'Employees Gallery', icon: 'fa fa-home fa-fw', routerLink: ['/ephotogallery'] },
-      { label: 'Loans Flow Chart', icon: 'fa fa-fw fa-book', routerLink: ['/loansflow'] },
+      { label: 'Legal Documents', icon: 'fa fa-file fa-fw', routerLink: ['/legaldocs'] },
+      { label: 'Institutions Gallery', icon: 'fa fa-university fa-fw', routerLink: ['/sphotogallery'] },
+      { label: 'Employees Gallery', icon: 'fa fa-th fa-fw', routerLink: ['/ephotogallery'] },
+      { label: 'Loans Flow Chart', icon: 'fa fa-th-list fa-fw', routerLink: ['/loansflow'] },
       { label: 'Contact Us', icon: 'fa fa-fw fa-book', routerLink: ['/contactus'] },
       { label: 'Register', icon: 'fa fa-user-circle', routerLink: ['/register'] },
       { label: 'Login', icon: 'fa fa-sign-in', routerLink: ['/login'] }

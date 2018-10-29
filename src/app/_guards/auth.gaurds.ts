@@ -26,6 +26,7 @@ export class AuthGaurd implements CanActivate {
       rawUrl !== '/' + RouteConstants.INSTITUTIONSGALLERY &&
       rawUrl !== '/' + RouteConstants.CONTACTUS &&
       rawUrl !== '/' + RouteConstants.EMPLOYEESGALLERY &&
+      rawUrl !== '/' + RouteConstants.LEGALDOCS &&
       rawUrl !== '/' + RouteConstants.HOME &&
       rawUrl !== '/' + RouteConstants.LOANS &&
       rawUrl !== '/' ) {

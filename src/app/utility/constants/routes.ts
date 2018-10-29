@@ -6,6 +6,7 @@ export class RouteConstants {
   public static INSTITUTIONSGALLERY = 'sphotogallery';
   public static EMPLOYEESGALLERY = 'ephotogallery';
   public static LOANS = 'loansflow';
+  public static LEGALDOCS = 'legaldocs';
   public static DASHBOARD = 'dashboard';
   public static SECRETKEY = 'secretkey';
   public static MASTERSCREEN = 'masterscreen';
@@ -45,5 +46,5 @@ export class RouteConstants {
   public static ADMINREPORTS = 'adminreports';
   public static USERWITHDRAWS = 'userwithdraws';
   public static UPLOADINSTIMAGES = 'uploadInstImages';
-  public static RENEWLOANACCOUNT = 'renewloanaccount/:UserID';  
+  public static RENEWLOANACCOUNT = 'renewloanaccount/:UserID';
 }

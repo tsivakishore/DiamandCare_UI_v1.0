@@ -296,6 +296,10 @@ p-dropdown{
   color:#d6d6d6!important;
 }
 
+.ui-tabmenu {
+  width: 115% !important;
+}
+
 .ui-tabmenu .ui-tabmenu-nav > li {
   background: #00cdad !important;
 }

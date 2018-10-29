@@ -16,6 +16,7 @@ export class API {
   public static UPDATE_SECURE_LOGIN = 'user/updatesecurelogin';
   public static STATE = 'Shared/GetState';
   public static SCHOOLDETAILS = 'Shared/GetSchool';
+  public static USERSTATUS = 'Shared/GetUserStatus';
   public static SOURCEOFUSER = 'Shared/sourceofuser';
   public static ACCOUNTTYPES = 'Shared/accounttypes';
   public static BANKNAMES = 'Shared/banks';

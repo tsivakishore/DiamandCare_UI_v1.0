@@ -4790,6 +4790,8 @@ padding: 17px 20px 20px 20px; }
 .token-balance-container,
 .address-info-container,
 .settings-container,
+.legaldocs-container,
+.adminreports-container,
 .etherium-container {
   width: 100%;
   padding: 0px;
@@ -4908,6 +4910,32 @@ padding: 17px 20px 20px 20px; }
       padding-left: 10px !important; }
   .secretkey-container .PTB70 {
     color: #fff !important; }
+
+    /*************************************************************************/
+/*************************************************************************/
+.adminreports-container {
+  margin: 10px 5px 5px 2px;
+  background-color: #353c48;
+  padding: 0px !important;
+  width: calc(100% - 10px); }
+.adminreports-container .adminreports-form {
+  margin-top: 5px;
+  box-shadow: 0 0px 0px -4px rgba(0, 0, 0, 0.2), 0 0px 1px 0px rgba(0, 0, 0, 0.14), 0 0px 1px 0px rgba(0, 0, 0, 0.12);
+  padding-bottom: 10px; }
+  .adminreports-container .adminreports-form h3 {
+    font-weight: 500;
+    padding-top: 12px;
+    border-bottom: 2px solid #414354;
+    padding-bottom: 5px;
+    color: #00c8aa;
+    padding-left: 10px; }
+  .adminreports-container .adminreports-form .label {
+    font-weight: normal;
+    color: #fff !important; }
+  .adminreports-container .adminreports-form .col-md-12 {
+    padding-left: 10px !important; }
+.adminreports-container .PTB70 {
+  color: #fff !important; }
 
 /*************************************************************************/
 /*************************************************************************/
@@ -5031,6 +5059,74 @@ width: calc(100% - 10px);
       border-bottom: 0px solid #dadada !important; }
   .address-info-container .etherium-body h3 {
     border-bottom: 0px solid #dadada !important; }
+
+/*************************************************************************/
+/*************************************************************************/
+.legaldocs-container .legaldocs-list {
+  margin: 5px 5px 5px 2px;
+  /* background-color: #353c48; */
+  width: calc(100% - 10px);
+  box-shadow: 0 2px 0px -3px rgba(0, 0, 0, 0.2), 0 0px 0px 0px rgba(0, 0, 0, 0.14), 0 0px 3px 0px rgba(0, 0, 0, 0.12);
+  padding: 0px !important;
+  padding-bottom: 10px !important; }
+  .legaldocs-container .legaldocs-list h3 {
+    font-weight: 500;
+    padding-top: 12px;
+    border-bottom: 2px solid #414354;
+    padding-bottom: 5px;
+    margin-bottom: 0px;
+    padding-left: 10px !important;
+    color: #00c8aa; }
+  .legaldocs-container .legaldocs-list ul {
+    margin: 0;
+    padding: 0;
+    margin-top: 5px; }
+    .legaldocs-container .legaldocs-list ul li {
+      /* border-bottom: 1px solid #414354; */
+      padding-bottom: 7px;
+      list-style-type: none;
+      padding-top: 5px;
+      padding-left: 10px;
+      min-height: 52px;
+      margin-bottom: 5px;
+      cursor: pointer;
+      width: 100px !important;
+    }
+  .legaldocs-container .legaldocs-list ul li div {
+    cursor: pointer;
+    color: #1ecbe6; 
+    text-align: left;
+  }
+
+  .legaldocs-container .legaldocs-list ul div div:hover {
+  color: red;
+  font-weight: bold;
+  }
+
+  .legaldocs-container .legaldocs-list ul li small {
+    color: #fff !important; }
+.legaldocs-container .user-data {
+  margin: 5px 5px 5px 2px;
+  width: calc(100% - 10px);
+  background-color: #353c48;
+  box-shadow: 0 2px 0px -3px rgba(0, 0, 0, 0.2), 0 0px 0px 0px rgba(0, 0, 0, 0.14), 0 0px 3px 0px rgba(0, 0, 0, 0.12);
+  padding: 0px !important;
+  padding-bottom: 10px !important; }
+  .legaldocs-container .user-data h3 {
+    font-weight: 500;
+    padding-top: 12px;
+    border-bottom: 2px solid #414354;
+    padding-bottom: 5px;
+    margin-bottom: 0px;
+    padding-left: 10px !important;
+    color: #00c8aa; }
+  .legaldocs-container .user-data label {
+    color: #00c8aa;
+    font-weight: 400;
+    font-size: 13px; }
+  .legaldocs-container .user-data div {
+    color: #fff !important; }
+
 
 /*************************************************************************/
 /*************************************************************************/

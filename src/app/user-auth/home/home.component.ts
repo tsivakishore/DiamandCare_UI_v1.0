@@ -1,11 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewContainerRef } from '@angular/core';
-import { Router, ActivatedRoute } from "@angular/router";
-import { RouteConstants } from "../../utility/constants/routes";
-import { slideUp } from "../../admin/animation";
-import { APIManager } from "../../utility/shared-service/apimanager.service";
-import { BaseComponent } from "../../utility/base-component/base.component";
-import { ToastsManager } from "ng2-toastr";
-import { SharedService } from "../../utility/shared-service/shared.service";
+import { slideUp, dialog } from "../../admin/animation";
+import { style, transition, animate, trigger } from "@angular/animations";
 import { LoanEarnsService } from "../../utility/shared-service/loanEarns.service";
 
 @Component({
@@ -13,8 +8,20 @@ import { LoanEarnsService } from "../../utility/shared-service/loanEarns.service
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   providers: [LoanEarnsService],
-  animations: [slideUp]
+  animations: [
+    trigger('dialog', [
+      transition('void => *', [
+        style({ transform: 'scale3d(.8, .8, .8)' }),
+        animate(300)
+      ]),
+      transition('* => void', [
+        animate(200, style({ transform: 'scale3d(.0, .0, .0)' }))
+      ])
+    ]),
+    slideUp, dialog
+  ]
 })
+
 export class HomeComponent implements OnInit {
 
   constructor() {

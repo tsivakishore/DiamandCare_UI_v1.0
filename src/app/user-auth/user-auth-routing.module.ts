@@ -10,6 +10,7 @@ import { SphotogalleryComponent } from './sphotogallery/sphotogallery.component'
 import { EphotogalleryComponent } from './ephotogallery/ephotogallery.component';
 import { HomeComponent } from "./home/home.component";
 import { LoansflowComponent } from './loansflow/loansflow.component';
+import { LegalDocumentsComponent } from './legal-documents/legal-documents.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,11 @@ const routes: Routes = [
       {
         path: RouteConstants.LOANS,
         component: LoansflowComponent,
+        canActivate: [AuthGaurd]
+      },
+      {
+        path: RouteConstants.LEGALDOCS,
+        component: LegalDocumentsComponent,
         canActivate: [AuthGaurd]
       }
     ],

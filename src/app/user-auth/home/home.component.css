@@ -22,7 +22,7 @@
 
 @media only screen and (max-width: 767px) and (min-width: 320px){
     .myDIV {
-        border: 1px solid white;
+        border: 1px solid #353739;
         width: 95% !important;
         height: 100% !important;
         margin-left: 10px;
@@ -32,6 +32,6 @@
         text-align: -webkit-auto !important;
         color: white !important;
         margin-left: 5px !important;
-        font-size: large !important;
+        /* font-size: large !important; */
     }
 }
