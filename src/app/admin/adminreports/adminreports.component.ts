@@ -39,7 +39,7 @@ import { write } from 'xlsx-style';
 
 export class AdminreportsComponent extends BaseComponent implements OnInit {
   adminReportsForm: FormGroup;
-  lstUserStatus: any;
+  lstUserStatus: any[] = [];
   currentDate: string;
   minFromDate: Date;
   maxFromDate: Date;
@@ -70,7 +70,8 @@ export class AdminreportsComponent extends BaseComponent implements OnInit {
     this.currentDate = this.converDate(today);
     this.adminReportsForm.patchValue({
       FromDate: this.currentDate,
-      ToDate: this.currentDate
+      ToDate: this.currentDate,
+      //UserStatus: this.defaultStatus
     })
 
   }
@@ -79,7 +80,7 @@ export class AdminreportsComponent extends BaseComponent implements OnInit {
     this.adminReportsForm = this.fb.group({
       FromDate: [''],
       ToDate: [''],
-      UserStatus: ['']
+      UserStatusID: ['']
     })
   }
 
@@ -90,16 +91,91 @@ export class AdminreportsComponent extends BaseComponent implements OnInit {
       if (res.m_Item1) {
         debugger;
         this.lstUserStatus = res.m_Item3;
-        this.defaultStatus = this.lstUserStatus[0].UserStatusID;
-        this.adminReportsForm.controls['ReportType'].setValue(this.defaultStatus, { onlySelf: true });
+        this.lstUserStatus.push({ UserStatusID: 0, Status: 'All', Description: 'All' })
+        //this.defaultStatus = 'All';
+        this.adminReportsForm.controls['UserStatusID'].setValue(0, { onlySelf: true });
       }
     }, err => {
       this.sharedService.setLoader(false);
+    })
+  }
+  get dataLength() {
+    return this.data ? this.data.length : 0
+  }
+  FromDateChange(fromDate: Date) {
+    this.minToDate = fromDate;
+    this.maxToDate = new Date();
+    this.maxFromDate = new Date();
+    this.adminReportsForm.patchValue({
+      FromDate: this.converDate(fromDate)
+    })
+  }
+
+  ToDateChange(toDate: Date) {
+    this.adminReportsForm.patchValue({
+      ToDate: this.converDate(toDate)
     })
   }
 
   converDate(date: Date) {
     return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
   }
+  
+  DownloadExcelReports(formParam, isValid) {
+    if (isValid) {
+      this.buildColumns();
+      this.apiManager.postAPI(API.DOWNLOADUSERREPORTS, formParam).subscribe((response: any) => {
+        if (!!response && response.length > 0) {
+          this.data = response;
+          // let date = new Date();
+          // const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(response);
+          // const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+          // XLSX.writeFile(workbook, formParam.ReportType + '_' + date.getDate() + (date.getMonth() + 1) + date.getFullYear() + '_' + date.getTime() + '.' + this.EXCEL_EXTENSION, { bookType: 'xlsx', type: 'buffer' });
+        }
+        else
+          this.toastr.error('No records found');
+      }, err => {
+        console.log(err);
+        this.toastr.error("Error while downloading report.Please try again.");
+      });
+    }
+    else {
+      this.toastr.error("Form is not valid");
+    }
+  }
 
+  DownloadAllExcelReports() {    
+      this.buildColumns();
+      this.apiManager.getAPI(API.DOWNLOADALLUSERREPORTS).subscribe((response: any) => {
+        if (!!response && response.length > 0) {
+          this.data = response;         
+        }
+        else
+          this.toastr.error('No records found');
+      }, err => {
+        console.log(err);
+        this.toastr.error("Error while downloading report.Please try again.");
+      });  
+  }
+
+  buildColumns() {
+    this.cols = [
+      { field: 'UserName', header: 'User Name' },
+      { field: 'FirstName', header: 'First Name' },
+      { field: 'LastName', header: 'Last Name' },
+      { field: 'DcID', header: 'DcID' },
+      { field: 'Email', header: 'Email' },
+      { field: 'PhoneNumber', header: 'Phone Number' },
+      { field: 'FatherName', header: 'Father Name' },
+      { field: 'AadharNumber', header: 'Aadhar Number' },
+      { field: 'SponserName', header: 'Sponser Name' },
+      { field: 'UnderName', header: 'Under Name' },
+      { field: 'RegisterFrom', header: 'Register From' },
+      { field: 'CreatedDate', header: 'Created Date' },
+      { field: 'SecretKey', header: 'Secret Key' },
+      { field: 'UserStatus', header: 'User Status' },
+      { field: 'LoanWaiveOff', header: 'Loan WaiveOff' },
+      { field: 'IsSponserJoineesReq', header: 'Sponser Joinees Req' }
+    ];
+  }
 }

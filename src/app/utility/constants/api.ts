@@ -143,6 +143,8 @@ export class API {
   public static WITHDRAWFUNDS = 'wallet/WithdrawFunds';
   public static GETREPORTTYPES = 'reports/GetReportTypes';
   public static DOWNLOADREPORTS = 'reports/DownloadReport';
+  public static DOWNLOADUSERREPORTS = 'reports/DownloadUserReport';
+  public static DOWNLOADALLUSERREPORTS = 'reports/DownloadAllUserReport';
   public static GETFRANCHISEDETAILS = 'franchisedetails/GetFranchiseDetails';
   public static GETSCHOOLDETAILS = 'schooldetails/GetSchoolDetails';
   public static INSERTSCHOOLDETAILS = 'schooldetails/InsertSchoolDetails';

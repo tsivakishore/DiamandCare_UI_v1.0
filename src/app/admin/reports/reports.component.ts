@@ -287,6 +287,15 @@ export class ReportsComponent extends BaseComponent implements OnInit {
         { field: 'CreatedOn', header: 'Created On' }
       ];
     }
+    else if (reportType === "Expenses") {
+      this.cols = [  
+        { field: 'AgainstType', header: 'Against Type' },
+        { field: 'TransactionType', header: 'Transaction Type' },
+        { field: 'TransactionAmount', header: 'Transaction Amount' },
+        { field: 'Purpose', header: 'Purpose' },
+        { field: 'CreatedOn', header: 'Created On' }
+      ];
+    }
   }
 
   private wrapAndCenterCell(cell: XLSX.CellObject) {
