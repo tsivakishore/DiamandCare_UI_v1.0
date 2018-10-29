@@ -50,7 +50,7 @@ export class ReportsComponent extends BaseComponent implements OnInit {
   maxToDate: Date;
   EXCEL_EXTENSION: string = 'xlsx';
   defaultReportType: string = "";
-  data: any[];
+  data: any[] = [];
   cols: any[];
 
   constructor(private fb: FormBuilder,
@@ -98,6 +98,10 @@ export class ReportsComponent extends BaseComponent implements OnInit {
     }, err => {
       this.sharedService.setLoader(false);
     })
+  }
+
+  get dataLength() {
+    return this.data ? this.data.length : 0
   }
 
   DownloadExcelReports(formParam, isValid) {
@@ -198,32 +202,90 @@ export class ReportsComponent extends BaseComponent implements OnInit {
         { field: 'RegKeyStatus', header: 'Reg Key Status' },
         { field: 'CreateDate', header: 'Create Date' },
         { field: 'KeyType', header: 'Key Type' },
-        { field: 'KeyCost', header: 'Key Cost' }
+        { field: 'KeyCost', header: 'Key Cost' },
+        { field: 'UsedTo', header: 'Used To' }
       ];
     }
     else if (reportType === "Used Secret Keys") {
-
+      this.cols = [
+        { field: 'UserName', header: 'User Name' },
+        { field: 'RegKey', header: 'Reg Key' },
+        { field: 'PhoneNumber', header: 'Phone Number' },
+        { field: 'RegKeyStatus', header: 'Reg Key Status' },
+        { field: 'CreateDate', header: 'Create Date' },
+        { field: 'KeyType', header: 'Key Type' },
+        { field: 'KeyCost', header: 'Key Cost' },
+        { field: 'UsedTo', header: 'Used To' }
+      ];
     }
     else if (reportType === "All Issued Secret Keys") {
-
+      this.cols = [
+        { field: 'UserName', header: 'User Name' },
+        { field: 'RegKey', header: 'Reg Key' },
+        { field: 'PhoneNumber', header: 'Phone Number' },
+        { field: 'RegKeyStatus', header: 'Reg Key Status' },
+        { field: 'CreateDate', header: 'Create Date' },
+        { field: 'KeyType', header: 'Key Type' },
+        { field: 'KeyCost', header: 'Key Cost' }
+      ];
     }
     else if (reportType === "Issued Secret Keys") {
-
+      this.cols = [
+        { field: 'UserName', header: 'User Name' },
+        { field: 'RegKey', header: 'Reg Key' },
+        { field: 'PhoneNumber', header: 'Phone Number' },
+        { field: 'RegKeyStatus', header: 'Reg Key Status' },
+        { field: 'CreateDate', header: 'Create Date' },
+        { field: 'KeyType', header: 'Key Type' },
+        { field: 'KeyCost', header: 'Key Cost' }
+      ];
     }
     else if (reportType === "All Wallet Transactions") {
-
+      this.cols = [
+        { field: 'UserName', header: 'User Name' },
+        { field: 'Against', header: 'Against' },
+        { field: 'AgainstType', header: 'Against Type' },
+        { field: 'TransactionType', header: 'Transaction Type' },
+        { field: 'TransactionAmount', header: 'Transaction Amount' },
+        { field: 'Purpose', header: 'Purpose' },
+        { field: 'CreatedOn', header: 'Created On' }
+      ];
     }
     else if (reportType === "Wallet Transactions") {
-
+      this.cols = [
+        { field: 'UserName', header: 'User Name' },
+        { field: 'Against', header: 'Against' },
+        { field: 'AgainstType', header: 'Against Type' },
+        { field: 'TransactionType', header: 'Transaction Type' },
+        { field: 'TransactionAmount', header: 'Transaction Amount' },
+        { field: 'Purpose', header: 'Purpose' },
+        { field: 'CreatedOn', header: 'Created On' }
+      ];
     }
     else if (reportType === "Transfer Payments") {
 
     }
     else if (reportType === "All Commissions Log") {
-
+      this.cols = [
+        { field: 'UserName', header: 'User Name' },
+        { field: 'Against', header: 'Against' },
+        { field: 'AgainstType', header: 'Against Type' },
+        { field: 'TransactionType', header: 'Transaction Type' },
+        { field: 'TransactionAmount', header: 'Transaction Amount' },
+        { field: 'Purpose', header: 'Purpose' },
+        { field: 'CreatedOn', header: 'Created On' }
+      ];
     }
     else if (reportType === "Commissions Log") {
-
+      this.cols = [
+        { field: 'UserName', header: 'User Name' },
+        { field: 'Against', header: 'Against' },
+        { field: 'AgainstType', header: 'Against Type' },
+        { field: 'TransactionType', header: 'Transaction Type' },
+        { field: 'TransactionAmount', header: 'Transaction Amount' },
+        { field: 'Purpose', header: 'Purpose' },
+        { field: 'CreatedOn', header: 'Created On' }
+      ];
     }
   }
 
@@ -295,7 +357,7 @@ export class ReportsComponent extends BaseComponent implements OnInit {
       var file = new Blob([documentContent], {
         type: contentType
       });
-     
+
       var fileURL = URL.createObjectURL(file);
       var a = document.createElement('a');
       a.href = fileURL;

@@ -44,16 +44,17 @@
         <!-- <button (click)="exportAsXLSX()"><i class="fa fa-file-excel-o" style="font-size:26px;height: 35px;color:blue"></i></button> -->
       </div>
       <div class="clearfix"></div>
-
-      <p-dataTable #dataTable [value]="data" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
-        <p-header>
-          <div class="ui-helper-clearfix">
-            <button type="button" pButton icon="fa-file-o" iconPos="right" label="CSV Download" (click)="dataTable.exportCSV()" style="float:right">
-            </button>
-          </div>
-        </p-header>
-        <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header"></p-column>
-      </p-dataTable>
+      <div *ngIf="dataLength!=0">
+        <p-dataTable #dataTable [value]="data" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+          <p-header>
+            <div class="ui-helper-clearfix">
+              <button type="button" pButton icon="fa-file-o" iconPos="right" label="CSV Download" (click)="dataTable.exportCSV()" style="float:right">
+              </button>
+            </div>
+          </p-header>
+          <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header"></p-column>
+        </p-dataTable>
+      </div>
     </form>
   </div>
 </div>
