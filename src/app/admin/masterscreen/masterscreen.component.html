@@ -319,6 +319,144 @@
     </div>
   </form>
 </div>
+
+<h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">{{'employeecommission' | translate}}</h3>
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="transaction-history-container">
+      <div class="transaction-history-table box-shadow">
+        <p-dataTable [value]="lstEmployee" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+          <p-column [style]="{'width':'50px'}" field="ID" header="ID" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'120px'}" field="Designation" header="Designation" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'80px'}" field="DesignationCode" header="Designation Code" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'100px'}" field="RegIncentive" header="Register Incentive" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'100px'}" field="LoanRePayIncentive" header="Loan Repayment Incentive" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'80px'}" field="RecruitmentsReq" header="Recruitments Required" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'80px'}" field="TargetJoineesPerMonth" header="Target Joinees Per Month" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'100px'}" field="Salary" header="Salary" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'150px'}" field="Description" header="Description" [sortable]="true"></p-column>
+          <p-column [style]="{'width':'100px'}" header="Edit" [sortable]="true">
+            <ng-template let-data="rowData" pTemplate="body" let-ri="rowIndex">
+              <div class="col-md-12" style="margin-left: -30px;">
+                <div class="col-md-6" style="width:100px">
+                  <button type="button" class="btn btn-primary btnedit" (click)="EditEmployee(ri)">Edit</button>
+                </div>
+              </div>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="sucess-msg">
+  <p-messages [(value)]="msgs"></p-messages>
+</div> -->
+<div class="phone-number-modal divstyles" *ngIf="isShowModal == 7" @dialog>
+  <form [formGroup]="fgEmployee" (submit)="onSubmitEditEmployee(fgEmployee.value,fgEmployee.valid)">
+    <div class="modal-container" style="height: 300px !important;">
+      <div class="modal-header" style="background: #797b85;">
+        <h5>Edit Employee</h5>
+        <i class="material-icons" (click)="closeForm()">close</i>
+      </div>
+      <div class="clearfix"></div>
+      <div class="clearfix"></div>
+
+      <div class="modal-body" style="height: 50px;">
+        <div class="col-md-12">
+          <div class="margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="ID" tooltipPosition="top" class="form-control" formControlName="ID" readonly/>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Designation" tooltipPosition="top" class="form-control" formControlName="Designation" readonly/>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Designation Code" tooltipPosition="top" class="form-control" formControlName="DesignationCode" readonly />
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="'Register Incentive' | translate" tooltipPosition="top" class="form-control" formControlName="RegIncentive"
+              />
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(fgEmployee.get('RegIncentive'))" [errMsg]="'Register Incentive Is Required' | translate"></validation>
+              </div>
+            </div>            
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="'Loan Repayment Incentive' | translate" tooltipPosition="top" class="form-control" formControlName="LoanRePayIncentive"
+              />
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(fgEmployee.get('LoanRePayIncentive'))" [errMsg]="'Loan Repayment Incentive Is Required' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Recruitments Require" tooltipPosition="top" class="form-control" formControlName="RecruitmentsReq"
+              />
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(fgEmployee.get('RecruitmentsReq'))" [errMsg]="'Recruitments Required Is Required' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Target Joinees Per Month" tooltipPosition="top" class="form-control" formControlName="TargetJoineesPerMonth"
+              />
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(fgEmployee.get('TargetJoineesPerMonth'))" [errMsg]="'Target Joinees Per Month Is Required' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Salary" tooltipPosition="top" class="form-control" formControlName="Salary" />
+              <div class="input-validation-msg">
+                <validation *ngIf="isRequiredField(fgEmployee.get('Salary'))" [errMsg]="'Salary Is Required' | translate"></validation>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class=" margin-top-15 col-md-12">
+            <div>
+              <input type="text" pTooltip="Description" tooltipPosition="top" class="form-control" formControlName="Description"
+              />
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-8 col-md-offset-3">
+          <button type="submit" [disabled]="!fgEmployee.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Submit</button>
+          <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+
 <div class="phone-number-modal divstyles" *ngIf="isShowModal == 3" @dialog>
   <form [formGroup]="fgWallet" (submit)="onSaveBalance(fgWallet.value,fgWallet.valid)">
     <div class="modal-container" style="height: 300px !important;">
