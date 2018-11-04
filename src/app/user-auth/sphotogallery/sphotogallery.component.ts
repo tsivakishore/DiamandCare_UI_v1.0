@@ -10,6 +10,8 @@ import { SharedService } from "../../utility/shared-service/shared.service";
   providers: [SchoolService]
 })
 export class SphotogalleryComponent implements OnInit {
+  defaultSchoolName: string = '';
+  imgCount = 0;
 
   images: any[];
   imageToShow: any[] = [];
@@ -21,27 +23,27 @@ export class SphotogalleryComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.getImagesDisplay();
+    this.getImagesDisplay(this.defaultSchoolName);
   }
 
-  public getImagesDisplay() {
+  public getImagesDisplay(schoolName: string) {
     this.sharedService.setLoader(true);
     this.images = [];
     this.imageToShow = [];
-    this.schoolService._getImagesDisplay('SaradaSchool').subscribe((res: any) => {
+    this.schoolService._getImagesDisplay(schoolName).subscribe((res: any) => {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.images = res.m_Item3;
-        console.log(this.images)
+        this.imgCount = this.images.length;
+        console.log(this.imgCount);
         this.images.map(item => {
           return {
-            source: this._DomSanitizationService.bypassSecurityTrustResourceUrl(item.Url),
-            alt: item.FileName,
-            title: item.InstituteName
+            source: this._DomSanitizationService.bypassSecurityTrustResourceUrl(item.ImageUrl),
+            alt: item.ImageName,
+            title: item.ImageName
           }
         }).forEach(item => this.imageToShow.push(item));
       }
-      console.log(this.imageToShow);
 
     }, err => {
       console.log(err);

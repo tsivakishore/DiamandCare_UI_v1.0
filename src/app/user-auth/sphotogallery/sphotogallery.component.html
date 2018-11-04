@@ -1,5 +1,5 @@
-<!-- <div class="row">
-  <div>
-    <p-galleria class="" [images]="images" panelWidth="500" panelHeight="313" [showCaption]="true" [autoPlay]="true"></p-galleria>
+<div class="row">
+  <div *ngIf="imgCount > 0" class="divimage-style">
+    <p-galleria class="" [images]="imageToShow" panelWidth="500" panelHeight="313" [showCaption]="true" [autoPlay]="true"></p-galleria>
   </div>
-</div> -->
+</div>

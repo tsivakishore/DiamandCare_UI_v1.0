@@ -1,9 +1,27 @@
-<h3 class="first">Upload Images</h3>
-<p-fileUpload name="myFile[]" maxFileSize="1000000000" customUpload="true" (uploadHandler)="myUploader($event)" (onUpload)="onUpload($event)"
-  multiple="multiple" accept="image/*">
-  <ng-template pTemplate="content">
-    <ul *ngIf="uploadedFiles.length">
-      <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-    </ul>
-  </ng-template>
-</p-fileUpload>
+<div class="uploadinstimages-container" @slideUp>
+  <div class="uploadinstimages-form">
+    <h3 class="first">Upload Images</h3>
+    <div class="col-md-4 col-xs-12 col-sm-12 margin-top-15">
+      <div class="label" style="color: white;">Search by Username or DCID</div>
+      <input type="text" #txtSearcByLoanId id="txtSearcByLoanId" class="form-control" placeholder="Search by Username or DCID"
+        (input)="onSearchChange($event.target.value)" />
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-md-4 col-xs-12 col-sm-12 margin-top-15">
+      <div class="label" style="color: white;">School Name</div>
+      <input type="text" #txtUserName id="txtUserName" class="form-control" readonly/>
+    </div>
+    <div class="clearfix"></div>
+    <div>
+      <h3 class="first">Select Images</h3>
+      <p-fileUpload #fileUpload name="myFile[]" maxFileSize="614400" [showUploadButton]="isShowUpload" customUpload="true" (uploadHandler)="myUploader($event,fileUpload)"
+        (onUpload)="onUpload($event)" multiple="multiple" accept="image/*">
+        <ng-template pTemplate="content">
+          <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+          </ul>
+        </ng-template>
+      </p-fileUpload>
+    </div>
+  </div>
+</div>

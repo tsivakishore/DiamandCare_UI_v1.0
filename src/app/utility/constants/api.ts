@@ -177,7 +177,8 @@ export class API {
   
   public static RENEWLOANACCOUNT = 'renewloanaccount/RenewLoanAccount';
   public static UPLOADIMAGES = 'uploadimages/SaveImages';
-  public static GETIMAGESTODIAPLAY = 'uploadimages/GetImagesByInstitute';
+  public static GETINSTITUTEIMAGESTODIAPLAY = 'uploadimages/GetImagesByInstitute';
+  public static GETSCHOOLDETAILSBYDcIDOrUSERNAME = 'schooldetails/GetSchoolIDorName';
 
   // EXTERNAL API CALLERS
 

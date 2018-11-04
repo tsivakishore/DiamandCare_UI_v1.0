@@ -317,6 +317,11 @@ p-dropdown{
   border: 1px solid #007ad9 !important;
 }
 
+.ui-panel-images{
+  width: 100% !important;
+    height: 257px;
+}
+
 @media only screen and (max-width: 767px) and (min-width: 320px){
   .ui-calendar.ui-calendar-w-btn input {
     width: 300px !important;
@@ -328,6 +333,15 @@ p-dropdown{
     margin-left: -4% !important;
   }
 
+  .ui-panel-images{
+    width: 90% !important;
+    margin-left: -50px !important;
+    height: 257px !important;
+  }
+
+  .ui-galleria{
+    width: 320px !important;
+  }
 }
 
 @media screen  and (min-width: 320px) and (max-width: 767px) {
