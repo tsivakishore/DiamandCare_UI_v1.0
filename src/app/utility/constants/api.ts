@@ -163,6 +163,8 @@ export class API {
   public static VERIFYSTUDENTOTP = 'studentmapping/VerifyStudentOTP';
   public static GETAGAINSTTYPE='Shared/GetAgainstType';
   public static UPDATEWITHDRAWFUNDS = 'wallet/UpdateWithdrawFunds';
+  public static GETEMPLOYEEMASTER = 'Employeedetails/GetEmployeeMasterDetails';
+  public static EDITEMPLOYEE = 'Employeedetails/UpdateEmployee';
 
   //Display Screens
   public static GETSCREENMASTERDETAILS = 'displayscreens/GetScreenMasterDetails';
