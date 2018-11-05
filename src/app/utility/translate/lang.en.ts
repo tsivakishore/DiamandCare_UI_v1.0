@@ -135,6 +135,7 @@ export const LANG_EN_TRANS = {
   'prePaidLoan': 'Prepaid Loan Charges',
   'registrationCharges': 'Registration Charges',
   'franchisecommission': 'Franchise & Commission',
+  'employeecommission': 'Employee & Commission',
   'area': 'Area',
   'district': 'District',
   'districtCluster': 'District Cluster',

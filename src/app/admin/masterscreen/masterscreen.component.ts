@@ -11,12 +11,13 @@ import { TranslateService } from "../../utility/translate/translate.service";
 import { style, transition, animate, trigger } from "@angular/animations";
 import { MasterChargesService } from "../../utility/shared-service/mastercharges.service";
 import { FranchiseService } from "../../utility/shared-service/franchise.service";
+import { EmployeeService } from '../../utility/shared-service/employee.service';
 
 @Component({
   selector: 'app-masterscreen',
   templateUrl: './masterscreen.component.html',
   styleUrls: ['./masterscreen.component.css'],
-  providers: [MasterChargesService, FranchiseService],
+  providers: [MasterChargesService, FranchiseService,EmployeeService],
   animations: [
     trigger('dialog', [
       transition('void => *', [
@@ -36,6 +37,7 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
   isAddressValid: boolean = true;
   masterCharges: any;
   lstFranchise: any;
+  lstEmployee: any;
   gridTitle: string;
   selectedRow: any;
   isShowModal: number = 1;
@@ -44,11 +46,13 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
   fgLoanWaive: FormGroup;
   fgUserSponserJoineesReq: FormGroup;
   fgFreeToPaid: FormGroup;
+  fgEmployee: FormGroup;
   userID: number;
 
   constructor(private sharedService: SharedService,
     private masterChargesService: MasterChargesService,
     private franchiseService: FranchiseService,
+    private employeeService: EmployeeService,
     private fb: FormBuilder,
     private apiManager: APIManager,
     public toastr: ToastsManager,
@@ -61,6 +65,7 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
     this.GetMasterCharges();
     this.createmasterScreenForm();
     this.getFranchiseMasterDetails();
+    this.getEmployeeMasterDetails();
   }
 
   createFranchiseForm() {
@@ -70,6 +75,19 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       PaymentReceiptPercentage: new FormControl(''),
       TargetJoineesPerMonth: new FormControl(''),
       MinimumJoineesAvg: new FormControl(''),
+    })
+  }
+  createEmployeeForm() {
+    this.fgEmployee = this.fb.group({
+      ID: new FormControl(''),
+      Designation: new FormControl(''),
+      DesignationCode: new FormControl(''),
+      RegIncentive: ['', Validators.compose([Validators.required])],
+      LoanRePayIncentive: ['', Validators.compose([Validators.required])],
+      RecruitmentsReq: ['', Validators.compose([Validators.required])],
+      TargetJoineesPerMonth: ['', Validators.compose([Validators.required])],
+      Salary: ['', Validators.compose([Validators.required])],
+      Description: new FormControl(''),
     })
   }
 
@@ -392,6 +410,18 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       this.sharedService.setLoader(false);
     })
   }
+  public getEmployeeMasterDetails() {
+    this.sharedService.setLoader(true);
+    this.employeeService._getEmployeeMasterDetails().subscribe((res: any) => {
+      this.sharedService.setLoader(false);
+      if (res.m_Item1) {
+        this.lstEmployee = res.m_Item3;
+      }
+    }, err => {
+      console.log(err);
+      this.sharedService.setLoader(false);
+    })
+  }
 
   EditFranchise(rowIndex) {
     this.isShowModal = 2;
@@ -403,6 +433,23 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       PaymentReceiptPercentage: this.selectedRow.PaymentReceiptPercentage,
       TargetJoineesPerMonth: this.selectedRow.TargetJoineesPerMonth,
       MinimumJoineesAvg: this.selectedRow.MinimumJoineesAvg
+    })
+
+  }
+  EditEmployee(rowIndex) {
+    this.isShowModal = 7;
+    this.createEmployeeForm();
+    this.selectedRow = this.lstEmployee[rowIndex];
+    this.fgEmployee.patchValue({
+      ID: this.selectedRow.ID,
+      Designation: this.selectedRow.Designation,
+      DesignationCode: this.selectedRow.DesignationCode,
+      RegIncentive: this.selectedRow.RegIncentive,
+      LoanRePayIncentive: this.selectedRow.LoanRePayIncentive,
+      RecruitmentsReq: this.selectedRow.RecruitmentsReq,
+      TargetJoineesPerMonth: this.selectedRow.TargetJoineesPerMonth,
+      Salary: this.selectedRow.Salary,
+      Description: this.selectedRow.Description
     })
 
   }
@@ -423,6 +470,29 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
       }, err => {
         this.isShowModal = 1;
         this.toastr.error("Oops! There has been an error while updating franchise details .Please try again.");
+      });
+    }
+    else {
+      this.toastr.error("Form is not valid");
+    }
+  }
+
+  onSubmitEditEmployee(frmdata: any, isValidForm) {
+    if (isValidForm) {
+      this.apiManager.postAPI(API.EDITEMPLOYEE, frmdata).subscribe(response => {
+        if (response.m_Item1) {
+          this.isShowModal = 1;
+          this.toastr.success(response.m_Item2);
+          this.fgEmployee.reset();
+          this.getEmployeeMasterDetails();
+        }
+        else {
+          this.toastr.error(response.m_Item2);
+          this.isShowModal = 1;
+        }
+      }, err => {
+        this.isShowModal = 1;
+        this.toastr.error("Oops! There has been an error while updating Employee details .Please try again.");
       });
     }
     else {

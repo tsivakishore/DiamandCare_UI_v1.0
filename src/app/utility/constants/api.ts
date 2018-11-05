@@ -166,6 +166,8 @@ export class API {
   public static VERIFYSTUDENTOTP = 'studentmapping/VerifyStudentOTP';
   public static GETAGAINSTTYPE = 'Shared/GetAgainstType';
   public static UPDATEWITHDRAWFUNDS = 'wallet/UpdateWithdrawFunds';
+  public static GETEMPLOYEEMASTER = 'Employeedetails/GetEmployeeMasterDetails';
+  public static EDITEMPLOYEE = 'Employeedetails/UpdateEmployee';
 
   //Display Screens
   public static GETSCREENMASTERDETAILS = 'displayscreens/GetScreenMasterDetails';
@@ -180,7 +182,8 @@ export class API {
 
   public static RENEWLOANACCOUNT = 'renewloanaccount/RenewLoanAccount';
   public static UPLOADIMAGES = 'uploadimages/SaveImages';
-  public static GETIMAGESTODIAPLAY = 'uploadimages/GetImagesByInstitute';
+  public static GETINSTITUTEIMAGESTODIAPLAY = 'uploadimages/GetImagesByInstitute';
+  public static GETSCHOOLDETAILSBYDcIDOrUSERNAME = 'schooldetails/GetSchoolIDorName';
 
   // EXTERNAL API CALLERS
 
