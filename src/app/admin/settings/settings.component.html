@@ -1,6 +1,7 @@
 <div class="settings-container">
   <div class="col-md-12 col-xs-12 user-data" @slideUp>
     <h3>{{'userInfo' | translate}}</h3>
+
     <div class="col-md-4 col-xs-12 padding-left-10 margin-top-10">
       <label>{{'firstName' | translate}}</label>
       <div>{{UserDetails.FirstName}}</div>
@@ -10,7 +11,6 @@
       <div>{{UserDetails.LastName}}</div>
     </div>
     <div class="clearfix"></div>
-
     <div class="col-md-4 col-xs-12 padding-left-10 margin-top-10">
       <label>{{'phnNumber' | translate}}</label>
       <div>{{UserDetails.PhoneNumber}}</div>
@@ -52,6 +52,14 @@
       </div>
       <li (click)="onShowAddNomineeModel()">
         <div>Add Nominee Details</div>
+      </li>
+      <li (click)="onUploadPhoto()">
+        <div>Upload Photo</div>
+        <div class="col-md-8 col-xs-12 padding-left-10 margin-top-10">
+          <div>
+            <img [src]="imgSrc">
+          </div>
+        </div>
       </li>
     </ul>
   </div>
@@ -482,8 +490,8 @@
           <div class="col-md-6 col-sm-12 col-xs-12 padding-right-0">
             <div class="label" style="color: #fff;">Nominee Name</div>
             <div class="clearfix"></div>
-            <input type="text" placeholder="NomineeName" pTooltip="NomineeName" tooltipPosition="top" class="form-control"
-              formControlName="NomineeName" required/>
+            <input type="text" placeholder="NomineeName" pTooltip="NomineeName" tooltipPosition="top" class="form-control" formControlName="NomineeName"
+              required/>
             <div class="input-validation-msg">
               <validation *ngIf="isRequiredField(frmNomineeDetails.get('NomineeName'))" [errMsg]="'nomineeNameRqrd' | translate"></validation>
               <validation *ngIf="isValidLength(frmNomineeDetails.get('NomineeName'))" [errMsg]="'nomineeNameLnth' | translate"></validation>
@@ -500,7 +508,7 @@
               <validation *ngIf="isRequiredField(frmNomineeDetails.get('NomineeRelationshipID'))" [errMsg]="'nomineeRelationShipRqrd' | translate"></validation>
             </div>
           </div>
-          <div class="col-md-3 col-sm-12 col-xs-12 padding-right-0" *ngIf="isVisible_OtherRelations" >
+          <div class="col-md-3 col-sm-12 col-xs-12 padding-right-0" *ngIf="isVisible_OtherRelations">
             <div class="label" style="color: #fff;">Other Relationship</div>
             <div class="clearfix"></div>
             <input type="text" placeholder="Other Relationship" pTooltip="Other Relationship" tooltipPosition="top" class="form-control"
@@ -552,6 +560,51 @@
   </form>
 </div>
 <!-- End Nominee details modal popup -->
+
+<div class="phone-number-modal modeldialog" *ngIf="isShowModal == 7" @dialog>
+  <form [formGroup]="fgUserImage" (submit)="onSubmitImage(fgUserImage.value,fgUserImage.valid)">
+    <div class="modal-container" style="width: 100%; height: 515px !important;">
+      <div class="modal-header" style="background: #797b85;">
+        <h5>Upload Photo</h5>
+        <i class="material-icons" pTooltip="Close" tooltipPosition="top" (click)="isShowModal = 1">close</i>
+      </div>
+      <div class="clearfix"></div>
+      <div class="clearfix"></div>
+
+      <div class="modal-body" style="height: 300px;">
+        <div class="col-md-12">
+          <div class="col-md-12" style="margin-top:-15px">
+            <div class="col-md-11 padding-right-0 padding-left-0 margin-top-20">
+              <input type="text" class="form-control" formControlName="ImageName" placeholder="File Name" required readonly/>
+            </div>
+            <div class="col-md-1 file-icons padding-right-0 padding-right-0 margin-top-20">
+              <input type="file" (change)="selectUserPhoto($event.target)" pTooltip="Upload Photo" tooltipPosition="top" accept=".pdf,.jpg,.jpeg,.png"
+                class="form-control" required/>
+              <i class="material-icons">attach_file</i>
+            </div>
+            <div class="input-validation-msg customMsg">
+              <div class="label" *ngIf="isValidKYCDocument" style="width: 375px;">
+                <p style="color:red;font-size: 13px;text-align: left;">{{msgError}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="modal-footer">
+        <div class="col-md-8 col-md-offset-3">
+          <button type="submit" [disabled]="!fgUserImage.valid" style="width: 90px; margin-left: 10px;" class="btn btn-primary">Apply</button>
+          <button type="button" style="width: 90px;background: #e85454;border: #e85454; margin-left: 20px;" (click)="closeForm()" class="btn btn-primary">Cancel</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="margin-top-10"></div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
 
 <div class="confirm-modal-overay" *ngIf="isShowModal == 2 || isShowModal == 3 || isShowModal == 4|| isShowModal == 5|| isShowModal == 6"
   (click)="closeForm()"></div>

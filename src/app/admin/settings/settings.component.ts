@@ -40,6 +40,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
   addressForm: FormGroup;
   frmBankAccount: FormGroup;
   frmNomineeDetails: FormGroup;
+  fgUserImage: FormGroup;
 
   status: string;
   UserDetails: any;
@@ -57,6 +58,12 @@ export class SettingsComponent extends BaseComponent implements OnInit {
   isBankGrid: boolean = false;
   isBankAccountLink: boolean = false;
   isVisible_OtherRelations: boolean = false;
+  private file: any;
+  isValidImage: boolean = false;
+  msgError: string;
+  myFiles: string[] = [];
+  item: any;
+  imgSrc: any;
 
   constructor(public fb: FormBuilder,
     private translateService: TranslateService,
@@ -67,6 +74,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
     private userAuthService: UserAuthService,
     private sharedService: SharedService) {
     super(toastManager, vcr);
+    this.GetUserImage();
   }
 
   ngOnInit() {
@@ -78,6 +86,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
     this.createBankAccountForm();
     this.createNomineeDetailsForm();
     this.GetUserBankDetails();
+    //this.GetUserImage();
   }
 
   createChangePassword() {
@@ -105,7 +114,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
       UserName: new FormControl(''),
       DcID: new FormControl(''),
       FirstName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])),
-      LastName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50),<any>Validators.pattern(CommonRegexp.ALPHABETS_REGEXP)])),
+      LastName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50), <any>Validators.pattern(CommonRegexp.ALPHABETS_REGEXP)])),
       PhoneNumber: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), <any>Validators.pattern(CommonRegexp.NUMERIC_REGEXP)]),
       Email: new FormControl('', Validators.compose([Validators.minLength(5), Validators.maxLength(100), <any>Validators.pattern(CommonRegexp.EMAIL_ADDRESS_REGEXP)])),
       FatherName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(50)])),
@@ -161,11 +170,31 @@ export class SettingsComponent extends BaseComponent implements OnInit {
     });
   }
 
+  createUserPhotoForm() {
+    this.fgUserImage = this.fb.group({
+      ImageName: new FormControl('', Validators.compose([Validators.required])),
+      ImageContent: new FormControl('')
+    })
+  }
   public GetUserProfile() {
     this.userAuthService._getUserProfile().then((res: any) => {
       if (res.m_Item1) {
         this.userDetails = res.m_Item3;
         this.sharedService.setUser(this.userDetails);
+      }
+      else {
+        this.toastr.error(res.m_Item2);
+      }
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  public GetUserImage() {
+    this.userAuthService._getUserImage().subscribe((res: any) => {
+      if (res.m_Item1) {
+        this.item = res.m_Item3;
+        this.imgSrc = this.formImgSrc(this.item.ImageContent, this.item.ImageName)
       }
       else {
         this.toastr.error(res.m_Item2);
@@ -349,6 +378,11 @@ export class SettingsComponent extends BaseComponent implements OnInit {
     })
   }
 
+  onUploadPhoto() {
+    this.isShowModal = 7;
+    this.createUserPhotoForm();
+  }
+
   changePassword(formChangePassword, IsValidForm) {
     if (IsValidForm) {
       this.apiManager.postAPI(API.CHANGEPASSWORD, formChangePassword).subscribe(response => {
@@ -422,6 +456,52 @@ export class SettingsComponent extends BaseComponent implements OnInit {
       this.frmNomineeDetails.controls['OtherRelationship'].setValue('');
       this.frmNomineeDetails.get('OtherRelationship').updateValueAndValidity({ onlySelf: true, emitEvent: false });
     }
+  }
+
+  public selectUserPhoto(value) {
+    let files: FileList = value.files;
+    this.file = files[0];
+
+    this.isValidImage = false;
+
+    if ((/\.(pdf|jpg|jpeg|png)$/i).test(this.file.name)) {
+      this.fgUserImage.patchValue({ ImageName: this.file.name, ImageContent: this.file })
+      this.file = "";
+    }
+    else {
+      this.isValidImage = true;
+      this.fgUserImage.value.ImageName = "";
+      this.msgError = "Only acept jpg, jpeg, png, pdf files.";
+    }
+  }
+
+  onSubmitImage(fgUserImage: any, isValidForm) {
+    if (isValidForm) {
+      this.apiManager.postAPI(API.USERIMAGE, fgUserImage, this.myFiles).subscribe(response => {
+        if (response.m_Item1) {
+          this.isShowModal = 1;
+          this.toastr.success(response.m_Item2);
+          this.fgUserImage.reset();
+          this.GetUserImage();
+        }
+        else {
+          this.toastr.error(response.m_Item2);
+          this.isShowModal = 1;
+        }
+      }, err => {
+        this.isShowModal = 1;
+        this.toastr.error("Oops! There has been an error while uploading photo. Please try again.");
+      });
+    }
+    else {
+      this.toastr.error("Invalid form data.");
+    }
+  }
+
+  formImgSrc(imageContent: any, imageName: string) {
+    var splitFile = imageName.split(".");
+    let imgType = "data:image/" + splitFile[1] + ";base64,"
+    return imgType + imageContent;
   }
 
   closeForm() {

@@ -117,15 +117,19 @@ export class ReportsComponent extends BaseComponent implements OnInit {
           // const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
           // XLSX.writeFile(workbook, formParam.ReportType + '_' + date.getDate() + (date.getMonth() + 1) + date.getFullYear() + '_' + date.getTime() + '.' + this.EXCEL_EXTENSION, { bookType: 'xlsx', type: 'buffer' });
         }
-        else
+        else {
           this.toastr.error('No records found');
+          this.data = [];
+        }
       }, err => {
         console.log(err);
         this.toastr.error("Error while downloading report.Please try again.");
+        this.data = [];
       });
     }
     else {
       this.toastr.error("Form is not valid");
+      this.data = [];
     }
   }
 
@@ -288,7 +292,7 @@ export class ReportsComponent extends BaseComponent implements OnInit {
       ];
     }
     else if (reportType === "Expenses") {
-      this.cols = [  
+      this.cols = [
         { field: 'AgainstType', header: 'Against Type' },
         { field: 'TransactionType', header: 'Transaction Type' },
         { field: 'TransactionAmount', header: 'Transaction Amount' },

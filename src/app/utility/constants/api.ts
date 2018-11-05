@@ -36,7 +36,7 @@ export class API {
   public static GETREJECTEDLOANSBYUSERID = 'loan/GetRejectedLoanDetailsByUserID';
   public static GETREJECTEDLOANSBYDCIDORUSERNAME = 'loan/GetRejectedLoanDetailsByDCIDorUserName';
   public static GETTRANSFERPENDINGLOANS = 'loan/GetLoansAmountTransferPending';
-  public static GETPAIDLOANSBYUSERID = 'loan/GetPaidLoanDetailsByUserID';  
+  public static GETPAIDLOANSBYUSERID = 'loan/GetPaidLoanDetailsByUserID';
   public static GETLOANDETAILS = 'loan/getloandetails';
   public static DOWNLOADS = 'loan/downloadfile';
   public static CHECKPL = 'loan/checkpersonalloan';
@@ -81,6 +81,9 @@ export class API {
   public static FORGETPASSWORD = 'user/forgetpassword';
   public static CHANGEPASSWORD = 'user/changepassword';
   public static CHANGEPASSWORDBYID = 'user/changepasswordbyId';
+  public static USERIMAGE = 'user/userimage';
+  public static GETUSERIMAGE = 'user/GetUserImageById';
+
   public static GETTREEVIEWDATA = 'treedata/GetTreeData';
   public static INSERTORUPDATEBANKDETAILS = 'userbankdetails/InsertorUpdateUserBankDetails';
   public static GETUSERBANKDETAILS = 'userbankdetails/GetUserBankDetails';
@@ -161,7 +164,7 @@ export class API {
   public static GENERATEOTP = 'studentmapping/UpdateUserOTP';
   public static GENERATELOANOTP = 'studentmapping/GenerateLoanOTP';
   public static VERIFYSTUDENTOTP = 'studentmapping/VerifyStudentOTP';
-  public static GETAGAINSTTYPE='Shared/GetAgainstType';
+  public static GETAGAINSTTYPE = 'Shared/GetAgainstType';
   public static UPDATEWITHDRAWFUNDS = 'wallet/UpdateWithdrawFunds';
 
   //Display Screens
@@ -174,7 +177,7 @@ export class API {
   public static GETFEEMASTERSBYUSERID = 'studentmapping/GetFeeMastersByUserID';
   public static STUDENTMAPPING = 'studentmapping/InsertStudentMapping';
   public static STUDENTMAPPINGDETAILS = 'studentmapping/GetStudentMappingDetails';
-  
+
   public static RENEWLOANACCOUNT = 'renewloanaccount/RenewLoanAccount';
   public static UPLOADIMAGES = 'uploadimages/SaveImages';
   public static GETIMAGESTODIAPLAY = 'uploadimages/GetImagesByInstitute';

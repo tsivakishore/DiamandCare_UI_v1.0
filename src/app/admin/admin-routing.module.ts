@@ -38,6 +38,7 @@ import { AdminreportsComponent } from './adminreports/adminreports.component';
 import { UserwithdrawsComponent } from './userwithdraws/userwithdraws.component';
 import { UploadInstImagesComponent } from './uploadInstImages/uploadInstImages.component';
 import { RenewloanaccountComponent } from './renewloanaccount/renewloanaccount.component';
+import { IdcardComponent } from './idcard/idcard.component';
 
 const routes: Routes = [
   {
@@ -219,7 +220,12 @@ const routes: Routes = [
     path: RouteConstants.RENEWLOANACCOUNT,
     component: RenewloanaccountComponent,
     canActivate: [AuthGaurd]
-  }
+  },
+  {
+    path: RouteConstants.IDCARD,
+    component: IdcardComponent,
+    canActivate: [AuthGaurd]
+  },
 ];
 
 @NgModule({

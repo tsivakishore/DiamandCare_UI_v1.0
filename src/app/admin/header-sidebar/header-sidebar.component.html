@@ -210,6 +210,12 @@
       </a>
     </li>
     <li tooltipPosition="top" routerLinkActive="active">
+      <a [routerLink]="idCardUrl" *ngIf="Is_Visible_IdCard" routerLinkActive="active">
+        <i class="material-icons">image</i>
+        <span>Id Card</span>
+      </a>
+    </li>
+    <li tooltipPosition="top" routerLinkActive="active">
       <a [routerLink]="adminReportsUrl" *ngIf="Is_Visible_Admin_Reports" routerLinkActive="active">
         <i class="material-icons">brightness_auto</i>
         <span>Admin Reports</span>
@@ -455,6 +461,12 @@
       <a [routerLink]="uploadInstImagesUrl" *ngIf="Is_Visible_UploadInstImages" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">image</i>
         <span>Upload Inst Images</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="idCardUrl" *ngIf="Is_Visible_IdCard" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">image</i>
+        <span>Id Card</span>
       </a>
     </li>
     <li>

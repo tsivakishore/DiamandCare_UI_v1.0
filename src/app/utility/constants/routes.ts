@@ -47,4 +47,5 @@ export class RouteConstants {
   public static USERWITHDRAWS = 'userwithdraws';
   public static UPLOADINSTIMAGES = 'uploadInstImages';
   public static RENEWLOANACCOUNT = 'renewloanaccount/:UserID';
+  public static IDCARD = 'idcard';
 }

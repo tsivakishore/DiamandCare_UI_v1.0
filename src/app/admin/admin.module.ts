@@ -49,6 +49,7 @@ import { AdminreportsComponent } from './adminreports/adminreports.component';
 import { UserwithdrawsComponent } from './userwithdraws/userwithdraws.component';
 import { UploadInstImagesComponent } from './uploadInstImages/uploadInstImages.component';
 import { RenewloanaccountComponent } from './renewloanaccount/renewloanaccount.component';
+import { IdcardComponent } from './idcard/idcard.component';
 
 @NgModule({
   imports: [
@@ -109,8 +110,9 @@ import { RenewloanaccountComponent } from './renewloanaccount/renewloanaccount.c
     AdminreportsComponent,
     UserwithdrawsComponent,
     UploadInstImagesComponent,
-    RenewloanaccountComponent
-  ],
+    RenewloanaccountComponent,
+    IdcardComponent
+],
 
 
   exports: [HeaderSidebarComponent]

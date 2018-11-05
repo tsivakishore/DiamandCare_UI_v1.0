@@ -84,6 +84,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   Is_Visible_Admin_Reports = false;
   Is_Visible_User_Withdraws = false;
   Is_Visible_UploadInstImages = false;
+  Is_Visible_IdCard = false;
 
   constructor(private apiManager: APIManager, private sharedService: SharedService, private commonService: CommonService, private userService: UserService,
     private router: Router, public toastr: ToastsManager, public vcr: ViewContainerRef) {
@@ -288,6 +289,10 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
             this.Is_Visible_UploadInstImages = element.Checked;
             break;
           }
+          case "idcard": {
+            this.Is_Visible_IdCard = element.Checked;
+            break;
+          }
           default: {
             //this.logout();
             break;
@@ -451,6 +456,10 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   get uploadInstImagesUrl() {
     return "/" + RouteConstants.UPLOADINSTIMAGES;
+  }
+
+  get idCardUrl() {
+    return "/" + RouteConstants.IDCARD;
   }
 
   earnLoanEvent() {

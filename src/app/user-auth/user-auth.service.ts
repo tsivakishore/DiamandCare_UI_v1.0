@@ -58,6 +58,14 @@ export class UserAuthService {
       });
   }
 
+  _getUserImage() {
+    return this.httpService
+      .get(API.GETUSERIMAGE)
+      .map(res => this.extractData(res, false)).catch((error: any) => {
+        return Observable.throw(new Error(error.status));
+      });
+  }
+
   resetPWD(email, userOTP, newPWD, confirmPWD) {
     let values = { "email": email, "otp": userOTP, "password": newPWD, "repeatPassword": confirmPWD };
     return this.httpService
