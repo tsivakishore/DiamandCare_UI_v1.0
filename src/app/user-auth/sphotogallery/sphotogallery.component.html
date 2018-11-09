@@ -2,4 +2,8 @@
   <div *ngIf="imgCount > 0" class="divimage-style">
     <p-galleria class="" [images]="imageToShow" panelWidth="500" panelHeight="313" [showCaption]="true" [autoPlay]="true"></p-galleria>
   </div>
+  <div *ngIf="noImgCount==0" class="col-md-12 margin-top-30 logo-section-mobile">
+    <h2 class="margin-0">No images found....</h2>
+    <div class="clearfix"></div>
+  </div>
 </div>

@@ -561,9 +561,9 @@
 </div>
 <!-- End Nominee details modal popup -->
 
-<div class="phone-number-modal modeldialog" *ngIf="isShowModal == 7" @dialog>
+<div class="phone-number-modal" *ngIf="isShowModal == 7" @dialog>
   <form [formGroup]="fgUserImage" (submit)="onSubmitImage(fgUserImage.value,fgUserImage.valid)">
-    <div class="modal-container" style="width: 100%; height: 515px !important;">
+    <div class="modal-container" style="width: 100%; height: 200px !important;">
       <div class="modal-header" style="background: #797b85;">
         <h5>Upload Photo</h5>
         <i class="material-icons" pTooltip="Close" tooltipPosition="top" (click)="isShowModal = 1">close</i>
@@ -571,7 +571,7 @@
       <div class="clearfix"></div>
       <div class="clearfix"></div>
 
-      <div class="modal-body" style="height: 300px;">
+      <div class="modal-body" style="height: 50px;">
         <div class="col-md-12">
           <div class="col-md-12" style="margin-top:-15px">
             <div class="col-md-11 padding-right-0 padding-left-0 margin-top-20">
@@ -606,5 +606,5 @@
   </form>
 </div>
 
-<div class="confirm-modal-overay" *ngIf="isShowModal == 2 || isShowModal == 3 || isShowModal == 4|| isShowModal == 5|| isShowModal == 6"
+<div class="confirm-modal-overay" *ngIf="isShowModal == 2 || isShowModal == 3 || isShowModal == 4 || isShowModal == 5|| isShowModal == 6 || isShowModal == 7"
   (click)="closeForm()"></div>

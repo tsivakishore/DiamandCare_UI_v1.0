@@ -197,7 +197,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
         this.imgSrc = this.formImgSrc(this.item.ImageContent, this.item.ImageName)
       }
       else {
-        this.toastr.error(res.m_Item2);
+        //this.toastr.error(res.m_Item2);
       }
     }, err => {
       console.log(err);

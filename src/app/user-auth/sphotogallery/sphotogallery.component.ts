@@ -12,6 +12,7 @@ import { SharedService } from "../../utility/shared-service/shared.service";
 export class SphotogalleryComponent implements OnInit {
   defaultSchoolName: string = '';
   imgCount = 0;
+  noImgCount: number;
 
   images: any[];
   imageToShow: any[] = [];
@@ -44,7 +45,7 @@ export class SphotogalleryComponent implements OnInit {
           }
         }).forEach(item => this.imageToShow.push(item));
       }
-
+      this.noImgCount = this.imageToShow.length;
     }, err => {
       console.log(err);
       this.sharedService.setLoader(false);
