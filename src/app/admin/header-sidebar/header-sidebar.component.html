@@ -89,6 +89,12 @@
       </a>
     </li>
     <li tooltipPosition="top">
+      <a [routerLink]="upgradeToEmployeeUrl" *ngIf="Is_Visible_Upgrade_Employee" routerLinkActive="active">
+        <i class="material-icons">employee</i>
+        <span>Upgrade To Employee</span>
+      </a>
+    </li>
+    <li tooltipPosition="top">
       <a [routerLink]="courseMasterUrl" *ngIf="Is_Visible_Course_Master" routerLinkActive="active">
         <i class="material-icons">add_circle</i>
         <span>Course Master</span>
@@ -335,6 +341,12 @@
       <a [routerLink]="upgradeToSchoolUrl" *ngIf="Is_Visible_Upgrade_School" routerLinkActive="active" (click)="closeSidebar()">
         <i class="material-icons">school</i>
         <span>Upgrade To Institution</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="upgradeToEmployeeUrl" *ngIf="Is_Visible_Upgrade_Employee" routerLinkActive="active" (click)="closeSidebar()">
+        <i class="material-icons">employee</i>
+        <span>Upgrade To Employee</span>
       </a>
     </li>
     <li>

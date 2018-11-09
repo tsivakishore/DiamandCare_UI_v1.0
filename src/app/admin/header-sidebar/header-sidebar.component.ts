@@ -85,6 +85,7 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
   Is_Visible_User_Withdraws = false;
   Is_Visible_UploadInstImages = false;
   Is_Visible_IdCard = false;
+  Is_Visible_Upgrade_Employee = false;
 
   constructor(private apiManager: APIManager, private sharedService: SharedService, private commonService: CommonService, private userService: UserService,
     private router: Router, public toastr: ToastsManager, public vcr: ViewContainerRef) {
@@ -293,6 +294,10 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
             this.Is_Visible_IdCard = element.Checked;
             break;
           }
+          case "upgradetoEmployee": {
+            this.Is_Visible_Upgrade_Employee = element.Checked;
+            break;
+          }
           default: {
             //this.logout();
             break;
@@ -460,6 +465,10 @@ export class HeaderSidebarComponent extends BaseComponent implements OnInit {
 
   get idCardUrl() {
     return "/" + RouteConstants.IDCARD;
+  }
+
+  get upgradeToEmployeeUrl() {
+    return "/" + RouteConstants.UPGRADETOEMPLOYEE;
   }
 
   earnLoanEvent() {

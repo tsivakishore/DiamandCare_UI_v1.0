@@ -50,6 +50,7 @@ import { UserwithdrawsComponent } from './userwithdraws/userwithdraws.component'
 import { UploadInstImagesComponent } from './uploadInstImages/uploadInstImages.component';
 import { RenewloanaccountComponent } from './renewloanaccount/renewloanaccount.component';
 import { IdcardComponent } from './idcard/idcard.component';
+import { UpgradetoEmployeeComponent } from './upgradetoEmployee/upgradetoEmployee.component';
 
 @NgModule({
   imports: [
@@ -111,7 +112,8 @@ import { IdcardComponent } from './idcard/idcard.component';
     UserwithdrawsComponent,
     UploadInstImagesComponent,
     RenewloanaccountComponent,
-    IdcardComponent
+    IdcardComponent,
+    UpgradetoEmployeeComponent
 ],
 
 

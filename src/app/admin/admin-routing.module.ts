@@ -39,6 +39,7 @@ import { UserwithdrawsComponent } from './userwithdraws/userwithdraws.component'
 import { UploadInstImagesComponent } from './uploadInstImages/uploadInstImages.component';
 import { RenewloanaccountComponent } from './renewloanaccount/renewloanaccount.component';
 import { IdcardComponent } from './idcard/idcard.component';
+import { UpgradetoEmployeeComponent } from "./upgradetoEmployee/upgradetoEmployee.component";
 
 const routes: Routes = [
   {
@@ -224,6 +225,11 @@ const routes: Routes = [
   {
     path: RouteConstants.IDCARD,
     component: IdcardComponent,
+    canActivate: [AuthGaurd]
+  },
+  {
+    path: RouteConstants.UPGRADETOEMPLOYEE,
+    component: UpgradetoEmployeeComponent,
     canActivate: [AuthGaurd]
   },
 ];
