@@ -74,9 +74,9 @@ validation + validation{
 select.form-control:not([size]):not([multiple]) {
   padding-top: 4px!important;
 }
-.box-shadow{
-  /*box-shadow: 0 -2px 4px -3px rgba(0,0,0,.2), 0 0px 3px 1px rgba(0,0,0,.14), 0 2px 0px 0px rgba(0,0,0,.12);*/
-}
+/* .box-shadow{
+  box-shadow: 0 -2px 4px -3px rgba(0,0,0,.2), 0 0px 3px 1px rgba(0,0,0,.14), 0 2px 0px 0px rgba(0,0,0,.12);
+} */
 .switch{
   position: relative;
   top: 4px;
@@ -319,7 +319,27 @@ p-dropdown{
 
 .ui-panel-images{
   width: 100% !important;
-    height: 257px;
+  height: 257px;
+}
+
+.ui-grid .ui-grid-row {
+  color: #f8f9fa !important;
+  font-size: initial !important;
+  font-weight: bold !important;
+}
+
+.ui-carousel .ui-carousel-header{
+  text-align: center !important;
+}
+
+.ui-carousel .ui-carousel-header .ui-carousel-header-title{
+  color: #3be6d8 !important;
+  font-size: large !important;
+  font-weight: bold !important;
+}
+
+.ui-carousel .ui-carousel-button{
+  color: #f8f9fa !important;
 }
 
 @media only screen and (max-width: 767px) and (min-width: 320px){

@@ -2,8 +2,20 @@
     margin-left: 480px;
 }
 
+.imgheight{
+	height: 240px;
+	width: 100%;
+    border-radius: 10px;
+}
+
 @media only screen and (max-width: 767px) and (min-width: 320px){
     .divimage-style{
         margin-left: 15px !important;
     }
+
+    .imgheight{
+        height: 240px;
+        border-radius: 10px;
+        width: 100% !important;
+	}
 }
