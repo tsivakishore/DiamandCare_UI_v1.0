@@ -104,15 +104,22 @@ export class UploadInstImagesComponent extends BaseComponent implements OnInit {
 
   onChangeDescription(searchValue: string) {
     this.ErrorMessage = '';
-    if (!!searchValue && searchValue.trim().length >= 5) {
+
+    if (!!searchValue && searchValue.trim().length >= 5 && searchValue.trim().length < 20) {
       this.isShowUpload = true;
       this.isErrorMessage = false;
     }
     else {
-      this.ErrorMessage = 'Enter min of 5 chars';
+      this.ErrorMessage = 'Enter min of 5 chars and max of 20 chars';
       this.isShowUpload = false;
       this.isErrorMessage = true;
     }
+
+    if (!!this.txtUserName.nativeElement.value && !!this.txtDescription.nativeElement.value)
+      this.isShowUpload = true;
+    else
+      this.isShowUpload = false;
+
   }
 
   onFocusDescription(searchValue: string) {
@@ -129,11 +136,6 @@ export class UploadInstImagesComponent extends BaseComponent implements OnInit {
   }
 
   getSchoolDetailsByDCIDorUserName(searchValue: string) {
-    if (!!this.txtDescription.nativeElement.value)
-      this.isShowUpload = true;
-    else
-      this.isShowUpload = false;
-
     this.schoolService._getSchoolDetailsByDCIDorUserName(searchValue).subscribe((res: any) => {
       if (res.m_Item1) {
         this.schoolDetails = res.m_Item3;
@@ -151,6 +153,17 @@ export class UploadInstImagesComponent extends BaseComponent implements OnInit {
     }, err => {
       console.log(err);
     })
+        
+    if (!!this.txtUserName.nativeElement.value && !!this.txtDescription.nativeElement.value)
+      this.isShowUpload = true;
+    else
+      this.isShowUpload = false;
+  }
+
+  restrictSpace(e) {
+    var startPos = e.currentTarget.selectionStart;
+    if (e.which === 32 && startPos == 0)
+      e.preventDefault();
   }
 
 }

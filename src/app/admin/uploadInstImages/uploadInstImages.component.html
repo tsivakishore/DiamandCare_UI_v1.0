@@ -15,7 +15,7 @@
     <div class="col-md-4 col-xs-12 col-sm-12 margin-top-15">
       <div class="label" style="color: white;">Description</div>
       <input type="text" #txtDescription id="txtDescription" class="form-control" (focus)="onFocusDescription($event.target.value)"
-        (input)="onChangeDescription($event.target.value)" required/>
+        (input)="onChangeDescription($event.target.value)" (keypress)="restrictSpace($event)" required/>
       <div class="label" *ngIf="isErrorMessage" style="width: 420px;">
         <p style="color:red;font-size: 12px;">{{ErrorMessage}}</p>
       </div>
