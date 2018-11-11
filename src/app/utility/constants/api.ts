@@ -168,6 +168,10 @@ export class API {
   public static UPDATEWITHDRAWFUNDS = 'wallet/UpdateWithdrawFunds';
   public static GETEMPLOYEEMASTER = 'Employeedetails/GetEmployeeMasterDetails';
   public static EDITEMPLOYEE = 'Employeedetails/UpdateEmployee';
+  public static GETUNDEREMPLOYEES = 'UpgradeToEmployee/GetUnderEmployees';
+  public static INSERTORUPDATEUPGRADEEMPLOYEE = 'UpgradeToEmployee/InsertOrUpdateUpgradeEmployee';
+  public static GETUPGRADEEMPLOYEES = 'UpgradeToEmployee/GetUpgradeEmployees';
+  public static UPDATEUSERSTATUS = 'user/UpdateUserStatus';
 
   //Display Screens
   public static GETSCREENMASTERDETAILS = 'displayscreens/GetScreenMasterDetails';

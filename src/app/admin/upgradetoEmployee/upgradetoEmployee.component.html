@@ -1,3 +1,173 @@
-<p>
-  upgradetoEmployee works!
-</p>
+<div class="upgradefranchisescreen-container" @slideUp>
+  <div class="upgradefranchisescreen-form">
+    <form [formGroup]="frmUpgradeToEmployee" (submit)="InsertOrUpdateEmployee(frmUpgradeToEmployee.value,frmUpgradeToEmployee.valid)">
+      <h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">Upgrade to Employee</h3>
+      <div class="clearfix"></div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">User ID</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="UserID or UserName" pTooltip="UserID or UserName" tooltipPosition="top"
+              formControlName="UserNameOrID" (change)="onUsernameByDCIDorName(frmUpgradeToEmployee.value)" required/>
+            <div class="input-validation-msg">
+              <validation *ngIf="isRequiredField(frmUpgradeToEmployee.get('UserNameOrID'))" [errMsg]="'userIDUserNameRqrd' | translate"></validation>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">User Name</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="UserName" pTooltip="UserName" tooltipPosition="top" formControlName="UserName"
+              readonly required/>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">Designation</div>
+            <div class="clearfix"></div>
+            <select class="form-control dropdownstyle" formControlName="DesignationID" (change)="getUnderEmployeeDetails($event.target.value)"
+              required>
+              <option value="" disabled selected>--Select--</option>
+              <option *ngFor="let designation of lstEmployees" value="{{designation.ID}}">{{designation.Designation}}</option>
+            </select>
+            <div class="input-validation-msg">
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">Under Employees</div>
+            <div class="clearfix"></div>
+            <select class="form-control dropdownstyle" formControlName="UnderEmployeeID">
+              <option value="" disabled selected>--Select--</option>
+              <option *ngFor="let underEmployee of UnderEmployeesList" value="{{underEmployee.UnderEmployeeID}}">{{underEmployee.UnderEmployeeName}}</option>
+            </select>
+            <div class="input-validation-msg">
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">Conditions Apply Self</div>
+            <div class="clearfix"></div>
+            <span class="-addon checkbox check-primary bg-transparent">
+              <input type="checkbox" formControlName="ConditionsApplySelf">
+              <label for="ConditionsApplySelf">&nbsp;</label>
+            </span>
+            <div class="input-validation-msg">
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">Conditions Apply Group</div>
+            <div class="clearfix"></div>
+            <span class="-addon checkbox check-primary bg-transparent">
+              <input type="checkbox" formControlName="ConditionsApplyGroup">
+              <label for="ConditionsApplyGroup">&nbsp;</label>
+            </span>
+            <div class="input-validation-msg">
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">Recruitments Required</div>
+            <div class="clearfix"></div>
+            <span class="-addon checkbox check-primary bg-transparent">
+              <input type="checkbox" formControlName="RecruitmentReq">
+              <label for="RecruitmentReq">&nbsp;</label>
+            </span>
+            <div class="input-validation-msg">
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">Register Incentive</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="Register Incentive" pTooltip="Register Incentive" tooltipPosition="top"
+              formControlName="RegIncentive" required/>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">Loan Repayment Incentive</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="Loan Repayment Incentive" pTooltip="LoanRepayment Incentive" tooltipPosition="top"
+              formControlName="LoanPayIncentive" required/>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row" style="margin-top: 1em;">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">Target Joinees Per Month</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="Target Joinees Per Month" pTooltip="Target Joinees Per Month" tooltipPosition="top"
+              formControlName="TargetJoineesPerMonth" required/>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">Salary</div>
+            <div class="clearfix"></div>
+            <input type="text" class="form-control" placeholder="Salary" pTooltip="Salary" tooltipPosition="top" formControlName="Salary"
+              required/>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row" style="margin-top: 1em;">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="label" style="color: #fff;">Description</div>
+            <div class="clearfix"></div>
+            <textarea id="txtArea" style="height:100px" class="form-control" placeholder="Description" pTooltip="Description" tooltipPosition="top"
+              formControlName="Description"></textarea>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-md-12 col-sm-12 col-xs-12 margin-top-15" style="margin-left:18%" *ngIf="isShowModal == 1">
+        <button type="submit" class="btn btn-primary btnstyles" [disabled]="!frmUpgradeToEmployee.valid" pTooltip="{{'submit' | translate}}"
+          tooltipPosition="top">{{'submit' | translate}}</button>
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12 margin-top-15" style="margin-left:18%" *ngIf="isShowModal == 2">
+        <button type="button" class="btn btn-primary btncancel" (click)="cancelUpgradeEmployee()" pTooltip="{{'Cancel'}}" tooltipPosition="top">{{'Cancel'}}</button>
+        <button type="submit" class="btn btn-primary btnstyles" [disabled]="!frmUpgradeToEmployee.valid" pTooltip="{{'Update'}}"
+          tooltipPosition="top">{{'Update'}}</button>
+      </div>
+      <div class="clearfix"></div>
+    </form>
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+<!-- Grid Start -->
+<h3 class="col-md-12 col-sm-12 col-xs-12" style="color: #00c8aa;">{{'Upgrade To Employee'}}</h3>
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="transaction-history-container">
+      <div class="transaction-history-table box-shadow">
+        <p-dataTable [value]="upgradeEmployees" [loading]="false" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+          <!-- <p-column [style]="{'width':'80px'}" field="UserID" header="UserID" [sortable]="true"></p-column> -->
+          <p-column [style]="{'width':'200px'}" field="UserName" header="User Name" [sortable]="true"></p-column>
+          <p-column field="Designation" header="Designation" [sortable]="true"></p-column>
+          <p-column field="RegIncentive" header="Register Incentive" [sortable]="true"></p-column>
+          <p-column field="LoanPayIncentive" header="Loan Repayment Incentive" [sortable]="true"></p-column>
+          <p-column field="RecruitmentReq" header="Recruitments Required" [sortable]="true"></p-column>
+          <p-column field="ConditionsApplySelf" header="Conditions Apply Self" [sortable]="true"></p-column>
+          <p-column field="ConditionsApplyGroup" header="Conditions Apply Group" [sortable]="true"></p-column>
+          <p-column field="TargetJoineesPerMonth" header="Target Joinees PerMonth" [sortable]="true"></p-column>
+          <p-column field="Salary" header="Salary" [sortable]="true"></p-column>
+          <p-column field="Description" header="Description"></p-column>
+          <p-column header="Edit" [sortable]="true">
+            <ng-template let-data="rowData" pTemplate="body" let-ri="rowIndex">
+              <div class="col-md-12" style="margin-left: -30px;">
+                <div class="col-md-6" style="width:100px">
+                  <button type="button" class="btn btn-primary btnedit" (click)="editUpgradeEmployee(data)">Edit</button>
+                </div>
+              </div>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Grid End -->
+
+<admin-footer></admin-footer>

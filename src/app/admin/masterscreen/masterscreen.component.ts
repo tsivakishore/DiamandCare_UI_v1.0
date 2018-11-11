@@ -12,12 +12,13 @@ import { style, transition, animate, trigger } from "@angular/animations";
 import { MasterChargesService } from "../../utility/shared-service/mastercharges.service";
 import { FranchiseService } from "../../utility/shared-service/franchise.service";
 import { EmployeeService } from '../../utility/shared-service/employee.service';
+import { CommonService } from '../../utility/shared-service/common.service';
 
 @Component({
   selector: 'app-masterscreen',
   templateUrl: './masterscreen.component.html',
   styleUrls: ['./masterscreen.component.css'],
-  providers: [MasterChargesService, FranchiseService,EmployeeService],
+  providers: [MasterChargesService, FranchiseService, EmployeeService, CommonService],
   animations: [
     trigger('dialog', [
       transition('void => *', [
@@ -45,14 +46,17 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
   fgWallet: FormGroup;
   fgLoanWaive: FormGroup;
   fgUserSponserJoineesReq: FormGroup;
+  fgChangeUserStatus: FormGroup;
   fgFreeToPaid: FormGroup;
   fgEmployee: FormGroup;
   userID: number;
+  lstUserStatus: any[] = [];
 
   constructor(private sharedService: SharedService,
     private masterChargesService: MasterChargesService,
     private franchiseService: FranchiseService,
     private employeeService: EmployeeService,
+    private commonService: CommonService,
     private fb: FormBuilder,
     private apiManager: APIManager,
     public toastr: ToastsManager,
@@ -124,6 +128,15 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
     })
   }
 
+  createChangeUserStatusForm() {
+    this.fgChangeUserStatus = this.fb.group({
+      UserID: ['', Validators.compose([Validators.required])],
+      UserName: ['', Validators.compose([Validators.required])],
+      UserStatusID: [''],
+      Status: ['']
+    })
+  }
+
   onAddBalanceToWallet() {
     this.createWalletForm();
     this.isShowModal = 3;
@@ -142,6 +155,12 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
   onUserSponserJoineesReq() {
     this.createUserSponserJoineesReqForm();
     this.isShowModal = 6;
+  }
+
+  onChangeUserStatus() {
+    this.createChangeUserStatusForm();
+    this.isShowModal = 8;
+    this.getUserStatus();
   }
 
   getFranchiseUsernameWalletByIDorName(DcIDorName: any) {
@@ -498,6 +517,55 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
     else {
       this.toastr.error("Form is not valid");
     }
+  }
+
+  getUserNameUserStatus(DCIDorName: any) {
+    if (DCIDorName != "") {
+      this.franchiseService._getUserNameWithSponserJoinees(DCIDorName).subscribe(response => {
+        if (response.m_Item1) {
+          this.userID = response.m_Item3.UserID
+          this.fgChangeUserStatus.patchValue({
+            UserName: response.m_Item3.UserName,
+          })
+        }
+        else {
+          this.fgUserSponserJoineesReq.patchValue({
+            UserName: ''
+          })
+          this.toastr.error(response.m_Item2);
+        }
+      }, err => {
+        this.toastr.error("Oops! There has been an error from server. Please try again.");
+      })
+    }
+  }
+
+  public onUpdateUserStatus(fgChangeUserStatus, isValidForm) {
+    if (isValidForm) {
+      fgChangeUserStatus.UserID = this.userID;
+      this.masterChargesService._updateUserStatus(fgChangeUserStatus.UserID, fgChangeUserStatus.UserStatusID).subscribe(response => {
+        if (response.m_Item1) {
+          this.isShowModal = 1;
+          this.fgChangeUserStatus.reset();
+          this.toastr.success(response.m_Item2);
+        }
+        else
+          this.toastr.error(response.m_Item2);
+      }, err => {
+        console.log(err);
+        this.toastr.error("Error while update employee status. Please try again.");
+      });
+    }
+  }
+
+  public getUserStatus() {
+    this.commonService._getUserStatus().subscribe((res: any) => {
+      if (res.m_Item1) {
+        this.lstUserStatus = res.m_Item3;
+      }
+    }, err => {
+      this.sharedService.setLoader(false);
+    })
   }
 
   closeForm() {
