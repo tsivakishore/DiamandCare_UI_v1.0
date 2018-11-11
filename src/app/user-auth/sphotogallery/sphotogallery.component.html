@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
   <div *ngIf="imgCount > 0" class="divimage-style">
     <p-galleria class="" [images]="imageToShow" panelWidth="500" panelHeight="313" [showCaption]="true" [autoPlay]="true"></p-galleria>
   </div>
@@ -6,4 +6,27 @@
     <h2 class="margin-0">No images found....</h2>
     <div class="clearfix"></div>
   </div>
+</div> -->
+
+<div *ngIf="imgCount > 0">
+  <p-carousel headerText="Photo Gallery" [value]="images" numVisible="3" effectDuration="500" pageLinks="100" easing="easeOutStrong"
+    circular="true" autoplayInterval="3000">
+    <ng-template let-image pTemplate="item">
+      <div class="ui-grid ui-grid-responsive">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-12">
+            <img [src]="formImgSrc(image.ImageUrl)" class="imgheight">
+          </div>
+        </div>
+        <div style="text-align: center !important;">
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-6">{{image.SchoolName}}</div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-6">{{image.Description}}</div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
 </div>
