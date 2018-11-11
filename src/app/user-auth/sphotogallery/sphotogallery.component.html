@@ -9,21 +9,21 @@
 </div> -->
 
 <div *ngIf="imgCount > 0">
-  <p-carousel headerText="Photo Gallery" [value]="images" numVisible="3" effectDuration="500" pageLinks="100" easing="easeOutStrong"
-    circular="true" autoplayInterval="3000">
+  <p-carousel headerText="Photo Gallery" [value]="imageToShow" numVisible="3" effectDuration="slow" pageLinks="10" easing="ease-out"
+    circular="false" autoplayInterval="3000">
     <ng-template let-image pTemplate="item">
       <div class="ui-grid ui-grid-responsive">
         <div class="ui-grid-row">
           <div class="ui-grid-col-12">
-            <img [src]="formImgSrc(image.ImageUrl)" class="imgheight">
+            <img [src]='formImgSrc(image.source)' class="imgheight">
           </div>
         </div>
         <div style="text-align: center !important;">
           <div class="ui-grid-row">
-            <div class="ui-grid-col-6">{{image.SchoolName}}</div>
+            <div class="ui-grid-col-6">{{image.title}}</div>
           </div>
           <div class="ui-grid-row">
-            <div class="ui-grid-col-6">{{image.Description}}</div>
+            <div class="ui-grid-col-6">{{image.alt}}</div>
           </div>
         </div>
       </div>

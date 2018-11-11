@@ -9,6 +9,7 @@ import { SharedService } from "../../utility/shared-service/shared.service";
   styleUrls: ['./sphotogallery.component.css'],
   providers: [SchoolService]
 })
+
 export class SphotogalleryComponent implements OnInit {
   defaultSchoolName: string = '';
   imgCount = 0;
@@ -69,6 +70,7 @@ export class SphotogalleryComponent implements OnInit {
         }).forEach(item => this.imageToShow.push(item));
       }
       this.noImgCount = this.imageToShow.length;
+      console.log(this.imageToShow);
     }, err => {
       console.log(err);
       this.sharedService.setLoader(false);

@@ -185,6 +185,7 @@ export class API {
   public static UPLOADIMAGES = 'uploadimages/SaveImages';
   public static GETINSTITUTEIMAGESTODIAPLAY = 'uploadimages/GetImagesByInstitute';
   public static GETSCHOOLDETAILSBYDcIDOrUSERNAME = 'schooldetails/GetSchoolIDorName';
+  public static GETEMPPHOTOSDISPLAY = 'schooldetails/GetEmployesImages';
 
   // EXTERNAL API CALLERS
 
