@@ -83,6 +83,7 @@ export class API {
   public static CHANGEPASSWORDBYID = 'user/changepasswordbyId';
   public static USERIMAGE = 'user/userimage';
   public static GETUSERIMAGE = 'user/GetUserImageById';
+  public static GETUSERIDCARDDETAILSBYID = 'user/GetUserIdCardDetailsById';
 
   public static GETTREEVIEWDATA = 'treedata/GetTreeData';
   public static INSERTORUPDATEBANKDETAILS = 'userbankdetails/InsertorUpdateUserBankDetails';

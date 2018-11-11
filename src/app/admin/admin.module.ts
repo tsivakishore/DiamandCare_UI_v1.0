@@ -16,6 +16,7 @@ import {
   FileUploadModule 
 } from "primeng/primeng";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgxQRCodeModule } from "ngx-qrcode2";
 import { SettingsComponent } from './settings/settings.component';
 import { MyAutofocusDirective } from "./focus.directive";
 import { FooterComponent } from './footer/footer.component';
@@ -63,6 +64,7 @@ import { UpgradetoEmployeeComponent } from './upgradetoEmployee/upgradetoEmploye
     SharedModule,
     InputSwitchModule,
     FormsModule,
+    NgxQRCodeModule,
     ReactiveFormsModule,
     UtilityModule,
     AdminRoutingModule,

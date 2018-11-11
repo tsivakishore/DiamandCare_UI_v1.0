@@ -3,7 +3,7 @@ export class BaseUrl {
   /* Unused as of 0.1.0 */
   public static MAIN_URL: string = "";
   public static URL: string = "";
-  public static NumberOfLevels = 7;
+  public static NumberOfLevels = 10;
 
   /* Attach your Node API here */
   public static Api: string = "http://localhost:62780/api/";

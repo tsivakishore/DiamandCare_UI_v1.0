@@ -1,23 +1,28 @@
-<div class="id-card-holder" id="divEmpidCard">
-  <div class="id-card">    
-    <div class="photo">
-      <img src="assets/img/logo_fillsize.png">
+<div class="col-md-12 col-sm-12 col-xs-12" id="idCard">
+  <div class="col-md-3 col-sm-12 col-xs-12">
+    <div class="id-card-holder" id="divEmpidCard">
+      <div class="photo">
+        <img [src]="imgSrc">
+      </div>
+      <h2>{{name}}</h2>
+      <h3>{{designation}}</h3>
+      <h3>Empl.ID: {{dcid}}</h3>     
     </div>
-    <h2>Kiran Das DA</h2>
-    <div class="qr-code">
-      <img src="assets/img/logo_fillsize.png">
-    </div>
-    <h3>www.diamandcare.in</h3>
-    <hr>
-    <p>
-      <strong>"PENGG"</strong>HOUSE,4th Floor, TC 11/729(4), Division Office Road
-    </p>
-    <p>Near PMG Junction, Thiruvananthapuram Kerala, India
-      <strong>695033</strong>
-    </p>
-    <p>Ph: 9446062493 | E-ail: info@onetikk.info</p>
-
   </div>
+  <div class="col-md-3 col-sm-12 col-xs-12">
+    <div class="id-card-holder-back" id="divEmpidCard1">
+      <div class="qrcode">
+        <ngx-qrcode [qrc-element-type]="elementType" [qrc-value]="userName">
+        </ngx-qrcode>
+      </div>
+      <h2>Resi. Address:</h2>
+      <h3>{{userAddress}}</h3>     
+      <h2>Contact No:</h2>
+      <h3>{{phone}}</h3>    
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-12 col-xs-12"></div>
 </div>
 
-<button (click)="downloadPDF()">Download</button>
+<div class="clearfix"></div>
+<!-- <button (click)="captureScreen()">Download</button> -->
