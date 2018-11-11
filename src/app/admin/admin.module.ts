@@ -13,7 +13,7 @@ import { UtilityModule } from "../utility/utility.module";
 import {
   DataTableModule, DropdownModule, InputSwitchModule, MessagesModule,
   SharedModule, TooltipModule, CalendarModule, DataListModule, MultiSelectModule, OrganizationChartModule,
-  FileUploadModule
+  FileUploadModule 
 } from "primeng/primeng";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SettingsComponent } from './settings/settings.component';

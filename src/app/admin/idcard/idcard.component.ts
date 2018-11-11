@@ -12,4 +12,8 @@ export class IdcardComponent implements OnInit {
   ngOnInit() {
   }
 
+  public downloadPDF() {
+    return xepOnline.Formatter.Format('divEmpidCard', { render: 'download' });
+  }
+
 }
