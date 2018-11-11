@@ -31,10 +31,13 @@ import { SchoolService } from '../../utility/shared-service/school.service';
 export class UploadInstImagesComponent extends BaseComponent implements OnInit {
   @ViewChild('txtSearcByLoanId') txtSearcByLoanId: ElementRef;
   @ViewChild('txtUserName') txtUserName: ElementRef;
+  @ViewChild('txtDescription') txtDescription: ElementRef;
   uploadedFiles: any[] = [];
   frmImageUpload: FormGroup;
   schoolDetails: any;
   isShowUpload = false;
+  isErrorMessage = false;
+  ErrorMessage = '';
 
   constructor(private apiManager: APIManager,
     public toastr: ToastsManager,
@@ -52,11 +55,13 @@ export class UploadInstImagesComponent extends BaseComponent implements OnInit {
   createImageUploadForm() {
     this.frmImageUpload = this.fb.group({
       UserID: ['', [Validators.required]],
-      FileName: [null]
+      FileName: [null],
+      Description: ['']
     })
   }
 
   onUpload(event) {
+    debugger;
     for (let file of event.files) {
       this.uploadedFiles.push(file);
     }
@@ -67,14 +72,20 @@ export class UploadInstImagesComponent extends BaseComponent implements OnInit {
       this.toastr.error("Oops! No file selected.Please try again.");
       return;
     }
+    debugger;
+    this.frmImageUpload.patchValue({
+      Description: this.txtDescription.nativeElement.value
+    })
 
     var fileToUpload = event.files;
     this.apiManager.postAPIModified(API.UPLOADIMAGES, this.frmImageUpload.value, fileToUpload).subscribe(response => {
+      this.txtDescription.nativeElement.value;
       if (response.m_Item1) {
         this.toastr.success(response.m_Item2);
         fileUpload.clear();
         this.txtUserName.nativeElement.value = '';
         this.txtSearcByLoanId.nativeElement.value = '';
+        this.txtDescription.nativeElement.value = '';
         this.isShowUpload = false;
       }
       else {
@@ -91,6 +102,39 @@ export class UploadInstImagesComponent extends BaseComponent implements OnInit {
     }
   }
 
+  onChangeDescription(searchValue: string) {
+    this.ErrorMessage = '';
+
+    if (!!searchValue && searchValue.trim().length >= 5 && searchValue.trim().length < 20) {
+      this.isShowUpload = true;
+      this.isErrorMessage = false;
+    }
+    else {
+      this.ErrorMessage = 'Enter min of 5 chars and max of 20 chars';
+      this.isShowUpload = false;
+      this.isErrorMessage = true;
+    }
+
+    if (!!this.txtUserName.nativeElement.value && !!this.txtDescription.nativeElement.value)
+      this.isShowUpload = true;
+    else
+      this.isShowUpload = false;
+
+  }
+
+  onFocusDescription(searchValue: string) {
+    this.ErrorMessage = '';
+    if (!!searchValue) {
+      this.isShowUpload = true;
+      this.isErrorMessage = false;
+    }
+    else {
+      this.ErrorMessage = 'Description required';
+      this.isShowUpload = false;
+      this.isErrorMessage = true;
+    }
+  }
+
   getSchoolDetailsByDCIDorUserName(searchValue: string) {
     this.schoolService._getSchoolDetailsByDCIDorUserName(searchValue).subscribe((res: any) => {
       if (res.m_Item1) {
@@ -99,18 +143,27 @@ export class UploadInstImagesComponent extends BaseComponent implements OnInit {
           UserID: this.schoolDetails.UserID
         })
         this.txtUserName.nativeElement.value = this.schoolDetails.UserName;
-        this.isShowUpload = true;
       }
       else {
         this.frmImageUpload.patchValue({
           UserID: ''
         })
         this.txtUserName.nativeElement.value = '';
-        this.isShowUpload = false;
       }
     }, err => {
       console.log(err);
     })
+        
+    if (!!this.txtUserName.nativeElement.value && !!this.txtDescription.nativeElement.value)
+      this.isShowUpload = true;
+    else
+      this.isShowUpload = false;
+  }
+
+  restrictSpace(e) {
+    var startPos = e.currentTarget.selectionStart;
+    if (e.which === 32 && startPos == 0)
+      e.preventDefault();
   }
 
 }

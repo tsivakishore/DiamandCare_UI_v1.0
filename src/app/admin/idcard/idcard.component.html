@@ -1,3 +1,28 @@
-<p>
-  idcard works!
-</p>
+<div class="col-md-12 col-sm-12 col-xs-12" id="idCard">
+  <div class="col-md-3 col-sm-12 col-xs-12">
+    <div class="id-card-holder" id="divEmpidCard">
+      <div class="photo">
+        <img [src]="imgSrc">
+      </div>
+      <h2>{{name}}</h2>
+      <h3>{{designation}}</h3>
+      <h3>Empl.ID: {{dcid}}</h3>     
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-12 col-xs-12">
+    <div class="id-card-holder-back" id="divEmpidCard1">
+      <div class="qrcode">
+        <ngx-qrcode [qrc-element-type]="elementType" [qrc-value]="userName">
+        </ngx-qrcode>
+      </div>
+      <h2>Resi. Address:</h2>
+      <h3>{{userAddress}}</h3>     
+      <h2>Contact No:</h2>
+      <h3>{{phone}}</h3>    
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-12 col-xs-12"></div>
+</div>
+
+<div class="clearfix"></div>
+<!-- <button (click)="captureScreen()">Download</button> -->

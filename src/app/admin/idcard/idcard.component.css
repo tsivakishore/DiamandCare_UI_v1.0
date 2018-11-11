@@ -1,0 +1,58 @@
+
+.id-card-holder {
+    width: 225px;
+    height: 350px;
+    padding: 4px;
+    margin: 0 auto;
+    
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: 225px 350px !important; 
+    background-image: url('http://test.diamandcare.com/assets/img/ID_1.jpg');    
+}
+
+.id-card-holder-back {
+    width: 225px;
+    height: 350px;
+    padding: 4px;
+    margin: 0 auto;
+    
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: 225px 350px !important; 
+    background-image: url('http://test.diamandcare.com/assets/img/ID_2.jpg');    
+}
+.photo {
+    margin-top: 0px; 
+}
+.photo img {
+    width: 80px;
+    height: 100px;
+    margin-top: 115px;
+    margin-left: 68px;
+}
+.qrcode {
+    margin-left: 50px; 
+}
+
+h2 {
+    color: rgb(17, 135, 231);
+    font-size: 15px;
+    margin: 0px 0;
+    text-align: center;
+}
+h3 {
+    font-size: 12px;
+    margin: -1px 0;
+    font-weight: 300;
+    text-align: center;
+}
+
+h4 {
+    font-size: 12px;
+    margin: 1px 0;
+    font-weight: 300;
+    text-align: center;
+}
+
+
