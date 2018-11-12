@@ -465,7 +465,6 @@ export class SettingsComponent extends BaseComponent implements OnInit {
     this.isValidImage = false;
     this.msgError = '';
     if ((/\.(pdf|jpg|jpeg|png)$/i).test(this.file.name)) {
-      debugger;
       if (this.file.size > 40000) {
         this.isValidImage = true;
         this.fgUserImage.value.ImageName = "";

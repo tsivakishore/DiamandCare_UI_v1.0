@@ -74,6 +74,14 @@ export class UserAuthService {
       });
   }
 
+  _getIdCardImages() {
+    return this.httpService
+        .get(API.GETIDCARDIMAGES)
+        .map(res => this.extractData(res, false)).catch((error: any) => {
+            return Observable.throw(new Error(error.status));
+        });
+}
+
   resetPWD(email, userOTP, newPWD, confirmPWD) {
     let values = { "email": email, "otp": userOTP, "password": newPWD, "repeatPassword": confirmPWD };
     return this.httpService

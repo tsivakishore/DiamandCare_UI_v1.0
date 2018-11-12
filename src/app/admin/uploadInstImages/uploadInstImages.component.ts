@@ -61,7 +61,6 @@ export class UploadInstImagesComponent extends BaseComponent implements OnInit {
   }
 
   onUpload(event) {
-    debugger;
     for (let file of event.files) {
       this.uploadedFiles.push(file);
     }
@@ -72,7 +71,6 @@ export class UploadInstImagesComponent extends BaseComponent implements OnInit {
       this.toastr.error("Oops! No file selected.Please try again.");
       return;
     }
-    debugger;
     this.frmImageUpload.patchValue({
       Description: this.txtDescription.nativeElement.value
     })

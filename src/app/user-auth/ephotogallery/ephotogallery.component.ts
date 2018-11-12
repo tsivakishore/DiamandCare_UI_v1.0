@@ -38,7 +38,6 @@ export class EphotogalleryComponent implements OnInit {
       if (res.m_Item1) {
         this.images = res.m_Item3;
         this.imgCount = this.images.length;
-        console.log(this.imgCount);
       }
       this.noImgCount = this.imageToShow.length;
 

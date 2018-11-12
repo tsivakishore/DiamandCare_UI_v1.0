@@ -135,7 +135,6 @@ export class TreeviewComponent extends BaseComponent implements OnInit {
     }
 
     function mouseover(d) {
-      //debugger;
       d3.select(this).append("text")
         .attr("class", "hover")
         .text(d.data.name);

@@ -89,7 +89,6 @@ export class UserwithdrawsComponent extends BaseComponent implements OnInit {
       WithdrawAmount: this.selectedRow.WithdrawAmount,      
       Purpose: this.selectedRow.Purpose
     })
-    debugger;
     this.frmWithdrawFunds.controls["TransferStatusID"].setValue(this.selectedRow.TransferStatusID, { onlySelf: true })
   }
 
