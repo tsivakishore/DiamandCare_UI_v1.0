@@ -10,7 +10,7 @@ import {
   SafeUrl,
   SafeStyle
 } from "@angular/platform-browser";
-import * as jspdf from 'jspdf'; 
+import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 
 @Component({
@@ -33,26 +33,31 @@ import html2canvas from 'html2canvas';
 })
 export class IdcardComponent extends BaseComponent implements OnInit {
 
-  data:any;
+  data: any;
   imgSrc: any;
-  name:any;
-  userName:any;
-  designation:any;
-  dcid:any;
-  userAddress:any;
-  phone:any;
+  name: any;
+  userName: any;
+  designation: any;
+  dcid: any;
+  userAddress: any;
+  phone: any;
+  idCardInfo = false;
+  dynamicFrontImage: any;
+  dynamicRearImage: any;
+  idCardBackgroundImages: any;
 
   constructor(
     private userAuthService: UserAuthService,
     public vcr: ViewContainerRef,
     private toastManager: ToastsManager,
-    private sanitizer:DomSanitizer
-    ) {
+    private sanitizer: DomSanitizer
+  ) {
     super(toastManager, vcr);
+    this.getIdCardImages();
     this.getUserIdCardDetails();
   }
 
-  elementType: 'url' | 'canvas' | 'img' = 'url';  
+  elementType: 'url' | 'canvas' | 'img' = 'url';
 
   ngOnInit() {
     //this.getUserIdCardDetails();
@@ -62,16 +67,33 @@ export class IdcardComponent extends BaseComponent implements OnInit {
     this.userAuthService._getUserIdCardDetails().subscribe((res: any) => {
       if (res.m_Item1) {
         this.data = res.m_Item3;
-        if(!!this.data){
-          this.name=this.data.FirstName+' '+this.data.LastName;
-          this.userName=this.data.UserName;
-          this.designation=this.data.Designation;
-          this.dcid=this.data.DcID;
-          this.userAddress=this.data.UserAddress;
-          this.phone=this.data.PhoneNumber
+        if (!!this.data) {
+          this.idCardInfo = true;
+          this.name = this.data.FirstName + ' ' + this.data.LastName;
+          this.userName = this.data.UserName;
+          this.designation = this.data.Designation;
+          this.dcid = this.data.DcID;
+          this.userAddress = this.data.UserAddress;
+          this.phone = this.data.PhoneNumber
           this.imgSrc = this.formImgSrc(this.data.Photo, "name")
         }
-        
+      }
+      else {
+        //this.toastr.error(res.m_Item2);
+      }
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  public getIdCardImages() {
+    this.userAuthService._getIdCardImages().subscribe((res: any) => {
+      if (res.m_Item1) {
+        this.idCardBackgroundImages = res.m_Item3;
+        if (!!this.idCardBackgroundImages) {
+          this.dynamicFrontImage = this.idCardBackgroundImages.FrontImageContent;
+          this.dynamicRearImage = this.idCardBackgroundImages.RearImageContent;
+        }
       }
       else {
         //this.toastr.error(res.m_Item2);
@@ -84,29 +106,29 @@ export class IdcardComponent extends BaseComponent implements OnInit {
   formImgSrc(imageContent: any, imageName: string) {
     var splitFile = imageName.split(".");
     let imgType = "data:image/" + splitFile[1] + ";base64,"
-    return  this.sanitizer.bypassSecurityTrustResourceUrl(imgType + imageContent);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(imgType + imageContent);
   }
 
   public downloadPDF() {
     return xepOnline.Formatter.Format('divEmpidCard', { render: 'download' });
   }
 
-  public captureScreen()  
-  {  
-    var data = document.getElementById('idCard');  
-    html2canvas(data).then(canvas => {  
+  public captureScreen() {
+    var data = document.getElementById('idCard');
+    console.log(data);
+    html2canvas(data).then(canvas => {
       // Few necessary setting options  
-      var imgWidth = 208;   
-      var pageHeight = 295;    
-      var imgHeight = canvas.height * imgWidth / canvas.width;  
-      var heightLeft = imgHeight;  
-  
-      const contentDataURL = canvas.toDataURL('image/png')  
+      var imgWidth = 208;
+      var pageHeight = 295;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png')
       let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
-      var position = 0;  
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
-      pdf.save('MYPdf.pdf'); // Generated PDF   
-    });  
-  }  
+      var position = 10;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('MYPdf.pdf'); // Generated PDF   -
+    });
+  }
 
 }

@@ -190,6 +190,7 @@ export class API {
   public static GETINSTITUTEIMAGESTODIAPLAY = 'uploadimages/GetImagesByInstitute';
   public static GETSCHOOLDETAILSBYDcIDOrUSERNAME = 'schooldetails/GetSchoolIDorName';
   public static GETEMPPHOTOSDISPLAY = 'schooldetails/GetEmployesImages';
+  public static GETIDCARDIMAGES = 'user/GetIdCardImages';
 
   // EXTERNAL API CALLERS
 

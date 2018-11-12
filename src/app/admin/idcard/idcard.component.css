@@ -8,7 +8,7 @@
     position: relative;
     background-repeat: no-repeat;
     background-size: 225px 350px !important; 
-    background-image: url('http://test.diamandcare.com/assets/img/ID_1.jpg');    
+    /* background-image: url('http://test.diamandcare.com/assets/img/ID_1.jpg');     */
 }
 
 .id-card-holder-back {
@@ -20,16 +20,16 @@
     position: relative;
     background-repeat: no-repeat;
     background-size: 225px 350px !important; 
-    background-image: url('http://test.diamandcare.com/assets/img/ID_2.jpg');    
+    /* background-image: url('http://test.diamandcare.com/assets/img/ID_2.jpg');     */
 }
 .photo {
     margin-top: 0px; 
 }
 .photo img {
-    width: 80px;
-    height: 100px;
+    width: 100px;
+    /* height: 100px; */
     margin-top: 115px;
-    margin-left: 68px;
+    /* margin-left: 68px; */
 }
 .qrcode {
     margin-left: 50px; 
@@ -55,4 +55,20 @@ h4 {
     text-align: center;
 }
 
+.div-idcard{
+    text-align: center;
+    margin-top: 20px
+}
+.btn-download{
+    margin-top: 20px;
+    text-align: center;
+    width: 675px;
+}
 
+@media only screen and (max-width: 767px) and (min-width: 320px){
+    .btn-download{
+        margin-top: 20px !important;
+        text-align: center;
+        width: 330px !important;
+    }
+}

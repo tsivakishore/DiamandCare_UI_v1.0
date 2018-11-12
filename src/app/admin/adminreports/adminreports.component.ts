@@ -89,7 +89,6 @@ export class AdminreportsComponent extends BaseComponent implements OnInit {
     this.commonService._getUserStatus().subscribe((res: any) => {
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
-        debugger;
         this.lstUserStatus = res.m_Item3;
         this.lstUserStatus.push({ UserStatusID: 0, Status: 'All', Description: 'All' })
         //this.defaultStatus = 'All';
