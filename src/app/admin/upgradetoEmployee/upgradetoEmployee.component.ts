@@ -194,7 +194,6 @@ export class UpgradetoEmployeeComponent extends BaseComponent implements OnInit 
       this.sharedService.setLoader(false);
       if (res.m_Item1) {
         this.upgradeEmployees = res.m_Item3;
-        console.log(this.upgradeEmployees);
       }
       else {
         this.toastr.error(res.m_Item2);

@@ -526,6 +526,7 @@ export class MasterscreenComponent extends BaseComponent implements OnInit {
           this.userID = response.m_Item3.UserID
           this.fgChangeUserStatus.patchValue({
             UserName: response.m_Item3.UserName,
+            UserStatusID: response.m_Item3.UserStatusID,
           })
         }
         else {
