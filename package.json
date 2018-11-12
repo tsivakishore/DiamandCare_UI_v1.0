@@ -22,7 +22,6 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "@types/jspdf": "^1.1.31",
-    "@types/node": "^6.0.89",
     "@types/xlsx": "0.0.36",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
@@ -42,7 +41,7 @@
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@angular/cli": "1.4.5",
+    "@angular/cli": "^1.7.4",
     "@angular/compiler-cli": "^4.2.4",
     "@angular/language-service": "^4.2.4",
     "@types/file-saver": "0.0.1",
