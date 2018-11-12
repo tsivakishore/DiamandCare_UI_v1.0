@@ -3,15 +3,15 @@ export class BaseUrl {
   /* Unused as of 0.1.0 */
   public static MAIN_URL: string = "";
   public static URL: string = "";
-  public static NumberOfLevels = 10;
+  public static NumberOfLevels = 7;
 
   /* Attach your Node API here */
-  public static Api: string = "http://localhost:62780/api/";
-  public static LoginApi: string = "http://localhost:62780/";
+  // public static Api: string = "http://localhost:62780/api/";
+  // public static LoginApi: string = "http://localhost:62780/";
 
   //For India
-  // public static Api: string = "http://api.diamandcare.in/api/";
-  // public static LoginApi: string = "http://api.diamandcare.in/";
+  public static Api: string = "http://api.diamandcare.in/api/";
+  public static LoginApi: string = "http://api.diamandcare.in/";
 
   //For Test
   // public static Api: string = "http://testapi.diamandcare.com/api/";

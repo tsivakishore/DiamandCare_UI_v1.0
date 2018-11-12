@@ -28,7 +28,9 @@
 .photo img {
     width: 100px;
     /* height: 100px; */
-    margin-top: 115px;
+    margin-top: 120px;
+
+    margin-bottom: 5px;
     /* margin-left: 68px; */
 }
 .qrcode {
