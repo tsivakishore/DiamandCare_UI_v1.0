@@ -27,20 +27,19 @@
                 </div>
               </ng-template>
             </p-column>
-            <p-column [style]="{'width':'165px'}" field="FeesReimbursement" header="Fee Reimbursement" [sortable]="true">
+            <!-- <p-column [style]="{'width':'165px'}" field="FeesReimbursement" header="Fee Reimbursement" [sortable]="true">
               <ng-template let-listOfEarnLoans="rowData" pTemplate="body" let-ri="rowIndex">
                 <div class="col-md-12" style="margin-left: -15px;">
                   <div class="col-md-6" style="width:100px">
                     <label>{{feesReimbursementValue}}</label>
                   </div>
-                  <div class="col-md-6" style="width:100px">
-                    <!-- [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)" -->
+                  <div class="col-md-6" style="width:100px">                    
                     <button type="button" class="btn btn-primary btnapply" [ngClass]="colorCode(listOfEarnLoans.LoanStatus)" [disabled]="checkLoanEligibility(listOfEarnLoans.LoanStatus)"
                       *ngIf="checkFeesReimbursementHidden(listOfEarnLoans.FeesReimbursement)" (click)="ApplyFeesReimbursement(ri)">Apply</button>
                   </div>
                 </div>
               </ng-template>
-            </p-column>
+            </p-column> -->
             <p-column field="HealthBenefit" [style]="{'width':'175px'}" header="Health Benefits" [sortable]="true">
               <ng-template let-listOfEarnLoans="rowData" pTemplate="body" let-ri="rowIndex">
                 <div class="col-md-12" style="margin-left: -25px;">

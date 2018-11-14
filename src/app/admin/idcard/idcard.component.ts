@@ -70,7 +70,7 @@ export class IdcardComponent extends BaseComponent implements OnInit {
         if (!!this.data) {
           this.idCardInfo = true;
           this.name = this.data.FirstName + ' ' + this.data.LastName;
-          this.userName = this.data.UserName;
+          this.userName = this.data.UserName + '_' + this.data.DcID;
           this.designation = this.data.Designation;
           this.dcid = this.data.DcID;
           this.userAddress = this.data.UserAddress;
@@ -118,8 +118,8 @@ export class IdcardComponent extends BaseComponent implements OnInit {
     console.log(data);
     html2canvas(data).then(canvas => {
       // Few necessary setting options  
-      var imgWidth = 208;
-      var pageHeight = 295;
+      var imgWidth = 225;
+      var pageHeight = 350;
       var imgHeight = canvas.height * imgWidth / canvas.width;
       var heightLeft = imgHeight;
 
@@ -127,7 +127,7 @@ export class IdcardComponent extends BaseComponent implements OnInit {
       let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
       var position = 10;
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-      pdf.save('MYIdCard.pdf'); // Generated PDF   -
+      pdf.save('MyIdCard.pdf'); // Generated PDF   -
     });
   }
 

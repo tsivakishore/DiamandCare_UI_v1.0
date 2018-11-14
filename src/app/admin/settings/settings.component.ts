@@ -465,10 +465,10 @@ export class SettingsComponent extends BaseComponent implements OnInit {
     this.isValidImage = false;
     this.msgError = '';
     if ((/\.(pdf|jpg|jpeg|png)$/i).test(this.file.name)) {
-      if (this.file.size > 40000) {
+      if (this.file.size > 51200) {
         this.isValidImage = true;
         this.fgUserImage.value.ImageName = "";
-        this.msgError = "Image size should not exceeds 4 kb";
+        this.msgError = "Image size should not exceeds 50 kb";
       }
       else {
         this.fgUserImage.patchValue({ ImageName: this.file.name, ImageContent: this.file })
