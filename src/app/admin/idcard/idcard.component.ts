@@ -11,7 +11,7 @@ import {
   SafeStyle
 } from "@angular/platform-browser";
 import * as jspdf from 'jspdf';
-import html2canvas from 'html2canvas';
+import * as html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-idcard',
@@ -115,19 +115,23 @@ export class IdcardComponent extends BaseComponent implements OnInit {
 
   public captureScreen() {
     var data = document.getElementById('idCard');
-    console.log(data);
     html2canvas(data).then(canvas => {
-      // Few necessary setting options  
       var imgWidth = 225;
       var pageHeight = 350;
       var imgHeight = canvas.height * imgWidth / canvas.width;
       var heightLeft = imgHeight;
+      console.log(imgHeight)
+      const contentDataURL = canvas.toDataURL('image/jpg')
+      
+      var a = document.createElement("a");
+      a.href = contentDataURL;
+      a.download = "MyID-Card.jpg";
+      a.click();
 
-      const contentDataURL = canvas.toDataURL('image/png')
-      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
-      var position = 10;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-      pdf.save('MyIdCard.pdf'); // Generated PDF   -
+      // let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+      // var position = 10;
+      // pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      // pdf.save('MYIdCard.pdf'); // Generated PDF   -
     });
   }
 
