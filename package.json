@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "@types/html2canvas": "0.0.35",
     "@types/jspdf": "^1.1.31",
     "@types/xlsx": "0.0.36",
     "bootstrap": "^3.3.7",
